@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scape=1.8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="icon" href="images/icon.png">
+    <title>My Portfolio</title>
+  </head>
+  <body>
+    <!-- scroll to top -->
+    <button onclick="topFunction()" id="myBtn" title="Go to top">︿</button>
+
+    <!-- header -->
+
+  
+    <header class="side">
+      <a href="index.html" >
+        <img src="images/logo.png" alt="Logo" />
+      </a>
+      <hr>
+      <nav class="side-under">
+        <a href="#index.html" class="link-active"><p>Home</p></a>
+        <a href="#network" class="link"><p>My Network</p></a>
+        <a href="#offers" class="link"><p>Job Offers</p></a>
+        <a href="#messages" class="link"><p>Messages</p></a>
+      </nav>
+    </header>
+
+    <section class="main">
+        <section class="main-header">
+          <input type="text" placeholder="Search...">
+        </section>
+    </section>
+
+
+    
+
+
+
+
+
+
+
+   
+
+    <!-- scroll-top script -->
+    <script>
+      mybutton = document.getElementById("myBtn");
+      window.onscroll = function () {
+        scrollFunction();
+      };
+
+      function scrollFunction() {
+        if (
+          document.body.scrollTop > 100 ||
+          document.documentElement.scrollTop > 100
+        ) {
+          mybutton.style.display = "block";
+        } else {
+          mybutton.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>
