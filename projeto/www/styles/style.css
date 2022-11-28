@@ -1,7 +1,7 @@
 body {
     font-family: 'Open Sans', sans-serif;
     height: 100vh;
-    background: #2b2d42;
+    background: #5654ab;
     margin: 0px;
     display: flex;
 }
@@ -12,6 +12,7 @@ body {
 
 .side img{
     height: 70px;
+    margin-left: 20px;
 }
 
 .side-under {
@@ -22,24 +23,24 @@ body {
 .side-under a {
     display: flex;
     text-decoration: none;
-    color: white;
+    color: #8481cf;
     margin-top: 20px;
 }
 
 .side-under a:hover {
     text-decoration: none;
-    color: #ef233c;
+    color: white;
 }
 
 .side-under .link-active {
     text-decoration: none;
-    color: #ef233c;
+    color: white;
     border-radius: 20px;
 }
 
 hr {
     margin-left: 26px;
-    width: 155px;
+    width: 110px;
     height:0.5px;
     border-width:0;
     color:rgb(180, 180, 180);
@@ -50,20 +51,35 @@ hr {
     background: white;
     border-radius: 20px;
     width: 100%;
+    margin: 10px;
+    margin-left: 20px;
 }
 
-input[type=text] {
+.main-header {
+    display: flex;
+}
+
+.main-header h1 {
+    color: #5654ab;
+    margin-left: 30px;
+    font-size: 30px;
+}
+
+.main-header input[type=text] {
     background-color: #f2f2f8;
     color: #adb1ba;
     padding: 10px;
     border: none;
     border-color: #adb1ba;
     border-radius: 20px;
-    margin-top: 8px;
+    margin-top: 30px;
+    margin-left: 200px;
     width: 200px;
+    height: 20px;
+    justify-content: flex-end;
 }
 
-::placeholder {
+.main-header ::placeholder {
     color: #adb1ba;
 }
 
