@@ -12,6 +12,7 @@
     <title>My Portfolio</title>
   </head>
   <body>
+    <!-- <div id="preloader"></div> -->
     <!-- scroll to top -->
     <button onclick="topFunction()" id="myBtn" title="Go to top">︿</button>
 
@@ -24,10 +25,14 @@
       </a>
       <hr>
       <nav class="side-under">
-        <a href="#index.html" class="link-active"><p>Home</p></a>
+        <a href="index.html" class="link-active"><p>Home</p></a>
         <a href="#network" class="link"><p>My Network</p></a>
         <a href="#offers" class="link"><p>Job Offers</p></a>
         <a href="#messages" class="link"><p>Messages</p></a>
+      </nav>
+      <hr>
+      <nav class="side-under">
+        <a href="team.html" class="link"><p>Team</p></a>
       </nav>
     </header>
 
@@ -66,6 +71,12 @@
           mybutton.style.display = "none";
         }
       }
+    </script>
+    <script>
+      var loader = document.getElementById("preloader");
+      window.addEventListener("load", function() {
+        loader.style.display = "none";
+      })
     </script>
   </body>
 </html>
