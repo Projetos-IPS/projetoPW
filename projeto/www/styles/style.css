@@ -57,6 +57,12 @@ hr {
 
 .main-header {
     display: flex;
+    justify-content: space-between;
+}
+
+.buttons{
+
+    margin: 30px;
 }
 
 .main-header h1 {
