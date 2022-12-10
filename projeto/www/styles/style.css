@@ -107,6 +107,10 @@ hr {
 }
 
 
+/*-------------------------------------
+             team page
+--------------------------------------*/
+
 #preloader {
     background: #000 url(/www/images/preloader.gif) no-repeat center center;
     background-size: 15%;
@@ -119,6 +123,7 @@ hr {
 
 .team {
     display: flex;
+    justify-content: space-around;
 }
 
 .team .member {
