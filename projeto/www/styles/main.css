@@ -1,0 +1,124 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    height: 100vh;
+    background: #5654ab;
+    margin: 0px;
+    display: flex;
+}
+
+.side {
+    margin-top: 10px;
+}
+
+.side img{
+    height: 70px;
+    margin-left: 20px;
+}
+
+.side-under {
+    justify-content: left;
+    margin-left: 26px;
+}
+
+.side-under a {
+    font-family: 'Unbounded', cursive;
+    font-size: 90%;
+    display: flex;
+    text-decoration: none;
+    color: #8481cf;
+    margin-top: 20px;
+}
+
+.side-under a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.side-under .link-active {
+    text-decoration: none;
+    color: white;
+    border-radius: 20px;
+}
+
+hr {
+    margin-left: 23px;
+    width: 118px;
+    height:0.5px;
+    border-width:0;
+    color: #8481cf;
+    background-color:#8481cf;
+}
+
+.main {
+    background: linear-gradient(90deg, white 67%, #f2f2f8 33%);
+    border-radius: 20px;
+    width: 100%;
+    margin: 10px;
+    margin-left: 20px;
+}
+
+.main-header {
+    display: flex;
+}
+
+.main-header h1 {
+    font-family: 'Unbounded', cursive;
+    color: #5654ab;
+    margin-left: 30px;
+    font-size: 30px;
+}
+
+.main-header #login {
+    font-family: 'Unbounded', cursive;
+    color: #5654ab;
+    margin-left: 30px;
+    font-size: 20px;
+    border: none;
+    background: none;
+}
+
+.main-header #login:hover {
+    color: #8481cf;
+    cursor: pointer;
+    text-align: end;
+}
+
+.main-header input[type=text] {
+    background-color: #f2f2f8;
+    color: #adb1ba;
+    padding: 10px;
+    border: none;
+    border-color: #adb1ba;
+    border-radius: 20px;
+    margin-top: 30px;
+    margin-left: 200px;
+    width: 200px;
+    height: 20px;
+    justify-content: flex-end;
+}
+
+.main-header ::placeholder {
+    color: #adb1ba;
+}
+
+/*-------------------------------------
+             Scroll Button
+--------------------------------------*/
+#myBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    color: #b75e42; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+}
+  
+#myBtn:hover {
+    background-color: rgba(0, 74, 173, 0.5); /* Add a dark-grey background on hover */
+}
