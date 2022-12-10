@@ -21,8 +21,6 @@ body {
 }
 
 .side-under a {
-    font-family: 'Unbounded', cursive;
-    font-size: 90%;
     display: flex;
     text-decoration: none;
     color: #8481cf;
@@ -42,7 +40,7 @@ body {
 
 hr {
     margin-left: 23px;
-    width: 118px;
+    width: 110px;
     height:0.5px;
     border-width:0;
     color: #8481cf;
@@ -50,7 +48,7 @@ hr {
 }
 
 .main {
-    background: linear-gradient(90deg, white 67%, #f2f2f8 33%);
+    background: white;
     border-radius: 20px;
     width: 100%;
     margin: 10px;
@@ -62,25 +60,9 @@ hr {
 }
 
 .main-header h1 {
-    font-family: 'Unbounded', cursive;
     color: #5654ab;
     margin-left: 30px;
     font-size: 30px;
-}
-
-.main-header #login {
-    font-family: 'Unbounded', cursive;
-    color: #5654ab;
-    margin-left: 30px;
-    font-size: 20px;
-    border: none;
-    background: none;
-}
-
-.main-header #login:hover {
-    color: #8481cf;
-    cursor: pointer;
-    text-align: end;
 }
 
 .main-header input[type=text] {
@@ -100,6 +82,7 @@ hr {
 .main-header ::placeholder {
     color: #adb1ba;
 }
+
 
 /*-------------------------------------
              Scroll Button
@@ -121,4 +104,52 @@ hr {
   
 #myBtn:hover {
     background-color: rgba(0, 74, 173, 0.5); /* Add a dark-grey background on hover */
+}
+
+
+#preloader {
+    background: #000 url(/www/images/preloader.gif) no-repeat center center;
+    background-size: 15%;
+    height: 100vh;
+    width: 100vh;
+    position: fixed;
+    z-index: 100;
+}
+
+
+.team {
+    display: flex;
+}
+
+.team .member {
+    background: rgb(132,129,207);
+    background: radial-gradient(circle, rgba(132,129,207,1) 0%, rgba(86,84,171,1) 100%);
+    margin-left: 30px;
+    margin-top: 50px;
+    width: 400px;
+    height: 500px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.team .member img {
+    width: 200px;
+    height: 200px;
+    margin-top: -50px;
+    box-shadow: 10px 5px 5px #5554abd8;
+}
+
+.team .member h2{
+    color: white;
+    height: 3px;
+}
+
+.team .member h6{
+    color: #5654ab;
+}
+
+.team .member p{
+    color: white;
+    width: 300px;
+    margin-left: 50px;
 }
