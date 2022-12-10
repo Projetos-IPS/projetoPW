@@ -3,7 +3,6 @@
 --------------------------------------*/
 .team {
     display: flex;
-    justify-content: space-around;
 }
 
 .team .member {

@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/index.css" />
+    <script src="scripts/main.js"> </script>
     <link rel="icon" href="images/iconic.png">
     <title>My Portfolio</title>
   </head>
@@ -18,8 +20,6 @@
     <button onclick="topFunction()" id="myBtn" title="Go to top">︿</button>
 
     <!-- header -->
-
-  
     <header class="side">
       <a href="index.html" >
         <img src="images/newLogo.png" alt="Logo" />
@@ -41,11 +41,25 @@
         <section class="main-header">
           <h1>DASHBOARD</h1>
           <section class="buttons">
-            <button> Login </button>
-            <button> Sign-up </button>
+            <button onclick="login()" id="login" title="Login">Login </button>
+            <button onclick="signup()" id="signup" title="Sign-up"> Sign-up</button>
+            <a href="profile.html" ><img src="images/profile.png" alt="Profile" /></a>
           </section>
-      <!--    <input type="text" placeholder="Search..."> -->
         </section>
+
+        <section class="description">
+          <div class="description-">
+            <h2>Description</h2>
+            <p>MyPortfolio is a social network that focuses on professional networking and career development.
+            </br>Join us now and grow your professional life.
+            </p>
+          </div>
+        </section>
+
+        <section class="profile">
+          <p>profile</p>
+        </section>
+
     </section>
 
 
@@ -76,12 +90,6 @@
           mybutton.style.display = "none";
         }
       }
-    </script>
-    <script>
-      var loader = document.getElementById("preloader");
-      window.addEventListener("load", function() {
-        loader.style.display = "none";
-      })
     </script>
   </body>
 </html>

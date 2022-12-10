@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css" />
     <link rel="stylesheet" href="styles/team.css" />
+    <script src="scripts/main.js"> </script>
     <link rel="icon" href="images/iconic.png">
     <title>My Portfolio</title>
   </head>
@@ -41,11 +42,10 @@
         <section class="main-header">
           <h1>MEET THE TEAM</h1>
           <section class="buttons">
-            <button> Login </button>
-            <button> Sign-up </button>
+            <button onclick="login()" id="login" title="Login">Login </button>
+            <button onclick="signup()" id="signup" title="Sign-up"> Sign-up</button>
+            <a href="profile.html" ><img src="images/profile.png" alt="Profile" /></a>
           </section>
-          <!--  <input 
-        <!-- <input type="text" placeholder="Search...">--> 
         </section>
 
         <section class="team">
@@ -70,6 +70,8 @@
             </p>
           </div>
         </section>
+
+        
     </section>
     
 
