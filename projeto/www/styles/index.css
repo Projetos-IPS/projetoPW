@@ -1,8 +1,5 @@
-.description {
-    display: flex;
-}
 
-.description .description- {
+.descriptionS .description- {
     background: radial-gradient(circle, rgba(132,129,207,1) 0%, rgba(86,84,171,1) 100%);
     margin-left: 30px;
     width: 825px;
@@ -11,12 +8,12 @@
     text-align: center;
 }
 
-.description .description- h2{
+.descriptionS .description- h2{
     font-family: 'Unbounded', cursive;
     color: white;
 }
 
-.description .description- p{
+.descriptionS .description- p{
     color: white;
     margin-top: 35px;
 }
@@ -34,4 +31,9 @@
 
 .profile p{
     color: white;
+}
+
+.descriptionS{
+    display: flex;
+    justify-content: space-between;
 }
