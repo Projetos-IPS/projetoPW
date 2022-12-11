@@ -172,11 +172,16 @@ hr {
     list-style-type: none;
 }
 
-#listajobs a{
+.jobsinfo{
+    
+
+}
+
+/*#listajobs a{
 
     text-decoration: none;
     color: black;
-}
+}*/
 
 /*-------------------------------------
              Scroll Button

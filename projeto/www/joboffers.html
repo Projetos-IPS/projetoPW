@@ -53,10 +53,8 @@
         ul = document.getElementById("listajobs");
         li = ul.getElementsByTagName('li');
       
-        // Loop through all list items, and hide those who don't match the search query
         for (i = 0; i < li.length; i++) {
-          a = li[i].getElementsByTagName("a")[0];
-          txtValue = a.textContent || a.innerText;
+          txtValue = li[i].textContent || li[i].innerText;
           if (txtValue.toUpperCase().indexOf(filter) > -1) {
             li[i].style.display = "";
           } else {
@@ -65,30 +63,15 @@
         }
       }
         </script>
-
       <section class="filter">
-       
-     <!--  <h4>Filter by: </h4>--> 
-       <!-- <button onclick="">Crescente </button>-->
         <input type="text" id="myInput" onkeyup="search()" class="input-text" placeholder="Search...">
       </section>
-    <script>
-
-
-    </script>
+    
     <section class="info" id="main-info">
       <section class="jobs-side" id="jobs-side">
-        <script>
-          let content = document.getElementById('jobs-side');
-          let list = "<ul id='listajobs'>";
-
-           for(let i = 0; i < data.length; i++)
-           {
-            list += "<li id='jobsinfoo' class='jobsinfo'>" + "<a href='#'>" + "<p>" + "<b>" + data[i].companyName + "</b>"  + " looking for "  + data[i].position + "<p><b>Position: </b>" + data[i].description + "</p>" + "<p>" + data[i].location + " (" +data[i].duration + ") </p>" + "<b><p> Yearly salary: " + data[i].salary + "</b>" + "<img src='images/arrow.png' class='imgjob'/>" + "</a>"   + "<hr class='hr-jobs'/>" + "</li>";
-           }
-           list = list + "</ul>";
-         content.innerHTML = list;
-         </script>
+       <!-- <button onclick="sort()">sort</button> -->
+        <ul id = 'listajobs'>
+        </ul>
          </section>
     </section>    
     </section>
