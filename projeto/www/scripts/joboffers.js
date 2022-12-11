@@ -38,8 +38,10 @@ var init = function(){
             var br2 = document.createElement("br");
             var br3 = document.createElement("br");
             var br4 = document.createElement("br");
+            var br5 = document.createElement("br");
             var textLiJobOffer = document.createTextNode(data[i].companyName + " looking for " + data[i].description);
             var textLiJobOffer2 = document.createTextNode("Position: " + data[i].position);
+            var textLiJobOffer5 = document.createTextNode("Duration: " + data[i].duration);
             var textLiJobOffer3 = document.createTextNode("Location: " + data[i].location);
             var textLiJobOffer4 = document.createTextNode("Yearly salary: " + data[i].salary);
             
@@ -48,6 +50,8 @@ var init = function(){
             liJobOffer.appendChild(br2);
             liJobOffer.appendChild(textLiJobOffer2);
             liJobOffer.appendChild(br3);
+            liJobOffer.appendChild(textLiJobOffer5);
+            liJobOffer.appendChild(br5);
             liJobOffer.appendChild(textLiJobOffer3);
             liJobOffer.appendChild(br4);
             liJobOffer.appendChild(textLiJobOffer4);
