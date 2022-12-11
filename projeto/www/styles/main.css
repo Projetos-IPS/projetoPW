@@ -6,6 +6,9 @@ body {
     display: flex;
 }
 
+/*-------------------------------------
+              Side Menu
+--------------------------------------*/
 .side {
     margin-top: 10px;
 }
@@ -49,6 +52,9 @@ hr {
     background-color:#8481cf;
 }
 
+/*-------------------------------------
+                 Main
+--------------------------------------*/
 .main {
     background: linear-gradient(90deg, white 67%, #f2f2f8 33%);
     border-radius: 20px;
@@ -88,7 +94,7 @@ hr {
 }
 
 /*-------------------------------------
-            Login Button
+            Login Buttons
 --------------------------------------*/
 .buttons {
     display: flex;
@@ -114,74 +120,6 @@ hr {
     height: 50px;
     margin: 15px;
 }
-
-/*-------------------------------------
-           Job offers page
---------------------------------------*/
-
-.info{
-    padding-left: 50px;
-    padding-top: 20px;
-    max-height: 100vh;
-    display: flex;
-}
-
-.jobs-side{
-    width: 50%;
-    overflow: auto;
-    max-height: 500px;
-    padding-left: 5px;
-  
-}
-
-.hr-jobs{
-    width: 80%;
-    margin-left: 0;
-}
-
-.filter{
-    display: flex;
-    justify-content: end;
-    width: 48.2%;
-    margin-left: 4%;
-}
-
-
-.input-text {
-    background-color: #f2f2f8;
-    color: #adb1ba;
-    padding: 10px;
-    border: none;
-    border-color: #adb1ba;
-    border-radius: 20px;
-    width: 200px;
-    height: 20px;
-    margin-top: 13px;
-
-}
-
-.imgjob{
-
-    margin-left: 50%;
-    width: 20px;
-
-}
-
-#listajobs{
-
-    list-style-type: none;
-}
-
-.jobsinfo{
-    
-
-}
-
-/*#listajobs a{
-
-    text-decoration: none;
-    color: black;
-}*/
 
 /*-------------------------------------
              Scroll Button
