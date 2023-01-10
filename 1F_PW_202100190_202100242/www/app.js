@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require("body-parser");
 //const requestHandlers = require("./request-handlers.js");
 
-const port = 8081;
+const port = 8080;
 const host = 'localhost';
 
 var indexRouter = require('./routes/index.js');
