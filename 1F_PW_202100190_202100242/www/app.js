@@ -1,34 +1,25 @@
 const express = require("express");
-const app = express();
-//const bodyParser = require("body-parser");
+const path = require('path');
+const bodyParser = require("body-parser");
 //const requestHandlers = require("./request-handlers.js");
 
 const port = 8081;
 const host = 'localhost';
 
+var indexRouter = require('./routes/index.js');
+var jobRouter = require('./routes/joboffers.js');
+var teamRouter = require('./routes/team.js');
+var app = express();
+
 app.set('view engine', 'pug');
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded());
 
-
-app.get('/', (req, res) => {
-	res.render('index.pug');
-});
-
-app.get('/Job%20offers', (req, res) => {
-	res.render('joboffers.pug');
-});
-
-app.get('/Homepage', (req, res) => {
-	res.render('index.pug');
-});
-
-app.get('/Team', (req, res) => {
-	res.render('team.pug');
-});
-
+app.use('/', indexRouter);
+app.use('/Homepage', indexRouter);
+app.use('/Job%20offers', jobRouter);
+app.use('/Team', teamRouter);
 
 app.listen(port, host, () => {
 	console.log(`Server running at http://${host}:${port}`);
 });
-
-
