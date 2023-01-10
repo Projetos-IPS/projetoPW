@@ -32,7 +32,7 @@ var init = function(){
             liJobOffer.className = "jobsinfo";
             liJobOffer.id = "jobsinfoo";
             img.className = "imgjob";
-            img.src = "images/arrow.png";
+            img.src = "../images/arrow.png";
 
             var br = document.createElement("br");
             var br2 = document.createElement("br");
