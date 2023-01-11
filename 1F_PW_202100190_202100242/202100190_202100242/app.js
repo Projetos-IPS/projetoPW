@@ -12,7 +12,7 @@ var teamRouter = require('./routes/team.js');
 var app = express();
 
 app.set('view engine', 'pug');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'www')));
 app.use(bodyParser.urlencoded());
 
 app.use('/', indexRouter);
