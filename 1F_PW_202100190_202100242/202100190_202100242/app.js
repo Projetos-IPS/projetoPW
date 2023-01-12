@@ -6,12 +6,11 @@ const bodyParser = require("body-parser");
 const port = 8080;
 const host = 'localhost';
 
-var indexRouter = require('./routes/index.js');
 var jobRouter = require('./routes/joboffers.js');
 var teamRouter = require('./routes/team.js');
+var indexRouter = require('./routes/index.js');
 var app = express();
 
-app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, 'www')));
 app.use(bodyParser.urlencoded());
 

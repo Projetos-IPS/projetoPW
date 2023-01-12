@@ -3,9 +3,7 @@ var routerJ = express.Router();
 var path = require('path');
 
 routerJ.get('/', function (req, res) {
-	res.sendFile(path.join(__dirname, '/../views/joboffers.html'));
+	res.render(path.join(__dirname + "/../views/login.pug"));
 });
-
-
 
 module.exports = routerJ;
