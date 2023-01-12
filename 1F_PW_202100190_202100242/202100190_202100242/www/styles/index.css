@@ -2,8 +2,9 @@
 .side-to-side{
     display: flex;
     height: 50vh;
-    width: 60%;
+    width: 80%;
     margin: auto auto;
+    justify-content: space-evenly;
 }
 
 .left img{
@@ -15,35 +16,45 @@
     color: white;
 }
 
-.right{
-    margin: 70px 90px;
+.right button{
+    width: 300px;
+    height: 30px;
 }
 
-.right button{
-    width: 100%;
-    height: 30px;
+.right{
+    margin-top: 5%;
+
+}
+
+.right form{
+    background-color: white;
+    padding: 20px;
 }
 
 .right hr{
     color: white;
-    width: 100%;
+    width: 300px;
     margin: 10px 0;
 }
 
 .right p{
     font-size: medium;
-    color: white;
+    color: #706dca;
+}
+
+a{
+    text-decoration: none;
 }
 
 input[type=text] {
-    width: 100%;
+    width: 300px;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
   }
 
   input[type=password] {
-    width: 100%;
+    width: 300px;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
