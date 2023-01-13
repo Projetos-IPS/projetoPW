@@ -1,8 +1,5 @@
 function change_form() {
 
-    form_professional = document.getElementById('profissional');
-    form_empresa = document.getElementById('empresa');
-
     if(document.getElementById('profissionalR').checked) {
         document.getElementById('profissional').style.display = "block";
         document.getElementById('empresa').style.display = "none";
