@@ -1,61 +1,109 @@
+body {
+    background-color: #5654ab;
+}
 
-.side-to-side{
+.side-to-side {
     display: flex;
-    height: 50vh;
-    width: 80%;
     margin: auto auto;
     justify-content: space-evenly;
 }
 
-.left img{
+.left {
+    text-align: center;
+    background-color: #5654ab;
+}
+
+.left img {
     width: 200px;
 }
 
-.left p{
+.left p {
     width: 500px;
     color: white;
 }
 
-.right button{
-    width: 300px;
+.right {
+    text-align: center;
+    align-self: center;
+    margin-left: 50px;
+}
+
+.right a {
+    background-color: transparent;
+    color: #5654ab;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    font-weight: bold;
+}
+
+.right a:hover {
+    color: #706dca;
+}
+
+.right label {
+    float: left;
+    color: rgba(0, 0, 0, 0.545);
+}
+
+.right button {
+    width: 200px;
     height: 30px;
+    background-color: #5654ab;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 8px 10px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    cursor: pointer;
+    position: relative;
+    font-size: 18px;
 }
 
-.right{
-    margin-top: 5%;
-
+.right button:hover {
+    width: 200px;
+    height: 30px;
+    background-color: #706dca;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 8px 10px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    cursor: pointer;
+    position: relative;
 }
 
-.right form{
+.right form {
     background-color: white;
-    padding: 20px;
+    padding: 50px;
+    border-radius: 5px;
 }
 
-.right hr{
+.right hr {
     color: white;
     width: 300px;
     margin: 10px 0;
 }
 
-.right p{
+.right p {
     font-size: medium;
     color: #706dca;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
 input[type=text] {
     width: 300px;
     padding: 12px 20px;
-    margin: 8px 0;
     box-sizing: border-box;
-  }
+    border-width: 0px 0px 1px 0px;
+    border-color: #5654ab;
+}
 
-  input[type=password] {
+input[type=password] {
     width: 300px;
     padding: 12px 20px;
-    margin: 8px 0;
     box-sizing: border-box;
-  }
+    border-width: 0px 0px 1px 0px;
+    border-color: #5654ab;
+}
