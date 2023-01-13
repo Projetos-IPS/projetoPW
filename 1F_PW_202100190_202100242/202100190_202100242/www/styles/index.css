@@ -6,6 +6,7 @@ body {
     display: flex;
     margin: auto auto;
     justify-content: space-evenly;
+    
 }
 
 .left {
@@ -15,6 +16,7 @@ body {
 
 .left img {
     width: 200px;
+    margin-bottom: 5px;
 }
 
 .left p {
@@ -69,12 +71,14 @@ body {
     box-shadow: 0 8px 10px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     cursor: pointer;
     position: relative;
+
 }
 
 .right form {
     background-color: white;
-    padding: 50px;
+    padding: 20px;
     border-radius: 5px;
+    box-shadow: 10px 10px 5px #706dca;
 }
 
 .right hr {
