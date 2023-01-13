@@ -9,3 +9,27 @@ function change_form() {
         document.getElementById('profissional').style.display = "none";
       }
 }
+
+function hide(){
+  document.getElementById('pop-up').style.display = "none";
+}
+
+function pop_up(){
+var el = document.getElementById('sign-in-pop');
+    function show() {
+    document.getElementById('pop-up').style.display = "block";
+    }
+
+    el.onclick = show();
+    
+}
+
+
+
+
+
+
+
+
+
+

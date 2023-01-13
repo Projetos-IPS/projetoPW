@@ -2,6 +2,27 @@ body {
     background-color: #5654ab;
 }
 
+.login{
+    margin: 0 auto;
+}
+
+.pop-up{
+
+    margin-top: 20vh;
+    position: fixed;
+    height: 40vh;
+    display: none;
+
+}
+
+.pop-up .close{
+    margin-top: 5%;
+}
+
+.pop-up button{
+    margin-top: 0;
+}
+
 .side-to-side {
     display: flex;
     height: 50vh;
@@ -31,7 +52,7 @@ body {
     margin-top: 5vh;
 }
 
-.right a {
+a {
     background-color: transparent;
     color: #5654ab;
     border: none;
@@ -40,13 +61,13 @@ body {
     font-weight: bold;
 }
 
-.right a:hover {
+a:hover {
     color: #706dca;
 }
 
 
 
-.right button {
+button {
     width: 200px;
     height: 30px;
     background-color: #5654ab;
@@ -60,7 +81,7 @@ body {
     margin-top: 3vh;
 }
 
-.right button:hover {
+button:hover {
     width: 200px;
     height: 30px;
     background-color: #706dca;
@@ -73,7 +94,7 @@ body {
 
 }
 
-.right form {
+form {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
@@ -83,7 +104,7 @@ body {
 .right hr {
     color: white;
     width: 300px;
-    margin: 10px 0;
+    margin: 10px auto;
 }
 
 .profissional{

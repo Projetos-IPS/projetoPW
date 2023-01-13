@@ -17,8 +17,22 @@
   </head>
   <body>
   
-    <main class="side-to-side">
  
+    <main class="side-to-side">
+      <section id="pop-up" class="pop-up">
+        <form class="login" id="login" action="">
+          <center>
+
+            <h1> Login </h1>
+          <input type="text" name="emailLogin" placeholder="Email"><br>
+          <input type="password" name="passwordLogin" placeholder="Password"><br>
+          <h5><a href="#">Forgot password?</h5></a>
+          <button type="button">Sign in</button><br>
+          <button class="close" onclick="hide()" type="button">Close</button><br>
+        </center>
+        </form>
+      </section>
+      
       <section class="left">
           <img src="../images/iconicsembordas.png"/>
           <p>
@@ -27,9 +41,9 @@
           </p>
       </section> 
       <section class="right">
-        <form class="startF">
+        <form action="" class="startF">
           <h1>Get Started</h1>
-          <h5>Already have an account?<a href="#"> Sign In</a></h5>
+          <h5>Already have an account?<a href="javascript:pop_up()" id="sign-in-pop"> Sign In </a></h5>
 <hr>
        <b> <center><label for="tipo_perfil">Select profile you wish to create:</label><br></center></b>  
           <center>  <input type="radio" id="profissionalR" name="tipo_perfil" value="profissional" onchange="change_form()">
@@ -38,7 +52,7 @@
           <label for="empresaR">Company</label><br></center> 
         </form>
         
-          <form class="profissional" id="profissional">
+          <form class="profissional" action="" id="profissional">
             <input type="text" name="nomeP" id="nomeP" placeholder="Name"><br>
             <input type="text" id="emailP" name="emailP" placeholder="Email"><br>
             <input type="password" id="passP" name="passP" placeholder="Password"><br>
@@ -69,8 +83,7 @@
 
     </main>
 
-    <section class="pop-up">
-     
+ 
     </section>
 
     
