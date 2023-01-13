@@ -5,6 +5,7 @@
     width: 80%;
     margin: auto auto;
     justify-content: space-evenly;
+    
 }
 
 .left img{
@@ -24,11 +25,15 @@
 .right{
     margin-top: 5%;
 
+   
+
 }
 
 .right form{
     background-color: white;
     padding: 20px;
+    border-radius: 5px;
+    box-shadow: 10px 10px 5px #706dca;
 }
 
 .right hr{
