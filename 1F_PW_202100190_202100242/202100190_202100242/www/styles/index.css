@@ -10,6 +10,7 @@
 
 .left img{
     width: 200px;
+    margin-bottom: 5px;
 }
 
 .left p{
@@ -24,9 +25,6 @@
 
 .right{
     margin-top: 5%;
-
-   
-
 }
 
 .right form{
