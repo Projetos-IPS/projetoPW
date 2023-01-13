@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require("body-parser");
 //const requestHandlers = require("./request-handlers.js");
 
+
 const port = 8080;
 const host = 'localhost';
 
@@ -11,8 +12,8 @@ var teamRouter = require('./routes/team.js');
 var indexRouter = require('./routes/index.js');
 var app = express();
 
-app.use(express.static(path.join(__dirname, 'www')));
 app.use(bodyParser.urlencoded());
+app.use(express.static(path.join(__dirname, 'www')));
 
 app.use('/', indexRouter);
 app.use('/Homepage', indexRouter);
@@ -22,3 +23,5 @@ app.use('/Team', teamRouter);
 app.listen(port, host, () => {
 	console.log(`Server running at http://${host}:${port}`);
 });
+
+module.exports = app;
