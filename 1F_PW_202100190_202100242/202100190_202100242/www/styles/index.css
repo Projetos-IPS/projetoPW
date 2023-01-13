@@ -4,14 +4,16 @@ body {
 
 .side-to-side {
     display: flex;
-    margin: auto auto;
+    height: 50vh;
+    width: 80%;
+    margin: 10vh auto;
     justify-content: space-evenly;
-    
+
 }
 
 .left {
     text-align: center;
-    background-color: #5654ab;
+    margin-top: 5vh;
 }
 
 .left img {
@@ -26,8 +28,7 @@ body {
 
 .right {
     text-align: center;
-    align-self: center;
-    margin-left: 50px;
+    margin-top: 5vh;
 }
 
 .right a {
@@ -43,10 +44,7 @@ body {
     color: #706dca;
 }
 
-.right label {
-    float: left;
-    color: rgba(0, 0, 0, 0.545);
-}
+
 
 .right button {
     width: 200px;
@@ -59,6 +57,7 @@ body {
     cursor: pointer;
     position: relative;
     font-size: 18px;
+    margin-top: 3vh;
 }
 
 .right button:hover {
@@ -85,6 +84,18 @@ body {
     color: white;
     width: 300px;
     margin: 10px 0;
+}
+
+.profissional{
+    margin-top: -30px;
+}
+
+.empresa{
+        margin-top: -30px;
+}
+
+.empresa, .profissional{
+    display: none;
 }
 
 .right p {
