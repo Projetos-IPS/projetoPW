@@ -8,6 +8,7 @@ body {
 
 .pop-up{
 
+    z-index:1;
     margin-top: 20vh;
     position: fixed;
     height: 40vh;
