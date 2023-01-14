@@ -1,22 +1,12 @@
-var config = {
-    database: { 
+var mysql = require("mysql");
+
+var connection = mysql.createConnection ({
     host : "localhost",
     user: "root",
     password: "12345678",
     port: 3306,
-    database: "proj_bd_202100190_202100242"
-    },
-    server: {
-      host: '127.0.01',
-      port: '8888'
-    }
-}
+    database: "proj_pw_202100190_202100242"
+});
 
-module.exports = config;
+module.exports = connection;
 
-/*
-connection.connect(function(err) {
-    if (err) throw err
-    console.log('Está conectado à BD ...')
-  })
-  //fim da conexão MySQL.*/
