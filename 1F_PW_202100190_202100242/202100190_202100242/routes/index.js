@@ -6,10 +6,10 @@ routerI.get('/', function (req, res) {
 	res.sendFile(path.join(__dirname, '/../views/index.html'));
 });
 
-routerI.get('/Homepage', function (req, res) {
+/*routerI.get('/Homepage', function (req, res) {
 	res.sendFile(path.join(__dirname, '/../views/index.html'));
 });
-
+*/
 
 
 

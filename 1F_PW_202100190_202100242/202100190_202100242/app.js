@@ -22,10 +22,10 @@ app.listen(8888, function(){
 	})
 });
 
-app.get('/', indexRouter);
-app.get('/Homepage', indexRouter);
-app.get('/Job%20offers', jobRouter);
-app.get('/Team', teamRouter);
+app.use('/', indexRouter);
+app.use('/Homepage', indexRouter);
+app.use('/Job%20offers', jobRouter);
+app.use('/Team', teamRouter);
 
 
 module.exports = app;
