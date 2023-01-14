@@ -1,11 +1,9 @@
 var express = require('express');
-var routerT = express.Router();
-var path = require('path');
+var router = express.Router();
 
-routerT.get('/', function (req, res) {
-	res.sendFile(path.join(__dirname, '/../views/team.html'));
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('team', { title: 'Team' });
 });
 
-
-
-module.exports = routerT;
+module.exports = router;

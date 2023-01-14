@@ -1,11 +1,9 @@
 var express = require('express');
-var routerJ = express.Router();
-var path = require('path');
+var router = express.Router();
 
-routerJ.get('/', function (req, res) {
-	res.sendFile(path.join(__dirname, '/../views/joboffers.html'));
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('joboffers', { title: 'Job offers' });
 });
 
-
-
-module.exports = routerJ;
+module.exports = router;
