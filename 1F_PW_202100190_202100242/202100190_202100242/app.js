@@ -1,31 +1,45 @@
-const express = require("express");
-const path = require('path');
-const bodyParser = require("body-parser");
-var connection = require('./config/connection.js');
-//const requestHandlers = require("./request-handlers.js");
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
 
-var jobRouter = require('./routes/joboffers.js');
-var teamRouter = require('./routes/team.js');
-var indexRouter = require('./routes/index.js');
+var indexRouter = require('./routes/index');
+var joboffersRouter = require('./routes/joboffers');
+var teamRouter = require('./routes/team');
+
 var app = express();
-const port = 8888;
-const host = "127.0.0.1";
 
-app.use(bodyParser.urlencoded());
-app.use(express.static(path.join(__dirname, 'www')));
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
-app.listen(8888, function(){
-	console.log('Server running at %s:%s', host, port);
-	connection.connect(function(err){
-		if(err) throw err;
-		console.log('Database connected!');
-	})
-});
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/Homepage', indexRouter);
-app.use('/Job%20offers', jobRouter);
+app.use('/Job%20offers', joboffersRouter);
 app.use('/Team', teamRouter);
 
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
 
 module.exports = app;
