@@ -69,6 +69,7 @@ router.post('/login', function(request, response, next){
           }
         }
       }
+      response.send('Account not found');
       response.end();
 
     });
