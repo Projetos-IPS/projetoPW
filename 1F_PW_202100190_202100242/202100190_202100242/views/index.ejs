@@ -60,7 +60,7 @@
         
 
         <!--inicio form registo PROFISSIONAL-->
-          <form method="post" class="profissional" id="profissional">
+          <form method="post" action="/registoP" class="profissional" id="profissional">
             <input type="text" name="nomeP" id="nomeP" placeholder="Name"><br>
             <input type="text" id="emailP" name="emailP" placeholder="Email"><br>
             <input type="password" id="passP" name="passP" placeholder="Password"><br>
@@ -75,12 +75,12 @@
             <label for="gender">Male</label>
             <input type="radio" id="other" name="genderP" value="other">
             <label for="gender">Other</label><br>
-            <button type="submit">Sign up</button><br>
+            <button  type="submit">Sign up</button><br>
           </form>
        <!--fim form registo PROFISSIONAL-->
 
        <!--inicio form registo EMPRESA-->
-          <form  method="post" class="empresa" id="empresa">
+          <form  method="post"  action="/registoE" class="empresa" id="empresa">
             <input type="text" name="nomeE" id="nomeE" placeholder="Name"><br>
             <input type="text" name="emailE" id="emailE" placeholder="Email"><br>
             <input type="password" name="passE" id="passE" placeholder="Password"><br>
@@ -88,6 +88,8 @@
             <button type="submit">Sign up</button><br>
           </form>
        <!--fim form registo EMPRESA-->
+       <input type="hidden" name="action" id="action" value="AddP" />
+                
        
       </section>
 

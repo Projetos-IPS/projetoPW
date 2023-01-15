@@ -24,7 +24,7 @@ var el = document.getElementById('sign-in-pop');
     
 }
 
-$(document).ready(function(){
+/*$(document).ready(function(){
   $('#profissional').on('submit', function(event){
   event.preventDefault();
   $.ajax({
@@ -52,7 +52,7 @@ success:function(){
     }
   });
 });
-});
+});*/
 
 
 
