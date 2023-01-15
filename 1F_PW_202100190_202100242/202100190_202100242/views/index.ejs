@@ -10,6 +10,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/index.css" />
+
+
+
+    <script
+    src="https://code.jquery.com/jquery-3.6.3.js"
+    integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"></script>
+
+
+
+
     <script src="../scripts/main.js"> </script>
     <script src="../scripts/index.js"> </script>
     <link rel="icon" href="images/iconic.png">
@@ -20,9 +31,11 @@
  
     <main class="side-to-side">
       <section id="pop-up" class="pop-up">
-        <form class="login" id="login" action="">
-          <center>
 
+
+        <!--INICIO FORM LOGIN-->
+        <form class="login" id="login">
+          <center>
             <h1> Login </h1>
           <input type="text" name="emailLogin" placeholder="Email"><br>
           <input type="password" name="passwordLogin" placeholder="Password"><br>
@@ -31,6 +44,7 @@
           <button class="close" onclick="hide()" type="button">Close</button><br>
         </center>
         </form>
+          <!--FIM FORM LOGIN-->
       </section>
       
       <section class="left">
@@ -41,7 +55,7 @@
           </p>
       </section> 
       <section class="right">
-        <form action="" class="startF">
+        <form  class="startF">
           <h1>Get Started</h1>
           <h5>Already have an account?<a href="javascript:pop_up()" id="sign-in-pop"> Sign In </a></h5>
 <hr>
@@ -52,7 +66,9 @@
           <label for="empresaR">Company</label><br></center> 
         </form>
         
-          <form class="profissional" action="" id="profissional">
+
+        <!--inicio form registo PROFISSIONAL-->
+          <form method="post" class="profissional" id="profissional">
             <input type="text" name="nomeP" id="nomeP" placeholder="Name"><br>
             <input type="text" id="emailP" name="emailP" placeholder="Email"><br>
             <input type="password" id="passP" name="passP" placeholder="Password"><br>
@@ -63,21 +79,24 @@
             <b><center><label for="genderP">Select gender</label><br></center></b>
             <input type="radio" id="feminino" name="genderP" value="Feminino">
             <label for="gender">Female</label>
-            <input type="radio" id="masculino" name="genderP" value="masculino">
+            <input type="radio" id="masculino" name="genderP" value="Masculino">
             <label for="gender">Male</label>
             <input type="radio" id="other" name="genderP" value="other">
             <label for="gender">Other</label><br>
-            <button type="button">Sign up</button><br>
+            <input type="hidden" name="action" id="action" value="Add" />
+            <button id="submit_profissional" type="submit">Sign up</button><br>
           </form>
-      
+       <!--fim form registo PROFISSIONAL-->
+
+       <!--inicio form registo EMPRESA-->
           <form class="empresa" id="empresa">
             <input type="text" name="nomeE" id="nomeE" placeholder="Name"><br>
             <input type="text" name="emailE" id="emailE" placeholder="Email"><br>
             <input type="password" name="passE" id="passE" placeholder="Password"><br>
             <input type="password" name="passvE" id="passvE" placeholder="Repeat password"><br>
-            <button type="button">Sign up</button><br>
+            <button type="submit">Sign up</button><br>
           </form>
-       
+       <!--fim form registo EMPRESA-->
        
       </section>
 
@@ -86,7 +105,31 @@
  
     </section>
 
-    
+    <script>
+
+      $(document).ready(function(){
+
+        $('#profissionalR').attr('checked', function(){
+          $('#profissional')[0].reset();
+        $('#action').val('AddP');
+        });
+
+$('#profissional').on('submit', function(event){
+event.preventDefault();
+$.ajax({
+    url:"http://localhost:8081/Homepage/action",
+    method:"POST",
+    data:$('#profissional').serialize(),
+    dataType:"JSON",
+  success:function(){
+    $('#profissional')[0].reset();
+    alert("Conta criada, faça login.");
+  }
+
+});
+});
+});
+    </script>
 
   </body>
 </html>
