@@ -29,8 +29,8 @@
         <form class="login" method="post" action="/login" id="login">
           <center>
             <h1> Login </h1>
-          <input type="text" name="emailLogin" placeholder="Email"><br>
-          <input type="password" name="passwordLogin" placeholder="Password"><br>
+          <input type="text" name="emailLogin"  placeholder="Email" required><br>
+          <input type="password" name="passwordLogin"  placeholder="Password" required><br>
           <h5><a href="#">Forgot password?</h5></a>
           <button type="submit">Sign in</button><br>
           <button class="close" onclick="hide()" type="button">Close</button><br>
@@ -61,19 +61,19 @@
 
         <!--inicio form registo PROFISSIONAL-->
           <form method="post" action="/registoP" class="profissional" id="profissional">
-            <input type="text" name="nomeP" id="nomeP" placeholder="Name"><br>
-            <input type="text" id="emailP" name="emailP" placeholder="Email"><br>
-            <input type="password" id="passP" name="passP" placeholder="Password"><br>
-            <input type="password" id="passvP" name="passvP" placeholder="Repeat password"><br>
+            <input type="text" name="nomeP" id="nomeP" placeholder="Name" required><br>
+            <input type="text" id="emailP" name="emailP" placeholder="Email" required><br>
+            <input type="password" id="passP" name="passP" placeholder="Password" required><br>
+            <input type="password" id="passvP" name="passvP" placeholder="Repeat password" required><br>
             <br>
             <b><label for="birthday">Birthday date</label><br></b>
-            <input type="date" id="birthdayP" name="birthdayP"><br><br>
+            <input type="date" id="birthdayP" name="birthdayP" required><br><br>
             <b><center><label for="genderP">Select gender</label><br></center></b>
-            <input type="radio" id="feminino" name="genderP" value="Feminino">
+            <input type="radio" id="feminino" name="genderP" value="Feminino" required>
             <label for="gender">Female</label>
-            <input type="radio" id="masculino" name="genderP" value="Masculino">
+            <input type="radio" id="masculino" name="genderP" value="Masculino" required>
             <label for="gender">Male</label>
-            <input type="radio" id="other" name="genderP" value="other">
+            <input type="radio" id="other" name="genderP" value="other" required>
             <label for="gender">Other</label><br>
             <button  type="submit">Sign up</button><br>
           </form>
@@ -81,10 +81,10 @@
 
        <!--inicio form registo EMPRESA-->
           <form  method="post"  action="/registoE" class="empresa" id="empresa">
-            <input type="text" name="nomeE" id="nomeE" placeholder="Name"><br>
-            <input type="text" name="emailE" id="emailE" placeholder="Email"><br>
-            <input type="password" name="passE" id="passE" placeholder="Password"><br>
-            <input type="password" name="passvE" id="passvE" placeholder="Repeat password"><br>
+            <input type="text" name="nomeE" id="nomeE" placeholder="Name" required><br>
+            <input type="text" name="emailE" id="emailE" placeholder="Email" required><br>
+            <input type="password" name="passE" id="passE" placeholder="Password" required><br>
+            <input type="password" name="passvE" id="passvE" placeholder="Repeat password" required><br>
             <button type="submit">Sign up</button><br>
           </form>
        <!--fim form registo EMPRESA-->
