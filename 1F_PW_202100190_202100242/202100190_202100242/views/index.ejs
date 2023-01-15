@@ -84,12 +84,12 @@
             <input type="radio" id="other" name="genderP" value="other">
             <label for="gender">Other</label><br>
             <input type="hidden" name="action" id="action" value="Add" />
-            <button id="submit_profissional" type="submit">Sign up</button><br>
+            <button type="submit">Sign up</button><br>
           </form>
        <!--fim form registo PROFISSIONAL-->
 
        <!--inicio form registo EMPRESA-->
-          <form class="empresa" id="empresa">
+          <form class="empresa" id="empresa" method="post">
             <input type="text" name="nomeE" id="nomeE" placeholder="Name"><br>
             <input type="text" name="emailE" id="emailE" placeholder="Email"><br>
             <input type="password" name="passE" id="passE" placeholder="Password"><br>
@@ -106,7 +106,6 @@
     </section>
 
     <script>
-
       $(document).ready(function(){
 
         $('#profissionalR').attr('checked', function(){
@@ -117,7 +116,7 @@
 $('#profissional').on('submit', function(event){
 event.preventDefault();
 $.ajax({
-    url:"http://localhost:8081/Homepage/action",
+    url:"http://localhost:8081/registoP",
     method:"POST",
     data:$('#profissional').serialize(),
     dataType:"JSON",
@@ -125,11 +124,11 @@ $.ajax({
     $('#profissional')[0].reset();
     alert("Conta criada, faça login.");
   }
-
 });
 });
 });
     </script>
+
 
   </body>
 </html>
