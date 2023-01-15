@@ -83,13 +83,12 @@
             <label for="gender">Male</label>
             <input type="radio" id="other" name="genderP" value="other">
             <label for="gender">Other</label><br>
-            <input type="hidden" name="action" id="action" value="Add" />
             <button type="submit">Sign up</button><br>
           </form>
        <!--fim form registo PROFISSIONAL-->
 
        <!--inicio form registo EMPRESA-->
-          <form class="empresa" id="empresa" method="post">
+          <form  method="post" class="empresa" id="empresa">
             <input type="text" name="nomeE" id="nomeE" placeholder="Name"><br>
             <input type="text" name="emailE" id="emailE" placeholder="Email"><br>
             <input type="password" name="passE" id="passE" placeholder="Password"><br>
@@ -108,14 +107,9 @@
     <script>
       $(document).ready(function(){
 
-        $('#profissionalR').attr('checked', function(){
-          $('#profissional')[0].reset();
-        $('#action').val('AddP');
-        });
-
-$('#profissional').on('submit', function(event){
-event.preventDefault();
-$.ajax({
+    $('#profissional').on('submit', function(event){
+    event.preventDefault();
+    $.ajax({
     url:"http://localhost:8081/registoP",
     method:"POST",
     data:$('#profissional').serialize(),
@@ -123,9 +117,27 @@ $.ajax({
   success:function(){
     $('#profissional')[0].reset();
     alert("Conta criada, faça login.");
-  }
-});
-});
+      }
+    });
+  });
+
+  $('#empresa').on('submit', function(event){
+    event.preventDefault();
+    $.ajax({
+    url:"http://localhost:8081/registoE",
+    method:"POST",
+    data:$('#empresa').serialize(),
+    dataType:"JSON",
+  success:function(){
+    $('#empresa')[0].reset();
+    alert("Conta criada, faça login.");
+      }
+    });
+  });
+
+  
+
+
 });
     </script>
 
