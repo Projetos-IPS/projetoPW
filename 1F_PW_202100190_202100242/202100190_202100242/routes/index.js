@@ -17,12 +17,13 @@ router.post('/registoP', function(request, response, next){
    var pass = request.body.passP;
    var birthday = request.body.birthdayP;
    var gender = request.body.genderP;
-   var query = `INSERT INTO profissional (email,nome, pass, data_nascimento, genero)
-   values ("${email}", "${nome}", "${pass}", "${birthday}", "${gender}")`;
+   var query = `INSERT INTO profissional (email,nome, data_nascimento, genero)
+   values ("${email}", "${nome}", "${birthday}", "${gender}")`;
    database.query(query);
-   var query2 = `INSERT INTO utilizador(email, tipo_utilizador) values ("${email}", "profissional")`;
+   var query2 = `INSERT INTO utilizador(email, pass, tipo_utilizador) values ("${email}", "${pass}", "profissional")`;
    database.query(query2);
    response.redirect('http://localhost:8081/');
+   response.end();
 });
 
 
@@ -31,14 +32,56 @@ router.post('/registoE', function(request, response, next){
    var nome = request.body.nomeE;
    var email = request.body.emailE;
    var pass = request.body.passE;
-   var query = `INSERT INTO empresa (email, nome, pass)
-   values ("${email}", "${nome}", "${pass}")`;
+   var query = `INSERT INTO empresa (email, nome)
+   values ("${email}", "${nome}")`;
    database.query(query);
-   var query2 = `INSERT INTO utilizador(email, tipo_utilizador) values ("${email}", "empresa")`;
+   var query2 = `INSERT INTO utilizador(email, pass, tipo_utilizador) values ("${email}", "${pass}", "empresa")`;
    database.query(query2);
    response.redirect('http://localhost:8081/');
+   response.end();
 });
 
+router.post('/login', function(request, response, next){
+
+  var email = request.body.emailLogin;
+  var pass = request.body.passwordLogin;
+
+  if (email && pass)
+  {
+    query = 
+    `SELECT * FROM utilizador WHERE email = "${email}"`;
+
+    database.query(query, function(error,data){
+
+      if(data.length > 0)
+      {
+        for (var count = 0; count < data.length; count++)
+        {
+          if(data[count].pass == pass)
+          {
+            request.session.id = data[count].id;
+
+            response.redirect("/team");
+          }
+          else
+          {
+            response.send('Incorrect password');
+          }
+        }
+      }
+ 
+      response.end();
+
+    });
+
+  }
+  else
+  {
+    response.send('Please enter email address and password details.');
+    response.end();
+  }
+
+});
 
 
 module.exports = router;

@@ -3,7 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
+
 var app = express();
+app.use(session({
+  secret : 'webslesson',
+  resave : true,
+  saveUninitialized : true
+}));
 
 
 var indexRouter = require('./routes/index');
