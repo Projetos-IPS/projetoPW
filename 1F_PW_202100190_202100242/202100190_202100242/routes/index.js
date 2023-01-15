@@ -69,7 +69,6 @@ router.post('/login', function(request, response, next){
           }
         }
       }
- 
       response.end();
 
     });
