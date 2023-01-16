@@ -69,7 +69,7 @@ router.post('/login', function(request, response, next){
           }
         }
       }
-      response.send('Account not found');
+
       response.end();
 
     });
@@ -77,7 +77,6 @@ router.post('/login', function(request, response, next){
   }
   else
   {
-    response.send('Please enter email address and password details.');
     response.end();
   }
 
