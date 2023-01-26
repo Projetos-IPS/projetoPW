@@ -7,7 +7,7 @@ var session = require('express-session');
 
 var app = express();
 app.use(session({
-  secret : 'webslesson',
+  secret : '123',
   resave : true,
   saveUninitialized : true
 }));
