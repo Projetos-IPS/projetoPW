@@ -33,6 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/out', indexRouter);
 app.use('/Homepage', indexRouter);
 app.use('/Job%20offers', joboffersRouter);
 app.use('/Team', teamRouter);
