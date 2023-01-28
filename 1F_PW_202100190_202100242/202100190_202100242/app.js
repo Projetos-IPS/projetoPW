@@ -5,11 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 
+const oneDay = 1000 * 60 * 60 * 24;
+
 var app = express();
 app.use(session({
-  secret : '123',
-  resave : true,
-  saveUninitialized : true
+  secret : 'secret',
+  resave: false,
+  cookie: {maxAge: oneDay},
+	saveUninitialized: true
 }));
 
 

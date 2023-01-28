@@ -47,7 +47,7 @@ router.post('/login', function(request, response, next){
 
   var email = request.body.emailLogin;
   var pass = request.body.passwordLogin;
-
+  
   if (email && pass)
   {
     query = 
@@ -59,17 +59,17 @@ router.post('/login', function(request, response, next){
       {
         for (var count = 0; count < data.length; count++)
         {
-          if(data[count].pass == pass)
+          if(data[count].pass === pass)
           {
-            request.session.id = data[count].id;
-
-            response.redirect("/team");
+            request.session.loggedin = true;
+            request.session.name = email;
+            response.redirect("/Job%20offers");
           }
           else
           {
             response.send('Incorrect password');
-          }
-        }
+          }       
+         }
       }
 
       response.end();
@@ -83,6 +83,7 @@ router.post('/login', function(request, response, next){
   }
 
 });
+
 
 
 module.exports = router;
