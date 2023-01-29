@@ -7,7 +7,7 @@ var database = require('../config/connection');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Homepage' });
+  res.render('index');
   res.end();
 });
 
@@ -27,7 +27,6 @@ router.post('/registoP', function(request, response, next){
    response.redirect('http://localhost:8081/');
    response.end();
 });
-
 
 router.post('/registoE', function(request, response, next){
 
