@@ -4,49 +4,39 @@ var router = express.Router();
 var db = require('../config/connection');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  var email = req.session.name;
-var query = `SELECT tipo_utilizador FROM utilizador WHERE email = "${email}"`;
-db.query(query, function(error,data){
+router.get('/', getUser, renderPage);
 
-  if (data.length > 0)
-  {
-    for (var count = 0; count < data.length; count++)
+function getUser(req, res, next) {
+
+    var email = req.session.name;
+    query = `SELECT tipo_utilizador FROM utilizador WHERE EMAIL = "${email}"`;
+    db.query(query, function(err, result)
     {
-      if(data[count].tipo_utilizador === "profissional")
+      var user = result[0].tipo_utilizador;
+      if(user == 'profissional')
       {
-        var query2 = `SELECT nome FROM profissional WHERE email = "${email}"`;
-        db.query(query2, function(error,data)
+        query2 = `SELECT nome FROM profissional where email = "${email}"`;
+        db.query(query2, function(err, result)
         {
-            if(data.length > 0)
-            {
-              for(var count = 0; count < data.length; count++)
-              {
-                var nameU = data[count].nome;
-              }
-            }
-            res.render('team', { title: 'Team', name: nameU});
+          res.locals.name = result[0].nome;
+          next();
         });
       }
-      if(data[count].tipo_utilizador == 'empresa')
+      else if(user == 'empresa')
       {
-        var query2 = `SELECT nome FROM empresa WHERE email = "${email}"`;
-        db.query(query2, function(error,data)
+        query2 = `SELECT nome FROM empresa where email = "${email}"`;
+        db.query(query2, function(err, result)
         {
-            if(data.length > 0)
-            {
-              for(var count = 0; count < data.length; count++)
-              {
-                var nameU = data[count].nome;
-              }
-            }
-            res.render('team', { title: 'Team', name: nameU});
+          res.locals.name = result[0].nome;
+          next();
         });
-      }       
-     }
-  }
-});
- 
-});
+      }
+    });
+ };
+
+ function renderPage(req, res)
+ {
+  res.render('team');
+ }
 
 module.exports = router;

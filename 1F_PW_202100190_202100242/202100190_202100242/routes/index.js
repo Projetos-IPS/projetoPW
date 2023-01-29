@@ -85,7 +85,6 @@ router.post('/login', function(request, response, next){
 });
 
 router.get('/out', function(req,res){
-
   req.session.destroy((err) => {
     res.redirect('/') // will always fire after session is destroyed
   })
