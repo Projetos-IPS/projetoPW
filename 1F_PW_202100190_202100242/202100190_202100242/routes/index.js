@@ -7,6 +7,11 @@ var database = require('../config/connection');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  if(req.session.name !== undefined)
+  {
+    req.session.destroy();
+    req.session = null;
+  }
   res.render('index');
 });
 
@@ -84,7 +89,6 @@ router.post('/login', function(request, response, next){
 
 router.get('/out', function(req,res){
   req.session.destroy((err) => {
-    delete req.session;
     req.session = null;
     res.redirect('/'); // will always fire after session is destroyed
     res.end();
