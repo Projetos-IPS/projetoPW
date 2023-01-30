@@ -24,38 +24,6 @@ var el = document.getElementById('sign-in-pop');
     
 }
 
-/*$(document).ready(function(){
-  $('#profissional').on('submit', function(event){
-  event.preventDefault();
-  $.ajax({
-  url:"http://localhost:8081/registoP",
-  method:"POST",
-  data:$('#profissional').serialize(),
-  dataType:"JSON",
-success:function(){
-  $('#profissional')[0].reset();
-  alert("Conta criada, faça login.");
-    }
-  });
-});
-
-$('#empresa').on('submit', function(event){
-  event.preventDefault();
-  $.ajax({
-  url:"http://localhost:8081/registoE",
-  method:"POST",
-  data:$('#empresa').serialize(),
-  dataType:"JSON",
-success:function(){
-  $('#empresa')[0].reset();
-  alert("Conta criada, faça login.");
-    }
-  });
-});
-});*/
-
-
-
 
 
 
