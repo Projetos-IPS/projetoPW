@@ -10,6 +10,8 @@ router.get('/', getUser, renderPage);
 function getUser(req, res, next) {
 
     var email = req.session.name;
+    if(email !== undefined)
+    {
     query = `SELECT tipo_utilizador FROM utilizador WHERE EMAIL = "${email}"`;
     db.query(query, function(err, result)
     {
@@ -33,6 +35,12 @@ function getUser(req, res, next) {
         });
       }
     });
+  }
+  else
+  {
+    res.redirect('Homepage');
+    res.end();
+  }
  };
 
  function renderPage(req, res)
