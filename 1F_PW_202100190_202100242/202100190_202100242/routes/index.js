@@ -7,6 +7,11 @@ var database = require('../config/connection');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  if(req.session.name !== undefined)
+  {
+    req.session.destroy();
+    req.session = null;
+  }
   res.render('index');
 });
 
