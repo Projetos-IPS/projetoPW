@@ -1,4 +1,3 @@
-const { response } = require('express');
 var express = require('express');
 var router = express.Router();
 
@@ -14,7 +13,6 @@ router.get('/', function(req, res, next) {
   }
   res.render('index');
 });
-
 
 router.post('/registoP', function(request, response, next){
 
@@ -82,7 +80,7 @@ router.post('/login', function(request, response, next){
   }
   else
   {
-    response.end();
+    response.send('Email or password dont exist');
   }
 
 });
@@ -90,7 +88,7 @@ router.post('/login', function(request, response, next){
 router.get('/out', function(req,res){
   req.session.destroy((err) => {
     req.session = null;
-    res.redirect('/'); // will always fire after session is destroyed
+    res.redirect('/'); 
     res.end();
   })
 });
