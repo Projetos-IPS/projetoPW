@@ -15,7 +15,7 @@ connection.connect(function(error){
     }
     else
     {
-        console.log('Database connected, running on port 8081');
+        console.log('Database connected, server running on port 8080.');
     }
 
 });
