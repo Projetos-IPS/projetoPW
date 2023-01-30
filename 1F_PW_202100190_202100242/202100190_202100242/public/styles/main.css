@@ -52,6 +52,15 @@ hr {
     background-color:#8481cf;
 }
 
+.before-logout-hr{
+    margin-left: 0;
+    width: 110px;
+    height:0.5px;
+    border-width:0;
+    color: #8481cf;
+    background-color:#8481cf;
+}
+
 /*-------------------------------------
                  Main
 --------------------------------------*/
