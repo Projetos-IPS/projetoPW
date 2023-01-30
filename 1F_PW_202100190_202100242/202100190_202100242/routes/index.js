@@ -8,7 +8,6 @@ var database = require('../config/connection');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
-  res.end();
 });
 
 
