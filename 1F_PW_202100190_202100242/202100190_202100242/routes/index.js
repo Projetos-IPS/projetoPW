@@ -35,9 +35,9 @@ router.post('/registoE', function(request, response, next){
    var nome = request.body.nomeE;
    var email = request.body.emailE;
    var pass = request.body.passE;
-   var query = `INSERT INTO empresa (email, nome)
+  /* var query = `INSERT INTO empresa (email, nome)
    values ("${email}", "${nome}")`;
-   database.query(query);
+   database.query(query);*/
    var query2 = `INSERT INTO utilizador(email, pass, tipo_utilizador, approved) values ("${email}", "${pass}", "empresa", 0)`;
    database.query(query2);
    response.redirect('Homepage');

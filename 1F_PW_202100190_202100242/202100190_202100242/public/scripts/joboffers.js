@@ -10,7 +10,6 @@ const jobOfferPosition = {
     ITDIRECTOR: "IT director"
 }
 
-
 var data = [
     { companyName: 'Kwalee', description: 'Senior Software Engineer - Frontend', position: jobOfferPosition.SOFTWAREENGINEER, duration: 'Fulltime', location: 'Lisbon/Portugal', salary: '39.532'}, 
     { companyName: 'Reaktor', description: 'Senior Frontend Engineer', position: jobOfferPosition.SOFTWAREENGINEER, duration: 'Fulltime', location: 'Lisbon/Portugal', salary: '42.000'},
@@ -39,6 +38,7 @@ function imprimirArrayValorDesc(){
     document.getElementById('listajobsValorDesc').style.display="block";
     document.getElementById('listajobsValorAsc').style.display="none";
     document.getElementById('myInput2').style.display="none";
+    document.getElementById('clear').reset();
     document.getElementById('myInput').style.display="none";
     document.getElementById('myInput3').style.display="block";
   
@@ -64,8 +64,10 @@ function imprimirArrayValorAsc(){
     document.getElementById('listajobsValorDesc').style.display="none";
     document.getElementById('listajobsValorAsc').style.display="block";
     document.getElementById('myInput2').style.display="block";
+    document.getElementById('clear').reset();
     document.getElementById('myInput').style.display="none";
     document.getElementById('myInput3').style.display="none";
+    
 
     data.sort((a, b) => a.salary - b.salary);
 
