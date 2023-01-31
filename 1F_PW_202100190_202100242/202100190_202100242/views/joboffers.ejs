@@ -52,21 +52,18 @@
       </section>
 
       <section class="filter">
-        <input
-          type="text"
-          id="myInput"
-          onkeyup="search()"
-          class="input-text"
-          placeholder="Search..."
-        />
+        <p>Order salary by: </p>
+        <button  type="submit" value="Descending-order" onclick="imprimirArrayValorDesc()">Descending order</button>
+        <button type="submit" value="Ascending-order" onclick="imprimirArrayValorAsc()">Ascending order</button>
+     
       </section>
 
+
       <section class="info" id="main-info">
+    
         <section class="jobs-side" id="jobs-side">
-          Order salary by: 
-          <button class="" type="submit" value="Descending-order" onclick="imprimirArrayValorDesc()">Descending order</button>
-          <button class="" type="submit" value="Ascending-order" onclick="imprimirArrayValorAsc()">Ascending order</button>
           <!-- <button onclick="sort()">sort</button> -->
+          <hr class="hr-jobs2">
           <ul id="listajobs"></ul>
           <ul id="listajobsValorDesc"></ul>
           <ul id="listajobsValorAsc"></ul>
