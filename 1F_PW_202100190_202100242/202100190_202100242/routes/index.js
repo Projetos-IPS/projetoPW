@@ -26,7 +26,7 @@ router.post('/registoP', function(request, response, next){
    database.query(query);
    var query2 = `INSERT INTO utilizador(email, pass, tipo_utilizador, approved) values ("${email}", "${pass}", "profissional", 1)`;
    database.query(query2);
-   response.redirect('http://localhost:8081/');
+   response.redirect('Homepage');
    response.end();
 });
 
@@ -40,7 +40,7 @@ router.post('/registoE', function(request, response, next){
    database.query(query);
    var query2 = `INSERT INTO utilizador(email, pass, tipo_utilizador, approved) values ("${email}", "${pass}", "empresa", 0)`;
    database.query(query2);
-   response.redirect('http://localhost:8081/');
+   response.redirect('Homepage');
    response.end();
 });
 
