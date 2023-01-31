@@ -3,6 +3,7 @@
 --------------------------------------*/
 .team {
     display: flex;
+    margin-top: 2%;
 }
 
 .team .member {
