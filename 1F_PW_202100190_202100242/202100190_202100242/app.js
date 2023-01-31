@@ -19,6 +19,7 @@ app.use(session({
 var indexRouter = require('./routes/index');
 var joboffersRouter = require('./routes/joboffers');
 var teamRouter = require('./routes/team');
+var profileRouter = require('./routes/profile');
 
 
 
@@ -37,6 +38,7 @@ app.use('/out', indexRouter);
 app.use('/Homepage', indexRouter);
 app.use('/Job%20offers', joboffersRouter);
 app.use('/Team', teamRouter);
+app.use('/Profile', profileRouter);
 
 
 // catch 404 and forward to error handler
