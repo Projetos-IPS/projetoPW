@@ -24,7 +24,7 @@ router.post('/registoP', function(request, response, next){
    var query = `INSERT INTO profissional (email,nome, data_nascimento, genero)
    values ("${email}", "${nome}", "${birthday}", "${gender}")`;
    database.query(query);
-   var query2 = `INSERT INTO utilizador(email, pass, tipo_utilizador) values ("${email}", "${pass}", "profissional")`;
+   var query2 = `INSERT INTO utilizador(email, pass, tipo_utilizador, approved) values ("${email}", "${pass}", "profissional", 1)`;
    database.query(query2);
    response.redirect('http://localhost:8081/');
    response.end();
@@ -38,7 +38,7 @@ router.post('/registoE', function(request, response, next){
    var query = `INSERT INTO empresa (email, nome)
    values ("${email}", "${nome}")`;
    database.query(query);
-   var query2 = `INSERT INTO utilizador(email, pass, tipo_utilizador) values ("${email}", "${pass}", "empresa")`;
+   var query2 = `INSERT INTO utilizador(email, pass, tipo_utilizador, approved) values ("${email}", "${pass}", "empresa", 0)`;
    database.query(query2);
    response.redirect('http://localhost:8081/');
    response.end();
@@ -72,6 +72,10 @@ router.post('/login', function(request, response, next){
           }       
          }
       }
+      else
+      {
+        response.send('Email or password dont exist');
+      }
 
       response.end();
 
@@ -80,7 +84,7 @@ router.post('/login', function(request, response, next){
   }
   else
   {
-    response.send('Email or password dont exist');
+    response.end();
   }
 
 });
