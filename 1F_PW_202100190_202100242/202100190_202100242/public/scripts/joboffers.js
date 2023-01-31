@@ -38,6 +38,7 @@ function imprimirArrayValorDesc(){
     document.getElementById('listajobs').style.display="none";
     document.getElementById('listajobsValorDesc').style.display="block";
     document.getElementById('listajobsValorAsc').style.display="none";
+    document.getElementById("teste").reset();
 
     data.sort((a, b) => b.salary - a.salary);
 
@@ -59,6 +60,7 @@ function imprimirArrayValorAsc(){
     document.getElementById('listajobs').style.display="none";
     document.getElementById('listajobsValorDesc').style.display="none";
     document.getElementById('listajobsValorAsc').style.display="block";
+    document.getElementById("teste").reset();
 
     data.sort((a, b) => a.salary - b.salary);
 

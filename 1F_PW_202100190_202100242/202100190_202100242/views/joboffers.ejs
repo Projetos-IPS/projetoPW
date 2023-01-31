@@ -50,13 +50,23 @@
           <a href="Profile" ><img src="../images/profile.png" alt="Profile" /></a></a>
         </section>
       </section>
-
+      <section class="filter">
+        <form id="teste">
+        <input
+          type="text"
+          id="myInput"
+          onkeyup="search()"
+          class="input-text"
+          placeholder="Search..."
+        />
+        </form>
+        </section>
       <section class="filter">
         <p>Order salary by: </p>
         <button  type="submit" value="Descending-order" onclick="imprimirArrayValorDesc()">Descending order</button>
         <button type="submit" value="Ascending-order" onclick="imprimirArrayValorAsc()">Ascending order</button>
-     
       </section>
+  
 
 
       <section class="info" id="main-info">
