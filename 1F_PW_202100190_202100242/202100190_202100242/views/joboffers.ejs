@@ -45,13 +45,13 @@
       <section class="main-header">
         <h1>JOB OFFERS</h1>
         <section class="buttons">
-
           <a class="name" href="Profile"> <%= name %> </a>
           <a href="Profile" ><img src="../images/profile.png" alt="Profile" /></a></a>
         </section>
       </section>
-      <section class="filter">
-        <form id="teste">
+
+      <section class="bar-up">
+      <section class="filter2">
         <input
           type="text"
           id="myInput"
@@ -59,13 +59,27 @@
           class="input-text"
           placeholder="Search..."
         />
-        </form>
+        <input
+        type="text"
+        id="myInput2"
+        onkeyup="searchASC()"
+        class="input-text"
+        placeholder="Search..."
+        />
+        <input
+       type="text"
+        id="myInput3"
+       onkeyup="searchDESC()"
+       class="input-text"
+       placeholder="Search..."
+        />
         </section>
       <section class="filter">
         <p>Order salary by: </p>
         <button  type="submit" value="Descending-order" onclick="imprimirArrayValorDesc()">Descending order</button>
         <button type="submit" value="Ascending-order" onclick="imprimirArrayValorAsc()">Ascending order</button>
       </section>
+    </section>
   
 
 

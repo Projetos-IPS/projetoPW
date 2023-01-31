@@ -38,7 +38,10 @@ function imprimirArrayValorDesc(){
     document.getElementById('listajobs').style.display="none";
     document.getElementById('listajobsValorDesc').style.display="block";
     document.getElementById('listajobsValorAsc').style.display="none";
-    document.getElementById("teste").reset();
+    document.getElementById('myInput2').style.display="none";
+    document.getElementById('myInput').style.display="none";
+    document.getElementById('myInput3').style.display="block";
+  
 
     data.sort((a, b) => b.salary - a.salary);
 
@@ -60,7 +63,9 @@ function imprimirArrayValorAsc(){
     document.getElementById('listajobs').style.display="none";
     document.getElementById('listajobsValorDesc').style.display="none";
     document.getElementById('listajobsValorAsc').style.display="block";
-    document.getElementById("teste").reset();
+    document.getElementById('myInput2').style.display="block";
+    document.getElementById('myInput').style.display="none";
+    document.getElementById('myInput3').style.display="none";
 
     data.sort((a, b) => a.salary - b.salary);
 
@@ -93,5 +98,39 @@ function search() {
         li[i].style.display = "none";
       }
     }
+  }
 
+  function searchASC() {
+    var input, filter, ul, li, i, txtValue;
+    input = document.getElementById("myInput2");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("listajobsValorAsc");
+    li = ul.getElementsByTagName("li");
+
+    for (i = 0; i < li.length; i++) {
+      txtValue = li[i].textContent || li[i].innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+  }
+
+  
+  function searchDESC() {
+    var input, filter, ul, li, i, txtValue;
+    input = document.getElementById("myInput3");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("listajobsValorDesc");
+    li = ul.getElementsByTagName("li");
+
+    for (i = 0; i < li.length; i++) {
+      txtValue = li[i].textContent || li[i].innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
   }
