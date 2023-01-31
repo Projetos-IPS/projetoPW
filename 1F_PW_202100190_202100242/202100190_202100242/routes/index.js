@@ -75,13 +75,13 @@ router.post('/login', function(request, response, next){
           }
           else
           {
-            response.send('Incorrect password');
+            response.send('Incorrect password.');
           }       
          }
       }
       else
       {
-        response.send('Email or password dont exist');
+        response.send('Account doesnt exist.');
       }
 
       response.end();
