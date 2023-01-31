@@ -62,9 +62,16 @@ router.post('/login', function(request, response, next){
         {
           if(data[count].pass === pass)
           {
+            if(data[count].approved == 0)
+            {
+              response.send('Your account needs to be approved before accessing. Contact an administrator.');
+            }
+            else
+            {
             request.session.loggedin = true;
             request.session.name = email;
             response.redirect("/Job%20offers");
+            }
           }
           else
           {
