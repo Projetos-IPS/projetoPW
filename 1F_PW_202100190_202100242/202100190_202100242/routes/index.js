@@ -30,6 +30,18 @@ router.post('/registoE', function(req, res)
  
 });
 
+router.post('/login', function(req, res)
+{
+  const data = req.body;
+  User.login(data).then(function(id){
+    res.json({result : id});
+    if(id !== 0 && id !== 2 && id !== 3)
+    {
+      req.session.name = id;
+    }
+  });
+});
+
 router.get('/out', function(req,res){
   req.session.destroy((err) => {
     req.session = null;

@@ -32,6 +32,51 @@
           <button class="close" onclick="hide()" type="button">Close</button><br>
         </center>
         </form>
+
+        <script>
+          var formLogin = document.getElementById('login');
+          formLogin.addEventListener('submit', function(event){
+           event.preventDefault();
+          // const data = new FormData(form);
+           const dataLogin = {
+            emailLogin: formLogin.emailLogin.value,
+            passLogin: formLogin.passwordLogin.value
+           };
+
+           const xhrlogin = new XMLHttpRequest();
+           xhrlogin.open('POST', '/login', true);
+           xhrlogin.setRequestHeader('Content-Type', 'application/json');
+           xhrlogin.send(JSON.stringify(dataLogin));
+           
+           xhrlogin.onload = function(){
+            if(xhrlogin.status === 200)
+            {
+              var response = JSON.parse(xhrlogin.responseText);
+              formLogin.reset();
+
+              if(response.result == 0)
+              {
+                alert('Account not verified. Contact an administrator to verify your account.');
+              }
+              else
+              if(response.result == 2)
+              {
+                alert('Incorrect password');
+              }
+              else
+              if(response.result == 3)
+              {
+                alert('Account doesnt exist');
+              }
+              else
+              {
+                window.location.replace("Team");
+              }
+            }
+           };
+          });
+          
+        </script>
           <!--FIM FORM LOGIN-->
       </section>
 
@@ -76,28 +121,28 @@
           </form>
 
           <script>
-            var form = document.getElementById('profissional');
-            form.addEventListener('submit', function(event){
+            var formProfissional = document.getElementById('profissional');
+            formProfissional.addEventListener('submit', function(event){
              event.preventDefault();
             // const data = new FormData(form);
-             const data = {
-              nomeP: form.nomeP.value,
-              emailP: form.emailP.value,
-              passP: form.passP.value,
-              birthdayP: form.birthdayP.value,
-              genderP: form.genderP.value
+             const dataP = {
+              nomeP: formProfissional.nomeP.value,
+              emailP: formProfissional.emailP.value,
+              passP: formProfissional.passP.value,
+              birthdayP: formProfissional.birthdayP.value,
+              genderP: formProfissional.genderP.value
              };
 
-             const xhr = new XMLHttpRequest();
-             xhr.open('POST', '/registoP', true);
-             xhr.setRequestHeader('Content-Type', 'application/json');
-             xhr.send(JSON.stringify(data));
+             const xhrRprofissional = new XMLHttpRequest();
+             xhrRprofissional.open('POST', '/registoP', true);
+             xhrRprofissional.setRequestHeader('Content-Type', 'application/json');
+             xhrRprofissional.send(JSON.stringify(dataP));
              
-             xhr.onload = function(){
-              if(xhr.status === 200)
+             xhrRprofissional.onload = function(){
+              if(xhrRprofissional.status === 200)
               {
-                var response = JSON.parse(xhr.responseText);
-                form.reset();
+                var response = JSON.parse(xhrRprofissional.responseText);
+                formProfissional.reset();
                 alert('Account created. You can now log-in.');
              //   console.log(response.id);
               }
@@ -117,26 +162,26 @@
           </form>
 
           <script>
-            var form1 = document.getElementById('empresa');
-            form1.addEventListener('submit', function(event){
+            var formEmpresa = document.getElementById('empresa');
+            formEmpresa.addEventListener('submit', function(event){
              event.preventDefault();
             // const data = new FormData(form);
-             const data1 = {
-              nomeE: form1.nomeE.value,
-              emailE: form1.emailE.value,
-              passE: form1.passE.value
+             const dataE = {
+              nomeE: formEmpresa.nomeE.value,
+              emailE: formEmpresa.emailE.value,
+              passE: formEmpresa.passE.value
              };
     
-             const xhr1 = new XMLHttpRequest();
-             xhr1.open('POST', '/registoE', true);
-             xhr1.setRequestHeader('Content-Type', 'application/json');
-             xhr1.send(JSON.stringify(data1));
+             const xhrRempresa = new XMLHttpRequest();
+             xhrRempresa.open('POST', '/registoE', true);
+             xhrRempresa.setRequestHeader('Content-Type', 'application/json');
+             xhrRempresa.send(JSON.stringify(dataE));
              
-             xhr1.onload = function(){
-              if(xhr1.status === 200)
+             xhrRempresa.onload = function(){
+              if(xhrRempresa.status === 200)
               {
-                var response = JSON.parse(xhr1.responseText);
-                form1.reset();
+                var response = JSON.parse(xhrRempresa.responseText);
+                formEmpresa.reset();
                 alert('Account created. You must wait for an administrator to activate your account.');
              //   console.log(response.id);
               }

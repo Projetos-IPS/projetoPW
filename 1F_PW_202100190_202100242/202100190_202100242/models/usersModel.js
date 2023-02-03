@@ -1,6 +1,7 @@
 const mysql = require("mysql");
 const session = require("express-session");
 const options = require('../config/options.json');
+const { query } = require("express");
 
 
 var User = {
@@ -41,6 +42,50 @@ var User = {
             })
         
 
+        });
+    },
+
+    login: function(data)
+    {
+        return new Promise(function(resolve, reject)
+        {
+            var sql = `SELECT * FROM utilizador WHERE email = ?`
+            var emailL = data.emailLogin;
+            var passL = data.passLogin;
+
+            var connection = mysql.createConnection(options.mysql);
+            connection.query(sql, emailL, function(error, result)
+            {
+                if(result.length>0)
+                {
+                    for(var i = 0; i < result.length; i++)
+                    {
+                        if(result[i].pass === passL)
+                        {
+                            if(result[i].approved === 0)
+                            {
+                                resolve(0); //conta não aprovada por administrador
+                                connection.end();
+                            }
+                            else
+                            {
+                                resolve(result[i].email);
+                                connection.end();
+                            }
+                        }
+                        else
+                        {
+                            resolve(2);
+                            connection.end(); //incorrect password
+                        }
+                    }
+                }
+                else
+                {
+                    resolve(3);
+                    connection.end(); //account doesnt exist
+                }
+            })
         });
     }
 }
