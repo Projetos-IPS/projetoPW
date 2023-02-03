@@ -38,6 +38,7 @@ router.post('/login', function(req, res)
     if(id !== 0 && id !== 2 && id !== 3)
     {
       req.session.name = id;
+      console.log(req.session.name);
     }
   });
 });

@@ -64,26 +64,26 @@ var User = {
                         {
                             if(result[i].approved === 0)
                             {
-                                resolve(0); //conta não aprovada por administrador
+                                resolve(0);//conta não aprovada por administrador
                                 connection.end();
                             }
                             else
                             {
-                                resolve(result[i].email);
+                                resolve(result[i].email);//login feito com sucesso
                                 connection.end();
                             }
                         }
                         else
                         {
-                            resolve(2);
-                            connection.end(); //incorrect password
+                            resolve(2);//incorrect password
+                            connection.end(); 
                         }
                     }
                 }
                 else
                 {
-                    resolve(3);
-                    connection.end(); //account doesnt exist
+                    resolve(3);//account doesnt exist
+                    connection.end(); 
                 }
             })
         });
