@@ -185,6 +185,7 @@ input[type=password] {
 
 .profissional .form-left {
     align-self: start;
+  
 }
 
 .profissional label {
@@ -366,4 +367,13 @@ input[type=password] {
 .company button:hover {
     background-position: right center;
     cursor: pointer;
+}
+
+.profissional .gender {
+    display: flex;
+}
+
+.profissional .gender label {
+    font-size: 13px;
+    height: 20px;
 }

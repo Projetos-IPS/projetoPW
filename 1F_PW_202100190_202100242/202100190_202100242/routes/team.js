@@ -7,7 +7,14 @@ router.get('/', renderPage);
 
  function renderPage(req, res)
  {
-  res.render('team');
+    if(req.session.name !== undefined)
+    {
+    res.render('team');
+    }
+    else
+    {
+    res.redirect('Homepage');
+    }
  }
 
 module.exports = router;

@@ -118,11 +118,27 @@
             <label for="birthday">Birth Date</label><br>
             <input type="date" class="birthday" id="birthday" name="birthdayP" required><br><br>
 
-            <label for="gender">Select Gender</label><br>
-            <input type="button" id="female" name="genderP" onclick="getChoiceFemale()" value="Female" required>
-            <input type="button" id="male" name="genderP" onclick="getChoiceMale()" value="Male" required>
-            <input type="button" id="other" name="genderP" onclick="getChoiceOther()" value="Other" required>
+            <label for="gender">Select Gender</label><br><br>
+
+            <div class="gender">
+              <div>
+                <label for="gender">Female</label>
+                <input type="radio" id="female" name="genderP" value="Feminino" required>  
+              </div>
+            
+              <div>
+                <label for="gender">Male</label>
+                <input type="radio" id="male" name="genderP" value="Masculino" required>
+              </div>
+          
+              <div>
+                <label for="gender">Other</label>
+                <input type="radio" id="other" name="genderP" value="other" required>
+              </div>
+            </div>
+          
           </div>
+
         
           <h5>Already have an account? <a href="javascript:hideSignUp()"> Sign In</a></h5>
           <button type="submit">Sign up</button><br>
