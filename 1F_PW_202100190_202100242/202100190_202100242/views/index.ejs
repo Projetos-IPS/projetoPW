@@ -26,7 +26,7 @@
 
 
         <!--INICIO FORM LOGIN-->
-        <form class="login" method="post" action="/login" id="login">
+        <form class="login" id="login" method="post" action="/login" id="login">
           <center>
             <h1> Login </h1>
           <input type="text" name="emailLogin"  placeholder="Email" required><br>
@@ -38,6 +38,7 @@
         </form>
           <!--FIM FORM LOGIN-->
       </section>
+
       
       <section class="left">
           <img src="../images/iconicsembordas.png"/>
@@ -60,7 +61,7 @@
         
 
         <!--inicio form registo PROFISSIONAL-->
-          <form method="post" action="/registoP" class="profissional" id="profissional">
+          <form method="post" class="profissional" id="profissional">
             <input type="text" name="nomeP" id="nomeP" placeholder="Name" required><br>
             <input type="text" id="emailP" name="emailP" placeholder="Email" required><br>
             <input type="password" id="passP" name="passP" placeholder="Password" required><br>
@@ -77,6 +78,35 @@
             <label for="gender">Other</label><br>
             <button  type="submit">Sign up</button><br>
           </form>
+
+          <script>
+            var form = document.querySelector('#profissional');
+            form.addEventListener('submit', function(event){
+             event.preventDefault();
+            // const data = new FormData(form);
+             const data = {
+              nomeP: form.nomeP.value,
+              emailP: form.emailP.value,
+              passP: form.passP.value,
+              birthdayP: form.birthdayP.value,
+              genderP: form.genderP.value
+             };
+
+             const xhr = new XMLHttpRequest();
+             xhr.open('POST', '/registoP', true);
+             xhr.setRequestHeader('Content-Type', 'application/json');
+             xhr.send(JSON.stringify(data));
+             
+             xhr.onload = function(){
+              if(xhr.status === 200)
+              {
+                var response = JSON.parse(xhr.responseText);
+             //   console.log(response.id);
+              }
+             };
+            });
+            
+          </script>
        <!--fim form registo PROFISSIONAL-->
 
        <!--inicio form registo EMPRESA-->
@@ -87,10 +117,35 @@
             <input type="password" name="passvE" id="passvE" placeholder="Repeat password" required><br>
             <button type="submit">Sign up</button><br>
           </form>
+
+          <script>
+            var form = document.querySelector('#empresa');
+            form.addEventListener('submit', function(event){
+             event.preventDefault();
+            // const data = new FormData(form);
+             const data = {
+              nomeE: form.nomeE.value,
+              emailE: form.emailE.value,
+              passE: form.passE.value
+             };
+    
+             const xhr = new XMLHttpRequest();
+             xhr.open('POST', '/registoE', true);
+             xhr.setRequestHeader('Content-Type', 'application/json');
+             xhr.send(JSON.stringify(data));
+             
+             xhr.onload = function(){
+              if(xhr.status === 200)
+              {
+                var response = JSON.parse(xhr.responseText);
+             //   console.log(response.id);
+              }
+             };
+            });
+           
+          </script>
        <!--fim form registo EMPRESA-->
 
-                
-       
       </section>
 
     </main>

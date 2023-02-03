@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-var getUser = require('../models/getUser');
+
 
 /* GET home page. */
-router.get('/', getUser, renderPage);
+router.get('/', renderPage);
 
  function renderPage(req, res)
  {
