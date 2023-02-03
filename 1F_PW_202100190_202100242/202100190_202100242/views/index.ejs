@@ -12,123 +12,131 @@
     <link rel="stylesheet" href="../styles/index.css" />
     <script src="../scripts/main.js"> </script>
     <script src="../scripts/index.js"> </script>
-    <link rel="icon" href="images/iconic.png">
-    <title>My Portfolio</title>
+    <link rel="icon" href="images/white-logo.png">
+    <title>FOLIO&FLEX</title>
   </head>
   <body>
-  
     <main class="side-to-side">
-      <section id="pop-up" class="pop-up">
-
-
-        <!--INICIO FORM LOGIN-->
-        <form class="login" id="login" method="post" action="/login" id="login">
-          <center>
-            <h1> Login </h1>
-          <input type="text" name="emailLogin"  placeholder="Email" required><br>
-          <input type="password" name="passwordLogin"  placeholder="Password" required><br>
-          <h5><a href="#">Forgot password?</h5> </a>
-          <button type="submit">Sign in</button><br>
-          <button class="close" onclick="hide()" type="button">Close</button><br>
-        </center>
-        </form>
-
-        <script>
-          var formLogin = document.getElementById('login');
-          formLogin.addEventListener('submit', function(event){
-           event.preventDefault();
-          // const data = new FormData(form);
-           const dataLogin = {
-            emailLogin: formLogin.emailLogin.value,
-            passLogin: formLogin.passwordLogin.value
-           };
-
-           const xhrlogin = new XMLHttpRequest();
-           xhrlogin.open('POST', '/login', true);
-           xhrlogin.setRequestHeader('Content-Type', 'application/json');
-           xhrlogin.send(JSON.stringify(dataLogin));
-           
-           xhrlogin.onload = function(){
-            if(xhrlogin.status === 200)
-            {
-              var response = JSON.parse(xhrlogin.responseText);
-
-              if(response.result == 0)
-              {
-                alert('Account not verified. Contact an administrator to verify your account.');
-              }
-              else
-              if(response.result == 2)
-              {
-                alert('Incorrect password');
-              }
-              else
-              if(response.result == 3)
-              {
-                alert('Account doesnt exist');
-              }
-              else
-              {
-                window.location.replace("Team");
-                formLogin.reset();
-              }
-            }
-           };
-          });
-          
-        </script>
-          <!--FIM FORM LOGIN-->
-      </section>
-
       
       <section class="left">
-          <img src="../images/iconicsembordas.png"/>
-          <p>
-            MyPortfolio is a social network that focuses on professional networking and career development.
-           <br><br> Here you are able to connect with other professionals, share your experiences and find jobs that might be of your interest.
-          </p>
+          <img src="../images/white-logo.png"/>
+          <h1>WELCOME!</h1>
+          <hr></br></br>
+          <p><b>FOLIO&FLEX</b> is a social network that focuses on professional networking and career development.
+            <br><br><b>Connect</b> with other professionals, <b>share</b> your experiences and <b>find</b> jobs that might be of your interest.</p>
+          <button type="submit" onclick="showSignUp()">Get Started</button>
       </section> 
+
       <section class="right">
-        <form  class="startF">
-          <h1>Get Started</h1>
-          <h5>Already have an account?<a href="javascript:pop_up()" id="sign-in-pop"> Sign In </a></h5>
-<hr>
-       <b> <center><label for="tipo_perfil">Select profile you wish to create:</label><br></center></b>  
-          <center>  <input type="radio" id="profissionalR" name="tipo_perfil" value="profissional" onchange="change_form()">
-      <label for="profissionalR">Person</label>
-          <input type="radio" id="empresaR" name="tipo_perfil" value="empresa" onchange="change_form()">
-          <label for="empresaR">Company</label><br></center> 
+
+        <form class="login" method="post" action="/login" id="login">
+          <h1>Sign In</h1><br><br/>
+          <label for="emailLogin">Email</label><br/>
+          <input type="text" name="emailLogin" required><br><br/>
+          <label for="passwordLogin">Password</label><br/>
+          <input type="password" name="passwordLogin" required><br>
+          <h5><a href="#">Forgot password?</a></h5>
+          <button type="submit">Sign in</button><br>
+
+          <!--Código de login-->
+          <script>
+            var formLogin = document.getElementById('login');
+            formLogin.addEventListener('submit', function(event){
+             event.preventDefault();
+            // const data = new FormData(form);
+             const dataLogin = {
+              emailLogin: formLogin.emailLogin.value,
+              passLogin: formLogin.passwordLogin.value
+             };
+  
+             const xhrlogin = new XMLHttpRequest();
+             xhrlogin.open('POST', '/login', true);
+             xhrlogin.setRequestHeader('Content-Type', 'application/json');
+             xhrlogin.send(JSON.stringify(dataLogin));
+             
+             xhrlogin.onload = function(){
+              if(xhrlogin.status === 200)
+              {
+                var response = JSON.parse(xhrlogin.responseText);
+  
+                if(response.result == 0)
+                {
+                  alert('Account not verified. Contact an administrator to verify your account.');
+                }
+                else
+                if(response.result == 2)
+                {
+                  alert('Incorrect password');
+                }
+                else
+                if(response.result == 3)
+                {
+                  alert('Account doesnt exist');
+                }
+                else
+                {
+                  window.location.replace("Team");
+                  formLogin.reset();
+                }
+              }
+             };
+            });
+           
+          </script> 
+           <!--fim do código do login-->
+
         </form>
+
+        <form class="profissional" id="profissional" method="post" action="/registoP">
+          <h1>Sign Up</h1><h6><a href="javascript:signUpCompany()">Sign Up as Company</a></h6><br>
+
+          <div class="form">
+            <div class="first">
+              <label for="name">Name</label><br>
+              <input type="text" name="nameP" required><br>
+            </div>
+            <div class="second">
+              <label for="email">Email</label><br>
+              <input type="text" name="emailP" required><br>
+            </div>
+          </div>
+          <br>
+          <div class="form">
+            <div class="first">
+              <label for="password">Password</label><br/>
+              <input type="password" name="passwordP" id="password" required>
+            </div>
+            <div class="second">
+              <label for="passwordRepeat">Repeat Password</label><br/>
+              <input type="password" name="passwordRepeatP" id="passwordRepeat" required><br>
+            </div>
+          </div>
+
+          <br>
+
+          <div class="form-left">
+            <label for="birthday">Birth Date</label><br>
+            <input type="date" class="birthday" id="birthday" name="birthdayP" required><br><br>
+
+            <label for="gender">Select Gender</label><br>
+            <input type="button" id="female" name="genderP" onclick="getChoiceFemale()" value="Female" required>
+            <input type="button" id="male" name="genderP" onclick="getChoiceMale()" value="Male" required>
+            <input type="button" id="other" name="genderP" onclick="getChoiceOther()" value="Other" required>
+          </div>
         
+          <h5>Already have an account? <a href="javascript:hideSignUp()"> Sign In</a></h5>
+          <button type="submit">Sign up</button><br>
 
-        <!--inicio form registo PROFISSIONAL-->
-          <form method="post" class="profissional" id="profissional">
-            <input type="text" name="nomeP"  placeholder="Name" required><br>
-            <input type="text"  name="emailP" placeholder="Email" required><br>
-            <input type="password" name="passP" placeholder="Password" required><br>
-            <input type="password"  name="passvP" placeholder="Repeat password" required><br>
-            <br>
-            <b><label for="birthday">Birthday date</label><br></b>
-            <input type="date"  name="birthdayP" required><br><br>
-            <b><center><label for="genderP">Select gender</label><br></center></b>
-            <input type="radio" id="feminino" name="genderP" value="Feminino" required>
-            <label for="gender">Female</label>
-            <input type="radio" id="masculino" name="genderP" value="Masculino" required>
-            <label for="gender">Male</label>
-            <input type="radio" id="other" name="genderP" value="other" required>
-            <label for="gender">Other</label><br>
-            <button  type="submit">Sign up</button><br>
-          </form>
-
+          <!--Código de registo de um profissional-->
           <script>
             var formProfissional = document.getElementById('profissional');
             formProfissional.addEventListener('submit', function(event){
              event.preventDefault();
             // const data = new FormData(form);
              const dataP = {
-              nomeP: formProfissional.nomeP.value,
+              nomeP: formProfissional.nameP.value,
               emailP: formProfissional.emailP.value,
-              passP: formProfissional.passP.value,
+              passP: formProfissional.passwordP.value,
               birthdayP: formProfissional.birthdayP.value,
               genderP: formProfissional.genderP.value
              };
@@ -149,27 +157,50 @@
            
              };
             });
-          </script>
-       <!--fim form registo PROFISSIONAL-->
+          </script> 
+        </form>
+          <!--Fim do código de registo de um profissional-->
 
-       <!--inicio form registo EMPRESA-->
-          <form  method="post" class="empresa" id="empresa">
-            <input type="text" name="nomeE" id="nomeE" placeholder="Name" required><br>
-            <input type="text" name="emailE" id="emailE" placeholder="Email" required><br>
-            <input type="password" name="passE" id="passE" placeholder="Password" required><br>
-            <input type="password" name="passvE" id="passvE" placeholder="Repeat password" required><br>
-            <button type="submit">Sign up</button><br>
-          </form>
+        <form class="company" id="company" method="post" action="/registoE"> 
+          <h1>Sign Up</h1><h6><a href="javascript:showSignUp()">Sign Up as Professional</a></h6><br>
 
+          <div class="form">
+            <div class="first">
+              <label for="name">Name</label><br>
+              <input type="text" name="nameE" required><br>
+            </div>
+            <div class="second">
+              <label for="email">Email</label><br>
+              <input type="text" name="emailE" required><br>
+            </div>
+          </div>
+
+          <br>
+
+          <div class="form">
+            <div class="first">
+              <label for="password">Password</label><br/>
+              <input type="password" name="passwordE" id="password" required>
+            </div>
+            <div class="second">
+              <label for="passwordRepeat">Repeat Password</label><br/>
+              <input type="password" name="passwordRepeatE" id="passwordRepeat" required><br>
+            </div>
+          </div>
+
+          <h5>Already have an account? <a href="javascript:hideSignUp()"> Sign In</a></h5>
+          <button type="submit">Sign up</button><br>
+
+          <!--Código de registo de uma empresa -->
           <script>
-            var formEmpresa = document.getElementById('empresa');
+            var formEmpresa = document.getElementById('company');
             formEmpresa.addEventListener('submit', function(event){
              event.preventDefault();
             // const data = new FormData(form);
              const dataE = {
-              nomeE: formEmpresa.nomeE.value,
+              nomeE: formEmpresa.nameE.value,
               emailE: formEmpresa.emailE.value,
-              passE: formEmpresa.passE.value
+              passE: formEmpresa.passwordE.value
              };
     
              const xhrRempresa = new XMLHttpRequest();
@@ -188,13 +219,12 @@
             
              };
             });
-          </script>
-       <!--fim form registo EMPRESA-->
-
+          </script> 
+             <!--Fim do código de registo de uma empresa -->
+        </form>
+                
       </section>
 
     </main>
-    </section>
-
   </body>
 </html>

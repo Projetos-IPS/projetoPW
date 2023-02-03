@@ -15,53 +15,55 @@
     padding-left: 5px;
 }
 
-.arrow{
-    
+.jobs-side::-webkit-scrollbar {
+    display: none;
+}
+  
+.jobs-side {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.arrow {
     margin-left: 90%;
     width: 20px;
 }
 
-.bar-up{
+.bar-up {
     display: flex;
-   width: 55.5%;
-   justify-content: space-between;
+    width: 55.5%;
+    justify-content: space-between;
     margin-left: 93px;
- 
 }
 
-#myInput2{
+#myInput2 {
     display: none;
 }
 
-#myInput3{
+#myInput3 {
     display: none;
 }
 
-.filter button{
+.filter button {
     margin-right: 10px;
     width: 130px;
     height: 30px;
-
 }
-
 
 .listajobs {
     list-style-type: none;
     margin-bottom: 20px;
 }
 
-.hr-jobs{
+.hr-jobs {
     width: 95%;
     margin-left: 0;
 }
 
-.hr-jobs2{
+.hr-jobs2 {
     margin-left: 40px;
     width: 88%;
-
 }
-
-
 
 .input-text {
     background-color: #f2f2f8;

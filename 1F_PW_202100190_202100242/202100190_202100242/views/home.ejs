@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scape=1.8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Open+Sans&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/offers.css" />
+    <script src="../scripts/joboffers.js"></script>
+    <script src="../scripts/main.js"></script>
+    <link rel="icon" href="images/ff-logo.png" />
+    <title>FOLIO&FLEX</title>
+  </head>
+  <body>
+    <!-- scroll to top -->
+    <button onclick="topFunction()" id="myBtn" title="Go to top">︿</button>
+
+    <!-- header -->
+    <header class="side">
+        <a href="Homepage" class="logo">
+          <img src="../images/ff-logo.png" alt="Logo" />
+        </a>
+        <nav class="side-under">
+          <nav class="side-menu">
+            <a href="Home" class="link">
+              <img src="../images/home.png"/>
+              <div class="menu-text">HOME</div>
+            </a>
+      
+            <a href="Job offers" class="link-active">
+              <img src="../images/joboffers.png"/>
+              <div class="menu-text">JOB OFFERS</div>
+            </a>
+  
+            <a href="Portfolios" class="link">
+              <img src="../images/portfolios.png"/>
+              <div class="menu-text">PORTFOLIOS</div>
+            </a>
+          </nav>
+      
+          <nav class="side-footer">
+            <a href="Profile" class="link">
+              <img src="../images/profile.png"/>
+              <div class="menu-text">PROFILE</div>
+            </a>
+  
+            <a href="Team" class="link">
+              <img src="../images/team.png"/>
+              <div class="menu-text">ABOUT US</div>
+            </a>
+  
+            <a href="out" class="link">
+              <img src="../images/logout.png"/>
+              <div class="menu-text">LOGOUT</div>
+            </a>
+          </nav>
+  
+        </nav>
+      </header>
+      <!-- header end -->
+
+      <!-- main -->
+        <section class="main">
+
+        <section class="main-header"> <!-- main-header start -->
+          <h1>JOB OFFERS</h1>
+          <section class="buttons">
+            <a class="name" href="Profile">  </a>
+            <a href="Profile" ><img src="../images/profile-pic.png" alt="Profile" /></a></a>
+          </section>
+        </section> <!-- main-header end -->
+
+    </section>
+    <!-- main end -->
+
+    <!-- scroll-top -->
+    <script>
+      mybutton = document.getElementById("myBtn");
+      window.onscroll = function () {
+        scrollFunction();
+      };
+
+      function scrollFunction() {
+        if (
+          document.body.scrollTop > 100 ||
+          document.documentElement.scrollTop > 100
+        ) {
+          mybutton.style.display = "block";
+        } else {
+          mybutton.style.display = "none";
+        }
+      }
+    </script>
+    <!-- scroll-top end -->
+  </body>
+</html>

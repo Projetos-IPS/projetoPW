@@ -20,6 +20,7 @@ var indexRouter = require('./routes/index');
 var joboffersRouter = require('./routes/joboffers');
 var teamRouter = require('./routes/team');
 var profileRouter = require('./routes/profile');
+var homeRouter = require('./routes/home');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,6 +39,7 @@ app.use('/Homepage', indexRouter);
 app.use('/Job%20offers', joboffersRouter);
 app.use('/Team', teamRouter);
 app.use('/Profile', profileRouter);
+app.use('/Home', homeRouter);
 
 
 

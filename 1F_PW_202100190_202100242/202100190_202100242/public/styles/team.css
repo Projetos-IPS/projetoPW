@@ -2,40 +2,83 @@
                  TEAM
 --------------------------------------*/
 .team {
+    overflow:auto;
     display: flex;
-    margin-top: 2%;
+    justify-content: left;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 86%;
+    position: relative;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.team::-webkit-scrollbar {
+    display: none;
 }
 
 .team .member {
-    background: rgb(132,129,207);
-    background: radial-gradient(circle, rgba(132,129,207,1) 0%, rgba(86,84,171,1) 100%);
-    margin-left: 30px;
-    margin-top: 50px;
-    width: 400px;
-    height: 500px;
-    border-radius: 20px;
+    width: 35%;
+    height: 90%;
+    margin: 20px;
+    padding: 30px;
+    background: #7087b08d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    border-radius: 15px;
+    align-items: center;
     text-align: center;
+    opacity: 0.8;
+    transition: 0.5s;
+}
+
+.team .member:hover {
+    opacity: 1;
+}
+
+.team .member:hover .general {
+    opacity: 1;
+    transform: translateY(-5px);
+}
+
+.general {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: 0.5s;
+    transform: translateY(100px);
 }
 
 .team .member img {
-    width: 200px;
-    height: 200px;
-    margin-top: -50px;
-    box-shadow: 10px 5px 5px #5554abd8;
+    width: 60%;
+    border-radius: 50%;
 }
 
-.team .member h2{
+.team .member h2 {
     font-family: 'Unbounded', cursive;
-    color: white;
+    text-transform: uppercase;
+    color: #7088B0;
     height: 3px;
 }
 
-.team .member h6{
-    color: #5654ab;
+.team .member h6 {
+    color: #7088B0;
+    text-transform: uppercase;
 }
 
-.team .member p{
+.details {
+    width: 90%;
     color: white;
-    width: 300px;
-    margin-left: 50px;
+    opacity: 0;
+    transition: 0.5s;
+    transform: translateY(40px);
+}
+
+.member:hover .details {
+    opacity : 1;
+    transform: translateY(-10px);
 }

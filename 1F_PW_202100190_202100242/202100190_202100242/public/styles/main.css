@@ -1,7 +1,7 @@
 body {
     font-family: 'Open Sans', sans-serif;
     height: 100vh;
-    background: #5654ab;
+    background: white;
     margin: 0px;
     display: flex;
 }
@@ -10,17 +10,26 @@ body {
               Side Menu
 --------------------------------------*/
 .side {
-    margin-top: 10px;
+    margin: 10px;
 }
 
-.side img{
-    height: 70px;
-    margin-left: 20px;
+.side .logo img {
+    margin: 10px;
+    height: 85px;
 }
 
 .side-under {
-    justify-content: left;
-    margin-left: 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 84.3%;
+    justify-content: space-between;
+}
+
+.side-under .link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .side-under a {
@@ -28,48 +37,70 @@ body {
     font-size: 90%;
     display: flex;
     text-decoration: none;
-    color: #8481cf;
+    color: black;
     margin-top: 20px;
 }
 
 .side-under a:hover {
-    text-decoration: none;
-    color: white;
-}
-
-.side-under .link-active {
-    text-decoration: none;
-    color: white;
+    background-color: #7087b092;
     border-radius: 20px;
 }
 
-hr {
-    margin-left: 23px;
-    width: 110px;
-    height:0.5px;
-    border-width:0;
-    color: #8481cf;
-    background-color:#8481cf;
+.side-under a:hover img {
+    opacity: 0;
+    transform: translateY(-38px);
+    transition: 0.5s;
+    background-color: #7087b092;
 }
 
-.before-logout-hr{
-    margin-left: 0;
-    width: 110px;
-    height:0.5px;
-    border-width:0;
-    color: #8481cf;
-    background-color:#8481cf;
+.side-under a:hover .menu-text {
+    opacity : 1;
+    transform: translateY(0px);
+}
+
+.side-under img {
+    width: 20px;
+    height: 20px;
+    margin: 20px;
+    transition: 0.5s;
+}
+
+.side-under .link-active {
+    background-color: #7088B0;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-text {
+    opacity: 0;
+    transition: 0.5s;
+    position: absolute;
+    transform: translateY(30px);
+}
+
+/** SIDE MENU **/
+.side-menu {
+    margin: 20px;
+}
+
+/** SIDE FOOTER **/
+.side-footer {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /*-------------------------------------
                  Main
 --------------------------------------*/
 .main {
-    background: linear-gradient(90deg, white 67%, #f2f2f8 33%);
+    background: #ECEDF1;
     border-radius: 20px;
     width: 100%;
     margin: 10px;
-    margin-left: 20px;
 }
 
 .main-header {
@@ -79,7 +110,7 @@ hr {
 
 .main-header h1 {
     font-family: 'Unbounded', cursive;
-    color: #5654ab;
+    color: #7088B0;
     margin-left: 30px;
     font-size: 30px;
 }
@@ -102,14 +133,28 @@ hr {
     color: #adb1ba;
 }
 
+.main-general {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-side {
+    background-color: white;
+    width: 50%;
+    margin: 20px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 /*-------------------------------------
             Login Buttons
 --------------------------------------*/
 .buttons {
     display: flex;
-    width: 434px;
     justify-content: end;
-
 }
 
 .buttons button {
@@ -135,8 +180,6 @@ hr {
     text-align: end;
 }
 
-
-
 /*-------------------------------------
              Scroll Button
 --------------------------------------*/
@@ -148,7 +191,7 @@ hr {
     z-index: 99; /* Make sure it does not overlap */
     border: none; /* Remove borders */
     outline: none; /* Remove outline */
-    color: #b75e42; /* Text color */
+    color: #7088B0; /* Text color */
     cursor: pointer; /* Add a mouse pointer on hover */
     padding: 15px; /* Some padding */
     border-radius: 10px; /* Rounded corners */

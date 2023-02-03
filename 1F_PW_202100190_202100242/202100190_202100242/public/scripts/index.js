@@ -1,27 +1,37 @@
-function change_form() {
-
-    if(document.getElementById('profissionalR').checked) {
-        document.getElementById('profissional').style.display = "block";
-        document.getElementById('empresa').style.display = "none";
-      }
-      else if(document.getElementById('empresaR').checked) {
-        document.getElementById('empresa').style.display = "block";
-        document.getElementById('profissional').style.display = "none";
-      }
+function showSignUp() {
+  document.getElementById('login').style.display = "none";
+  document.getElementById('company').style.display = "none";
+  document.getElementById('profissional').style.display = "flex";
 }
 
-function hide(){
-  document.getElementById('pop-up').style.display = "none";
+function signUpCompany() {
+  document.getElementById('login').style.display = "none";
+  document.getElementById('profissional').style.display = "none";
+  document.getElementById('company').style.display = "flex";
 }
 
-function pop_up(){
-var el = document.getElementById('sign-in-pop');
-    function show() {
-    document.getElementById('pop-up').style.display = "block";
-    }
+function hideSignUp() {
+  document.getElementById('login').style.display = "block";
+  document.getElementById('profissional').style.display = "none";
+  document.getElementById('company').style.display = "none";
+}
 
-    el.onclick = show();
-    
+function getChoiceFemale() {
+  document.getElementById('female').style.color = "white";
+  document.getElementById('male').style.color = "rgba(255, 255, 255, 0.503)";
+  document.getElementById('other').style.color = "rgba(255, 255, 255, 0.503)";
+}
+
+function getChoiceMale() {
+  document.getElementById('male').style.color = "white";
+  document.getElementById('female').style.color = "rgba(255, 255, 255, 0.503)";
+  document.getElementById('other').style.color = "rgba(255, 255, 255, 0.503)";
+}
+
+function getChoiceOther() {
+  document.getElementById('other').style.color = "white";
+  document.getElementById('male').style.color = "rgba(255, 255, 255, 0.503)";
+  document.getElementById('female').style.color = "rgba(255, 255, 255, 0.503)";
 }
 
 

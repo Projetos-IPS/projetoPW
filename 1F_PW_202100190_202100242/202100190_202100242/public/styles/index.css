@@ -1,146 +1,369 @@
 body {
-    background-color: #5654ab;
-}
-
-.login{
-    margin: 0 auto;
-}
-
-.pop-up{
-
-    z-index:1;
-    margin-top: 20vh;
-    position: fixed;
-    height: 40vh;
-    display: none;
-
-}
-
-.pop-up .close{
-    margin-top: 5%;
-}
-
-.pop-up button{
-    margin-top: 0;
+    background-color: #ECEDF1;
+    background-image: url(../images/darkblue.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
 .side-to-side {
+    background-image: url(../images/darkblue.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-color: rgba(0, 0, 0, 0.141);
+    background-blend-mode: darken;
     display: flex;
-    height: 50vh;
-    width: 80%;
-    margin: 10vh auto;
-    justify-content: space-evenly;
-
+    margin: 50px;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.7) 0px 0px 30px 10px;
+    color: white;
 }
 
 .left {
-    text-align: center;
-    margin-top: 5vh;
+    padding: 20px;
+    margin: 20px;
+    margin-left: 70px;
+    width: 45%;
+    height: 87%;
 }
 
 .left img {
-    width: 200px;
-    margin-bottom: 5px;
+    width: 15%;
+}
+
+.left h1 {
+    font-family: 'Unbounded', cursive;
+    font-size: 50px;
+}
+
+.left hr {
+    border: 4px solid white;
+    width: 100px;
+    float: left;
 }
 
 .left p {
-    width: 500px;
+    width: 70%;
+}
+
+.left button {
+    width: 200px;
+    height: 40px;
+    border-radius: 20px;
+    border-style: none;
     color: white;
+    font-family: 'Unbounded', cursive;
+    font-size: 15px;
+    background-image: linear-gradient(to right, #314755 0%, #7088B0  51%, #314755  100%);
+    transition: 0.5s;
+    background-size: 200% auto;
+}
+
+.left button:hover {
+    background-position: right center;
+    cursor: pointer;
 }
 
 .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.right .login {
+    background-color: rgba(255, 255, 255, 0.10);
+    padding: 70px;
+    margin: 20px;
+    font-family: 'Unbounded', cursive;
+}
+
+.login h1 {
     text-align: center;
-    margin-top: 5vh;
+    font-size: 40px;
+    margin: 0;
 }
 
-a {
-    background-color: transparent;
-    color: #5654ab;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    font-weight: bold;
-}
-
-a:hover {
-    color: #706dca;
-}
-
-
-
-button {
-    width: 200px;
+.login label {
+    float: left;
     height: 30px;
-    background-color: #5654ab;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 8px 10px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    cursor: pointer;
-    position: relative;
-    font-size: 18px;
-    margin-top: 3vh;
+    margin-left: 10px;
 }
 
-button:hover {
-    width: 200px;
-    height: 30px;
-    background-color: #706dca;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 8px 10px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    cursor: pointer;
-    position: relative;
-
-}
-
-form {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 10px 10px 5px #706dca;
-}
-
-.right hr {
-    color: white;
+.login input {
+    background-color: #ecedf157;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 30px 10px;
+    border-radius: 20px;
+    border-style: none;
     width: 300px;
-    margin: 10px auto;
-}
-
-.profissional{
-    margin-top: -30px;
-}
-
-.empresa{
-        margin-top: -30px;
-}
-
-.empresa, .profissional{
-    display: none;
-}
-
-.right p {
-    font-size: medium;
-    color: #706dca;
-}
-
-a {
-    text-decoration: none;
+    height: 40px;
+    color: white;
 }
 
 input[type=text] {
-    width: 300px;
     padding: 12px 20px;
     box-sizing: border-box;
-    border-width: 0px 0px 1px 0px;
-    border-color: #5654ab;
+    border-style: none;
+    color: white;
+    letter-spacing: 2px;
+}
+
+input:focus {
+    background-color: #ecedf157;
+    color: white;
+    border-color: white;
+    border-width: 5px;
 }
 
 input[type=password] {
-    width: 300px;
     padding: 12px 20px;
     box-sizing: border-box;
-    border-width: 0px 0px 1px 0px;
-    border-color: #5654ab;
+    border-style: none;
+}
+
+.login a {
+    text-decoration: none;
+    color: white;
+}
+
+.login h5 {
+    text-align: center;
+}
+
+.login a:hover {
+    color: rgba(255, 255, 255, 0.503);
+}
+
+.login button {
+    width: 300px;
+    height: 40px;
+    border-radius: 20px;
+    border-style: none;
+    color: white;
+    font-family: 'Unbounded', cursive;
+    font-size: 15px;
+    background-image: linear-gradient(to right, #314755 0%, #7088B0  51%, #314755  100%);
+    transition: 0.5s;
+    background-size: 200% auto;
+}
+
+.login button:hover {
+    background-position: right center;
+    cursor: pointer;
+}
+
+/** PROFISSIONAL */
+
+.right .profissional {
+    background-color: rgba(255, 255, 255, 0.10);
+    padding: 40px;
+    margin-right: 50px;
+    font-family: 'Unbounded', cursive;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profissional h1 {
+    text-align: center;
+    font-size: 40px;
+    margin: 0;
+}
+
+.profissional h6 {
+    font-weight: 100;
+    text-align: center;
+    margin: 0;
+}
+
+.profissional .form {
+    display: flex;
+}
+
+.profissional .form .second {
+    margin-left: 20px;
+}
+
+.profissional .form-left {
+    align-self: start;
+}
+
+.profissional label {
+    float: left;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.profissional input[type=text] {
+    background-color: #ecedf157;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 30px 10px;
+    border-radius: 20px;
+    border-style: none;
+    width: 250px;
+    height: 30px;
+    color: white;
+}
+
+.profissional input[type=password] {
+    background-color: #ecedf157;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 30px 10px;
+    border-radius: 20px;
+    border-style: none;
+    width: 250px;
+    height: 30px;
+    color: white;
+}
+
+.profissional input[type=date] {
+    margin-left: 10px;
+}
+
+.profissional input[type=button] {
+    font-family: 'Unbounded', cursive;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.503);
+    margin: 5px;
+    background: transparent;
+    border: none;
+}
+
+.profissional input[type=button]:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.profissional a {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+.profissional h5 {
+    text-align: center;
+}
+
+.profissional a:hover {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.503);
+    text-align: center;
+}
+
+.profissional button {
+    width: 300px;
+    height: 40px;
+    border-radius: 20px;
+    border-style: none;
+    color: white;
+    font-family: 'Unbounded', cursive;
+    font-size: 15px;
+    background-image: linear-gradient(to right, #314755 0%, #7088B0  51%, #314755  100%);
+    transition: 0.5s;
+    background-size: 200% auto;
+}
+
+.profissional button:hover {
+    background-position: right center;
+    cursor: pointer;
+}
+
+/** COMPANY **/
+
+.company {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.10);
+    padding: 40px;
+    margin-right: 50px;
+    font-family: 'Unbounded', cursive;
+}
+
+.company h1 {
+    text-align: center;
+    font-size: 40px;
+    margin: 0;
+}
+
+.company h6 {
+    font-weight: 100;
+    text-align: center;
+    margin: 0;
+}
+
+.company .form {
+    display: flex;
+}
+
+.company .form .second {
+    margin-left: 20px;
+}
+
+.company label {
+    float: left;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.company input {
+    background-color: #ecedf157;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 30px 10px;
+    border-radius: 20px;
+    border-style: none;
+    width: 250px;
+    height: 40px;
+    color: white;
+}
+
+.company input[type=text] {
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border-style: none;
+    color: white;
+    letter-spacing: 2px;
+}
+
+.company input:focus {
+    background-color: #ecedf157;
+    color: white;
+    border-color: white;
+    border-width: 5px;
+}
+
+.company input[type=password] {
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border-style: none;
+}
+
+.company a {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+.company h5 {
+    text-align: center;
+}
+
+.company a:hover {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.503);
+    text-align: center;
+}
+
+.company button {
+    width: 300px;
+    height: 40px;
+    border-radius: 20px;
+    border-style: none;
+    color: white;
+    font-family: 'Unbounded', cursive;
+    font-size: 15px;
+    background-image: linear-gradient(to right, #314755 0%, #7088B0  51%, #314755  100%);
+    transition: 0.5s;
+    background-size: 200% auto;
+}
+
+.company button:hover {
+    background-position: right center;
+    cursor: pointer;
 }
