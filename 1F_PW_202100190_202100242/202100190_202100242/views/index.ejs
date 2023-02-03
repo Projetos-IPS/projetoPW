@@ -52,7 +52,6 @@
             if(xhrlogin.status === 200)
             {
               var response = JSON.parse(xhrlogin.responseText);
-              formLogin.reset();
 
               if(response.result == 0)
               {
@@ -71,6 +70,7 @@
               else
               {
                 window.location.replace("Team");
+                formLogin.reset();
               }
             }
            };
