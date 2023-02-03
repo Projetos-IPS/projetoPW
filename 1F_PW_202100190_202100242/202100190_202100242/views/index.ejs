@@ -10,10 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/index.css" />
-    <script
-    src="https://code.jquery.com/jquery-3.6.3.js"
-    integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
-    crossorigin="anonymous"></script>
     <script src="../scripts/main.js"> </script>
     <script src="../scripts/index.js"> </script>
     <link rel="icon" href="images/iconic.png">
@@ -62,13 +58,13 @@
 
         <!--inicio form registo PROFISSIONAL-->
           <form method="post" class="profissional" id="profissional">
-            <input type="text" name="nomeP" id="nomeP" placeholder="Name" required><br>
-            <input type="text" id="emailP" name="emailP" placeholder="Email" required><br>
-            <input type="password" id="passP" name="passP" placeholder="Password" required><br>
-            <input type="password" id="passvP" name="passvP" placeholder="Repeat password" required><br>
+            <input type="text" name="nomeP"  placeholder="Name" required><br>
+            <input type="text"  name="emailP" placeholder="Email" required><br>
+            <input type="password" name="passP" placeholder="Password" required><br>
+            <input type="password"  name="passvP" placeholder="Repeat password" required><br>
             <br>
             <b><label for="birthday">Birthday date</label><br></b>
-            <input type="date" id="birthdayP" name="birthdayP" required><br><br>
+            <input type="date"  name="birthdayP" required><br><br>
             <b><center><label for="genderP">Select gender</label><br></center></b>
             <input type="radio" id="feminino" name="genderP" value="Feminino" required>
             <label for="gender">Female</label>
@@ -80,7 +76,7 @@
           </form>
 
           <script>
-            var form = document.querySelector('#profissional');
+            var form = document.getElementById('profissional');
             form.addEventListener('submit', function(event){
              event.preventDefault();
             // const data = new FormData(form);
@@ -101,8 +97,10 @@
               if(xhr.status === 200)
               {
                 var response = JSON.parse(xhr.responseText);
+                form.reset();
              //   console.log(response.id);
               }
+           
              };
             });
             
@@ -110,7 +108,7 @@
        <!--fim form registo PROFISSIONAL-->
 
        <!--inicio form registo EMPRESA-->
-          <form  method="post"  action="/registoE" class="empresa" id="empresa">
+          <form  method="post" class="empresa" id="empresa">
             <input type="text" name="nomeE" id="nomeE" placeholder="Name" required><br>
             <input type="text" name="emailE" id="emailE" placeholder="Email" required><br>
             <input type="password" name="passE" id="passE" placeholder="Password" required><br>
@@ -119,27 +117,29 @@
           </form>
 
           <script>
-            var form = document.querySelector('#empresa');
-            form.addEventListener('submit', function(event){
+            var form1 = document.getElementById('empresa');
+            form1.addEventListener('submit', function(event){
              event.preventDefault();
             // const data = new FormData(form);
-             const data = {
-              nomeE: form.nomeE.value,
-              emailE: form.emailE.value,
-              passE: form.passE.value
+             const data1 = {
+              nomeE: form1.nomeE.value,
+              emailE: form1.emailE.value,
+              passE: form1.passE.value
              };
     
-             const xhr = new XMLHttpRequest();
-             xhr.open('POST', '/registoE', true);
-             xhr.setRequestHeader('Content-Type', 'application/json');
-             xhr.send(JSON.stringify(data));
+             const xhr1 = new XMLHttpRequest();
+             xhr1.open('POST', '/registoE', true);
+             xhr1.setRequestHeader('Content-Type', 'application/json');
+             xhr1.send(JSON.stringify(data1));
              
-             xhr.onload = function(){
-              if(xhr.status === 200)
+             xhr1.onload = function(){
+              if(xhr1.status === 200)
               {
-                var response = JSON.parse(xhr.responseText);
+                var response = JSON.parse(xhr1.responseText);
+                form1.reset();
              //   console.log(response.id);
               }
+            
              };
             });
            
