@@ -8,14 +8,9 @@ router.get('/', renderPage);
 
  function renderPage(req, res)
  {
-    if(req.session.name !== undefined)
-    {
+
     res.render('joboffers');
-    }
-    else
-    {
-    res.redirect('Homepage');
-    }
+   
  }
 
 module.exports = router;

@@ -37,8 +37,8 @@ router.post('/login', function(req, res)
     res.json({result : id});
     if(id !== 0 && id !== 2 && id !== 3)
     {
-      req.session.name = id;
-      console.log(req.session.name);
+      req.session.data = id;
+
     }
   });
 });
