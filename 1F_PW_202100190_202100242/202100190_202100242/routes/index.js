@@ -6,10 +6,11 @@ var User = require('../models/usersModel');
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-  if(req.session.name != undefined && req.session.name != 0 && req.session.name != 2 && req.session.name != 3)
+  if(req.session.name !== undefined && req.session.name !== 0 && req.session.name !== 2 && req.session.name !== 3)
   {
     req.session.destroy;
   }
+  console.log(req.session.name);
   res.render('index');
   
 });
