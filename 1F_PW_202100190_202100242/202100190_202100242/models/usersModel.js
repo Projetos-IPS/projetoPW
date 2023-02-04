@@ -71,6 +71,7 @@ var User = {
                   {
                     if (result[i].approved === 0)
                     {
+                      if(error) return reject(error);
                       resolve(0);
                       connection.end();
                     }
@@ -79,12 +80,14 @@ var User = {
                       var querylog = `INSERT INTO sessions (utilizador) VALUES (?)`;
                       connection.query(querylog, emailL, function(error, result1){
                       sessionId = result1.insertId;});
+                      if(error) return reject(error);
                       resolve(1);//login feito com sucesso
                       connection.end();
                     }
                   }
                   else
                   {
+                    if(error) return reject(error);
                     resolve(2);
                     connection.end();
                   }
@@ -93,6 +96,7 @@ var User = {
               }
               else
               {
+                if(error) return reject(error);
                 resolve(3);
                 connection.end();
               }
@@ -120,11 +124,13 @@ var User = {
                 if(result.length > 0)
                 {
                     connection.query(queryDelete, sessionId);
+                    if(error) return reject(error);
                     resolve(1);
                     connection.end();
                 }
                 else
                 {
+                    if(error) return reject(error);
                     resolve(0);
                     connection.end();
                 }
