@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
   {
     req.session.destroy;
   }
-  console.log(req.session.name);
+ 
   res.render('index');
   
 });
