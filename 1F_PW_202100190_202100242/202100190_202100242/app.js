@@ -4,17 +4,8 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var session = require('express-session');
-
-const oneDay = 1000 * 60 * 60 * 24;
 
 var app = express();
-app.use(session({
-  secret : 'secret',
-  resave: false,
-  cookie: {maxAge: oneDay},
-	saveUninitialized: true
-}));
 
 var indexRouter = require('./routes/index');
 var joboffersRouter = require('./routes/joboffers');
@@ -32,6 +23,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+/*app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));*/
 
 app.use('/', indexRouter);
 app.use('/out', indexRouter);
