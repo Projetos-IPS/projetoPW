@@ -4,10 +4,9 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var optionsDB = require('./config/options.json');
 const session = require('express-session');
 
-var app = express();
+const app = express();
 
 var indexRouter = require('./routes/index');
 var joboffersRouter = require('./routes/joboffers');

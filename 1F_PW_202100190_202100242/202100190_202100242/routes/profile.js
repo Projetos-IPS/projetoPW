@@ -6,14 +6,15 @@ router.get('/', renderPage);
 
  function renderPage(req, res)
  {
-
-   if(req.session.name !== undefined)
+  console.log(req.session.name);
+  if(req.session.name == undefined || req.session.name == 0 || req.session.name == 2 || req.session.name == 3)
    {
-    res.render('profile');
+      res.redirect('/Homepage');
+    
    }
    else
    {
-      res.redirect('/Homepage');
+      res.render('profile');
    }
 
  

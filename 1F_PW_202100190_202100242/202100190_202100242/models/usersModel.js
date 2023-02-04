@@ -1,7 +1,8 @@
 const mysql = require("mysql");
 const options = require('../config/options.json');
 const { query } = require("express");
-
+var session = require('express-session');
+const { Session } = require("express-session");
 //var sessionId;
 
 var User = {
@@ -50,16 +51,7 @@ var User = {
       var passL = data.passLogin;
 
       var connection = mysql.createConnection(options.mysql);
-     // var verifySession = `SELECT * FROM sessions`;
-
-     // connection.query(verifySession, emailL, function(error, results)
-      //{
-       // if (results.length > 0)
-       // {
-         // var deleteSession = `DELETE FROM sessions WHERE utilizador = ?`;
-         // connection.query(deleteSession, emailL);
-        //}
-       
+      
             var sql = `SELECT * FROM utilizador WHERE email = ?`;
             connection.query(sql, emailL, function(error, result)
             {
@@ -69,19 +61,16 @@ var User = {
                 {
                   if (result[i].pass === passL)
                   {
-                    if (result[i].approved === 0)
+                    if (result[i].approved == 0)
                     {
                       if(error) return reject(error);
                       resolve(0);
                       connection.end();
                     }
-                    else
+                    else if(result[i].approved == 1)
                     {
-                      //var querylog = `INSERT INTO sessions (utilizador) VALUES (?)`;
-                      //connection.query(querylog, emailL, function(error, result1){
-                      //sessionId = result1.insertId;});
                       if(error) return reject(error);
-                      resolve(1);//login feito com sucesso
+                      resolve(result[i].email);//login feito com sucesso
                       connection.end();
                     }
                   }
@@ -101,14 +90,6 @@ var User = {
                 connection.end();
               }
             });
-
-
-
-
-       
-     // });
-
-    
   })
 }
 

@@ -5,13 +5,13 @@ var router = express.Router();
 router.get('/', renderPage);
 
 function renderPage(req, res) {
-    if(req.session.name !== undefined)
+    if(req.session.name == undefined || req.session.name == 0 || req.session.name == 2 || req.session.name == 3)
     {
-     res.render('home');
+        res.redirect('/Homepage');
     }
     else
     {
-       res.redirect('/Homepage');
+        res.render('home');
     }
 }
 

@@ -1,11 +1,12 @@
 var express = require('express');
+const { getUser } = require('../models/usersModel');
 var router = express.Router();
 var User = require('../models/usersModel');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-  if(req.session.name !== undefined)
+  if(req.session.name == undefined || req.session.name == 0 || req.session.name == 2 || req.session.name == 3)
   {
     req.session.destroy;
   }
@@ -29,19 +30,19 @@ router.post('/registoE', function(req, res)
   });
 });
 
-router.post('/login', function(req, res, next)
+router.post('/login', function(req, res)
 {
   const data = req.body;
   User.login(data).then(function(id){
-    res.json({result : id});
+    req.session.name = id;
+    res.json({result : id});  
   });
 
-  if(User.login(data).catch(1)){
+ /* if(User.login(data).catch(1)){
     req.session.name = req.body.emailLogin
-  };
+  };*/
 
-  console.log(req.session.name);
-
+  
 });
 
 router.get('/out', function(req,res){
