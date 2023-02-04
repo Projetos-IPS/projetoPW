@@ -2,7 +2,7 @@ const mysql = require("mysql");
 const options = require('../config/options.json');
 const { query } = require("express");
 
-var sessionId;
+//var sessionId;
 
 var User = {
     createP: function(data)
@@ -50,15 +50,15 @@ var User = {
       var passL = data.passLogin;
 
       var connection = mysql.createConnection(options.mysql);
-      var verifySession = `SELECT * FROM sessions`;
+     // var verifySession = `SELECT * FROM sessions`;
 
-      connection.query(verifySession, emailL, function(error, results)
-      {
-        if (results.length > 0)
-        {
-          var deleteSession = `DELETE FROM sessions WHERE utilizador = ?`;
-          connection.query(deleteSession, emailL);
-        }
+     // connection.query(verifySession, emailL, function(error, results)
+      //{
+       // if (results.length > 0)
+       // {
+         // var deleteSession = `DELETE FROM sessions WHERE utilizador = ?`;
+         // connection.query(deleteSession, emailL);
+        //}
        
             var sql = `SELECT * FROM utilizador WHERE email = ?`;
             connection.query(sql, emailL, function(error, result)
@@ -77,9 +77,9 @@ var User = {
                     }
                     else
                     {
-                      var querylog = `INSERT INTO sessions (utilizador) VALUES (?)`;
-                      connection.query(querylog, emailL, function(error, result1){
-                      sessionId = result1.insertId;});
+                      //var querylog = `INSERT INTO sessions (utilizador) VALUES (?)`;
+                      //connection.query(querylog, emailL, function(error, result1){
+                      //sessionId = result1.insertId;});
                       if(error) return reject(error);
                       resolve(1);//login feito com sucesso
                       connection.end();
@@ -106,13 +106,13 @@ var User = {
 
 
        
-      });
+     // });
 
     
   })
-},
+}
 
-    logout: function()
+ /*   logout: function()
     {
         return new Promise(function(resolve, reject)
         {
@@ -137,7 +137,7 @@ var User = {
             });
            
         });
-    }
+    }*/
 }
 
 module.exports = User;

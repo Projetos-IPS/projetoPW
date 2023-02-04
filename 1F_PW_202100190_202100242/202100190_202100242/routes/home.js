@@ -5,7 +5,14 @@ var router = express.Router();
 router.get('/', renderPage);
 
 function renderPage(req, res) {
-    res.render('home');
+    if(req.session.name !== undefined)
+    {
+     res.render('home');
+    }
+    else
+    {
+       res.redirect('/Homepage');
+    }
 }
 
 module.exports = router;

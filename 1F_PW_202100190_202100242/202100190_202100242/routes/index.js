@@ -5,6 +5,10 @@ var User = require('../models/usersModel');
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
+  if(req.session.name !== undefined)
+  {
+    req.session.destroy;
+  }
   res.render('index');
   
 });
@@ -25,18 +29,26 @@ router.post('/registoE', function(req, res)
   });
 });
 
-router.post('/login', function(req, res)
+router.post('/login', function(req, res, next)
 {
   const data = req.body;
   User.login(data).then(function(id){
     res.json({result : id});
   });
 
+  if(User.login(data).catch(1)){
+    req.session.name = req.body.emailLogin
+  };
+
+  console.log(req.session.name);
+
 });
 
 router.get('/out', function(req,res){
-  
-  User.logout().then(res.redirect('/'));
+  req.session.destroy((err) => {
+    res.redirect('/'); 
+    res.end();
+  })
 });
 
 module.exports = router;
