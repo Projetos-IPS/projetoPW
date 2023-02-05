@@ -1,6 +1,7 @@
-var init = function(){
+
+var init = function() {
     getProfileImg();
-}
+};
 
 function getProfileImg() {
     const xhr = new XMLHttpRequest();

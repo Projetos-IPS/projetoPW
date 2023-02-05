@@ -3,7 +3,6 @@ const options = require('../config/options.json');
 const { query } = require("express");
 var session = require('express-session');
 const { Session } = require("express-session");
-//var sessionId;
 
 var User = {
     createP: function(data)
@@ -44,7 +43,7 @@ var User = {
 
     login: function(data)
 {
-  return new Promise(function(resolve, reject)
+    return new Promise(function(resolve, reject)
   {
       
       var emailL = data.emailLogin;
@@ -55,6 +54,9 @@ var User = {
             var sql = `SELECT * FROM utilizador WHERE email = ?`;
             connection.query(sql, emailL, function(error, result)
             {
+              if(error) {return reject(error);}
+              else
+              {
               if(result.length > 0)
               {
                 for(var i = 0; i < result.length; i++)
@@ -63,20 +65,17 @@ var User = {
                   {
                     if (result[i].approved == 0)
                     {
-                      if(error) return reject(error);
                       resolve(0);
                       connection.end();
                     }
                     else if(result[i].approved == 1)
                     {
-                      if(error) return reject(error);
                       resolve(result[i].email);//login feito com sucesso
                       connection.end();
                     }
                   }
                   else
                   {
-                    if(error) return reject(error);
                     resolve(2);
                     connection.end();
                   }
@@ -85,40 +84,66 @@ var User = {
               }
               else
               {
-                if(error) return reject(error);
                 resolve(3);
                 connection.end();
               }
+            }
             });
+            
   })
-}
+    },
 
- /*   logout: function()
+    getUserType: function(email)
     {
-        return new Promise(function(resolve, reject)
+      return new Promise(function(resolve, reject)
+      {
+        var query = `SELECT * FROM utilizador WHERE email = ?`;
+        var connection = mysql.createConnection(options.mysql);
+
+        connection.query(query, email, function(error, result)
         {
-            var query = `SELECT * FROM sessions`;
-            var queryDelete = `delete from sessions WHERE id = ?`;
-            var connection = mysql.createConnection(options.mysql);
-            connection.query(query, function(error, result)
+          if(error) {return reject(error);}
+          else
+          {
+          if(result.length > 0)
+          {
+            for (var i = 0; i < result.length; i++)
             {
-                if(result.length > 0)
-                {
-                    connection.query(queryDelete, sessionId);
-                    if(error) return reject(error);
-                    resolve(1);
-                    connection.end();
-                }
-                else
-                {
-                    if(error) return reject(error);
-                    resolve(0);
-                    connection.end();
-                }
-            });
-           
+              if(result[i].tipo_utilizador == 'profissional')
+              {resolve('P'); 
+              }
+              else if(result[i].tipo_utilizador == 'empresa')
+              {resolve('E'); 
+              }
+              else if(result[i].tipo_utilizador == 'admin');
+              {resolve('A'); 
+              }
+            }
+          }
+        }
         });
-    }*/
+      });
+    },
+
+    getUserDataP: function(email)
+    {
+      return new Promise(function(resolve, reject)
+      {
+        var query = `SELECT email, nome, data_nascimento, genero, occupation, descricao, localidade, visualizacao FROM profissional WHERE email = ?`
+        var connection = mysql.createConnection(options.mysql);
+
+        connection.query(query, email, function(error,result)
+        {
+          if(error) { return reject(error);}
+          else
+          {
+            resolve(result);
+            connection.end();
+          }
+        });
+      });
+    }
+
 }
 
 module.exports = User;
