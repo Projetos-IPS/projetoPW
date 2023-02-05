@@ -74,6 +74,36 @@
           </section>
         </section>
 
+        <script>
+          
+          const xhrImage = new XMLHttpRequest();
+          xhrImage.open('GET', '/Profile/getUserDataP', true);
+          xhrImage.setRequestHeader('Content-Type', 'application/json');
+      
+          var profileImg = document.getElementById('profile');
+      
+          xhrImage.onload = function(){
+              if(xhrImage.status === 200)
+              {
+              var data = JSON.parse(xhrImage.responseText);
+              if(data[0].genero == 'Feminino')
+              {
+                  profileImg.src = "../images/profile-female.png";
+              }
+              else if(data[0].genero == 'Masculino')
+              {
+                  profileImg.src = "../images/profile-male.png";
+              }
+              else if(data[0].genero == 'other')
+              {
+                  profileImg.src = "../images/profile-other.png";
+              }
+            }
+          };
+          xhrImage.send();
+      
+        </script>
+
         <section class="main-general">
 
         <section class="team">
