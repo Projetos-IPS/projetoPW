@@ -156,7 +156,7 @@ function search() {
         }
         else if(data[0].genero == 'Masculino')
         {
-            profileImg.src = "../images/profile-masculino.png";
+            profileImg.src = "../images/profile-male.png";
         }
         else if(data[0].genero == 'other')
         {
