@@ -125,6 +125,38 @@ var User = {
       });
     },
 
+    getUser: function(email)
+    {
+      return new Promise(function(resolve, reject)
+      {
+        var query = `SELECT * FROM utilizador WHERE email = ?`;
+        var connection = mysql.createConnection(options.mysql);
+
+        connection.query(query, email, function(error, result)
+        {
+          if(error) {return reject(error);}
+          else
+          {
+          if(result.length > 0)
+          {
+            for (var i = 0; i < result.length; i++)
+            {
+              if(result[i].tipo_utilizador == 'profissional')
+              {resolve(result); 
+              }
+              else if(result[i].tipo_utilizador == 'empresa')
+              {resolve(result); 
+              }
+              else if(result[i].tipo_utilizador == 'admin');
+              {resolve(result); 
+              }
+            }
+          }
+        }
+        });
+      });
+    },
+
     getUserDataP: function(email)
     {
       return new Promise(function(resolve, reject)
@@ -142,7 +174,45 @@ var User = {
           }
         });
       });
-    }
+    },
+
+    getUserDataE: function(email)
+    {
+      return new Promise(function(resolve, reject)
+      {
+        var query = `SELECT email, nome, descricao, site, logotipo FROM empresa WHERE email = ?`
+        var connection = mysql.createConnection(options.mysql);
+
+        connection.query(query, email, function(error,result)
+        {
+          if(error) { return reject(error);}
+          else
+          {
+            resolve(result);
+            connection.end();
+          }
+        });
+      });
+    },
+
+    getUserDataA: function(email)
+    {
+      return new Promise(function(resolve, reject)
+      {
+        var query = `SELECT email, pass, tipo_utilizador, approved FROM utilizador WHERE email = ?`
+        var connection = mysql.createConnection(options.mysql);
+
+        connection.query(query, email, function(error,result)
+        {
+          if(error) { return reject(error);}
+          else
+          {
+            resolve(result);
+            connection.end();
+          }
+        });
+      });
+    },
 
 }
 

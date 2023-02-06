@@ -12,6 +12,7 @@ const xhrImage = new XMLHttpRequest();
     var profileDescription = document.getElementById('profile-description');
 
     xhrImage.onload = function(){
+        
         if(xhrImage.status === 200)
         {
         var data = JSON.parse(xhrImage.responseText);
@@ -34,20 +35,16 @@ const xhrImage = new XMLHttpRequest();
         profileName.innerHTML = data[0].nome;
         profileLocation.innerHTML = data[0].localidade;
         profileOccupation.innerHTML = data[0].occupation;
-        
+
         if(data[0].descricao == "")
         {
             profileDescription.innerHTML = "No description"
         }
         else
         {
-        profileDescription.innerHTML = data[0].descricao;
+            profileDescription.innerHTML = data[0].descricao;
         }
       
-    
-
-
-
         console.log(data[0]);
       }
     };

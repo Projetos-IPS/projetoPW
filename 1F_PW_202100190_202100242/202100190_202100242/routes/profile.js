@@ -14,15 +14,34 @@ router.get('/', function(req, res)
       res.render('Profile');
    }
 });
-   
+ 
+router.get('/getUser', function(req, res)
+{
+   User.getUser(req.session.name).then(function(data){
+      res.json(data);
+   })
+});
+
 router.get('/getUserDataP', function(req, res)
 {
-
    User.getUserType(req.session.name).then(function(type){
       if(type == 'P')
       {
-         console.log(type);
          User.getUserDataP(req.session.name).then(function(data)
+         {
+            res.json(data);
+         })
+      }
+      if(type == 'E')
+      {
+         User.getUserDataE(req.session.name).then(function(data)
+         {
+            res.json(data);
+         })
+      }
+      if(type == 'A')
+      {
+         User.getUserDataA(req.session.name).then(function(data)
          {
             res.json(data);
          })
