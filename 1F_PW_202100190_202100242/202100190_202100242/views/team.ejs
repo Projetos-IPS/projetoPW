@@ -19,49 +19,54 @@
     <!-- scroll to top -->
     <button onclick="topFunction()" id="myBtn" title="Go to top">︿</button>
 
-    <!-- header -->
-    <header class="side">
-      <a href="Homepage" class="logo">
-        <img src="../images/ff-logo.png" alt="Logo" />
-      </a>
-      <nav class="side-under">
-        <nav class="side-menu">
-          <a href="Home" class="link">
-            <img src="../images/home.png"/>
-            <div class="menu-text">HOME</div>
+        <!-- header -->
+        <header class="side">
+          <a href="Homepage" class="logo">
+            <img src="../images/ff-logo.png" alt="Logo" />
           </a>
+          <nav class="side-under">
+            <nav class="side-menu">
+              <a href="Home" id="home-menu" class="link">
+                <img src="../images/home.png"/>
+                <div class="menu-text">HOME</div>
+              </a>
+        
+              <a href="Job offers" id="joboffers-menu" class="link">
+                <img src="../images/joboffers.png"/>
+                <div class="menu-text">JOB OFFERS</div>
+              </a>
     
-          <a href="Job offers" class="link">
-            <img src="../images/joboffers.png"/>
-            <div class="menu-text">JOB OFFERS</div>
-          </a>
-
-          <a href="Portfolios" class="link">
-            <img src="../images/portfolios.png"/>
-            <div class="menu-text">PORTFOLIOS</div>
-          </a>
-        </nav>
+              <a href="Portfolios" id="portfolios-menu"class="link">
+                <img src="../images/portfolios.png"/>
+                <div class="menu-text">PORTFOLIOS</div>
+              </a>
     
-        <nav class="side-footer">
-          <a href="Profile" class="link">
-            <img src="../images/profile.png"/>
-            <div class="menu-text">PROFILE</div>
-          </a>
-
-          <a href="Team" class="link-active">
-            <img src="../images/team.png"/>
-            <div class="menu-text">ABOUT US</div>
-          </a>
-
-          <a href="out" class="link">
-            <img src="../images/logout.png"/>
-            <div class="menu-text">LOGOUT</div>
-          </a>
-        </nav>
-
-      </nav>
-    </header>
-    <!-- header end -->
+              <a href="Approve" id="aprovar-utilizadores" class="link">
+                <img src="../images/portfolios.png"/>
+                <div class="menu-text">APPROVE COMPANIES</div>
+              </a>
+            </nav>
+        
+            <nav class="side-footer">
+              <a href="Profile" id="profile-menu" class="link">
+                <img src="../images/profile.png"/>
+                <div class="menu-text">PROFILE</div>
+              </a>
+    
+              <a href="Team" class="link-active">
+                <img src="../images/team.png"/>
+                <div class="menu-text">ABOUT US</div>
+              </a>
+    
+              <a href="out" class="link">
+                <img src="../images/logout.png"/>
+                <div class="menu-text">LOGOUT</div>
+              </a>
+            </nav>
+    
+          </nav>
+        </header>
+        <!-- header end -->
 
     <!-- main -->
     <section class="main">
@@ -69,40 +74,13 @@
         <section class="main-header">
           <h1>MEET THE TEAM</h1>
           <section class="buttons">
-            <a class="name" href="Profile"> </a>
+            <p class="name" id="admin-name-show">Admin</p>
+            <a class="name" href="Profile">  </a>
             <a href="Profile" ><img id="profile" alt="Profile" /></a>
-          </section>
-        </section>
+            </section>
+            </section>
 
-        <script>
-          
-          const xhrImage = new XMLHttpRequest();
-          xhrImage.open('GET', '/Profile/getUserDataP', true);
-          xhrImage.setRequestHeader('Content-Type', 'application/json');
       
-          var profileImg = document.getElementById('profile');
-      
-          xhrImage.onload = function(){
-              if(xhrImage.status === 200)
-              {
-              var data = JSON.parse(xhrImage.responseText);
-              if(data[0].genero == 'Feminino')
-              {
-                  profileImg.src = "../images/profile-female.png";
-              }
-              else if(data[0].genero == 'Masculino')
-              {
-                  profileImg.src = "../images/profile-male.png";
-              }
-              else if(data[0].genero == 'other')
-              {
-                  profileImg.src = "../images/profile-other.png";
-              }
-            }
-          };
-          xhrImage.send();
-      
-        </script>
 
         <section class="main-general">
 
@@ -178,5 +156,6 @@
       }
     </script>
     <!-- scroll-top end -->
+
   </body>
 </html>
