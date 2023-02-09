@@ -180,6 +180,13 @@ body {
     text-align: end;
 }
 
+#aprovar-utilizadores{
+    display: none;
+}
+
+#admin-name-show{
+    display: none;
+}
 /*-------------------------------------
              Scroll Button
 --------------------------------------*/

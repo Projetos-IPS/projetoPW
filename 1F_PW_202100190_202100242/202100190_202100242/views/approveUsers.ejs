@@ -9,8 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/main.css" />
-    <link rel="stylesheet" href="../styles/profile.css" />
-    <script src="../scripts/profile.js"></script>
+    <link rel="stylesheet" href="../styles/approveUsers.css" />
+    <script src="../scripts/approveUsers.js"></script>
     <link rel="icon" href="images/ff-logo.png" />
     <title>FOLIO&FLEX</title>
   </head>
@@ -40,14 +40,14 @@
             <div class="menu-text">PORTFOLIOS</div>
           </a>
 
-          <a href="Approve" id="aprovar-utilizadores" class="link">
+          <a href="Approve" id="aprovar-utilizadores" class="link-active">
             <img src="../images/portfolios.png"/>
             <div class="menu-text">APPROVE USERS</div>
           </a>
         </nav>
     
         <nav class="side-footer">
-          <a href="Profile" id="profile-menu" class="link-active">
+          <a href="Profile" id="profile-menu" class="link">
             <img src="../images/profile.png"/>
             <div class="menu-text">PROFILE</div>
           </a>
@@ -71,7 +71,7 @@
     <section class="main">
 
       <section class="main-header"> <!-- main-header start -->
-        <h1>PROFILE</h1>
+        <h1>Companies list</h1>
         <section class="buttons">
           <p class="name" id="admin-name-show">Admin</p>
           <a class="name" href="Profile">  </a>
@@ -79,20 +79,22 @@
           </section>
           </section>
       
-        <section class="profile-gray-area">
-          <section class="profile-main">
-                 <img alt="profile-img" id="profile-img" class="profile-img">
-                 <section class="profile-white-part">
-                   <section class="main-profile-stuff">
-                 <h2 id="profile-name" class="profile-name"></h2>
-                 <p id="profile-occupation"></p>
-                 <p id="profile-address"></p>
-                   </section>
-                 <section class="profile-description-area">
-                   <p id="profile-description">  </p> 
-                 </section>
-               </section>
-         </section>
+        <section class="users-list">
+            <table class="" id="users-data">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>EMAIL</th>
+                        <th>USER TYPE</th>
+                        <th>ACCOUNT STATUS</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+        </section>
       
   
   </section>

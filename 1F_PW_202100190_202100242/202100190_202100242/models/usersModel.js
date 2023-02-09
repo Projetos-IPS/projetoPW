@@ -9,9 +9,9 @@ var User = {
     {
         return new Promise(function(resolve, reject)
         {
-            var sql = `INSERT INTO utilizador (email, pass, tipo_utilizador, approved) VALUES (?,?,'profissional',1)`;
+            var sql = `INSERT INTO utilizador (email, nome, pass, tipo_utilizador, approved) VALUES (?,?,?,'Profissional',1)`;
             var sql2 = `INSERT INTO profissional (email, nome, data_nascimento, genero) VALUES (?,?,?,?)`;
-            var values = [data.emailP, data.passP];
+            var values = [data.emailP, data.nomeP, data.passP];
             var values2 = [data.emailP, data.nomeP, data.birthdayP, data.genderP];
             var connection = mysql.createConnection(options.mysql);
             connection.query(sql, values, function(error, result)
@@ -29,8 +29,8 @@ var User = {
     {
         return new Promise(function(resolve, reject)
         {
-            var sql = `INSERT INTO utilizador (email, pass, tipo_utilizador, approved) VALUES (?,?,'empresa',0)`;
-            var values = [data.emailE, data.passE];
+            var sql = `INSERT INTO utilizador (email, nome, pass, tipo_utilizador, approved) VALUES (?,?,?,'Empresa',0)`;
+            var values = [data.emailE,data.nomeE, data.passE];
             var connection = mysql.createConnection(options.mysql);
             connection.query(sql, values, function(error, result)
             {
@@ -109,13 +109,13 @@ var User = {
           {
             for (var i = 0; i < result.length; i++)
             {
-              if(result[i].tipo_utilizador == 'profissional')
+              if(result[i].tipo_utilizador == 'Profissional')
               {resolve('P'); 
               }
-              else if(result[i].tipo_utilizador == 'empresa')
+              else if(result[i].tipo_utilizador == 'Empresa')
               {resolve('E'); 
               }
-              else if(result[i].tipo_utilizador == 'admin');
+              else if(result[i].tipo_utilizador == 'Admin');
               {resolve('A'); 
               }
             }
@@ -137,22 +137,26 @@ var User = {
           if(error) {return reject(error);}
           else
           {
-          if(result.length > 0)
+          resolve(result);
+         }
+        });
+      });
+    },
+
+    getCompanyUsers: function()
+    {
+      return new Promise(function(resolve, reject)
+      {
+        var query = `SELECT * FROM utilizador WHERE tipo_utilizador = 'Empresa'`;
+        var connection = mysql.createConnection(options.mysql);
+
+        connection.query(query, function(error, result)
+        {
+          if(error) {return reject(error);}
+          else
           {
-            for (var i = 0; i < result.length; i++)
-            {
-              if(result[i].tipo_utilizador == 'profissional')
-              {resolve(result); 
-              }
-              else if(result[i].tipo_utilizador == 'empresa')
-              {resolve(result); 
-              }
-              else if(result[i].tipo_utilizador == 'admin');
-              {resolve(result); 
-              }
-            }
-          }
-        }
+          resolve(result);
+         }
         });
       });
     },
@@ -213,6 +217,82 @@ var User = {
         });
       });
     },
+
+    approveCompany: function(data)
+    {
+      return new Promise(function(resolve, reject)
+      {
+      var query = `UPDATE utilizador SET approved = 1 WHERE email = ?`;
+      var queryName = `SELECT nome FROM utilizador WHERE email = ?`;
+      var connection = mysql.createConnection(options.mysql);
+      var email = data.userid;
+      connection.query(query,email, function(error)
+      {
+        if(error) {reject(error)}
+        else
+        {
+          connection.query(queryName,  email, function(error, result)
+          {
+            if(error) {reject(error);}
+            else
+            {
+            var query2 = `INSERT INTO empresa(email, nome) VALUES (?, ?)`;
+            var values = [email, result[0].nome];
+            connection.query(query2, values);
+            resolve(0);
+            connection.end();
+            }
+          });
+       }
+      });
+      
+    });
+  },
+
+  rejectCompany: function(data)
+  {
+    return new Promise(function(resolve, reject){
+      var query = `DELETE FROM utilizador WHERE email = ?`;
+      var connection = mysql.createConnection(options.mysql);
+      var email = data.userid;
+      connection.query(query, email, function(error)
+      {
+        if(error) {reject(error);}
+        else
+        {
+          resolve(0);
+          connection.end();
+        }
+      });
+    })
+  },
+
+  deactivateCompany: function(data)
+  {
+    return new Promise(function(resolve, reject){
+      var query2 = `DELETE FROM empresa WHERE email = ?`;
+      var query = `UPDATE utilizador SET approved = 0 WHERE email = ?`;
+
+      var connection = mysql.createConnection(options.mysql);
+      var email = data.userid;
+      connection.query(query, email, function(error)
+      {
+        if(error) {reject(error);}
+        else
+        {
+          connection.query(query2, email, function(error)
+          {
+            if(error){reject(error);}
+            else
+            {
+              resolve(0);
+              connection.end();
+            }
+          })
+        }
+      })
+    })
+  }
 
 }
 

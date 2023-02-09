@@ -13,6 +13,7 @@ var joboffersRouter = require('./routes/joboffers');
 var teamRouter = require('./routes/team');
 var profileRouter = require('./routes/profile');
 var homeRouter = require('./routes/home');
+var approveRouter = require('./routes/approveUsers')
 
 const oneDay = 1000 * 60 * 60 * 24;
 // view engine setup
@@ -46,6 +47,7 @@ app.use('/Job%20offers', joboffersRouter);
 app.use('/Team', teamRouter);
 app.use('/Profile', profileRouter);
 app.use('/Home', homeRouter);
+app.use('/Approve', approveRouter);
 
 
 
