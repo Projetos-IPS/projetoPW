@@ -50,6 +50,15 @@ router.get('/getUserDataP', function(req, res)
  });
 
 });
+
+router.post('/editUser', function(req, res)
+{
+   const dataEdit = req.body;
+   User.editUserP(dataEdit, req.session.name).then(function(result)
+   {
+      res.json(result);
+   })
+});
     
   
  module.exports = router;

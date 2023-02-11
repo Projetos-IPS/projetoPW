@@ -113,6 +113,7 @@ body {
     color: #7088B0;
     margin-left: 30px;
     font-size: 30px;
+    text-transform: uppercase;
 }
 
 .main-header input[type=text] {

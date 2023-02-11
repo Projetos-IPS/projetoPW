@@ -165,7 +165,7 @@ var User = {
     {
       return new Promise(function(resolve, reject)
       {
-        var query = `SELECT email, nome, data_nascimento, genero, occupation, descricao, localidade, visualizacao FROM profissional WHERE email = ?`
+        var query = `SELECT email, nome, data_nascimento, genero, headline, descricao, localidade, visualizacao FROM profissional WHERE email = ?`
         var connection = mysql.createConnection(options.mysql);
 
         connection.query(query, email, function(error,result)
@@ -289,6 +289,30 @@ var User = {
               connection.end();
             }
           })
+        }
+      })
+    })
+  },
+  
+  editUserP: function(dataEdit, email)
+  {
+    return new Promise(function(resolve, reject)
+    {
+      if(dataEdit.portfolioApproval == '')
+      {
+        dataEdit.portfolioApproval = 0;
+      }
+      var query = `UPDATE profissional SET nome = ?, headline = ?, descricao = ?, localidade = ?, portfolio = ?, visualizacao = ? WHERE email = ?`;
+      var fulldata = [dataEdit.nameUser, dataEdit.headlineUser, dataEdit.descriptionUser, dataEdit.locationUser, dataEdit.portfolioUser, dataEdit.portfolioApproval, email];
+
+      var connection = mysql.createConnection(options.mysql);
+      connection.query(query, fulldata, function(error)
+      {
+        if(error) {reject(error);}
+        else
+        {
+          resolve(0);
+          connection.end();
         }
       })
     })

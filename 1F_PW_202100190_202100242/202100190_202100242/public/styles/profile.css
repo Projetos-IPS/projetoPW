@@ -15,10 +15,12 @@
 
 .main-profile-stuff{
    padding-top: 2%;
-    width: 25%;
+    width: 30%;
     margin: 2% 1.5%;
     line-height: 10px;
+
     border-radius: 12px;
+
     text-align: center;
     
 }
@@ -29,14 +31,16 @@
     width: 50%;
     height: 120px;
     margin: 1.5% 5%;
-    padding: 1%;
+    padding: 0% 1%;
+
     text-align: center;
+    overflow: auto;
 }
 
 .profile-img{
     width: 130px;
     height: 130px;
-    margin-top: -90px;
+    margin-top: -65px;
     margin-left: 50px;
     border-radius: 50%;
     position: absolute;
@@ -65,3 +69,71 @@
     line-height: 50px;
     font-weight: bold;
 }
+
+.edit-button{
+    width:2.5%;
+    height: 5%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    left: 760px;
+    bottom: 130px;
+}
+
+.pop-up-edit{
+    background-color: white;
+    width: 50%;
+    height: 80%;
+    position: absolute;
+    z-index: 1;
+    margin: 5% 15%;
+    border-radius: 12px;
+    display: none;
+
+
+}
+
+.pop-up-header{
+    display: flex;
+    justify-content: space-between; 
+    height: 12%;
+    position: sticky;
+}
+
+
+
+.close-btn{
+    width:2.5%;
+    height: 5%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    margin: 4%;
+
+}
+
+
+
+.pop-up-form{
+    overflow: auto;
+    width: 100%;
+    height: 72%;
+}
+
+
+
+
+#page-mask {
+position: fixed;
+left: 0;
+right: 0;
+bottom: 0;
+top: 0;
+background-color: rgba(0,0,0,0.6);
+z-index: 1;
+display: none;
+}
+

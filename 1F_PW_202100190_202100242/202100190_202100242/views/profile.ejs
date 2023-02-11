@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/profile.css" />
     <script src="../scripts/profile.js"></script>
-    <link rel="icon" href="images/ff-logo.png" />
+    <script src="https://kit.fontawesome.com/93b3c59277.js" crossorigin="anonymous"></script>  <link rel="icon" href="images/ff-logo.png" />
     <title>FOLIO&FLEX</title>
   </head>
   <body>
@@ -27,7 +27,6 @@
         <nav class="side-menu">
           <a href="Home" id="home-menu" class="link">
             <img src="../images/home.png"/>
-            <div class="menu-text">HOME</div>
           </a>
     
           <a href="Job offers" id="joboffers-menu" class="link">
@@ -70,8 +69,75 @@
     <!-- main -->
     <section class="main">
 
+      <div id="page-mask"></div>
+      <section id="pop-up-edit" class="pop-up-edit">
+   
+        <section class="pop-up-header">
+        <h3>Edit intro</h3>
+        <button class="close-btn" onclick="closeEdit()"><i class="fa-solid fa-x" style="font-size: 20px; color: #7088B0;"></i></button>
+        </section>
+
+        <hr >
+        <section class="pop-up-form">
+
+      <p>* Indicates required</p>
+        <form class="editProfile" method="post" action="/Profile/editUser" id="editProfile">
+          <label for="nameUser">Name*</label><br/>
+          <input id="nameUser" type="text" name="nameUser" ><br><br/>
+          <label for="headline">Headline*</label><br/>
+          <input id="headlineUser" type="text" name="headline" ><br><br/>
+
+          <label for="descriptionUser">Description</label><br>
+          <p>You can write about your years of experience, industry, or skills. People also talk about their achievements or previous job experiences.</p>
+          <textarea id="descriptionUser" name="descriptionUser"></textarea><br>
+          <hr>
+          <h3>Location</h3>
+          <label for="locationUser">Country/Region*</label><br/>
+          <input id="locationUser" type="text" name="locationUser" ><br><br/>
+          <hr>
+          <h3>Portfolio</h3>
+          <label for="portfolioUser">Submit portfolio</label><br/>
+          <input type="file" name="portfolioUser" ><br><br/>
+          <label for="approvalPortfolio">Do you wish to allow others to see your portfolio?</label>
+          <input type="radio"  name="portfolioApproval" value="0" > No <!-- 0 - FALSE-->
+          <input type="radio"  name="portfolioApproval" value="1" > Yes   <!-- 1 TRUE-->
+      </section>
+      <hr >
+      <button type="submit">Save</button>
+    </form>
+    <script>
+            var formEdit = document.getElementById('editProfile');
+            formEdit.addEventListener('submit', function(event){
+             event.preventDefault();
+             
+
+             const dataEdit = {
+              nameUser: formEdit.nameUser.value,
+              headlineUser : formEdit.headlineUser.value,
+              descriptionUser : formEdit.descriptionUser.value,
+              locationUser : formEdit.locationUser.value,
+              portfolioUser : formEdit.portfolioUser.value,
+              portfolioApproval: formEdit.portfolioApproval.value
+             };
+  
+             const xhrlogin = new XMLHttpRequest();
+             xhrlogin.open('POST', '/Profile/editUser', true);
+             xhrlogin.setRequestHeader('Content-Type', 'application/json');
+             xhrlogin.send(JSON.stringify(dataEdit));
+             
+             xhrlogin.onload = function(){
+              if(xhrlogin.status === 200)
+              {
+                location.href = "/Profile";
+              }
+             };
+           
+            });
+      </script>
+     </section>
+
       <section class="main-header"> <!-- main-header start -->
-        <h1>PROFILE</h1>
+        <h1>Profile</h1>
         <section class="buttons">
           <p class="name" id="admin-name-show">Admin</p>
           <a class="name" href="Profile">  </a>
@@ -81,19 +147,24 @@
       
         <section class="profile-gray-area">
           <section class="profile-main">
+            <button  class="edit-button" onclick="openEdit()"><i class='far fa-edit' style='font-size:24px'></i></button>
                  <img alt="profile-img" id="profile-img" class="profile-img">
                  <section class="profile-white-part">
+
+          
                    <section class="main-profile-stuff">
                  <h2 id="profile-name" class="profile-name"></h2>
-                 <p id="profile-occupation"></p>
+                 <p id="profile-headline"></p>
                  <p id="profile-address"></p>
                    </section>
                  <section class="profile-description-area">
                    <p id="profile-description">  </p> 
                  </section>
                </section>
+            
          </section>
       
+      <!--FAZER A PARTE DA WORK EXPERIENCE, SEGUIR MOCKUPS-->
   
   </section>
 

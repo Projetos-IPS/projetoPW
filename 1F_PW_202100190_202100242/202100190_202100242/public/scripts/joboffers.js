@@ -196,6 +196,7 @@ function search() {
                             menuJobOffers.style.display = "none";
                             profileName.innerHTML = UserData[0].nome;
                         
+                        
                         }
                         if(dataUser[0].tipo_utilizador == 'Admin')
                         {
