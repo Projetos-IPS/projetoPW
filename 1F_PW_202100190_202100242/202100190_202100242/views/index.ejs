@@ -56,6 +56,9 @@
              xhrlogin.onload = function(){
               if(xhrlogin.status === 200)
               {
+                const xhrUser = new XMLHttpRequest();
+                xhrUser.open('GET', '/Profile/getUser', true);
+                xhrUser.setRequestHeader('Content-Type', 'application/json');
                 var response = JSON.parse(xhrlogin.responseText);
   
                 if(response.result == 0)
@@ -74,7 +77,26 @@
                 }
                 else
                 {
-                  window.location.replace("Team");
+                  const xhrGetUser = new XMLHttpRequest();
+                  xhrGetUser.open('GET', '/Profile/getUser', true);
+                  xhrGetUser.setRequestHeader('Content-Type', 'application/json');
+                  xhrGetUser.onload = function(){
+            
+                    if(xhrGetUser.status === 200)
+                    {
+                      var UserData = JSON.parse(xhrGetUser.responseText);
+                      if(UserData[0].tipo_utilizador == 'Profissional' || UserData[0].tipo_utilizador == 'Empresa')
+                      {
+                      window.location.replace("/Home");
+                      }
+                      if(UserData[0].tipo_utilizador == 'Admin')
+                      {
+                      window.location.replace('/Approve')
+                      }
+                
+                    }
+                  }
+                  xhrGetUser.send();
                   formLogin.reset();
                 }
               }

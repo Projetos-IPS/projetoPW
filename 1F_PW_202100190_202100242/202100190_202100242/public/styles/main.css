@@ -75,9 +75,11 @@ body {
 }
 
 .menu-text {
+    text-align: center;
     opacity: 0;
     transition: 0.5s;
     position: absolute;
+    text-transform: uppercase;
     transform: translateY(30px);
 }
 
@@ -182,13 +184,6 @@ body {
     text-align: end;
 }
 
-#aprovar-utilizadores{
-    display: none;
-}
-
-#admin-name-show{
-    display: none;
-}
 /*-------------------------------------
              Scroll Button
 --------------------------------------*/
@@ -209,4 +204,8 @@ body {
   
 #myBtn:hover {
     background-color: rgba(0, 74, 173, 0.5); /* Add a dark-grey background on hover */
+}
+
+#admin-name-show{
+    display: none;
 }

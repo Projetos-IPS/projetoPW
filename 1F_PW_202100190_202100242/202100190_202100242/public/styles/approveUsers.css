@@ -1,0 +1,26 @@
+#users-data {
+    border-collapse: collapse;
+    margin: 20px;
+}
+  
+#users-data th, #users-data td {
+    border: 1px solid #7087b092;
+    padding: 8px;
+    text-align: center;
+}
+  
+#users-data th {
+    background-color: #7087b092;
+    font-weight: bold;
+    text-align: center;
+}
+
+.editBtn {
+    margin: 2px;
+    margin-left: 5px;
+}
+
+.editBtn:hover {
+    cursor: pointer;
+    background-color: #7087b092;
+}
