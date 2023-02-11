@@ -75,6 +75,7 @@ body {
 }
 
 .menu-text {
+    text-align: center;
     opacity: 0;
     transition: 0.5s;
     position: absolute;
@@ -182,13 +183,6 @@ body {
     text-align: end;
 }
 
-#aprovar-utilizadores{
-    display: none;
-}
-
-#admin-name-show{
-    display: none;
-}
 /*-------------------------------------
              Scroll Button
 --------------------------------------*/

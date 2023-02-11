@@ -1,0 +1,15 @@
+#users-data {
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+#users-data th, #users-data td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+  
+#users-data th {
+    background-color: #ddd;
+    font-weight: bold;
+}
