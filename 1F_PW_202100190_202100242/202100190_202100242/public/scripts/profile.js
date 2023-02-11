@@ -100,6 +100,7 @@ function closeEdit(){
     document.getElementById('pop-up-edit').style.display = "none";
     document.getElementById('page-mask').style.display = "none";
     document.getElementById('editProfile').reset();
+    getProfileData();
 }
 
 function openEdit(){
