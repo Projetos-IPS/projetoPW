@@ -5,5 +5,5 @@
          "password": "12345678",
          "database": "proj_pw_202100190_202100242",
          "connectionLimit" : "10"
-        }
+    }
 }
