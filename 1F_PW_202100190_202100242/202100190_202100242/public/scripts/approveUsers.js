@@ -54,7 +54,6 @@ function getUsers() {
                         c.innerText = 'Not approved';
                         row.appendChild(c);
                         users_table.appendChild(row);
-    
                         btnEdit.dataset.userid = dataUser[count].email;
                         btnDelete.dataset.userid = dataUser[count].email;
                         btnDeactivate.style.display = 'none';
@@ -63,6 +62,7 @@ function getUsers() {
                     if(dataUser[count].approved == 1) {
                         c.innerText = 'Approved';
                         row.appendChild(c);
+                        users_table.appendChild(row);
                         btnEdit.style.display = 'none';
                         btnDelete.style.display = 'none';
                         btnDeactivate.dataset.userid = dataUser[count].email;
@@ -143,11 +143,13 @@ function getUsers() {
                     })
                     //----------------------------------------------------------
 
+                    var c = document.createElement("td");   
                     c.appendChild(btnEdit);
                     c.appendChild(btnDelete);
                     c.appendChild(btnDeactivate);
                     row.appendChild(c);
                     users_table.appendChild(row);
+                  
                 }
             } else {
 

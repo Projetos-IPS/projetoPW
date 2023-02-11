@@ -11,6 +11,7 @@ function getProfileData(){
         var menuProfile = document.getElementById('profile-menu');
         var menuApprove = document.getElementById('aprovar-utilizadores');
         var adminName = document.getElementById('admin-name-show');
+        var teamMenu = document.getElementById('team-page');
     
         xhrUser.onload = function(){
             
@@ -48,22 +49,24 @@ function getProfileData(){
                             }
                     
     
+                            menuApprove.style.display = "none";
                             menuPortfolios.style.display = "none";
                         }
                         if(dataUser[0].tipo_utilizador == 'Empresa')
                         {
                             menuJobOffers.style.display = "none";
                             profileName.innerHTML = UserData[0].nome;
+                            menuPortfolios.style.display = "none";
                         
                         }
                         if(dataUser[0].tipo_utilizador == 'Admin')
                         {
                             menuHome.style.display = "none";
                             menuProfile.style.display = "none";
-                            menuApprove.style.display = "inline";
                             menuJobOffers.style.display = "none";
                             profileImg.style.display = "none";
                             adminName.style.display = "block";
+                            teamMenu.style.display = "none";
                         }
     
     
