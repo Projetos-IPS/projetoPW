@@ -18,7 +18,7 @@
     width: 30%;
     margin: 2% 1.5%;
     line-height: 10px;
-
+    text-transform: capitalize;
     border-radius: 12px;
 
     text-align: center;
@@ -32,7 +32,6 @@
     height: 120px;
     margin: 1.5% 5%;
     padding: 0% 1%;
-
     text-align: center;
     overflow: auto;
 }
