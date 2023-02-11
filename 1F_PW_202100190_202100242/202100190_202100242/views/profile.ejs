@@ -73,7 +73,7 @@
       <section id="pop-up-edit" class="pop-up-edit">
    
         <section class="pop-up-header">
-        <h3>Edit intro</h3>
+        <h3>Edit profile</h3>
         <button class="close-btn" onclick="closeEdit()"><i class="fa-solid fa-x" style="font-size: 20px; color: #7088B0;"></i></button>
         </section>
 
@@ -89,7 +89,7 @@
 
           <label for="descriptionUser">Description</label><br>
           <p>You can write about your years of experience, industry, or skills. People also talk about their achievements or previous job experiences.</p>
-          <textarea id="descriptionUser" name="descriptionUser"></textarea><br>
+          <textarea wrap="hard" id="descriptionUser" name="descriptionUser"></textarea><br>
           <hr>
           <h3>Location</h3>
           <label for="locationUser">Country/Region*</label><br/>
@@ -146,23 +146,25 @@
       
         <section class="profile-gray-area">
           <section class="profile-main">
-            <button  class="edit-button" onclick="openEdit()"><i class='far fa-edit' style='font-size:24px'></i></button>
                  <img alt="profile-img" id="profile-img" class="profile-img">
                  <section class="profile-white-part">
-
-          
                    <section class="main-profile-stuff">
                  <h2 id="profile-name" class="profile-name"></h2>
                  <p id="profile-headline"></p>
                  <p id="profile-address"></p>
                    </section>
-                 <section class="profile-description-area">
-                   <p id="profile-description">  </p> 
-                 </section>
+            
                </section>
             
          </section>
+         <section class="profile-description-area">
+            <section class="profile-description-header">
+          <h3>About</h3>
+          <button  class="edit-button" onclick="openEdit()"><i class='far fa-edit' style='font-size:24px'></i></button>
       
+        </section>
+          <p id="profile-description">  </p> 
+        </section>
       <!--FAZER A PARTE DA WORK EXPERIENCE, SEGUIR MOCKUPS-->
   
   </section>

@@ -1,6 +1,5 @@
 .profile-main{
     background-color: #7088B0;;
-    width: 810px;
     margin: 0 2%;
     border-radius: 12px;
     padding-top: 150px;
@@ -25,21 +24,25 @@
 }
 
 .profile-description-area{
-    background-color: white;
+    background-color: #f2f2f8;
     border-radius: 12px;
-    width: 50%;
-    height: 120px;
-    margin: 1.5% 5%;
-    padding: 0% 1%;
-    text-align: center;
+    height: 170px;
+    margin: 1.5%;
+    padding: 0% 2%;
     overflow: auto;
+}
+
+.profile-description-area h3{
+    font-size: 22px;
+    margin-bottom: 0;
+ 
 }
 
 .profile-img{
     width: 130px;
     height: 130px;
-    margin-top: -65px;
-    margin-left: 50px;
+    margin-top: -93px;
+    margin-left: 70px;
     border-radius: 50%;
     position: absolute;
 }
@@ -53,31 +56,29 @@
     padding-top: 20px;
 }
 
-.profile-experience{
-    width: 810px;
-    height: 240px;
-    border-radius: 12px;
-    background-color: white;
-    margin: 2%;
-}
 
-.profile-experience p{
-    text-transform: uppercase;
-    margin: 2%;
-    line-height: 50px;
-    font-weight: bold;
-}
+
+
 
 .edit-button{
-    width:2.5%;
-    height: 5%;
     background-color: transparent;
     border: none;
     cursor: pointer;
     outline: none;
-    position: relative;
-    left: 760px;
-    bottom: 130px;
+    margin-top: 15px;
+ /*   position: relative;
+    left: 750px;
+    top: 50px;*/
+}
+
+.profile-description-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+#profile-description{
+    font-size: 15px;
+    padding-right: 5%;
 }
 
 .pop-up-edit{
@@ -103,8 +104,6 @@
 
 
 .close-btn{
-    width:2.5%;
-    height: 5%;
     background-color: transparent;
     border: none;
     cursor: pointer;
