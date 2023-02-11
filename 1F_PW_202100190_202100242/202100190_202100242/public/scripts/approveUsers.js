@@ -88,7 +88,8 @@ function getUsers(){
 
         if(response == 0)
         {
-            location.href = "/Approve"
+            users_table.innerHTML="";
+            getUsers();
         }
     }
 }
@@ -113,7 +114,8 @@ function getUsers(){
 
         if(response == 0)
         {
-            location.href = "/Approve"
+            users_table.innerHTML="";
+            getUsers();
         }
     }
 }
@@ -138,7 +140,8 @@ btnDeactivate.addEventListener("click", function(event){
 
         if(response == 0)
         {
-            location.href = "/Approve"
+            users_table.innerHTML="";
+            getUsers();
         }
     }
 }
