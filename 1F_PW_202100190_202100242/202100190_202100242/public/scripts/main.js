@@ -54,6 +54,7 @@ function getProfileData(){
                         {
                             menuJobOffers.style.display = "none";
                             profileName.innerHTML = UserData[0].nome;
+                            menuPortfolios.style.display = "none";
                         
                         }
                         if(dataUser[0].tipo_utilizador == 'Admin')

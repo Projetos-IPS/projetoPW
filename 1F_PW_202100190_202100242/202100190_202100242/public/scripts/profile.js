@@ -72,6 +72,7 @@ xhrUser.setRequestHeader('Content-Type', 'application/json');
                     {
                         menuJobOffers.style.display = "none";
                         profileName.innerHTML = UserData[0].nome;
+                        menuPortfolios.style.display = "none";
                         
                     
                     }
