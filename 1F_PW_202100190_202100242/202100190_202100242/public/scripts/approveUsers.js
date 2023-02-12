@@ -14,6 +14,8 @@ function getUsers() {
                     let btnDeactivate = document.createElement('button');
 
                     btnDeactivate.innerText = "Deactivate";
+                    btnDeactivate.className = "deactivateBtn";
+                    btnDeactivate.id = "deactivateBtn";
                     btnEdit.innerText = "Approve";
                     btnEdit.className += "editBtn";
                     btnEdit.id += "editBtn";
