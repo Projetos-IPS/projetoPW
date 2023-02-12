@@ -6,6 +6,7 @@
     padding-top: 20px;
     max-height: 100vh;
     display: flex;
+    background-color: bisque;
 }
 
 .jobs-side {
@@ -34,6 +35,7 @@
     width: 55.5%;
     justify-content: space-between;
     margin-left: 93px;
+    background-color: cyan;
 }
 
 #myInput2 {
@@ -42,12 +44,6 @@
 
 #myInput3 {
     display: none;
-}
-
-.filter button {
-    margin-right: 10px;
-    width: 130px;
-    height: 30px;
 }
 
 .listajobs {
@@ -75,4 +71,18 @@
     width: 200px;
     height: 10px;
     margin-top: 53px;
+}
+
+.filter button {
+    background-color: #7087b092;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.filter button:hover {
+    cursor: pointer;
+    background-color: rgb(9, 77, 9);
+    color: white;
 }
