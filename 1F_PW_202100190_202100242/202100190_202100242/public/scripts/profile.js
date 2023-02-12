@@ -102,18 +102,222 @@ let userName = document.getElementById('user-name-show');
     xhrUser.send();
 }
 
-function closeEdit(){
+function closeEditIntro(){
     document.getElementById('pop-up-edit').style.display = "none";
     document.getElementById('page-mask').style.display = "none";
-    document.getElementById('editProfile').reset();
+    document.getElementById('editProfileP').reset();
     getProfileData();
 }
 
-function openEdit(){
+function openEditIntro(){
     let inputEditName = document.getElementById('nameUser');
-    let inputDescription = document.getElementById('descriptionUser');
     let inputLocation = document.getElementById('locationUser');
     let inputHeadline = document.getElementById('headlineUser');
+
+    const xhrUser = new XMLHttpRequest();
+    xhrUser.open('GET', '/Profile/getUser', true);
+    xhrUser.setRequestHeader('Content-Type', 'application/json');
+    
+    xhrUser.onload = function(){
+        
+        if(xhrUser.status === 200)
+        {
+            document.getElementById('pop-up-edit').style.display = 'block';
+            document.getElementById('page-mask').style.display = 'block';
+            let dataUser = JSON.parse(xhrUser.responseText);
+
+           const xhrUserData = new XMLHttpRequest();
+           xhrUserData.open('GET', '/Profile/getUserDataP', true);
+           xhrUserData.setRequestHeader('Content-Type', 'application/json');
+
+            xhrUserData.onload = function(){
+                if(xhrUserData.status = 200){
+
+                    let UserData = JSON.parse(xhrUserData.responseText);
+                    if(dataUser[0].tipo_utilizador == 'Profissional')
+                    {
+                        inputEditName.value = UserData[0].nome;
+                
+                        if(UserData[0].headline != "")
+                        {
+                            inputHeadline.value = UserData[0].headline;
+                        }
+                        if(UserData[0].localidade != "")
+                        {
+                            inputLocation.value = UserData[0].localidade;
+                        }
+                        if(UserData[0].visualizacao == 1 )
+                        {
+                            document.getElementById('radio1').checked = true;
+                        }
+                        if(UserData[0].visualizacao == 0)
+                        {
+                            document.getElementById('radio0').checked = true;
+                        }
+
+                    }
+                    if(dataUser[0].tipo_utilizador == 'Empresa')
+                    {
+                     
+                    }
+                    if(dataUser[0].tipo_utilizador == 'Admin')
+                    {
+                        
+                    }
+                }
+               
+            } 
+
+            xhrUserData.send();
+         }
+    }  
+    xhrUser.send();
+
+
+   
+}
+
+function submitFormDataP(){
+const xhrUserType = new XMLHttpRequest();
+xhrUserType.open('GET', '/Profile/getUser', true);
+xhrUserType.setRequestHeader('Content-Type', 'application/json');
+
+xhrUserType.onload = function(){
+  if(xhrUserType.status === 200){
+
+    let userType = JSON.parse(xhrUserType.responseText);
+
+    if(userType[0].tipo_utilizador == 'Profissional')
+    {     
+          var formEditP = document.getElementById('editProfileP');
+          formEditP.addEventListener('submit', function(event){
+          event.preventDefault();
+
+          const dataEdit = {
+          nameUser: formEditP.nameUser.value,
+          headlineUser : formEditP.headlineUser.value,
+          locationUser : formEditP.locationUser.value,
+          portfolioUser : formEditP.portfolioUser.value,
+          portfolioApproval: formEditP.portfolioApproval.value
+         };
+
+         const editUserInfo = new XMLHttpRequest();
+         editUserInfo.open('POST', '/Profile/editUserIntro', true);
+         editUserInfo.setRequestHeader('Content-Type', 'application/json');
+         editUserInfo.send(JSON.stringify(dataEdit));
+         
+         editUserInfo.onload = function(){
+          if(editUserInfo.status === 200)
+          {
+            closeEditIntro();
+          }
+         };
+        });
+
+        var formEditDescriptionP = document.getElementById('editDescriptionProfileP');
+        formEditDescriptionP.addEventListener('submit', function(event){
+            event.preventDefault();
+
+            const dataEdit2 = {
+                descriptionUser : formEditDescriptionP.descriptionUser.value
+            };
+
+            const editUserDescription = new XMLHttpRequest();
+            editUserDescription.open('POST', '/Profile/editUserDescription', true);
+            editUserDescription.setRequestHeader('Content-Type', 'application/json');
+            editUserDescription.send(JSON.stringify(dataEdit2));
+            editUserDescription.onload = function(){
+                if(editUserDescription.status === 200)
+                {
+                    closeEditDescription();
+                }
+            };
+        });
+
+
+    }
+    else if(userType[0].tipo_utilizador == 'Empresa'){
+
+
+
+    }
+
+    else if(userType[0].tipo_utilizador == 'Admin'){
+
+
+      
+    }
+}
+
+}
+xhrUserType.send();
+
+       
+}
+
+
+
+function closeEditDescription(){
+    document.getElementById('pop-up-edit-description').style.display = "none";
+    document.getElementById('page-mask').style.display = "none";
+    document.getElementById('editDescriptionProfileP').reset();
+    getProfileData();
+}
+
+function openEditDescription(){
+    let inputEditDescription = document.getElementById('descriptionUser');
+
+    const xhrUser = new XMLHttpRequest();
+    xhrUser.open('GET', '/Profile/getUser', true);
+    xhrUser.setRequestHeader('Content-Type', 'application/json');
+    
+    xhrUser.onload = function(){
+        
+        if(xhrUser.status === 200)
+        {
+            document.getElementById('pop-up-edit-description').style.display = 'block';
+            document.getElementById('page-mask').style.display = 'block';
+            let dataUser = JSON.parse(xhrUser.responseText);
+
+           const xhrUserData = new XMLHttpRequest();
+           xhrUserData.open('GET', '/Profile/getUserDataP', true);
+           xhrUserData.setRequestHeader('Content-Type', 'application/json');
+
+            xhrUserData.onload = function(){
+                if(xhrUserData.status = 200){
+
+                    let UserData = JSON.parse(xhrUserData.responseText);
+                    if(dataUser[0].tipo_utilizador == 'Profissional')
+                    {
+                        if(UserData[0].descricao != "")
+                        {
+                            inputEditDescription.value = UserData[0].descricao;
+                        }
+
+                    }
+                    if(dataUser[0].tipo_utilizador == 'Empresa')
+                    {
+                     
+                    }
+                    if(dataUser[0].tipo_utilizador == 'Admin')
+                    {
+                        
+                    }
+                }
+               
+            } 
+
+            xhrUserData.send();
+         }
+    }  
+    xhrUser.send();
+
+
+   
+}
+
+/*function openEditDescription(){
+    let inputDescription = document.getElementById('descriptionUser');
 
     const xhrUser = new XMLHttpRequest();
     xhrUser.open('GET', '/Profile/getUser', true);
@@ -144,15 +348,6 @@ function openEdit(){
                         {
                             inputDescription.value = UserData[0].descricao;
                         }
-                        if(UserData[0].headline != "")
-                        {
-                            inputHeadline.value = UserData[0].headline;
-                        }
-                        if(UserData[0].localidade != "")
-                        {
-                            inputLocation.value = UserData[0].localidade;
-                        }
-
                     }
                     if(dataUser[0].tipo_utilizador == 'Empresa')
                     {
@@ -174,10 +369,11 @@ function openEdit(){
 
 
    
-}
+}*/
 
 var init = function(){
     getProfileData();
+    submitFormDataP();
 
 };
 

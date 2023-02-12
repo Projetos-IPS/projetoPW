@@ -51,10 +51,19 @@ router.get('/getUserDataP', function(req, res)
 
 });
 
-router.post('/editUser', function(req, res)
+router.post('/editUserIntro', function(req, res)
 {
    const dataEdit = req.body;
    User.editUserP(dataEdit, req.session.name).then(function(result)
+   {
+      res.json(result);
+   })
+});
+
+router.post('/editUserDescription', function(req, res)
+{
+   const dataEdit2 = req.body;
+   User.editUserDescriptionP(dataEdit2, req.session.name).then(function(result)
    {
       res.json(result);
    })
