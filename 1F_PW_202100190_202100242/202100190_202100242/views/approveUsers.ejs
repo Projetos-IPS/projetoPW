@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="../styles/main.css"/>
     <link rel="stylesheet" href="../styles/approveUsers.css"/>
     <!-- JavaScript -->
-    <script src="../scripts/main.js"></script>
     <script src="../scripts/approveUsers.js"></script>
     <!-- Display -->
     <link rel="icon" href="images/icon.png"/>
@@ -22,14 +21,23 @@
     <!-- scroll to top 
     <button onclick="topFunction()" id="myBtn" title="Go to top">︿</button> -->
 
-    <!-- header -->
-    <header class="side">
+     <!-- header -->
+     <header class="side">
       <a href="Homepage" class="logo">
         <img src="../images/ff-logo.png" alt="Logo" />
       </a>
       <nav class="side-under">
-
         <nav class="side-menu">
+          <a href="Home" id="home-menu" class="link-active">
+            <img src="../images/home.png"/>
+            <div class="menu-text">HOME</div>
+          </a>
+    
+          <a href="Job offers" id="joboffers-menu" class="link">
+            <img src="../images/joboffers.png"/>
+            <div class="menu-text">JOB OFFERS</div>
+          </a>
+
           <a href="Portfolios" id="portfolios-menu"class="link">
             <img src="../images/portfolios.png"/>
             <div class="menu-text">PORTFOLIOS</div>
@@ -42,6 +50,16 @@
         </nav>
     
         <nav class="side-footer">
+          <a href="Profile" id="profile-menu" class="link">
+            <img src="../images/profile.png"/>
+            <div class="menu-text">PROFILE</div>
+          </a>
+
+          <a href="Team" class="link" id="team-page">
+            <img src="../images/team.png"/>
+            <div class="menu-text">ABOUT US</div>
+          </a>
+
           <a href="out" class="link">
             <img src="../images/logout.png"/>
             <div class="menu-text">LOGOUT</div>
@@ -61,8 +79,8 @@
 
         <section class="buttons">
           <p class="name" id="admin-name-show">Admin</p>
-          <a class="name" href="Profile">  </a>
           <a href="Profile" ><img id="profile" alt="Profile" /></a>
+         
         </section>
 
       </section>
@@ -76,7 +94,7 @@
               <th>EMAIL</th>
               <th>USER TYPE</th>
               <th>ACCOUNT STATUS</th>
-              <th></th>
+              <th>BUTTONS (?)</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -109,79 +127,63 @@
     <!-- additional script -->
     <script>
       const xhrUser = new XMLHttpRequest();
-      xhrUser.open('GET', '/Profile/getUser', true);
-      xhrUser.setRequestHeader('Content-Type', 'application/json');
+    xhrUser.open('GET', '/Profile/getUser', true);
+    xhrUser.setRequestHeader('Content-Type', 'application/json');
     
-      var profileImg = document.getElementById('profile');
-      var profileImgProfile = document.getElementById('profile-img');
-      var profileName = document.getElementById('profile-name');
-      var profileLocation = document.getElementById('profile-address');
-      var profileOccupation = document.getElementById('profile-occupation');
-      var profileDescription = document.getElementById('profile-description');
-      var menuPortfolios = document.getElementById('portfolios-menu');
-      var menuJobOffers = document.getElementById('joboffers-menu');
-      var menuHome = document.getElementById('home-menu');
-      var menuProfile = document.getElementById('profile-menu');
-      var menuApprove = document.getElementById('aprovar-utilizadores');
-      var adminName = document.getElementById('admin-name-show');
+        let profileImg = document.getElementById('profile');
+        let menuPortfolios = document.getElementById('portfolios-menu');
+        let menuJobOffers = document.getElementById('joboffers-menu');
+        let menuHome = document.getElementById('home-menu');
+        let menuProfile = document.getElementById('profile-menu');
+        let menuApprove = document.getElementById('aprovar-utilizadores');
+        let adminName = document.getElementById('admin-name-show');
+        let teamMenu = document.getElementById('team-page');
     
-      xhrUser.onload = function() {
-        if(xhrUser.status === 200) {
-          var dataUser = JSON.parse(xhrUser.responseText);
-          const xhrUserData = new XMLHttpRequest();
-          xhrUserData.open('GET', '/Profile/getUserDataP', true);
-          xhrUserData.setRequestHeader('Content-Type', 'application/json');
+        xhrUser.onload = function(){
+            
+            if(xhrUser.status === 200)
+            {
+              let dataUser = JSON.parse(xhrUser.responseText);
     
-          xhrUserData.onload = function() {
-            if(xhrUserData.status = 200) {
-              var UserData = JSON.parse(xhrUserData.responseText);
+               const xhrUserData = new XMLHttpRequest();
+               xhrUserData.open('GET', '/Profile/getUserDataP', true);
+               xhrUserData.setRequestHeader('Content-Type', 'application/json');
+    
+                xhrUserData.onload = function(){
+                    if(xhrUserData.status = 200){
+    
+                      let UserData = JSON.parse(xhrUserData.responseText);
                         
-              if(dataUser[0].tipo_utilizador == 'Profissional') {
-                if(UserData[0].genero == 'Feminino') {
-                  profileImg.src = "../images/profile-female.png";
-                  profileImgProfile.src = "../images/profile-female.png";
-                } else if(UserData[0].genero == 'Masculino') {
-                  profileImg.src = "../images/profile-male.png";
-                  profileImgProfile.src = "../images/profile-male.png";
-                } else if(UserData[0].genero == 'other') {
-                  profileImg.src = "../images/profile-other.png";
-                  profileImgProfile.src = "../images/profile-other.png";
-                }
-                    
-                profileName.innerHTML = UserData[0].nome;
-                profileLocation.innerHTML = UserData[0].localidade;
-                profileOccupation.innerHTML = UserData[0].occupation;
-                    
-                if(UserData[0].descricao == "") {
-                  profileDescription.innerHTML = "No description"
-                } else {
-                  profileDescription.innerHTML = UserData[0].descricao;
-                }
+                        if(dataUser[0].tipo_utilizador == 'Profissional')
+                        {
+                          location.href('Homepage');
+                        }
+                        if(dataUser[0].tipo_utilizador == 'Empresa')
+                        {
+                          location.href('Homepage');
+                        }
+                        if(dataUser[0].tipo_utilizador == 'Admin')
+                        {
+                            menuHome.style.display = "none";
+                            menuProfile.style.display = "none";
+                      
+                            menuJobOffers.style.display = "none";
+                            profileImg.style.display = "none";
+                            adminName.style.display = "block";
+                            teamMenu.style.display = "none";
+                            
+                        }
     
-                menuPortfolios.style.display = "none";
-              }
-              
-              if(dataUser[0].tipo_utilizador == 'Empresa') {
-                menuJobOffers.style.display = "none";
-                profileName.innerHTML = UserData[0].nome;
-              }
-                        
-              if(dataUser[0].tipo_utilizador == 'Admin') {
-                menuHome.style.display = "none";
-                menuProfile.style.display = "none";
-                menuApprove.style.display = "inline";
-                menuJobOffers.style.display = "none";
-                profileImg.style.display = "none";
-                adminName.style.display = "block";
-              }
-            }
-          } 
     
-          xhrUserData.send();
-        }
-      }  
-
-      xhrUser.send();
+                    }
+                   
+                } 
+    
+                xhrUserData.send();
+             
+             }
+        }  
+        xhrUser.send();
     </script>
     <!-- additional script end -->
     

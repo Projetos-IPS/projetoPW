@@ -2,45 +2,45 @@ function getUsers() {
     const xhrUsers = new XMLHttpRequest();
     xhrUsers.open('GET', '/Approve/getUsers', true);
     xhrUsers.setRequestHeader('Content-Type', 'application/json');
-    var users_table = document.getElementById('users-data').getElementsByTagName('tbody')[0];
+    let users_table = document.getElementById('users-data').getElementsByTagName('tbody')[0];
 
     xhrUsers.onload = function() {
         if(xhrUsers.status === 200) {
-            var dataUser = JSON.parse(xhrUsers.responseText);
+            let dataUser = JSON.parse(xhrUsers.responseText);
 
             if(dataUser.length > 0) {
-                for(var count = 0; count < dataUser.length; count++) {
-                    var btnEdit = document.createElement('button');
-                    var btnDeactivate = document.createElement('button');
+                for(let count = 0; count < dataUser.length; count++) {
+                    let btnEdit = document.createElement('button');
+                    let btnDeactivate = document.createElement('button');
 
                     btnDeactivate.innerText = "Deactivate";
                     btnEdit.innerText = "Approve";
                     btnEdit.className += "editBtn";
                     btnEdit.id += "editBtn";
 
-                    var btnDelete = document.createElement('button');
+                    let btnDelete = document.createElement('button');
 
                     btnDelete.className += "deleteBtn";
                     btnDelete.innerText = "Reject";
 
-                    var row = document.createElement("tr");
-                    var c = document.createElement("td");   
+                    let row = document.createElement("tr");
+                    let c = document.createElement("td");   
 
                     c.innerText = dataUser[count].id;
                     row.appendChild(c);
                     users_table.appendChild(row);
             
-                    var c = document.createElement("td");   
+                    c = document.createElement("td");   
                     c.innerText = dataUser[count].nome;
                     row.appendChild(c);
 
                     users_table.appendChild(row);
-                    var c = document.createElement("td");   
+                    c = document.createElement("td");   
                     c.innerText = dataUser[count].email;
                     row.appendChild(c);
 
                     users_table.appendChild(row);
-                    var c = document.createElement("td"); 
+                    c = document.createElement("td"); 
 
                     if(dataUser[count].tipo_utilizador == "Empresa") {
                         c.innerText = 'Company';
@@ -48,13 +48,12 @@ function getUsers() {
 
                     row.appendChild(c);
                     users_table.appendChild(row);
-                    var c = document.createElement("td");   
+                    c = document.createElement("td");   
 
                     if(dataUser[count].approved == 0) {
                         c.innerText = 'Not approved';
                         row.appendChild(c);
                         users_table.appendChild(row);
-    
                         btnEdit.dataset.userid = dataUser[count].email;
                         btnDelete.dataset.userid = dataUser[count].email;
                         btnDeactivate.style.display = 'none';
@@ -63,6 +62,7 @@ function getUsers() {
                     if(dataUser[count].approved == 1) {
                         c.innerText = 'Approved';
                         row.appendChild(c);
+                        users_table.appendChild(row);
                         btnEdit.style.display = 'none';
                         btnDelete.style.display = 'none';
                         btnDeactivate.dataset.userid = dataUser[count].email;
@@ -71,7 +71,7 @@ function getUsers() {
                     //----------------------------------------------------------
                     btnEdit.addEventListener("click", function(event) {
                         const clickedButton = event.target;
-                        var data = {
+                        let data = {
                             userid : clickedButton.dataset.userid
                         }
 
@@ -82,7 +82,7 @@ function getUsers() {
    
                         xhrUpdate.onload = function() {
                             if(xhrUpdate.status === 200) {
-                                var response = JSON.parse(xhrUpdate.responseText);
+                                let response = JSON.parse(xhrUpdate.responseText);
 
                                 if(response == 0) {
                                     users_table.innerHTML="";
@@ -96,7 +96,7 @@ function getUsers() {
                     //----------------------------------------------------------
                     btnDelete.addEventListener("click", function(event) {
                         const clickedButton = event.target;
-                        var data = {
+                        let data = {
                             userid : clickedButton.dataset.userid
                         }
 
@@ -107,7 +107,7 @@ function getUsers() {
    
                         xhrUpdate.onload = function() {
                             if(xhrUpdate.status === 200) {
-                                var response = JSON.parse(xhrUpdate.responseText);
+                                let response = JSON.parse(xhrUpdate.responseText);
 
                                 if(response == 0) {
                                     users_table.innerHTML="";
@@ -121,7 +121,7 @@ function getUsers() {
                     //----------------------------------------------------------
                     btnDeactivate.addEventListener("click", function(event) {
                         const clickedButton = event.target;
-                        var data = {
+                        let data = {
                             userid : clickedButton.dataset.userid
                         }
 
@@ -132,7 +132,7 @@ function getUsers() {
    
                         xhrUpdate.onload = function() {
                             if(xhrUpdate.status === 200) {
-                                var response = JSON.parse(xhrUpdate.responseText);
+                                let response = JSON.parse(xhrUpdate.responseText);
 
                                 if(response == 0) {
                                     users_table.innerHTML="";
@@ -143,11 +143,13 @@ function getUsers() {
                     })
                     //----------------------------------------------------------
 
+                    c = document.createElement("td");   
                     c.appendChild(btnEdit);
                     c.appendChild(btnDelete);
                     c.appendChild(btnDeactivate);
                     row.appendChild(c);
                     users_table.appendChild(row);
+                  
                 }
             } else {
 

@@ -27,6 +27,7 @@
         <nav class="side-menu">
           <a href="Home" id="home-menu" class="link">
             <img src="../images/home.png"/>
+            <div class="menu-text">home</div>
           </a>
     
           <a href="Job offers" id="joboffers-menu" class="link">
@@ -40,7 +41,7 @@
           </a>
 
           <a href="Approve" id="aprovar-utilizadores" class="link">
-            <img src="../images/portfolios.png"/>
+            <img src="../images/approve.png"/>
             <div class="menu-text">APPROVE COMPANIES</div>
           </a>
         </nav>
@@ -51,7 +52,7 @@
             <div class="menu-text">PROFILE</div>
           </a>
 
-          <a href="Team" class="link">
+          <a href="Team" class="link" id="team-page">
             <img src="../images/team.png"/>
             <div class="menu-text">ABOUT US</div>
           </a>
@@ -106,7 +107,7 @@
       <button type="submit">Save</button>
     </form>
     <script>
-            var formEdit = document.getElementById('editProfile');
+            let formEdit = document.getElementById('editProfile');
             formEdit.addEventListener('submit', function(event){
              event.preventDefault();
              

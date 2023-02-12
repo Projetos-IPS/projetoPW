@@ -39,7 +39,7 @@
 
           <!--Código de login-->
           <script>
-            var formLogin = document.getElementById('login');
+            let formLogin = document.getElementById('login');
             formLogin.addEventListener('submit', function(event){
              event.preventDefault();
             // const data = new FormData(form);
@@ -56,7 +56,10 @@
              xhrlogin.onload = function(){
               if(xhrlogin.status === 200)
               {
-                var response = JSON.parse(xhrlogin.responseText);
+                const xhrUser = new XMLHttpRequest();
+                xhrUser.open('GET', '/Profile/getUser', true);
+                xhrUser.setRequestHeader('Content-Type', 'application/json');
+                let response = JSON.parse(xhrlogin.responseText);
   
                 if(response.result == 0)
                 {
@@ -74,7 +77,26 @@
                 }
                 else
                 {
-                  window.location.replace("Team");
+                  const xhrGetUser = new XMLHttpRequest();
+                  xhrGetUser.open('GET', '/Profile/getUser', true);
+                  xhrGetUser.setRequestHeader('Content-Type', 'application/json');
+                  xhrGetUser.onload = function(){
+            
+                    if(xhrGetUser.status === 200)
+                    {
+                      let UserData = JSON.parse(xhrGetUser.responseText);
+                      if(UserData[0].tipo_utilizador == 'Profissional' || UserData[0].tipo_utilizador == 'Empresa')
+                      {
+                      window.location.replace("/Home");
+                      }
+                      if(UserData[0].tipo_utilizador == 'Admin')
+                      {
+                      window.location.replace('/Approve')
+                      }
+                
+                    }
+                  }
+                  xhrGetUser.send();
                   formLogin.reset();
                 }
               }
@@ -146,7 +168,7 @@
 
           <!--Código de registo de um profissional-->
           <script>
-            var formProfissional = document.getElementById('profissional');
+            let formProfissional = document.getElementById('profissional');
             formProfissional.addEventListener('submit', function(event){
              event.preventDefault();
             // const data = new FormData(form);
@@ -166,7 +188,7 @@
              xhrRprofissional.onload = function(){
               if(xhrRprofissional.status === 200)
               {
-                var response = JSON.parse(xhrRprofissional.responseText);
+                let response = JSON.parse(xhrRprofissional.responseText);
                 formProfissional.reset();
                 alert('Account created. You can now log-in.');
              //   console.log(response.id);
@@ -212,7 +234,7 @@
 
           <!--Código de registo de uma empresa -->
           <script>
-            var formEmpresa = document.getElementById('company');
+            let formEmpresa = document.getElementById('company');
             formEmpresa.addEventListener('submit', function(event){
              event.preventDefault();
             // const data = new FormData(form);
@@ -230,7 +252,7 @@
              xhrRempresa.onload = function(){
               if(xhrRempresa.status === 200)
               {
-                var response = JSON.parse(xhrRempresa.responseText);
+                let response = JSON.parse(xhrRempresa.responseText);
                 formEmpresa.reset();
                 alert('Account created. You must wait for an administrator to activate your account.');
              //   console.log(response.id);
