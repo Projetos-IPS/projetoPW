@@ -1,6 +1,12 @@
+.users-list {
+    width: 100%;
+    text-align: -webkit-center;
+}
+
 #users-data {
     border-collapse: collapse;
     margin: 20px;
+    align-self: center;
 }
   
 #users-data th, #users-data td {
@@ -16,11 +22,29 @@
 }
 
 .editBtn {
-    margin: 2px;
-    margin-left: 5px;
+    background-color: #7087b092;
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+}
+
+.deleteBtn {
+    background-color: #7087b092;
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
 }
 
 .editBtn:hover {
     cursor: pointer;
-    background-color: #7087b092;
+    background-color: rgb(9, 77, 9);
+    color: white;
+}
+
+.deleteBtn:hover {
+    cursor: pointer;
+    background-color: rgb(152, 2, 2);
+    color: white;
 }
