@@ -1,4 +1,3 @@
-
 function getProfileData(){
 const xhrUser = new XMLHttpRequest();
 xhrUser.open('GET', '/Profile/getUser', true);
@@ -13,10 +12,11 @@ let profileDescription = document.getElementById('profile-description');
 let menuPortfolios = document.getElementById('portfolios-menu');
 let menuJobOffers = document.getElementById('joboffers-menu');
 let menuHome = document.getElementById('home-menu');
-    let menuProfile = document.getElementById('profile-menu');
-    let menuApprove = document.getElementById('aprovar-utilizadores');
-    let adminName = document.getElementById('admin-name-show');
-    let teamMenu = document.getElementById('team-page');
+let menuProfile = document.getElementById('profile-menu');
+let menuApprove = document.getElementById('aprovar-utilizadores');
+let adminName = document.getElementById('admin-name-show');
+let teamMenu = document.getElementById('team-page');
+let userName = document.getElementById('user-name-show');
   
     xhrUser.onload = function(){
         
@@ -54,6 +54,7 @@ let menuHome = document.getElementById('home-menu');
                         }
                 
 
+                        userName.innerHTML = UserData[0].nome;
                         profileName.innerHTML = UserData[0].nome;
                         profileLocation.innerHTML = UserData[0].localidade;
                         profileHeadline.innerHTML = UserData[0].headline;
@@ -75,6 +76,7 @@ let menuHome = document.getElementById('home-menu');
                         menuJobOffers.style.display = "none";
                         profileName.innerHTML = UserData[0].nome;
                         menuPortfolios.style.display = "none";
+                        userName.innerHTML = UserData[0].nome;
                         
                     
                     }

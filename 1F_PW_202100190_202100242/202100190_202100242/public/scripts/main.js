@@ -11,6 +11,7 @@ function getProfileData(){
     let menuApprove = document.getElementById('aprovar-utilizadores');
     let adminName = document.getElementById('admin-name-show');
     let teamMenu = document.getElementById('team-page');
+    let userName = document.getElementById('user-name-show');
     
         xhrUser.onload = function(){
             
@@ -27,8 +28,6 @@ function getProfileData(){
     
                       let UserData = JSON.parse(xhrUserData.responseText);
                         
-                      
-    
                         if(dataUser[0].tipo_utilizador == 'Profissional')
                         {
                             if(UserData[0].genero == 'Feminino')
@@ -47,6 +46,7 @@ function getProfileData(){
                                 
                             }
                     
+                            userName.innerHTML = UserData[0].nome;
                             menuApprove.style.display = "none";
                             menuPortfolios.style.display = "none";
                         }
@@ -56,6 +56,7 @@ function getProfileData(){
                             menuPortfolios.style.display = "none";
                             profileName.innerHTML = UserData[0].nome;
                             menuPortfolios.style.display = "none";
+                            userName.innerHTML = UserData[0].nome;
                         
                         
                         }
