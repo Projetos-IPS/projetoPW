@@ -4,25 +4,25 @@ const xhrUser = new XMLHttpRequest();
 xhrUser.open('GET', '/Profile/getUser', true);
 xhrUser.setRequestHeader('Content-Type', 'application/json');
 
-    var profileImg = document.getElementById('profile');
-    var profileImgProfile = document.getElementById('profile-img');
-    var profileName = document.getElementById('profile-name');
-    var profileLocation = document.getElementById('profile-address');
-    var profileHeadline = document.getElementById('profile-headline');
-    var profileDescription = document.getElementById('profile-description');
-    var menuPortfolios = document.getElementById('portfolios-menu');
-    var menuJobOffers = document.getElementById('joboffers-menu');
-    var menuHome = document.getElementById('home-menu');
-    var menuProfile = document.getElementById('profile-menu');
-    var menuApprove = document.getElementById('aprovar-utilizadores');
-    var adminName = document.getElementById('admin-name-show');
-    var teamMenu = document.getElementById('team-page');
+let profileImg = document.getElementById('profile');
+let profileImgProfile = document.getElementById('profile-img');
+let profileName = document.getElementById('profile-name');
+let profileLocation = document.getElementById('profile-address');
+let profileHeadline = document.getElementById('profile-headline');
+let profileDescription = document.getElementById('profile-description');
+let menuPortfolios = document.getElementById('portfolios-menu');
+let menuJobOffers = document.getElementById('joboffers-menu');
+let menuHome = document.getElementById('home-menu');
+    let menuProfile = document.getElementById('profile-menu');
+    let menuApprove = document.getElementById('aprovar-utilizadores');
+    let adminName = document.getElementById('admin-name-show');
+    let teamMenu = document.getElementById('team-page');
   
     xhrUser.onload = function(){
         
         if(xhrUser.status === 200)
         {
-            var dataUser = JSON.parse(xhrUser.responseText);
+            let dataUser = JSON.parse(xhrUser.responseText);
 
            const xhrUserData = new XMLHttpRequest();
            xhrUserData.open('GET', '/Profile/getUserDataP', true);
@@ -31,7 +31,7 @@ xhrUser.setRequestHeader('Content-Type', 'application/json');
             xhrUserData.onload = function(){
                 if(xhrUserData.status = 200){
 
-                    var UserData = JSON.parse(xhrUserData.responseText);
+                    let UserData = JSON.parse(xhrUserData.responseText);
                     
                     console.log(UserData[0]);
 
@@ -108,10 +108,10 @@ function closeEdit(){
 }
 
 function openEdit(){
-    var inputEditName = document.getElementById('nameUser');
-    var inputDescription = document.getElementById('descriptionUser');
-    var inputLocation = document.getElementById('locationUser');
-    var inputHeadline = document.getElementById('headlineUser');
+    let inputEditName = document.getElementById('nameUser');
+    let inputDescription = document.getElementById('descriptionUser');
+    let inputLocation = document.getElementById('locationUser');
+    let inputHeadline = document.getElementById('headlineUser');
 
     const xhrUser = new XMLHttpRequest();
     xhrUser.open('GET', '/Profile/getUser', true);
@@ -124,7 +124,7 @@ function openEdit(){
         {
             document.getElementById('pop-up-edit').style.display = 'block';
             document.getElementById('page-mask').style.display = 'block';
-            var dataUser = JSON.parse(xhrUser.responseText);
+            let dataUser = JSON.parse(xhrUser.responseText);
 
            const xhrUserData = new XMLHttpRequest();
            xhrUserData.open('GET', '/Profile/getUserDataP', true);
@@ -133,7 +133,7 @@ function openEdit(){
             xhrUserData.onload = function(){
                 if(xhrUserData.status = 200){
 
-                    var UserData = JSON.parse(xhrUserData.responseText);
+                    let UserData = JSON.parse(xhrUserData.responseText);
                     if(dataUser[0].tipo_utilizador == 'Profissional')
                     {
                         inputEditName.value = UserData[0].nome;

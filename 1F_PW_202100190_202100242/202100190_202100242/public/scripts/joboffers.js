@@ -19,8 +19,8 @@ var data = [
 ];
 
 var init = function(){
-    var ulListaOfertas = document.getElementById("listajobs")
-    var list = "";
+  let ulListaOfertas = document.getElementById("listajobs")
+  let list = "";
     for(let job of data)
     {
         list += "<li class='listajobs'>"  + job.companyName  + " Looking for " + job.description + "<br>" + "<b> Position: </b>" + job.position + "<br>" + "<b> Duration: </b>" + job.duration + "<br>" + "<b>Location: </b>" + job.location + "<br>" + "<b>Yearly salary: </b>" + job.salary + "€" + "<br>" + "<img alt='arrowRedirect' src='images/arrow.png' class='arrow'> ";
@@ -47,7 +47,7 @@ function imprimirArrayValorDesc(){
 
     data.sort((a, b) => b.salary - a.salary);
 
-       var ulListaValor = document.getElementById("listajobsValorDesc");
+    let ulListaValor = document.getElementById("listajobsValorDesc");
 
        list="";
 
@@ -73,7 +73,7 @@ function imprimirArrayValorAsc(){
 
     data.sort((a, b) => a.salary - b.salary);
 
-       var ulListaValor = document.getElementById("listajobsValorAsc");
+    let ulListaValor = document.getElementById("listajobsValorAsc");
 
        list="";
 
@@ -88,7 +88,7 @@ function imprimirArrayValorAsc(){
 }
 
 function search() {
-    var input, filter, ul, li, i, txtValue;
+  let input, filter, ul, li, i, txtValue;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
     ul = document.getElementById("listajobs");
@@ -105,7 +105,7 @@ function search() {
   }
 
   function searchASC() {
-    var input, filter, ul, li, i, txtValue;
+    let input, filter, ul, li, i, txtValue;
     input = document.getElementById("myInput2");
     filter = input.value.toUpperCase();
     ul = document.getElementById("listajobsValorAsc");
@@ -123,7 +123,7 @@ function search() {
 
   
   function searchDESC() {
-    var input, filter, ul, li, i, txtValue;
+    let input, filter, ul, li, i, txtValue;
     input = document.getElementById("myInput3");
     filter = input.value.toUpperCase();
     ul = document.getElementById("listajobsValorDesc");
@@ -145,20 +145,20 @@ function search() {
     xhrUser.open('GET', '/Profile/getUser', true);
     xhrUser.setRequestHeader('Content-Type', 'application/json');
     
-        var profileImg = document.getElementById('profile');
-        var menuPortfolios = document.getElementById('portfolios-menu');
-        var menuJobOffers = document.getElementById('joboffers-menu');
-        var menuHome = document.getElementById('home-menu');
-        var menuProfile = document.getElementById('profile-menu');
-        var menuApprove = document.getElementById('aprovar-utilizadores');
-        var adminName = document.getElementById('admin-name-show');
-        var teamMenu = document.getElementById('team-page');
+    let profileImg = document.getElementById('profile');
+    let menuPortfolios = document.getElementById('portfolios-menu');
+    let menuJobOffers = document.getElementById('joboffers-menu');
+    let menuHome = document.getElementById('home-menu');
+    let menuProfile = document.getElementById('profile-menu');
+    let menuApprove = document.getElementById('aprovar-utilizadores');
+    let adminName = document.getElementById('admin-name-show');
+    let teamMenu = document.getElementById('team-page');
     
         xhrUser.onload = function(){
             
             if(xhrUser.status === 200)
             {
-                var dataUser = JSON.parse(xhrUser.responseText);
+              let dataUser = JSON.parse(xhrUser.responseText);
     
                const xhrUserData = new XMLHttpRequest();
                xhrUserData.open('GET', '/Profile/getUserDataP', true);
@@ -167,7 +167,7 @@ function search() {
                 xhrUserData.onload = function(){
                     if(xhrUserData.status = 200){
     
-                        var UserData = JSON.parse(xhrUserData.responseText);
+                      let UserData = JSON.parse(xhrUserData.responseText);
                         
                       
     

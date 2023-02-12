@@ -9,11 +9,11 @@ var User = {
     {
         return new Promise(function(resolve, reject)
         {
-            var sql = `INSERT INTO utilizador (email, nome, pass, tipo_utilizador, approved) VALUES (?,?,?,'Profissional',1)`;
-            var sql2 = `INSERT INTO profissional (email, nome, data_nascimento, genero) VALUES (?,?,?,?)`;
-            var values = [data.emailP, data.nomeP, data.passP];
-            var values2 = [data.emailP, data.nomeP, data.birthdayP, data.genderP];
-            var connection = mysql.createConnection(options.mysql);
+          let sql = `INSERT INTO utilizador (email, nome, pass, tipo_utilizador, approved) VALUES (?,?,?,'Profissional',1)`;
+          let sql2 = `INSERT INTO profissional (email, nome, data_nascimento, genero) VALUES (?,?,?,?)`;
+          let values = [data.emailP, data.nomeP, data.passP];
+          let values2 = [data.emailP, data.nomeP, data.birthdayP, data.genderP];
+          let connection = mysql.createConnection(options.mysql);
             connection.query(sql, values, function(error, result)
             {
                 if(error) return reject(error);
@@ -29,9 +29,9 @@ var User = {
     {
         return new Promise(function(resolve, reject)
         {
-            var sql = `INSERT INTO utilizador (email, nome, pass, tipo_utilizador, approved) VALUES (?,?,?,'Empresa',0)`;
-            var values = [data.emailE,data.nomeE, data.passE];
-            var connection = mysql.createConnection(options.mysql);
+          let sql = `INSERT INTO utilizador (email, nome, pass, tipo_utilizador, approved) VALUES (?,?,?,'Empresa',0)`;
+          let values = [data.emailE,data.nomeE, data.passE];
+          let connection = mysql.createConnection(options.mysql);
             connection.query(sql, values, function(error, result)
             {
                 if(error) return reject(error);
@@ -46,12 +46,12 @@ var User = {
     return new Promise(function(resolve, reject)
   {
       
-      var emailL = data.emailLogin;
-      var passL = data.passLogin;
+    let emailL = data.emailLogin;
+    let passL = data.passLogin;
 
-      var connection = mysql.createConnection(options.mysql);
+    let connection = mysql.createConnection(options.mysql);
       
-            var sql = `SELECT * FROM utilizador WHERE email = ?`;
+    let sql = `SELECT * FROM utilizador WHERE email = ?`;
             connection.query(sql, emailL, function(error, result)
             {
               if(error) {return reject(error);}
@@ -59,7 +59,7 @@ var User = {
               {
               if(result.length > 0)
               {
-                for(var i = 0; i < result.length; i++)
+                for(let i = 0; i < result.length; i++)
                 {
                   if (result[i].pass === passL)
                   {
@@ -97,8 +97,8 @@ var User = {
     {
       return new Promise(function(resolve, reject)
       {
-        var query = `SELECT * FROM utilizador WHERE email = ?`;
-        var connection = mysql.createConnection(options.mysql);
+        let query = `SELECT * FROM utilizador WHERE email = ?`;
+        let connection = mysql.createConnection(options.mysql);
 
         connection.query(query, email, function(error, result)
         {
@@ -107,7 +107,7 @@ var User = {
           {
           if(result.length > 0)
           {
-            for (var i = 0; i < result.length; i++)
+            for (let i = 0; i < result.length; i++)
             {
               if(result[i].tipo_utilizador == 'Profissional')
               {resolve('P'); 
@@ -129,8 +129,8 @@ var User = {
     {
       return new Promise(function(resolve, reject)
       {
-        var query = `SELECT * FROM utilizador WHERE email = ?`;
-        var connection = mysql.createConnection(options.mysql);
+        let query = `SELECT * FROM utilizador WHERE email = ?`;
+        let connection = mysql.createConnection(options.mysql);
 
         connection.query(query, email, function(error, result)
         {
@@ -147,8 +147,8 @@ var User = {
     {
       return new Promise(function(resolve, reject)
       {
-        var query = `SELECT * FROM utilizador WHERE tipo_utilizador = 'Empresa'`;
-        var connection = mysql.createConnection(options.mysql);
+        let query = `SELECT * FROM utilizador WHERE tipo_utilizador = 'Empresa'`;
+        let connection = mysql.createConnection(options.mysql);
 
         connection.query(query, function(error, result)
         {
@@ -165,8 +165,8 @@ var User = {
     {
       return new Promise(function(resolve, reject)
       {
-        var query = `SELECT email, nome, data_nascimento, genero, headline, descricao, localidade, visualizacao FROM profissional WHERE email = ?`
-        var connection = mysql.createConnection(options.mysql);
+        let query = `SELECT email, nome, data_nascimento, genero, headline, descricao, localidade, visualizacao FROM profissional WHERE email = ?`
+        let connection = mysql.createConnection(options.mysql);
 
         connection.query(query, email, function(error,result)
         {
@@ -184,8 +184,8 @@ var User = {
     {
       return new Promise(function(resolve, reject)
       {
-        var query = `SELECT email, nome, descricao, site, logotipo FROM empresa WHERE email = ?`
-        var connection = mysql.createConnection(options.mysql);
+        let query = `SELECT email, nome, descricao, site, logotipo FROM empresa WHERE email = ?`
+        let connection = mysql.createConnection(options.mysql);
 
         connection.query(query, email, function(error,result)
         {
@@ -203,8 +203,8 @@ var User = {
     {
       return new Promise(function(resolve, reject)
       {
-        var query = `SELECT email, pass, tipo_utilizador, approved FROM utilizador WHERE email = ?`
-        var connection = mysql.createConnection(options.mysql);
+        let query = `SELECT email, pass, tipo_utilizador, approved FROM utilizador WHERE email = ?`
+        let connection = mysql.createConnection(options.mysql);
 
         connection.query(query, email, function(error,result)
         {
@@ -222,10 +222,10 @@ var User = {
     {
       return new Promise(function(resolve, reject)
       {
-      var query = `UPDATE utilizador SET approved = 1 WHERE email = ?`;
-      var queryName = `SELECT nome FROM utilizador WHERE email = ?`;
-      var connection = mysql.createConnection(options.mysql);
-      var email = data.userid;
+        let query = `UPDATE utilizador SET approved = 1 WHERE email = ?`;
+        let queryName = `SELECT nome FROM utilizador WHERE email = ?`;
+        let connection = mysql.createConnection(options.mysql);
+        let email = data.userid;
       connection.query(query,email, function(error)
       {
         if(error) {reject(error)}
@@ -236,8 +236,8 @@ var User = {
             if(error) {reject(error);}
             else
             {
-            var query2 = `INSERT INTO empresa(email, nome) VALUES (?, ?)`;
-            var values = [email, result[0].nome];
+              let query2 = `INSERT INTO empresa(email, nome) VALUES (?, ?)`;
+              let values = [email, result[0].nome];
             connection.query(query2, values);
             resolve(0);
             connection.end();
@@ -252,9 +252,9 @@ var User = {
   rejectCompany: function(data)
   {
     return new Promise(function(resolve, reject){
-      var query = `DELETE FROM utilizador WHERE email = ?`;
-      var connection = mysql.createConnection(options.mysql);
-      var email = data.userid;
+      let query = `DELETE FROM utilizador WHERE email = ?`;
+      let connection = mysql.createConnection(options.mysql);
+      let email = data.userid;
       connection.query(query, email, function(error)
       {
         if(error) {reject(error);}
@@ -270,11 +270,11 @@ var User = {
   deactivateCompany: function(data)
   {
     return new Promise(function(resolve, reject){
-      var query2 = `DELETE FROM empresa WHERE email = ?`;
-      var query = `UPDATE utilizador SET approved = 0 WHERE email = ?`;
+      let query2 = `DELETE FROM empresa WHERE email = ?`;
+      let query = `UPDATE utilizador SET approved = 0 WHERE email = ?`;
 
-      var connection = mysql.createConnection(options.mysql);
-      var email = data.userid;
+      let connection = mysql.createConnection(options.mysql);
+      let email = data.userid;
       connection.query(query, email, function(error)
       {
         if(error) {reject(error);}
@@ -302,10 +302,10 @@ var User = {
       {
         dataEdit.portfolioApproval = 0;
       }
-      var query = `UPDATE profissional SET nome = ?, headline = ?, descricao = ?, localidade = ?, portfolio = ?, visualizacao = ? WHERE email = ?`;
-      var fulldata = [dataEdit.nameUser, dataEdit.headlineUser, dataEdit.descriptionUser, dataEdit.locationUser, dataEdit.portfolioUser, dataEdit.portfolioApproval, email];
+      let query = `UPDATE profissional SET nome = ?, headline = ?, descricao = ?, localidade = ?, portfolio = ?, visualizacao = ? WHERE email = ?`;
+      let fulldata = [dataEdit.nameUser, dataEdit.headlineUser, dataEdit.descriptionUser, dataEdit.locationUser, dataEdit.portfolioUser, dataEdit.portfolioApproval, email];
 
-      var connection = mysql.createConnection(options.mysql);
+      let connection = mysql.createConnection(options.mysql);
       connection.query(query, fulldata, function(error)
       {
         if(error) {reject(error);}
