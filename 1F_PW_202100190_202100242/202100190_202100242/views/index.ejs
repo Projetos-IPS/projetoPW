@@ -87,10 +87,13 @@
                       let UserData = JSON.parse(xhrGetUser.responseText);
                       if(UserData[0].tipo_utilizador == 'Profissional' || UserData[0].tipo_utilizador == 'Empresa')
                       {
+                      setTimeout(3000);
                       window.location.replace("/Home");
                       }
+                      setTimeout(3000);
                       if(UserData[0].tipo_utilizador == 'Admin')
                       {
+                      setTimeout(3000);
                       window.location.replace('/Approve')
                       }
                 

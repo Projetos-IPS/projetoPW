@@ -69,5 +69,13 @@ router.post('/editUserDescription', function(req, res)
    })
 });
     
+
+router.get('/getuserBirthDate', function(req, res)
+{
+   User.getuserBirthDate(req.session.name).then(function(result)
+   {
+      res.json(result);
+   })
+});
   
  module.exports = router;

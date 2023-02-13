@@ -82,8 +82,7 @@
             style="font-size: 20px; color: #7088B0;"></i></button>
       </section>
 
-      <section class="pop-up-form">
-
+      <section class="pop-up-form"
         <p>* Indicates required</p>
         <form class="editProfile" method="post" action="/Profile/editUserIntro" id="editProfile">
           <h3>General</h3>
@@ -105,18 +104,17 @@
           </div>
 
           <div class="field">
-            <h3>Portfolio</h3>
-            <label for="portfolioUser">Submit portfolio</label><br />
-            <input type="file" name="portfolioUser"><br><br />
+            <h3>User information</h3>
+            <label for="birthUser">Birthdate</label><br />
+            <input type="date" id="birthUser" name="birthUser"><br><br>
 
-            <label for="approvalPortfolio">Make portfolio visible?</label>
-            <input type="radio" id="radio1" name="portfolioApproval" value="1"> Yes <!-- 1 TRUE-->
-            <input type="radio" id="radio0" name="portfolioApproval" value="0"> No <!-- 0 - FALSE-->
+            <b><label for="generoUser">Gender:</label></b>
+            <input type="radio" id="female" name="generoUser" value="Feminino"> Female <!-- 1 TRUE-->
+            <input type="radio" id="male" name="generoUser" value="Masculino"> Male <!-- 0 - FALSE-->
+            <input type="radio" id="other" name="generoUser" value="other"> Other <!-- 0 - FALSE-->
           </div>
 
           <br>
-         
-       
       </section>
       <div class="button-save">
         <button class="save" type="submit">Save</button>

@@ -146,15 +146,32 @@ function openEditIntro(){
                         {
                             inputLocation.value = UserData[0].localidade;
                         }
-                        if(UserData[0].visualizacao == 1 )
+                        
+                        if(UserData[0].genero == 'Feminino')
                         {
-                            document.getElementById('radio1').checked = true;
+                            document.getElementById('female').checked = true;
                         }
-                        if(UserData[0].visualizacao == 0)
+                        else if(UserData[0].genero == 'Masculino')
                         {
-                            document.getElementById('radio0').checked = true;
+                            document.getElementById('male').checked = true;
+                        }
+                        else if(UserData[0].genero == 'other')
+                        {
+                            document.getElementById('other').checked = true;
                         }
 
+                    const birthDatedb = new XMLHttpRequest();
+                    birthDatedb.open('GET', '/Profile/getuserBirthDate', true);
+                    birthDatedb.setRequestHeader('Content-Type', 'application/json');
+         
+                    birthDatedb.onload = function(){
+                        if(xhrUserData.status = 200){
+                            let userbirthdate = JSON.parse(birthDatedb.responseText);
+                            document.getElementById('birthUser').value = userbirthdate[0].data;
+                        }
+                    }
+                    birthDatedb.send();
+                    
                     }
                     if(dataUser[0].tipo_utilizador == 'Empresa')
                     {
@@ -164,7 +181,8 @@ function openEditIntro(){
                     {
                         
                     }
-                }
+
+                                   }
                
             } 
 
@@ -193,12 +211,17 @@ xhrUserType.onload = function(){
           formEditP.addEventListener('submit', function(event){
           event.preventDefault();
 
+          if(formEditP.birthUser.value == '')
+          {
+            formEditP.birthUser.value = User
+          }
+
           const dataEdit = {
           nameUser: formEditP.nameUser.value,
           headlineUser : formEditP.headlineUser.value,
           locationUser : formEditP.locationUser.value,
-          portfolioUser : formEditP.portfolioUser.value,
-          portfolioApproval: formEditP.portfolioApproval.value
+          generoUser : formEditP.generoUser.value,
+          birthUser : formEditP.birthUser.value
          };
 
          const editUserInfo = new XMLHttpRequest();
@@ -254,8 +277,6 @@ xhrUserType.send();
 
        
 }
-
-
 
 function closeEditDescription(){
     document.getElementById('pop-up-edit-description').style.display = "none";

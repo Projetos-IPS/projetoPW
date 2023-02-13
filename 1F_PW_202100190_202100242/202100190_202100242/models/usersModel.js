@@ -302,8 +302,9 @@ var User = {
       {
         dataEdit.portfolioApproval = 0;
       }
-      let query = `UPDATE profissional SET nome = ?, headline = ?, localidade = ?, portfolio = ?, visualizacao = ? WHERE email = ?`;
-      let fulldata = [dataEdit.nameUser, dataEdit.headlineUser, dataEdit.locationUser, dataEdit.portfolioUser, dataEdit.portfolioApproval, email];
+
+      let query = `UPDATE profissional SET nome = ?, data_nascimento = ?, genero = ?, headline = ?, localidade = ? WHERE email = ?`;
+      let fulldata = [dataEdit.nameUser, dataEdit.birthUser, dataEdit.generoUser, dataEdit.headlineUser, dataEdit.locationUser, email];
 
       let connection = mysql.createConnection(options.mysql);
       connection.query(query, fulldata, function(error)
@@ -340,8 +341,33 @@ var User = {
         }
       })
     })
+  },
+
+  getuserBirthDate: function(email)
+{
+  return new Promise(function(resolve, reject)
+  {
+    let query = `SELECT date_format(data_nascimento, '%Y-%m-%d') AS data from profissional WHERE email = ?`;
+
+    let connection = mysql.createConnection(options.mysql);
+    connection.query(query, email, function(error, result)
+    {
+      if(error) {reject(error);}
+      else
+      {
+        resolve(result);
+        connection.end();
+      }
+    })
+  })
+
   }
 
+
+
 }
+
+
+
 
 module.exports = User;
