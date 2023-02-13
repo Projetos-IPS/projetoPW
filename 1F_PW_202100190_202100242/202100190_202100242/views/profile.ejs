@@ -1,185 +1,210 @@
 <!DOCTYPE html>
 <html lang="pt">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scape=1.8" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Open+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/main.css" />
-    <link rel="stylesheet" href="../styles/profile.css" />
-    <script src="../scripts/profile.js"></script>
-    <script src="https://kit.fontawesome.com/93b3c59277.js" crossorigin="anonymous"></script>  <link rel="icon" href="images/ff-logo.png" />
-    <title>FOLIO&FLEX</title>
-  </head>
-  <body>
-    <!-- scroll to top -->
-    <button onclick="topFunction()" id="myBtn" title="Go to top">︿</button>
 
-    <!-- header -->
-    <header class="side">
-      <a href="Homepage" class="logo">
-        <img src="../images/ff-logo.png" alt="Logo" />
-      </a>
-      <nav class="side-under">
-        <nav class="side-menu">
-          <a href="Home" id="home-menu" class="link">
-            <img src="../images/home.png"/>
-            <div class="menu-text">home</div>
-          </a>
-    
-          <a href="Job offers" id="joboffers-menu" class="link">
-            <img src="../images/joboffers.png"/>
-            <div class="menu-text">JOB OFFERS</div>
-          </a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scape=1.8" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/profile.css" />
+  <script src="../scripts/profile.js"></script>
+  <script src="https://kit.fontawesome.com/93b3c59277.js" crossorigin="anonymous"></script>
+  <link rel="icon" href="images/ff-logo.png" />
+  <title>FOLIO&FLEX</title>
+</head>
 
-          <a href="Portfolios" id="portfolios-menu"class="link">
-            <img src="../images/portfolios.png"/>
-            <div class="menu-text">PORTFOLIOS</div>
-          </a>
+<body>
+  <!-- scroll to top -->
+  <button onclick="topFunction()" id="myBtn" title="Go to top">︿</button>
 
-          <a href="Approve" id="aprovar-utilizadores" class="link">
-            <img src="../images/approve.png"/>
-            <div class="menu-text">APPROVE COMPANIES</div>
-          </a>
-        </nav>
-    
-        <nav class="side-footer">
-          <a href="Profile" id="profile-menu" class="link-active">
-            <img src="../images/profile.png"/>
-            <div class="menu-text">PROFILE</div>
-          </a>
+  <!-- header -->
+  <header class="side">
+    <a href="Homepage" class="logo">
+      <img src="../images/ff-logo.png" alt="Logo" />
+    </a>
+    <nav class="side-under">
+      <nav class="side-menu">
+        <a href="Home" id="home-menu" class="link">
+          <img src="../images/home.png" />
+          <div class="menu-text">home</div>
+        </a>
 
-          <a href="Team" class="link" id="team-page">
-            <img src="../images/team.png"/>
-            <div class="menu-text">ABOUT US</div>
-          </a>
+        <a href="Job offers" id="joboffers-menu" class="link">
+          <img src="../images/joboffers.png" />
+          <div class="menu-text">JOB OFFERS</div>
+        </a>
 
-          <a href="out" class="link">
-            <img src="../images/logout.png"/>
-            <div class="menu-text">LOGOUT</div>
-          </a>
-        </nav>
+        <a href="Portfolios" id="portfolios-menu" class="link">
+          <img src="../images/portfolios.png" />
+          <div class="menu-text">PORTFOLIOS</div>
+        </a>
 
+        <a href="Approve" id="aprovar-utilizadores" class="link">
+          <img src="../images/approve.png" />
+          <div class="menu-text">APPROVE COMPANIES</div>
+        </a>
       </nav>
-    </header>
-    <!-- header end -->
 
-    <!-- main -->
-    <section class="main">
+      <nav class="side-footer">
+        <a href="Profile" id="profile-menu" class="link-active">
+          <img src="../images/profile.png" />
+          <div class="menu-text">PROFILE</div>
+        </a>
 
-      <div id="page-mask"></div>
-      <section id="pop-up-edit" class="pop-up-edit">
-   
-        <section class="pop-up-header">
+        <a href="Team" class="link" id="team-page">
+          <img src="../images/team.png" />
+          <div class="menu-text">ABOUT US</div>
+        </a>
+
+        <a href="out" class="link">
+          <img src="../images/logout.png" />
+          <div class="menu-text">LOGOUT</div>
+        </a>
+      </nav>
+
+    </nav>
+  </header>
+  <!-- header end -->
+
+  <!-- main -->
+  <section class="main">
+
+    <div id="page-mask"></div>
+    <section id="pop-up-edit" class="pop-up-edit">
+
+      <section class="pop-up-header">
         <h3>Edit profile</h3>
-        <button class="close-btn" onclick="closeEdit()"><i class="fa-solid fa-x" style="font-size: 20px; color: #7088B0;"></i></button>
-        </section>
+        <button class="close-btn" onclick="closeEdit()"><i class="fa-solid fa-x"
+            style="font-size: 20px; color: #7088B0;"></i></button>
+      </section>
 
-        <hr >
-        <section class="pop-up-form">
+      <section class="pop-up-form">
 
-      <p>* Indicates required</p>
+        <p>* Indicates required</p>
         <form class="editProfile" method="post" action="/Profile/editUser" id="editProfile">
-          <label for="nameUser">Name*</label><br/>
-          <input id="nameUser" type="text" name="nameUser" ><br><br/>
-          <label for="headline">Headline*</label><br/>
-          <input id="headlineUser" type="text" name="headline" ><br><br/>
 
-          <label for="descriptionUser">Description</label><br>
-          <p>You can write about your years of experience, industry, or skills. People also talk about their achievements or previous job experiences.</p>
-          <textarea wrap="hard" id="descriptionUser" name="descriptionUser"></textarea><br>
-          <hr>
-          <h3>Location</h3>
-          <label for="locationUser">Country/Region*</label><br/>
-          <input id="locationUser" type="text" name="locationUser" ><br><br/>
-          <hr>
-          <h3>Portfolio</h3>
-          <label for="portfolioUser">Submit portfolio</label><br/>
-          <input type="file" name="portfolioUser" ><br><br/>
-          <label for="approvalPortfolio">Do you wish to allow others to see your portfolio?</label>
-          <input type="radio"  name="portfolioApproval" value="0" > No <!-- 0 - FALSE-->
-          <input type="radio"  name="portfolioApproval" value="1" > Yes   <!-- 1 TRUE-->
+          <h3>General</h3>
+          <div class="name-occupation">
+            <div class="first">
+              <label for="nameUser">Name*</label><br>
+              <input id="nameUser" type="text" name="nameUser" required><br>
+            </div>
+            <div class="second">
+              <label for="email">Occupation*</label><br>
+              <input id="headlineUser" type="text" name="headline" required><br>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="descriptionUser">Description</label><br>
+            <p>You can write about your years of experience, industry, or skills. People also talk about their
+              achievements or previous job experiences.</p>
+            <textarea wrap="hard" id="descriptionUser" name="descriptionUser"></textarea><br>
+          </div>
+
+          <div class="field">
+            <h3>Location</h3>
+            <label for="locationUser">Country/Region*</label><br />
+            <input id="locationUser" type="text" name="locationUser">
+          </div>
+
+          <div class="field">
+            <h3>Portfolio</h3>
+            <label for="portfolioUser">Submit portfolio</label><br />
+            <input type="file" name="portfolioUser"><br><br />
+
+            <label for="approvalPortfolio">Make portfolio visible?</label>
+            <input type="radio" name="portfolioApproval" value="1"> Yes <!-- 1 TRUE-->
+            <input type="radio" name="portfolioApproval" value="0"> No <!-- 0 - FALSE-->
+          </div>
+
+          <br>
+          <div class="button-save">
+            <button class="save" type="submit">Save</button>
+          </div>
+        </form>
       </section>
-      <hr >
-      <button type="submit">Save</button>
-    </form>
-    <script>
-            let formEdit = document.getElementById('editProfile');
-            formEdit.addEventListener('submit', function(event){
-             event.preventDefault();
-             
-             const dataEdit = {
-              nameUser: formEdit.nameUser.value,
-              headlineUser : formEdit.headlineUser.value,
-              descriptionUser : formEdit.descriptionUser.value,
-              locationUser : formEdit.locationUser.value,
-              portfolioUser : formEdit.portfolioUser.value,
-              portfolioApproval: formEdit.portfolioApproval.value
-             };
-  
-             const xhrlogin = new XMLHttpRequest();
-             xhrlogin.open('POST', '/Profile/editUser', true);
-             xhrlogin.setRequestHeader('Content-Type', 'application/json');
-             xhrlogin.send(JSON.stringify(dataEdit));
-             
-             xhrlogin.onload = function(){
-              if(xhrlogin.status === 200)
-              {
-                closeEdit();
-              }
-             };
-           
-            });
+
+
+
+
+      <script>
+        let formEdit = document.getElementById('editProfile');
+        formEdit.addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          const dataEdit = {
+            nameUser: formEdit.nameUser.value,
+            headlineUser: formEdit.headlineUser.value,
+            descriptionUser: formEdit.descriptionUser.value,
+            locationUser: formEdit.locationUser.value,
+            portfolioUser: formEdit.portfolioUser.value,
+            portfolioApproval: formEdit.portfolioApproval.value
+          };
+
+          const xhrlogin = new XMLHttpRequest();
+          xhrlogin.open('POST', '/Profile/editUser', true);
+          xhrlogin.setRequestHeader('Content-Type', 'application/json');
+          xhrlogin.send(JSON.stringify(dataEdit));
+
+          xhrlogin.onload = function () {
+            if (xhrlogin.status === 200) {
+              closeEdit();
+            }
+          };
+
+        });
       </script>
-     </section>
+    </section>
 
-      <section class="main-header"> <!-- main-header start -->
-        <h1>Profile</h1>
-        <section class="buttons">
-          <p class="name" id="admin-name-show">Admin</p>
-          <a class="name" id="user-name-show" href="Profile">  </a>
-          <a href="Profile" ><img id="profile" alt="Profile" /></a>
-          </section>
-          </section>
-      
-        <section class="profile-gray-area">
-          <section class="profile-main">
-                 <img alt="profile-img" id="profile-img" class="profile-img">
-                 <section class="profile-white-part">
-                   <section class="main-profile-stuff">
-                 <h2 id="profile-name" class="profile-name"></h2>
-                 <p id="profile-headline"></p>
-                 <p id="profile-address"></p>
-                   </section>
-            
-               </section>
-            
-         </section>
-         <section class="profile-description-area">
-            <section class="profile-description-header">
-          <h3>About</h3>
-          <button  class="edit-button" onclick="openEdit()"><i class='far fa-edit' style='font-size:24px'></i></button>
-        </section>
-          <p id="profile-description">  </p> 
-        </section>
-
-        <section class="profile-description-area">
-          <section class="profile-description-header">
-        <h3>Experience</h3>
-        <button  class="edit-button" onclick="openEdit()"><i class='far fa-edit' style='font-size:24px'></i></button>
+    <section class="main-header"> <!-- main-header start -->
+      <h1>Profile</h1>
+      <section class="buttons">
+        <p class="name" id="admin-name-show">Admin</p>
+        <a class="name" id="user-name-show" href="Profile"> </a>
+        <a href="Profile"><img id="profile" alt="Profile" /></a>
       </section>
-        <p id="profile-description">  </p> 
+    </section>
+
+    <section class="profile-gray-area">
+      <section class="profile-main">
+        <img alt="profile-img" id="profile-img" class="profile-img">
+        <section class="profile-white-part">
+          <section class="main-profile-stuff">
+            <h2 id="profile-name" class="profile-name"></h2>
+            <p id="profile-headline"></p>
+            <p id="profile-address"></p>
+          </section>
+
+        </section>
+
+      </section>
+      <section class="profile-description-area">
+        <section class="profile-description-header">
+          <h3>About</h3>
+          <button class="edit-button" onclick="openEdit()"><i class='far fa-edit' style='font-size:24px'></i></button>
+        </section>
+        <p id="profile-description"> </p>
+      </section>
+
+      <section class="profile-description-area">
+        <section class="profile-description-header">
+          <h3>Experience</h3>
+          <button class="edit-button" onclick="openEdit()"><i class='far fa-edit' style='font-size:24px'></i></button>
+        </section>
+        <p id="profile-description"> </p>
       </section>
       <!--FAZER A PARTE DA WORK EXPERIENCE, SEGUIR MOCKUPS-->
-  
-  </section>
 
- 
+    </section>
+
+
     <!-- main end -->
-    
+
     <!-- scroll-top -->
     <script>
       mybutton = document.getElementById("myBtn");
@@ -199,5 +224,6 @@
       }
     </script>
     <!-- scroll-top end -->
-  </body>
+</body>
+
 </html>
