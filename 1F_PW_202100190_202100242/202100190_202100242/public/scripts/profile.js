@@ -105,7 +105,7 @@ let userName = document.getElementById('user-name-show');
 function closeEditIntro(){
     document.getElementById('pop-up-edit').style.display = "none";
     document.getElementById('page-mask').style.display = "none";
-    document.getElementById('editProfileP').reset();
+    document.getElementById('editProfile').reset();
     getProfileData();
 }
 
@@ -189,7 +189,7 @@ xhrUserType.onload = function(){
 
     if(userType[0].tipo_utilizador == 'Profissional')
     {     
-          var formEditP = document.getElementById('editProfileP');
+          var formEditP = document.getElementById('editProfile');
           formEditP.addEventListener('submit', function(event){
           event.preventDefault();
 
