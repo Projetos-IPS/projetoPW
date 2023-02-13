@@ -78,15 +78,14 @@
 
       <section class="pop-up-header">
         <h3>Edit profile</h3>
-        <button class="close-btn" onclick="closeEdit()"><i class="fa-solid fa-x"
+        <button class="close-btn" onclick="closeEditIntro()"><i class="fa-solid fa-x"
             style="font-size: 20px; color: #7088B0;"></i></button>
       </section>
 
       <section class="pop-up-form">
 
         <p>* Indicates required</p>
-        <form class="editProfile" method="post" action="/Profile/editUser" id="editProfile">
-
+        <form class="editProfile" method="post" action="/Profile/editUserIntro" id="editProfile">
           <h3>General</h3>
           <div class="name-occupation">
             <div class="first">
@@ -97,13 +96,6 @@
               <label for="email">Occupation*</label><br>
               <input id="headlineUser" type="text" name="headline" required><br>
             </div>
-          </div>
-
-          <div class="field">
-            <label for="descriptionUser">Description</label><br>
-            <p>You can write about your years of experience, industry, or skills. People also talk about their
-              achievements or previous job experiences.</p>
-            <textarea wrap="hard" id="descriptionUser" name="descriptionUser"></textarea><br>
           </div>
 
           <div class="field">
@@ -118,8 +110,8 @@
             <input type="file" name="portfolioUser"><br><br />
 
             <label for="approvalPortfolio">Make portfolio visible?</label>
-            <input type="radio" name="portfolioApproval" value="1"> Yes <!-- 1 TRUE-->
-            <input type="radio" name="portfolioApproval" value="0"> No <!-- 0 - FALSE-->
+            <input type="radio" id="radio1" name="portfolioApproval" value="1"> Yes <!-- 1 TRUE-->
+            <input type="radio" id="radio0" name="portfolioApproval" value="0"> No <!-- 0 - FALSE-->
           </div>
 
           <br>
@@ -129,37 +121,28 @@
         </form>
       </section>
 
-
-
-
-      <script>
-        let formEdit = document.getElementById('editProfile');
-        formEdit.addEventListener('submit', function (event) {
-          event.preventDefault();
-
-          const dataEdit = {
-            nameUser: formEdit.nameUser.value,
-            headlineUser: formEdit.headlineUser.value,
-            descriptionUser: formEdit.descriptionUser.value,
-            locationUser: formEdit.locationUser.value,
-            portfolioUser: formEdit.portfolioUser.value,
-            portfolioApproval: formEdit.portfolioApproval.value
-          };
-
-          const xhrlogin = new XMLHttpRequest();
-          xhrlogin.open('POST', '/Profile/editUser', true);
-          xhrlogin.setRequestHeader('Content-Type', 'application/json');
-          xhrlogin.send(JSON.stringify(dataEdit));
-
-          xhrlogin.onload = function () {
-            if (xhrlogin.status === 200) {
-              closeEdit();
-            }
-          };
-
-        });
-      </script>
     </section>
+
+         <!--------------------------------------------------------------->
+         <section id="pop-up-edit-description" class="pop-up-edit-description">
+   
+          <section class="pop-up-header">
+          <h3>Edit about</h3>
+          <button class="close-btn" onclick="closeEditDescription()"><i class="fa-solid fa-x" style="font-size: 20px; color: #7088B0;"></i></button>
+          </section>
+    
+          <hr >
+          <section class="pop-up-form">
+          <form class="editDescriptionProfileP" method="post" action="/Profile/editUserDescription" id="editDescriptionProfileP">
+            <p>You can write about your years of experience, industry, or skills. People also talk about their achievements or previous job experiences.</p>
+            <textarea wrap="hard" id="descriptionUser" name="descriptionUser"></textarea><br>
+        </section>
+        <hr >
+        <button type="submit">Save</button>
+      </form>
+      
+       </section>
+       <!--------------------------------------------------------------->
 
     <section class="main-header"> <!-- main-header start -->
       <h1>Profile</h1>
@@ -179,14 +162,16 @@
             <p id="profile-headline"></p>
             <p id="profile-address"></p>
           </section>
-
+          <section class="editIntro-button">
+            <button  class="edit-button" onclick="openEditIntro()"><i class='far fa-edit' style='font-size:24px'></i></button>
+           </section>
         </section>
 
       </section>
       <section class="profile-description-area">
         <section class="profile-description-header">
           <h3>About</h3>
-          <button class="edit-button" onclick="openEdit()"><i class='far fa-edit' style='font-size:24px'></i></button>
+          <button class="edit-button" onclick="openEditDescription()"><i class='far fa-edit' style='font-size:24px'></i></button>
         </section>
         <p id="profile-description"> </p>
       </section>
@@ -194,7 +179,7 @@
       <section class="profile-description-area">
         <section class="profile-description-header">
           <h3>Experience</h3>
-          <button class="edit-button" onclick="openEdit()"><i class='far fa-edit' style='font-size:24px'></i></button>
+          <button class="edit-button" onclick="openEditExperience()"><i class='far fa-edit' style='font-size:24px'></i></button>
         </section>
         <p id="profile-description"> </p>
       </section>

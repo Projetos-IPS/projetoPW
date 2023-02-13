@@ -302,8 +302,32 @@ var User = {
       {
         dataEdit.portfolioApproval = 0;
       }
-      let query = `UPDATE profissional SET nome = ?, headline = ?, descricao = ?, localidade = ?, portfolio = ?, visualizacao = ? WHERE email = ?`;
-      let fulldata = [dataEdit.nameUser, dataEdit.headlineUser, dataEdit.descriptionUser, dataEdit.locationUser, dataEdit.portfolioUser, dataEdit.portfolioApproval, email];
+      let query = `UPDATE profissional SET nome = ?, headline = ?, localidade = ?, portfolio = ?, visualizacao = ? WHERE email = ?`;
+      let fulldata = [dataEdit.nameUser, dataEdit.headlineUser, dataEdit.locationUser, dataEdit.portfolioUser, dataEdit.portfolioApproval, email];
+
+      let connection = mysql.createConnection(options.mysql);
+      connection.query(query, fulldata, function(error)
+      {
+        if(error) {reject(error);}
+        else
+        {
+          resolve(0);
+          connection.end();
+        }
+      })
+    })
+  },
+
+  editUserDescriptionP: function(dataEdit2, email)
+  {
+    return new Promise(function(resolve, reject)
+    {
+      if(dataEdit2.portfolioApproval == '')
+      {
+        dataEdit2.portfolioApproval = 0;
+      }
+      let query = `UPDATE profissional SET descricao = ? WHERE email = ?`;
+      let fulldata = [dataEdit2.descriptionUser, email];
 
       let connection = mysql.createConnection(options.mysql);
       connection.query(query, fulldata, function(error)
