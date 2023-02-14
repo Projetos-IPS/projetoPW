@@ -1,6 +1,6 @@
 function getLoggedUserData(){
     const xhrloggedUser = new XMLHttpRequest();
-    xhrloggedUser.open('GET', '/Profile/getloggedinUser', true);
+    xhrloggedUser.open('GET', '/getloggedinUser', true);
     xhrloggedUser.setRequestHeader('Content-Type', 'application/json');
     let username_show = document.getElementById('user-name-show');
 

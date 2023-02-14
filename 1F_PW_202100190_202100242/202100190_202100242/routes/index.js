@@ -42,11 +42,6 @@ router.post('/login', function(req, res)
     req.session.name = id;
     res.json({result : id});  
   });
-
- /* if(User.login(data).catch(1)){
-    req.session.name = req.body.emailLogin
-  };*/
-
   
 });
 
@@ -55,6 +50,15 @@ router.get('/out', function(req,res){
     res.redirect('/'); 
     res.end();
   })
+});
+
+router.get('/getloggedinUser', function(req,res)
+{
+   let email = req.session.name;
+   User.getloggedInUserData(email).then(function(result)
+   {
+      res.json(result);
+   })
 });
 
 module.exports = router;
