@@ -19,17 +19,17 @@ function renderPage(req, res) {
 router.get('/getloggedinUser', function(req,res)
 {
    let email = req.session.name;
-   User.getloggedInUserType(email).then(function(result)
+   User.getUserType(email).then(function(result)
    {
       if(result[0].tipo_utilizador == 'Profissional'){
-         User.getloggedInUserDataProfissional(email).then(function(result2)
+         User.getUserDataProfissional(email).then(function(result2)
          {
             res.json(result2);
          })
       }
       else if(result[0].tipo_utilizador == 'Empresa')
       {
-         User.getloggedInUserDataEmpresa(email).then(function(result2)
+         User.getUserDataEmpresa(email).then(function(result2)
          {
             res.json(result2);
          })

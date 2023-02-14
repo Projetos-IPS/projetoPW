@@ -40,6 +40,7 @@ var User = {
                 resolve(result.insertId);
                 connection.end();
             })
+           
         });
     },
 
@@ -68,18 +69,15 @@ var User = {
                     if (result[i].approved == 0)
                     {
                       resolve(0);
-                      connection.end();
                     }
                     else if(result[i].approved == 1)
                     {
                       resolve(result[i].email);//login feito com sucesso
-                      connection.end();
                     }
                   }
                   else
                   {
                     resolve(2);
-                    connection.end();
                   }
                   
                 }
@@ -87,11 +85,10 @@ var User = {
               else
               {
                 resolve(3);
-                connection.end();
               }
             }
             });
-            
+            connection.end();   
   })
     },
  //------------------------------- 
@@ -111,6 +108,7 @@ var User = {
           resolve(result);
          }
         });
+        connection.end();
       });
     },
 
@@ -141,7 +139,7 @@ var User = {
           });
        }
       });
-      
+
     });
     },
 
@@ -157,9 +155,9 @@ var User = {
         else
         {
           resolve(0);
-          connection.end();
         }
       });
+      connection.end();
     })
     },
 
@@ -203,9 +201,9 @@ var User = {
         else
         {
           resolve(result);
-          connection.end();
         }
       })
+      connection.end();
     })
   
     },
@@ -222,10 +220,12 @@ var User = {
           else
           {
             resolve(result);
-            connection.end();
+            
           }
         })
+        connection.end();
       })
+   
     },
 
     getIdbyEmail: function(email)
@@ -240,12 +240,13 @@ var User = {
           else
           {
             resolve(result);
-            connection.end();
           }
         })
+        connection.end();
       })
     },
-    getloggedInUserType: function(email)
+
+    getUserType: function(email)
     {
       return new Promise(function(resolve, reject)
       {
@@ -259,10 +260,12 @@ var User = {
             resolve(result);
           }
         })
+        connection.end();
       })
+   
     },
 
-    getloggedInUserDataProfissional: function(email)
+    getUserDataProfissional: function(email)
     {
       return new Promise(function(resolve, reject)
       {
@@ -276,10 +279,11 @@ var User = {
             resolve(result);
           }
         })
+        connection.end();
       })
     },
 
-    getloggedInUserDataEmpresa: function(email)
+    getUserDataEmpresa: function(email)
     {
       return new Promise(function(resolve, reject)
       {
@@ -293,9 +297,9 @@ var User = {
             resolve(result);
           }
         })
+        connection.end();
       })
     },
-
 //---------------------------------
 
 
