@@ -1,81 +1,50 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/usersModel');
+var app = require('../app');
 
-router.get('/', function(req, res)
+router.get('/', function(req, res, next)
 {
-   if(req.session.name == undefined || req.session.name == 0 || req.session.name == 2 || req.session.name == 3)
-   {
-      res.redirect('/Homepage');
-    
-   }
-   else
-   {
-      res.render('Profile');
-   }
+   next();
 });
+
+
+router.get('/:userid/', function(req, res)
+{
+   let id = req.params.userid;
+   User.getUserIDs().then(function(result)
+   {
+      for(let i = 0; i < result.length; i++)
+      {
+         if(result[i].id == id)
+      {
+         User.getEmailById(id).then(function(email)
+         {
+         res.render('Profile');
+         });
+      }
+      else
+      {
+        res.json('Not_found');
+      }
+   }
+   })
+});
+
+router.get('/getloggedinUser', function(req,res)
+{
+   
+   let email = req.session.name;
+   User.getloggedInUserData(email).then(function(result)
+   {
+      res.json(result);
+   })
+});
+
  
-router.get('/getUser', function(req, res)
-{
-   User.getUser(req.session.name).then(function(data){
-      res.json(data);
-   })
-});
+   
 
-router.get('/getUserDataP', function(req, res)
-{
-   User.getUserType(req.session.name).then(function(type){
-      if(type == 'P')
-      {
-         User.getUserDataP(req.session.name).then(function(data)
-         {
-            res.json(data);
-         })
-      }
-      if(type == 'E')
-      {
-         User.getUserDataE(req.session.name).then(function(data)
-         {
-            res.json(data);
-         })
-      }
-      if(type == 'A')
-      {
-         User.getUserDataA(req.session.name).then(function(data)
-         {
-            res.json(data);
-         })
-      }
 
- });
-
-});
-
-router.post('/editUserIntro', function(req, res)
-{
-   const dataEdit = req.body;
-   User.editUserP(dataEdit, req.session.name).then(function(result)
-   {
-      res.json(result);
-   })
-});
-
-router.post('/editUserDescription', function(req, res)
-{
-   const dataEdit2 = req.body;
-   User.editUserDescriptionP(dataEdit2, req.session.name).then(function(result)
-   {
-      res.json(result);
-   })
-});
     
-
-router.get('/getuserBirthDate', function(req, res)
-{
-   User.getuserBirthDate(req.session.name).then(function(result)
-   {
-      res.json(result);
-   })
-});
   
  module.exports = router;

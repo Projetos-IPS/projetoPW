@@ -11,6 +11,7 @@ function renderPage(req, res) {
     }
     else
     {
+        console.log(req.session.name);
         res.render('home');
     }
 }

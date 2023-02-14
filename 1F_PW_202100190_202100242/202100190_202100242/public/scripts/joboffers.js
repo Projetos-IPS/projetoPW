@@ -27,7 +27,7 @@ var init = function () {
   }
 
   ulListaOfertas.innerHTML = list;
-  getProfileData();
+ // getProfileData();
 }
 
 window.onload = init;

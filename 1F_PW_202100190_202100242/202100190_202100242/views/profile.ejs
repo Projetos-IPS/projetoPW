@@ -28,12 +28,12 @@
     </a>
     <nav class="side-under">
       <nav class="side-menu">
-        <a href="Home" id="home-menu" class="link">
+        <a href="../Home" id="home-menu" class="link">
           <img src="../images/home.png" />
           <div class="menu-text">home</div>
         </a>
 
-        <a href="Job offers" id="joboffers-menu" class="link">
+        <a href="../Job offers" id="joboffers-menu" class="link">
           <img src="../images/joboffers.png" />
           <div class="menu-text">JOB OFFERS</div>
         </a>
@@ -55,12 +55,12 @@
           <div class="menu-text">PROFILE</div>
         </a>
 
-        <a href="Team" class="link" id="team-page">
+        <a href="../Team" class="link" id="team-page">
           <img src="../images/team.png" />
           <div class="menu-text">ABOUT US</div>
         </a>
 
-        <a href="out" class="link">
+        <a href="../out" class="link">
           <img src="../images/logout.png" />
           <div class="menu-text">LOGOUT</div>
         </a>
@@ -74,15 +74,15 @@
   <section class="main">
 
     <div id="page-mask"></div>
-    <section id="pop-up-edit" class="pop-up-edit">
+    <div id="pop-up-edit" class="pop-up-edit">
 
-      <section class="pop-up-header">
+      <div class="pop-up-header">
         <h3>Edit profile</h3>
         <button class="close-btn" onclick="closeEditIntro()"><i class="fa-solid fa-x"
             style="font-size: 20px; color: #7088B0;"></i></button>
-      </section>
+      </div>
 
-      <section class="pop-up-form"
+      <div class="pop-up-form"
         <p>* Indicates required</p>
         <form class="editProfile" method="post" action="/Profile/editUserIntro" id="editProfile">
           <h3>General</h3>
@@ -115,74 +115,78 @@
           </div>
 
           <br>
-      </section>
+      </div>
       <div class="button-save">
         <button class="save" type="submit">Save</button>
       </div>
-    </section>
+    </div>
   </form>
-         <!--------------------------------------------------------------->
-         <section id="pop-up-edit-description" class="pop-up-edit-description">
+  <!--------------------------------------------------------------->
+  <div id="pop-up-edit-description" class="pop-up-edit-description">
    
-          <section class="pop-up-header">
+          <div class="pop-up-header">
           <h3>Edit about</h3>
           <button class="close-btn" onclick="closeEditDescription()"><i class="fa-solid fa-x" style="font-size: 20px; color: #7088B0;"></i></button>
-          </section>
+          </div>
     
           <hr >
-          <section class="pop-up-form">
+          <div class="pop-up-form">
           <form class="editDescriptionProfileP" method="post" action="/Profile/editUserDescription" id="editDescriptionProfileP">
             <p>You can write about your years of experience, industry, or skills. People also talk about their achievements or previous job experiences.</p>
             <textarea wrap="hard" id="descriptionUser" name="descriptionUser"></textarea><br>
-        </section>
+        </div>
         <hr >
         <button type="submit">Save</button>
       </form>
       
-       </section>
-       <!--------------------------------------------------------------->
+  </div>
+  <!--------------------------------------------------------------->
 
-    <section class="main-header"> <!-- main-header start -->
+    <div class="main-header"> <!-- main-header start -->
       <h1>Profile</h1>
-      <section class="buttons">
+      <div class="buttons">
         <p class="name" id="admin-name-show">Admin</p>
         <a class="name" id="user-name-show" href="Profile"> </a>
         <a href="Profile"><img id="profile" alt="Profile" /></a>
-      </section>
-    </section>
+      </div>
+    </div>
 
     <section class="profile-gray-area">
-      <section class="profile-main">
+      <div class="profile-main">
         <img alt="profile-img" id="profile-img" class="profile-img">
-        <section class="profile-white-part">
-          <section class="main-profile-stuff">
+        <div class="profile-white-part">
+          <div class="main-profile-stuff">
             <h2 id="profile-name" class="profile-name"></h2>
             <p id="profile-headline"></p>
             <p id="profile-address"></p>
-          </section>
-          <section class="editIntro-button">
+          </div>
+          <div class="editIntro-button">
             <button  class="edit-button" onclick="openEditIntro()"><i class='far fa-edit' style='font-size:24px'></i></button>
-           </section>
-        </section>
+           </div>
+        </div>
 
-      </section>
-      <section class="profile-description-area">
-        <section class="profile-description-header">
+      </div>
+      <div class="profile-description-area">
+        <div class="profile-description-header">
           <h3>About</h3>
           <button class="edit-button" onclick="openEditDescription()"><i class='far fa-edit' style='font-size:24px'></i></button>
-        </section>
+        </div>
         <p id="profile-description"> </p>
-      </section>
+      </div>
 
-      <section class="profile-description-area">
-        <section class="profile-description-header">
+      <div class="profile-description-area">
+        <div class="profile-description-header">
           <h3>Experience</h3>
           <button class="edit-button" onclick="openEditExperience()"><i class='far fa-edit' style='font-size:24px'></i></button>
-        </section>
+        </div>
         <p id="profile-description"> </p>
-      </section>
-      <!--FAZER A PARTE DA WORK EXPERIENCE, SEGUIR MOCKUPS-->
+      </div>
 
+    </section>
+      <!-------------------------------------------------------------------->
+
+
+    
     </section>
 
 

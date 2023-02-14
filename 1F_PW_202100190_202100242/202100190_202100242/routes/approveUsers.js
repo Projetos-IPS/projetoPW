@@ -21,8 +21,8 @@ router.get('/getUsers', function(req, res)
     User.getCompanyUsers().then(function(result)
     {
         res.json(result);
-    });
-})
+    })
+});
 
 router.post('/UpdateUser', function(req, res){
     var data = req.body;

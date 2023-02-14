@@ -37,7 +37,7 @@
     width: 130px;
     height: 130px;
     margin-top: -93px;
-    margin-left: 70px;
+    margin-left: 9.3%;
     border-radius: 50%;
     position: relative;
     top: 40px;
@@ -187,7 +187,6 @@
 
 .pop-up-form h3 {
     font-family: 'Unbounded', cursive;
-    text-align: center;
 }
 
 .pop-up-edit {

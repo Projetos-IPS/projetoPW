@@ -5,6 +5,8 @@ var session = require('express-session');
 const { Session } = require("express-session");
 
 var User = {
+
+  //Registo e login---------------
     createP: function(data)
     {
         return new Promise(function(resolve, reject)
@@ -92,57 +94,8 @@ var User = {
             
   })
     },
-
-    getUserType: function(email)
-    {
-      return new Promise(function(resolve, reject)
-      {
-        let query = `SELECT * FROM utilizador WHERE email = ?`;
-        let connection = mysql.createConnection(options.mysql);
-
-        connection.query(query, email, function(error, result)
-        {
-          if(error) {return reject(error);}
-          else
-          {
-          if(result.length > 0)
-          {
-            for (let i = 0; i < result.length; i++)
-            {
-              if(result[i].tipo_utilizador == 'Profissional')
-              {resolve('P'); 
-              }
-              else if(result[i].tipo_utilizador == 'Empresa')
-              {resolve('E'); 
-              }
-              else if(result[i].tipo_utilizador == 'Admin');
-              {resolve('A'); 
-              }
-            }
-          }
-        }
-        });
-      });
-    },
-
-    getUser: function(email)
-    {
-      return new Promise(function(resolve, reject)
-      {
-        let query = `SELECT * FROM utilizador WHERE email = ?`;
-        let connection = mysql.createConnection(options.mysql);
-
-        connection.query(query, email, function(error, result)
-        {
-          if(error) {return reject(error);}
-          else
-          {
-          resolve(result);
-         }
-        });
-      });
-    },
-
+ //------------------------------- 
+ //Aprovar empresas---------------
     getCompanyUsers: function()
     {
       return new Promise(function(resolve, reject)
@@ -157,63 +110,6 @@ var User = {
           {
           resolve(result);
          }
-        });
-      });
-    },
-
-    getUserDataP: function(email)
-    {
-      return new Promise(function(resolve, reject)
-      {
-        let query = `SELECT email, nome, data_nascimento, genero, headline, descricao, localidade, visualizacao FROM profissional WHERE email = ?`
-        let connection = mysql.createConnection(options.mysql);
-
-        connection.query(query, email, function(error,result)
-        {
-          if(error) { return reject(error);}
-          else
-          {
-            resolve(result);
-            connection.end();
-          }
-        });
-      });
-    },
-
-    getUserDataE: function(email)
-    {
-      return new Promise(function(resolve, reject)
-      {
-        let query = `SELECT email, nome, descricao, site, logotipo FROM empresa WHERE email = ?`
-        let connection = mysql.createConnection(options.mysql);
-
-        connection.query(query, email, function(error,result)
-        {
-          if(error) { return reject(error);}
-          else
-          {
-            resolve(result);
-            connection.end();
-          }
-        });
-      });
-    },
-
-    getUserDataA: function(email)
-    {
-      return new Promise(function(resolve, reject)
-      {
-        let query = `SELECT email, pass, tipo_utilizador, approved FROM utilizador WHERE email = ?`
-        let connection = mysql.createConnection(options.mysql);
-
-        connection.query(query, email, function(error,result)
-        {
-          if(error) { return reject(error);}
-          else
-          {
-            resolve(result);
-            connection.end();
-          }
         });
       });
     },
@@ -247,9 +143,9 @@ var User = {
       });
       
     });
-  },
+    },
 
-  rejectCompany: function(data)
+    rejectCompany: function(data)
   {
     return new Promise(function(resolve, reject){
       let query = `DELETE FROM utilizador WHERE email = ?`;
@@ -265,9 +161,9 @@ var User = {
         }
       });
     })
-  },
+    },
 
-  deactivateCompany: function(data)
+    deactivateCompany: function(data)
   {
     return new Promise(function(resolve, reject){
       let query2 = `DELETE FROM empresa WHERE email = ?`;
@@ -292,58 +188,115 @@ var User = {
         }
       })
     })
-  },
+    },
+//--------------------------------
+//userdata - perfil e sessão logada
+    getUserIDs: function()
+  {
+    return new Promise(function(resolve, reject)
+    {
+      let query = `SELECT id from utilizador WHERE approved = 1 AND tipo_utilizador != 'Admin'`;
+      let connection = mysql.createConnection(options.mysql);
+      connection.query(query, function(error, result)
+      {
+        if(error) {reject(error);}
+        else
+        {
+          resolve(result);
+          connection.end();
+        }
+      })
+    })
   
-  editUserP: function(dataEdit, email)
-  {
-    return new Promise(function(resolve, reject)
+    },
+
+    getEmailById: function(data)
     {
-      if(dataEdit.portfolioApproval == '')
+      return new Promise(function(resolve, reject)
       {
-        dataEdit.portfolioApproval = 0;
-      }
-
-      let query = `UPDATE profissional SET nome = ?, data_nascimento = ?, genero = ?, headline = ?, localidade = ? WHERE email = ?`;
-      let fulldata = [dataEdit.nameUser, dataEdit.birthUser, dataEdit.generoUser, dataEdit.headlineUser, dataEdit.locationUser, email];
-
-      let connection = mysql.createConnection(options.mysql);
-      connection.query(query, fulldata, function(error)
-      {
-        if(error) {reject(error);}
-        else
+        let query = `SELECT email FROM utilizador WHERE id = ?`;
+        id = [data.id];
+        let connection = mysql.createConnection(options.mysql);
+        connection.query(query, id, function(error, result)
         {
-          resolve(0);
-          connection.end();
-        }
+          if(error) {reject(error);}
+          else
+          {
+            resolve(result);
+            connection.end();
+          }
+        })
       })
-    })
-  },
+    },
 
-  editUserDescriptionP: function(dataEdit2, email)
-  {
-    return new Promise(function(resolve, reject)
+    getIdbyEmail: function(data)
     {
-      if(dataEdit2.portfolioApproval == '')
+      return new Promise(function(resolve, reject)
       {
-        dataEdit2.portfolioApproval = 0;
-      }
-      let query = `UPDATE profissional SET descricao = ? WHERE email = ?`;
-      let fulldata = [dataEdit2.descriptionUser, email];
-
-      let connection = mysql.createConnection(options.mysql);
-      connection.query(query, fulldata, function(error)
-      {
-        if(error) {reject(error);}
-        else
+        let query = `SELECT id FROM utilizador WHERE email = ?`;
+        let email = [data.email];
+        let connection = mysql.createConnection(options.mysql);
+        connection.query(query, email, function(error, result)
         {
-          resolve(0);
-          connection.end();
-        }
+          if(error) {reject(error);}
+          else
+          {
+            resolve(result);
+            connection.end();
+          }
+        })
       })
-    })
-  },
+    },
+    getloggedInUserData: function(data)
+    {
+      return new Promise(function(resolve, reject)
+      {
+        let query = `SELECT tipo_utilizador FROM utilizador WHERE email = ?`;
+        let email = [data.email];
+        let queryProfissional = `SELECT * FROM profissional WHERE email = ?`;
+        let queryEmpresa = `SELECT * FROM empresa WHERE email = ?`;
+        let connection = mysql.createConnection(options.mysql);
+        connection.query(query, email, function(error, result)
+        {
+          if(error) {reject(error);}
+          else
+          {
+            if(result[0].tipo_utilizador == 'Profissional')
+            {
+              connection.query(queryProfissional, email, function(error, result2)
+              {
+                if(error) {reject(error);}
+                else
+                {
+                resolve(result2);
+                connection.end();
+                }
+              });
+            }
+            else if(result[0].tipo_utilizador == 'Empresa')
+            {
+              connection.query(queryProfissional, email, function(error, result2)
+              {
+                if(error) {reject(error);}
+                else
+                {
+                resolve(result2);
+                connection.end();
+                }
+              });
+            }
+            connection.end();
+          }
+        })
+      })
+    },
 
-  getuserBirthDate: function(email)
+//---------------------------------
+
+
+
+
+ /* getuserBirthDate: function(email)
 {
   return new Promise(function(resolve, reject)
   {
@@ -361,9 +314,9 @@ var User = {
     })
   })
 
-  }
+  },*/
 
-
+ 
 
 }
 
