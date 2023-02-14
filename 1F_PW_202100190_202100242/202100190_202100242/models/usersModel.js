@@ -210,12 +210,11 @@ var User = {
   
     },
 
-    getEmailById: function(data)
+    getEmailById: function(id)
     {
       return new Promise(function(resolve, reject)
       {
         let query = `SELECT email FROM utilizador WHERE id = ?`;
-        id = [data.id];
         let connection = mysql.createConnection(options.mysql);
         connection.query(query, id, function(error, result)
         {
@@ -229,12 +228,11 @@ var User = {
       })
     },
 
-    getIdbyEmail: function(data)
+    getIdbyEmail: function(email)
     {
       return new Promise(function(resolve, reject)
       {
         let query = `SELECT id FROM utilizador WHERE email = ?`;
-        let email = [data.email];
         let connection = mysql.createConnection(options.mysql);
         connection.query(query, email, function(error, result)
         {
@@ -247,45 +245,52 @@ var User = {
         })
       })
     },
-    getloggedInUserData: function(data)
+    getloggedInUserType: function(email)
     {
       return new Promise(function(resolve, reject)
       {
         let query = `SELECT tipo_utilizador FROM utilizador WHERE email = ?`;
-        let email = [data.email];
-        let queryProfissional = `SELECT * FROM profissional WHERE email = ?`;
-        let queryEmpresa = `SELECT * FROM empresa WHERE email = ?`;
         let connection = mysql.createConnection(options.mysql);
         connection.query(query, email, function(error, result)
         {
           if(error) {reject(error);}
           else
           {
-            if(result[0].tipo_utilizador == 'Profissional')
-            {
-              connection.query(queryProfissional, email, function(error, result2)
-              {
-                if(error) {reject(error);}
-                else
-                {
-                resolve(result2);
-                connection.end();
-                }
-              });
-            }
-            else if(result[0].tipo_utilizador == 'Empresa')
-            {
-              connection.query(queryProfissional, email, function(error, result2)
-              {
-                if(error) {reject(error);}
-                else
-                {
-                resolve(result2);
-                connection.end();
-                }
-              });
-            }
-            connection.end();
+            resolve(result);
+          }
+        })
+      })
+    },
+
+    getloggedInUserDataProfissional: function(email)
+    {
+      return new Promise(function(resolve, reject)
+      {
+        let query = `SELECT * FROM profissional WHERE email = ?`;
+        let connection = mysql.createConnection(options.mysql);
+        connection.query(query, email, function(error, result)
+        {
+          if(error) {reject(error);}
+          else
+          {
+            resolve(result);
+          }
+        })
+      })
+    },
+
+    getloggedInUserDataEmpresa: function(email)
+    {
+      return new Promise(function(resolve, reject)
+      {
+        let query = `SELECT * FROM empresa WHERE email = ?`;
+        let connection = mysql.createConnection(options.mysql);
+        connection.query(query, email, function(error, result)
+        {
+          if(error) {reject(error);}
+          else
+          {
+            resolve(result);
           }
         })
       })

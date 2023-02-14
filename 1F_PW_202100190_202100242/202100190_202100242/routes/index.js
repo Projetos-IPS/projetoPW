@@ -52,13 +52,6 @@ router.get('/out', function(req,res){
   })
 });
 
-router.get('/getloggedinUser', function(req,res)
-{
-   let email = req.session.name;
-   User.getloggedInUserData(email).then(function(result)
-   {
-      res.json(result);
-   })
-});
+
 
 module.exports = router;

@@ -5,9 +5,8 @@ var app = require('../app');
 
 router.get('/', function(req, res, next)
 {
-   next();
+  next();
 });
-
 
 router.get('/:userid/', function(req, res)
 {
@@ -23,14 +22,13 @@ router.get('/:userid/', function(req, res)
          res.render('Profile');
          });
       }
-      else
+      /*else
       {
         res.json('Not_found');
-      }
+      }*/
    }
    })
 });
-
 
 
 

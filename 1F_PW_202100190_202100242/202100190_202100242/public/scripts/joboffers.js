@@ -27,7 +27,7 @@ var init = function () {
   }
 
   ulListaOfertas.innerHTML = list;
- // getProfileData();
+ getLoggedUserData();
 }
 
 window.onload = init;
@@ -128,70 +128,48 @@ function searchDESC() {
   }
 }
 
-function getProfileData() {
-  const xhrUser = new XMLHttpRequest();
-  xhrUser.open('GET', '/Profile/getUser', true);
-  xhrUser.setRequestHeader('Content-Type', 'application/json');
+function getLoggedUserData(){
+  const xhrloggedUser = new XMLHttpRequest();
+  xhrloggedUser.open('GET', '/Home/getloggedinUser', true);
+  xhrloggedUser.setRequestHeader('Content-Type', 'application/json');
+  let username_show = document.getElementById('user-name-show');
+  let profile_pic_show = document.getElementById('profile');
+  let profile_hyperlink = document.getElementById('profile-hyperlink');
+  let profile_hyperlink_menu = document.getElementById('profile-menu');
 
-  let profileImg = document.getElementById('profile');
-  let menuPortfolios = document.getElementById('portfolios-menu');
-  let menuJobOffers = document.getElementById('joboffers-menu');
-  let menuHome = document.getElementById('home-menu');
-  let menuProfile = document.getElementById('profile-menu');
-  let menuApprove = document.getElementById('aprovar-utilizadores');
-  let adminName = document.getElementById('admin-name-show');
-  let teamMenu = document.getElementById('team-page');
-  let userName = document.getElementById('user-name-show');
+  xhrloggedUser.onload = function () {
+      if (xhrloggedUser.status === 200) {
+         let loggedUserData = JSON.parse(xhrloggedUser.responseText);
+         username_show.innerHTML = loggedUserData[0].nome;
+         if(loggedUserData[0].genero == 'Feminino')
+         {
+          profile_pic_show.src = "../images/profile-female.png";
+         }
+         else if(loggedUserData[0].genero == 'Masculino')
+         {
+          profile_pic_show.src = "../images/profile-male.png";
+         }
+         else if(loggedUserData[0].genero == 'other')
+         {
+          profile_pic_show.src = "../images/profile-other.png";
+         }
+         else
+         {
+          profile_pic_show.src = "../images/profile_company.png";
+         }
 
-  xhrUser.onload = function () {
-    if (xhrUser.status === 200) {
-      let dataUser = JSON.parse(xhrUser.responseText);
-      const xhrUserData = new XMLHttpRequest();
-      xhrUserData.open('GET', '/Profile/getUserDataP', true);
-      xhrUserData.setRequestHeader('Content-Type', 'application/json');
-
-      xhrUserData.onload = function () {
-        if (xhrUserData.status = 200) {
-          let UserData = JSON.parse(xhrUserData.responseText);
-
-          if (dataUser[0].tipo_utilizador == 'Profissional') {
-            if (UserData[0].genero == 'Feminino') {
-              profileImg.src = "../images/profile-female.png";
-            }
-            else if (UserData[0].genero == 'Masculino') {
-              profileImg.src = "../images/profile-male.png";
-            }
-            else if (UserData[0].genero == 'other') {
-              profileImg.src = "../images/profile-other.png";
-            }
-
-            userName.innerHTML = UserData[0].nome;
-            menuApprove.style.display = "none";
-            menuPortfolios.style.display = "none";
+         const xhrloggedUserID = new XMLHttpRequest();
+         xhrloggedUserID.open('GET', '/Home/getloggedinUserID', true);
+         xhrloggedUserID.setRequestHeader('Content-Type', 'application/json');
+         xhrloggedUserID.onload = function () {
+          if (xhrloggedUserID.status === 200) {
+                  let idUser = JSON.parse(xhrloggedUserID.responseText);
+                  profile_hyperlink.href = "Profile/" + idUser[0].id;
+                  profile_hyperlink_menu.href = "Profile/" + idUser[0].id;
+              }
           }
-
-          if (dataUser[0].tipo_utilizador == 'Empresa') {
-            menuJobOffers.style.display = "none";
-            menuPortfolios.style.display = "none";
-            profileName.innerHTML = UserData[0].nome;
-            menuPortfolios.style.display = "none";
-            userName.innerHTML = UserData[0].nome;
-          }
-
-          if (dataUser[0].tipo_utilizador == 'Admin') {
-            menuHome.style.display = "none";
-            menuProfile.style.display = "none";
-            menuJobOffers.style.display = "none";
-            profileImg.style.display = "none";
-            adminName.style.display = "block";
-            teamMenu.style.display = "none";
-          }
-        }
+      xhrloggedUserID.send();
       }
-
-      xhrUserData.send();
-    }
   }
-  
-  xhrUser.send();
+  xhrloggedUser.send();
 }
