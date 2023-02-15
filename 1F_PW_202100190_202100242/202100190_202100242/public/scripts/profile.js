@@ -1,34 +1,73 @@
 var userID = window.location.href.split('/').pop();
 
 function getLoggedUserData(){
-    const xhrloggedUser = new XMLHttpRequest();
-    xhrloggedUser.open('GET', '/Home/getloggedinUser', true);
-    xhrloggedUser.setRequestHeader('Content-Type', 'application/json');
+    const xhrloggedUserType = new XMLHttpRequest();
+    xhrloggedUserType.open('GET', '/Home/getloggedinUserType', true);
+    xhrloggedUserType.setRequestHeader('Content-Type', 'application/json');
     let username_show = document.getElementById('user-name-show');
     let profile_pic_show = document.getElementById('profile');
     let profile_hyperlink = document.getElementById('profile-hyperlink');
     let profile_hyperlink_menu = document.getElementById('profile-menu');
 
-    xhrloggedUser.onload = function () {
-        if (xhrloggedUser.status === 200) {
-           let loggedUserData = JSON.parse(xhrloggedUser.responseText);
-           username_show.innerHTML = loggedUserData[0].nome;
-           if(loggedUserData[0].genero == 'Feminino')
+    xhrloggedUserType.onload = function () {
+        if (xhrloggedUserType.status === 200) {
+           let loggedUserType = JSON.parse(xhrloggedUserType.responseText);
+           
+           if(loggedUserType[0].tipo_utilizador == 'Profissional')
            {
-            profile_pic_show.src = "../images/profile-female.png";
+            const xhrloggedUserinformationProfissional = new XMLHttpRequest();
+            xhrloggedUserinformationProfissional.open('GET', '/Home/getloggedinUserInformationProfissional', true);
+            xhrloggedUserinformationProfissional.setRequestHeader('Content-Type', 'application/json');
+            xhrloggedUserinformationProfissional.onload = function () {
+             if (xhrloggedUserinformationProfissional.status === 200) {
+                 let profissionalInfo = JSON.parse(xhrloggedUserinformationProfissional.responseText);
+                 username_show.innerHTML = profissionalInfo[0].nome;
+                 if(profissionalInfo[0].genero == 'Feminino')
+                 {
+                    profile_pic_show.src = '../images/profile-female.png';
+                 }    
+                 else if(profissionalInfo[0].genero == 'Masculino')
+                 {
+                    profile_pic_show.src = '../images/profile-male.png';
+                 } 
+                 else if(profissionalInfo[0].genero == 'other')
+                 {
+                    profile_pic_show.src = '../images/profile-other.png';
+                 } 
+                
+                }
+             }
+             xhrloggedUserinformationProfissional.send();
+             document.getElementById('aprovar-utilizadores').style.display = "none";
+             document.getElementById('portfolios-menu').style.display = "none";
+     
            }
-           else if(loggedUserData[0].genero == 'Masculino')
+           if(loggedUserType[0].tipo_utilizador == 'Empresa')
            {
-            profile_pic_show.src = "../images/profile-male.png";
+            const xhrloggedUserinformationEmpresa = new XMLHttpRequest();
+            xhrloggedUserinformationEmpresa.open('GET', '/Home/getloggedinUserInformationEmpresa', true);
+            xhrloggedUserinformationEmpresa.setRequestHeader('Content-Type', 'application/json');
+            xhrloggedUserinformationEmpresa.onload = function () {
+             if (xhrloggedUserinformationEmpresa.status === 200) {
+                 let empresaInfo = JSON.parse(xhrloggedUserinformationEmpresa.responseText);
+                 username_show.innerHTML = empresaInfo[0].nome;
+                 profile_pic_show.src = '../images/profile_company.png';
+                }
+            }
+            xhrloggedUserinformationEmpresa.send();
+            document.getElementById('aprovar-utilizadores').style.display = "none";
+            document.getElementById('joboffers-menu').style.display = "none";
            }
-           else if(loggedUserData[0].genero == 'other')
+
+           if(loggedUserType[0].tipo_utilizador == 'Admin')
            {
-            profile_pic_show.src = "../images/profile-other.png";
-           }
-           else
-           {
-            profile_pic_show.src = "../images/profile_company.png";
-           }
+            document.getElementById('home-menu').style.display = "none";
+            document.getElementById('joboffers-menu').style.display = "none";
+            document.getElementById('profile-menu').style.display = "none";
+            document.getElementById('team-page').style.display = "none";
+            profile_pic_show.style.display = "none";
+            document.getElementById('admin-name-show').style.display = 'inline';
+        }
 
            const xhrloggedUserID = new XMLHttpRequest();
            xhrloggedUserID.open('GET', '/Home/getloggedinUserID', true);
@@ -38,12 +77,15 @@ function getLoggedUserData(){
                     let idUser = JSON.parse(xhrloggedUserID.responseText);
                     profile_hyperlink.href = "Profile/" + idUser[0].id;
                     profile_hyperlink_menu.href = "Profile/" + idUser[0].id;
+                    username_show.href = "Profile/" + idUser[0].id;
                 }
             }
         xhrloggedUserID.send();
+
+          
         }
     }
-    xhrloggedUser.send();
+    xhrloggedUserType.send();
 }
 
 function getProfileInformation(){

@@ -16,32 +16,38 @@ function renderPage(req, res) {
     }
 }
 
-router.get('/getloggedinUser', function(req,res)
+router.get('/getloggedinUserType', function(req, res)
 {
    let email = req.session.name;
-   User.getUserType(email).then(function(result)
-   {
-      if(result[0].tipo_utilizador == 'Profissional'){
-         User.getUserDataProfissional(email).then(function(result2)
-         {
-            res.json(result2);
-         })
-      }
-      else if(result[0].tipo_utilizador == 'Empresa')
-      {
-         User.getUserDataEmpresa(email).then(function(result2)
-         {
-            res.json(result2);
-         })
-      }
+   User.getUserType(email).then(function(result){
+      res.json(result);
    })
+});
+
+router.get('/getloggedinUserInformationProfissional', function(req,res)
+{
+   let email = req.session.name;
+  
+         User.getUserDataProfissional(email).then(function(result2){
+            res.json(result2);
+         })
+     
+});
+
+router.get('/getloggedinUserInformationEmpresa', function(req,res)
+{
+   let email = req.session.name;
+  
+         User.getUserDataEmpresa(email).then(function(result2){
+            res.json(result2);
+         })
+     
 });
 
 router.get('/getloggedinUserID', function(req, res)
 {
     let email = req.session.name;
-    User.getIdbyEmail(email).then(function(result)
-    {
+    User.getIdbyEmail(email).then(function(result){
         res.json(result);
     })
 });

@@ -46,7 +46,7 @@ router.get('/getProfileType/:userid/', function(req, res)
 
 });
 
-router.get('getProfileInformationProfissional/:userid/', function(req, res)
+router.get('/getProfileInformationProfissional/:userid/', function(req, res)
 {
    let id = req.params.userid;
    User.getEmailById(id).then(function(result)
@@ -58,7 +58,7 @@ router.get('getProfileInformationProfissional/:userid/', function(req, res)
    })
 });
 
-router.get('getProfileInformationEmpresa/:userid/', function(req, res)
+router.get('/getProfileInformationEmpresa/:userid/', function(req, res)
 {
    let id = req.params.userid;
    User.getEmailById(id).then(function(result)

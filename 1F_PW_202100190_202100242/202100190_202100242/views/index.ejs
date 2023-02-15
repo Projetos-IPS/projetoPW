@@ -78,7 +78,8 @@
                 else
                 {
                   const xhrGetUser = new XMLHttpRequest();
-                 /* xhrGetUser.open('GET', '/Profile/getUser', true);
+                 
+                  xhrGetUser.open('GET', '/Home/getloggedinUserType', true);
                   xhrGetUser.setRequestHeader('Content-Type', 'application/json');
                   xhrGetUser.onload = function(){
             
@@ -99,9 +100,10 @@
                 
                     }
                   }
-                  xhrGetUser.send();*/
-                  setTimeout(3000);
-                  window.location.replace("/Home");
+                  xhrGetUser.send();
+
+                 /* setTimeout(3000);
+                  window.location.replace("/Home");*/
                   formLogin.reset();
                 }
               }
