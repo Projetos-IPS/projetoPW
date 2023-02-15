@@ -4,13 +4,14 @@
 .team {
     overflow:auto;
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    height: 86%;
+    height: 98%;
     position: relative;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    width: 70%;
 }
 
 .team::-webkit-scrollbar {
@@ -18,11 +19,11 @@
 }
 
 .team .member {
-    width: 35%;
-    height: 90%;
-    margin: 20px;
+    width: 39%;
+    height: 89%;
+    margin: 0px 20px 20px 20px;
     padding: 30px;
-    background: #7087b08d;
+    background: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -72,7 +73,7 @@
 
 .details {
     width: 90%;
-    color: white;
+    color: #7088B0;
     opacity: 0;
     transition: 0.5s;
     transform: translateY(40px);
