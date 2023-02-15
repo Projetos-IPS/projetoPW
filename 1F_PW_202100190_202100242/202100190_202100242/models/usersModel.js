@@ -87,8 +87,9 @@ var User = {
                 resolve(3);
               }
             }
+            connection.end();  
             });
-            connection.end();   
+            
   })
     },
  //------------------------------- 
@@ -107,8 +108,9 @@ var User = {
           {
           resolve(result);
          }
+         connection.end();
         });
-        connection.end();
+        
       });
     },
 
@@ -156,8 +158,9 @@ var User = {
         {
           resolve(0);
         }
+        connection.end();
       });
-      connection.end();
+    
     })
     },
 
@@ -202,8 +205,9 @@ var User = {
         {
           resolve(result);
         }
+        connection.end();
       })
-      connection.end();
+      
     })
   
     },
@@ -222,8 +226,9 @@ var User = {
             resolve(result);
             
           }
+          connection.end();
         })
-        connection.end();
+        
       })
    
     },
@@ -241,8 +246,9 @@ var User = {
           {
             resolve(result);
           }
+          connection.end();
         })
-        connection.end();
+       
       })
     },
 
@@ -250,7 +256,7 @@ var User = {
     {
       return new Promise(function(resolve, reject)
       {
-        let query = `SELECT tipo_utilizador FROM utilizador WHERE email = ?`;
+        let query = `SELECT * FROM utilizador WHERE email = ?`;
         let connection = mysql.createConnection(options.mysql);
         connection.query(query, email, function(error, result)
         {
@@ -259,8 +265,9 @@ var User = {
           {
             resolve(result);
           }
+          connection.end();
         })
-        connection.end();
+       
       })
    
     },
@@ -278,8 +285,9 @@ var User = {
           {
             resolve(result);
           }
-        })
         connection.end();
+        })
+        
       })
     },
 
@@ -296,34 +304,76 @@ var User = {
           {
             resolve(result);
           }
+          connection.end();
         })
-        connection.end();
+        
       })
     },
+
+    getuserBirthDate: function(email)
+    {
+      return new Promise(function(resolve, reject)
+      {
+        let query = `SELECT date_format(data_nascimento, '%Y-%m-%d') AS data from profissional WHERE email = ?`;
+    
+        let connection = mysql.createConnection(options.mysql);
+        connection.query(query, email, function(error, result)
+        {
+          if(error) {reject(error);}
+          else
+          {
+            resolve(result);
+          }
+          connection.end();
+        })
+        
+      })
+    
+      },
+
+    editintro: function(data, email)
+      {
+        return new Promise(function(resolve, reject)
+        {
+          let query = `UPDATE profissional SET nome = ?, data_nascimento = ?, genero = ?, headline = ?, localidade = ? WHERE email = ?`;
+          let connection = mysql.createConnection(options.mysql);
+          let values = [data.nome, data.birth, data.genero, data.headline, data.localidade, email];
+          connection.query(query, values, function(error, result)
+          {
+            if(error) {reject(error);}
+            else
+            {
+              resolve(result.insertId);
+            }
+          connection.end();
+          });
+        
+        });
+      
+        },
+
+      editdescription: function(data1, email)
+        {
+          return new Promise(function(resolve, reject)
+          {
+            let query = `UPDATE profissional SET descricao = ? WHERE email = ?`;
+            let connection = mysql.createConnection(options.mysql);
+            let values = [data1.description, email];
+            connection.query(query, values, function(error, result)
+            {
+              if(error) {reject(error);}
+              else
+              {
+                resolve(result.insertId);
+              }
+            connection.end();
+            });
+          
+          });
+        
+          },
 //---------------------------------
 
-
-
-
- /* getuserBirthDate: function(email)
-{
-  return new Promise(function(resolve, reject)
-  {
-    let query = `SELECT date_format(data_nascimento, '%Y-%m-%d') AS data from profissional WHERE email = ?`;
-
-    let connection = mysql.createConnection(options.mysql);
-    connection.query(query, email, function(error, result)
-    {
-      if(error) {reject(error);}
-      else
-      {
-        resolve(result);
-        connection.end();
-      }
-    })
-  })
-
-  },*/
 
  
 

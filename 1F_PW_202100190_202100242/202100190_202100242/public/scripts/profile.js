@@ -75,9 +75,9 @@ function getLoggedUserData(){
            xhrloggedUserID.onload = function () {
             if (xhrloggedUserID.status === 200) {
                     let idUser = JSON.parse(xhrloggedUserID.responseText);
-                    profile_hyperlink.href = "Profile/" + idUser[0].id;
-                    profile_hyperlink_menu.href = "Profile/" + idUser[0].id;
-                    username_show.href = "Profile/" + idUser[0].id;
+                    profile_hyperlink.href = "../Profile/" + idUser[0].id;
+                    profile_hyperlink_menu.href = "../Profile/" + idUser[0].id;
+                    username_show.href = "../Profile/" + idUser[0].id;
                 }
             }
         xhrloggedUserID.send();
@@ -130,7 +130,7 @@ function getProfileInformation(){
                 }
                 xhrprofileprofissional.send();
             }
-            if(profileType[0].tipo_utilizador == 'Empresa')
+            else if(profileType[0].tipo_utilizador == 'Empresa')
             {
                 const xhrprofileempresa = new XMLHttpRequest();
                 xhrprofileempresa.open('GET', '/Profile/getProfileInformationEmpresa/' + userID, true);
@@ -144,6 +144,26 @@ function getProfileInformation(){
             }
                xhrprofileempresa.send();
             }
+
+        const xhrloggedUserInfo = new XMLHttpRequest();
+        xhrloggedUserInfo.open('GET', '/Home/getloggedinUserType', true);
+        xhrloggedUserInfo.setRequestHeader('Content-Type', 'application/json');
+        xhrloggedUserInfo.onload = function () {
+            if (xhrloggedUserInfo.status === 200) {
+               let loggedUserInfo = JSON.parse(xhrloggedUserInfo.responseText);
+                if(loggedUserInfo[0].id != userID)
+                {
+                    document.getElementById('edit-button').style.display = "none";
+                    document.getElementById('edit-button-description').style.display = "none";
+                    document.getElementById('edit-button-experience').style.display = "none";
+                    
+               
+                }
+            }
+        }
+        xhrloggedUserInfo.send();    
+
+
         }
 
     }
@@ -155,25 +175,122 @@ function closeEditIntro(){
     document.getElementById('page-mask').style.display = "none";
     document.getElementById('editProfile').reset();
     getLoggedUserData();
+    getProfileInformation();
 }
 
 function openEditIntro(){
-    const xhruserprofileData= new XMLHttpRequest();
-    xhruserprofileData.open('GET', '/Profile/getUserProfileData/' + userID, true);
-    xhruserprofileData.setRequestHeader('Content-Type', 'application/json');
-    xhruserprofileData.onload = function () {
-        if (xhruserprofileData.status === 200) {
-            userprofiledata = JSON.parse(xhruserprofileData.responseText);
-            console.log(userprofiledata[0].nome);
+    document.getElementById('pop-up-edit').style.display = "block";
+    document.getElementById('page-mask').style.display = "block";
+    let headline_input = document.getElementById('headlineUser');
+    let username_input = document.getElementById('nameUser');
+    let location_input = document.getElementById('locationUser');
+    let birthdate_input = document.getElementById('birthUser');
+    
+    const xhruserprofileType= new XMLHttpRequest();
+    xhruserprofileType.open('GET', '/Profile/getProfileType/' + userID, true);
+    xhruserprofileType.setRequestHeader('Content-Type', 'application/json');
+    xhruserprofileType.onload = function () {
+        if (xhruserprofileType.status === 200) {
+            let userprofileType = JSON.parse(xhruserprofileType.responseText);
+            
+            if(userprofileType[0].tipo_utilizador == 'Profissional')
+            {
+            const xhrforminformationProfissional = new XMLHttpRequest();
+            xhrforminformationProfissional.open('GET', '/Profile/getProfileInformationProfissional/' + userID, true);
+            xhrforminformationProfissional.setRequestHeader('Content-Type', 'application/json');
+            xhrforminformationProfissional.onload = function () {
+                if (xhrforminformationProfissional.status === 200) {
+                    let forminformationProfissional = JSON.parse(xhrforminformationProfissional.responseText);
+                    username_input.value = forminformationProfissional[0].nome;
+                    headline_input.value = forminformationProfissional[0].headline;
+                    location_input.value = forminformationProfissional[0].localidade;
+                    
+                    if(forminformationProfissional[0].genero == 'Feminino')
+                    {
+                        document.getElementById('female').checked = true;
+                    }
+                    else if(forminformationProfissional[0].genero == 'Masculino')
+                    {
+                        document.getElementById('male').checked = true;
+                    }
+                    else if(forminformationProfissional[0].genero == 'other')
+                    {
+                        document.getElementById('other').checked = true;
+                    }
+
+                    const xhrformInformationBirthdate = new XMLHttpRequest();
+                    xhrformInformationBirthdate.open('GET', '/Profile/getProfileBirthdate/' + userID, true);
+                    xhrformInformationBirthdate.setRequestHeader('Content-Type', 'application/json');
+                    xhrformInformationBirthdate.onload = function () {
+                        if (xhrformInformationBirthdate.status === 200) {
+                            let forminformationBirthdate = JSON.parse(xhrformInformationBirthdate.responseText);
+                            birthdate_input.value = forminformationBirthdate[0].data;
+                        }
+                    }
+                    xhrformInformationBirthdate.send();        
+                }
+            }
+            xhrforminformationProfissional.send();
+            
+            }
+            if(userprofileType[0].tipo_utilizador == 'Empresa')
+            {
+                //faltam cenas
+            }
         }
+ 
 
     }
-    xhruserprofileData.send();
+    xhruserprofileType.send();
 }
 
 function submitFormDataP(){
 
-       
+    let formEdit = document.getElementById('editProfile');
+    formEdit.addEventListener('submit', function(event){
+     event.preventDefault();
+     const data = {
+        nome: formEdit.nameUser.value,
+        birth: formEdit.birthUser.value,
+        genero: formEdit.generoUser.value,
+        headline: formEdit.headline.value,
+        localidade: formEdit.locationUser.value
+       };
+    const xhrsubmitEdit = new XMLHttpRequest();
+    xhrsubmitEdit.open('post', '/Profile/editIntro/' + userID, true);
+    xhrsubmitEdit.setRequestHeader('Content-Type', 'application/json');
+    xhrsubmitEdit.send(JSON.stringify(data));
+
+     xhrsubmitEdit.onload = function(){
+      if(xhrsubmitEdit.status === 200)
+      {
+        closeEditIntro();
+      }
+   
+     };
+   
+    });
+
+    let formEditDescription = document.getElementById('editDescriptionProfileP');
+    formEditDescription.addEventListener('submit', function(event){
+     event.preventDefault();
+     const data1 = {
+        description: formEditDescription.descriptionUser.value
+       };
+    const xhrsubmitEditDescription = new XMLHttpRequest();
+    xhrsubmitEditDescription.open('post', '/Profile/editDescription/' + userID, true);
+    xhrsubmitEditDescription.setRequestHeader('Content-Type', 'application/json');
+    xhrsubmitEditDescription.send(JSON.stringify(data1));
+
+    xhrsubmitEditDescription.onload = function(){
+      if(xhrsubmitEditDescription.status === 200)
+      {
+        closeEditDescription();
+      }
+   
+     };
+   
+    });
 }
 
 function closeEditDescription(){
@@ -181,73 +298,44 @@ function closeEditDescription(){
     document.getElementById('page-mask').style.display = "none";
     document.getElementById('editDescriptionProfileP').reset();
     getLoggedUserData();
+    getProfileInformation();
 }
 
 function openEditDescription(){
-    
+    document.getElementById('pop-up-edit-description').style.display = "block";
+    document.getElementById('page-mask').style.display = "block";
+    let description_input = document.getElementById('descriptionUser');
 
-   
-}
-
-/*function openEditDescription(){
-    let inputDescription = document.getElementById('descriptionUser');
-
-    const xhrUser = new XMLHttpRequest();
-    xhrUser.open('GET', '/Profile/getUser', true);
-    xhrUser.setRequestHeader('Content-Type', 'application/json');
-    
-
-    xhrUser.onload = function(){
-        
-        if(xhrUser.status === 200)
-        {
-            document.getElementById('pop-up-edit').style.display = 'block';
-            document.getElementById('page-mask').style.display = 'block';
-            let dataUser = JSON.parse(xhrUser.responseText);
-
-           const xhrUserData = new XMLHttpRequest();
-           xhrUserData.open('GET', '/Profile/getUserDataP', true);
-           xhrUserData.setRequestHeader('Content-Type', 'application/json');
-
-            xhrUserData.onload = function(){
-                if(xhrUserData.status = 200){
-
-                    let UserData = JSON.parse(xhrUserData.responseText);
-                    if(dataUser[0].tipo_utilizador == 'Profissional')
-                    {
-                        inputEditName.value = UserData[0].nome;
-                
-                        if(UserData[0].descricao != "")
-                        {
-                            inputDescription.value = UserData[0].descricao;
-                        }
-                    }
-                    if(dataUser[0].tipo_utilizador == 'Empresa')
-                    {
-                     
-                    }
-                    if(dataUser[0].tipo_utilizador == 'Admin')
-                    {
-                        
+    const xhruserprofileType= new XMLHttpRequest();
+    xhruserprofileType.open('GET', '/Profile/getProfileType/' + userID, true);
+    xhruserprofileType.setRequestHeader('Content-Type', 'application/json');
+    xhruserprofileType.onload = function () {
+        if (xhruserprofileType.status === 200) {
+            let userprofileType = JSON.parse(xhruserprofileType.responseText);
+            
+            if(userprofileType[0].tipo_utilizador == 'Profissional')
+            {
+            const xhrforminformationProfissional = new XMLHttpRequest();
+            xhrforminformationProfissional.open('GET', '/Profile/getProfileInformationProfissional/' + userID, true);
+            xhrforminformationProfissional.setRequestHeader('Content-Type', 'application/json');
+            xhrforminformationProfissional.onload = function () {
+                if (xhrforminformationProfissional.status === 200) {
+                    let forminformationProfissional = JSON.parse(xhrforminformationProfissional.responseText);
+                    description_input.value = forminformationProfissional[0].descricao;
                     }
                 }
-               
-            } 
-
-            xhrUserData.send();
-            console.log(dataUser[0]);
-         }
-    }  
-    xhrUser.send();
-
-
+                xhrforminformationProfissional.send();
+            }
+        }
+      }
+      xhruserprofileType.send();
    
-}*/
+}
 
 var init = function(){
     getLoggedUserData();
     getProfileInformation();
-   // submitFormDataP();
+    submitFormDataP();
 
 };
 

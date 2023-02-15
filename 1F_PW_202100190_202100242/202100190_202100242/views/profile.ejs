@@ -82,9 +82,9 @@
             style="font-size: 20px; color: #7088B0;"></i></button>
       </div>
 
-      <div class="pop-up-form"
+      <div class="pop-up-form">
         <p>* Indicates required</p>
-        <form class="editProfile" method="post" action="/Profile/editUserIntro" id="editProfile">
+        <form class="editProfile" method="POST" id="editProfile">
           <h3>General</h3>
           <div class="name-occupation">
             <div class="first">
@@ -119,8 +119,9 @@
       <div class="button-save">
         <button class="save" type="submit">Save</button>
       </div>
-    </div>
   </form>
+</div>
+
   <!--------------------------------------------------------------->
   <div id="pop-up-edit-description" class="pop-up-edit-description">
    
@@ -131,7 +132,7 @@
     
           <hr >
           <div class="pop-up-form">
-          <form class="editDescriptionProfileP" method="post" action="/Profile/editUserDescription" id="editDescriptionProfileP">
+          <form class="editDescriptionProfileP" method="post"  id="editDescriptionProfileP">
             <p>You can write about your years of experience, industry, or skills. People also talk about their achievements or previous job experiences.</p>
             <textarea wrap="hard" id="descriptionUser" name="descriptionUser"></textarea><br>
         </div>
@@ -160,8 +161,8 @@
             <p id="profile-headline"></p>
             <p id="profile-address"></p>
           </div>
-          <div class="editIntro-button">
-            <button  class="edit-button" onclick="openEditIntro()"><i class='far fa-edit' style='font-size:24px'></i></button>
+          <div class="editIntro-button" id="edit-button">
+            <button class="edit-button" onclick="openEditIntro()"><i class='far fa-edit' style='font-size:24px'></i></button>
            </div>
         </div>
 
@@ -169,7 +170,7 @@
       <div class="profile-description-area">
         <div class="profile-description-header">
           <h3>About</h3>
-          <button class="edit-button" onclick="openEditDescription()"><i class='far fa-edit' style='font-size:24px'></i></button>
+          <button id="edit-button-description" class="edit-button" onclick="openEditDescription()"><i class='far fa-edit' style='font-size:24px'></i></button>
         </div>
         <p id="profile-description"> </p>
       </div>
@@ -177,7 +178,7 @@
       <div class="profile-description-area">
         <div class="profile-description-header">
           <h3>Experience</h3>
-          <button class="edit-button" onclick="openEditExperience()"><i class='far fa-edit' style='font-size:24px'></i></button>
+          <button id="edit-button-experience" class="edit-button" onclick="openEditExperience()"><i class='far fa-edit' style='font-size:24px'></i></button>
         </div>
         <p id="profile-description"> </p>
       </div>
