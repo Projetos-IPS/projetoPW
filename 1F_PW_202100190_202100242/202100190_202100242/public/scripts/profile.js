@@ -123,6 +123,8 @@ function getProfileInformation(){
                             profileImg.src = '../images/profile-other.png';
                         }
                         profileName.innerHTML = informationProfile[0].nome;
+                        
+   
                         profileDescription.innerHTML = informationProfile[0].descricao;
                         profileHeadline.innerHTML = informationProfile[0].headline;
                         profileAddress.innerHTML = informationProfile[0].localidade;
@@ -156,7 +158,7 @@ function getProfileInformation(){
                     document.getElementById('edit-button').style.display = "none";
                     document.getElementById('edit-button-description').style.display = "none";
                     document.getElementById('edit-button-experience').style.display = "none";
-                    
+                    document.getElementById('profile-menu').className = "link";
                
                 }
             }
@@ -330,6 +332,19 @@ function openEditDescription(){
       }
       xhruserprofileType.send();
    
+}
+
+function openEditExperience(){
+}
+
+function openAddExperience(){
+    document.getElementById('pop-up-add-experience').style.display = "block";
+    document.getElementById('page-mask').style.display = "block";
+}
+
+function closeAddExperience(){
+    document.getElementById('pop-up-add-experience').style.display = "none";
+    document.getElementById('page-mask').style.display = "none";
 }
 
 var init = function(){

@@ -85,7 +85,7 @@
       <div class="pop-up-form">
         <p>* Indicates required</p>
         <form class="editProfile" method="POST" id="editProfile">
-          <h3>General</h3>
+         <center> <h3>General</h3></center>
           <div class="name-occupation">
             <div class="first">
               <label for="nameUser">Name*</label><br>
@@ -141,6 +141,25 @@
       </form>
       
   </div>
+
+  <!------INICIO POP-UP de adicionar experiência profissional-->
+  <div id="pop-up-add-experience" class="pop-up-edit-description">
+    <div class="pop-up-header">
+    <h3>Add experience</h3>
+    <button class="close-btn" onclick="closeAddExperience()"><i class="fa-solid fa-x" style="font-size: 20px; color: #7088B0;"></i></button>
+    </div>
+
+    <hr >
+    <div class="pop-up-form">
+    <form class="editDescriptionProfileP" method="post" id="editDescriptionProfileP">
+     
+    </div>
+  <hr >
+  <button type="submit">Save</button>
+</form>
+
+</div>
+<!------FIM POP-UP de adicionar experiência profissional-->
   <!--------------------------------------------------------------->
 
     <div class="main-header"> <!-- main-header start -->
@@ -178,7 +197,7 @@
       <div class="profile-description-area">
         <div class="profile-description-header">
           <h3>Experience</h3>
-          <button id="edit-button-experience" class="edit-button" onclick="openEditExperience()"><i class='far fa-edit' style='font-size:24px'></i></button>
+          <button id="edit-button-experience" class="edit-button" onclick="openAddExperience()"><i class='fas fa-plus' style='font-size:24px'></i></button>
         </div>
         <p id="profile-description"> </p>
       </div>
