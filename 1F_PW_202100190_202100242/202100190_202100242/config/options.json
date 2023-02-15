@@ -2,7 +2,7 @@
     "mysql": {
          "host": "localhost",
          "user": "root",
-         "password": "12345678",
+         "password": "",
          "database": "proj_pw_202100190_202100242",
          "connectionLimit" : "10"
     }

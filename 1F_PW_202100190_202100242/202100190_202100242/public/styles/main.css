@@ -11,7 +11,6 @@ body {
 --------------------------------------*/
 .side {
     margin: 10px;
-  
 }
 
 .side .logo img {
@@ -140,12 +139,13 @@ body {
 .main-general {
     display: flex;
     justify-content: space-between;
+    height: 87%;
 }
 
 .main-side {
     background-color: white;
-    width: 50%;
-    margin: 20px;
+    width: 25%;
+    margin: 0px 20px 20px 20px;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
