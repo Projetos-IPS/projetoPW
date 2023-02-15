@@ -1,19 +1,23 @@
 /*-------------------------------------
            Job offers page
 --------------------------------------*/
+.jobs {
+    width: 70%;
+    background-color: white;
+    border-radius: 20px;
+    margin: 0px 20px 20px 20px;
+}
+
 .info {
-    padding-left: 50px;
-    padding-top: 20px;
-    max-height: 100vh;
     display: flex;
-    background-color: bisque;
+    justify-content: center;
 }
 
 .jobs-side {
-    width: 60%;
+    width: 100%;
+    height: 70%;
     overflow: auto;
-    max-height: 500px;
-    padding-left: 5px;
+    max-height: 470px;
 }
 
 .jobs-side::-webkit-scrollbar {
@@ -32,10 +36,8 @@
 
 .bar-up {
     display: flex;
-    width: 55.5%;
     justify-content: space-between;
-    margin-left: 93px;
-    background-color: cyan;
+    padding: 0px 20px 20px 20px;
 }
 
 #myInput2 {
@@ -48,7 +50,6 @@
 
 .listajobs {
     list-style-type: none;
-    margin-bottom: 20px;
 }
 
 .hr-jobs {
@@ -58,7 +59,7 @@
 
 .hr-jobs2 {
     margin-left: 40px;
-    width: 88%;
+    width: 91%;
 }
 
 .input-text {
@@ -69,7 +70,7 @@
     border-color: #adb1ba;
     border-radius: 20px;
     width: 200px;
-    height: 10px;
+    height: 15px;
     margin-top: 53px;
 }
 
@@ -83,6 +84,26 @@
 
 .filter button:hover {
     cursor: pointer;
-    background-color: rgb(9, 77, 9);
+    background-color: #7088B0;
     color: white;
+}
+
+.filter-buttons {
+    display: flex;
+}
+
+.filter-buttons button{
+    margin: 0px 20px;
+}
+
+.filter2 {
+    justify-content: center;
+}
+
+.listajobs {
+    width: 100%;
+}
+
+.filter p {
+    text-align: center;
 }
