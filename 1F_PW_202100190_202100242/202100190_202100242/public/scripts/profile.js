@@ -108,7 +108,7 @@ function getProfileInformation(){
                 xhrprofileprofissional.setRequestHeader('Content-Type', 'application/json');
                 xhrprofileprofissional.onload = function () {
                     if (xhrprofileprofissional.status === 200) {
-                        informationProfile = JSON.parse(xhrprofileprofissional.responseText);
+                        let informationProfile = JSON.parse(xhrprofileprofissional.responseText);
                         
                         if(informationProfile[0].genero == 'Feminino')
                         {
@@ -129,6 +129,20 @@ function getProfileInformation(){
                     }
                 }
                 xhrprofileprofissional.send();
+            }
+            if(profileType[0].tipo_utilizador == 'Empresa')
+            {
+                const xhrprofileempresa = new XMLHttpRequest();
+                xhrprofileempresa.open('GET', '/Profile/getProfileInformationEmpresa/' + userID, true);
+                xhrprofileempresa.setRequestHeader('Content-Type', 'application/json');
+                xhrprofileempresa.onload = function () {
+                if (xhrprofileempresa.status === 200) {
+                    let informationProfile = JSON.parse(xhrprofileempresa.responseText);
+                    profileName.innerHTML = informationProfile[0].nome;
+                    profileImg.src = '../images/profile_company.png';
+                }
+            }
+               xhrprofileempresa.send();
             }
         }
 
