@@ -82,9 +82,107 @@ function getLoggedUserData() {
     xhrloggedUserType.send();
 }
 
+function createshowUsers(){
+    const xhrUserInfo = new XMLHttpRequest();
+    xhrUserInfo.open('GET', 'Home/getUsersProfissionaisInformation', true);
+    xhrUserInfo.setRequestHeader('Content-Type', 'application/json');
+    xhrUserInfo.onload = function () {
+        if (xhrUserInfo.status === 200) {
+            let userInfo = JSON.parse(xhrUserInfo.responseText);
+
+            const xhrlistUsers = new XMLHttpRequest();
+            xhrlistUsers.open('GET', 'Home/getUsersProfissionais', true);
+            xhrlistUsers.setRequestHeader('Content-Type', 'application/json');
+            let divFriends = document.getElementById('main-side');
+            xhrlistUsers.onload = function () {
+                if (xhrlistUsers.status === 200) {
+                    let listUsers = JSON.parse(xhrlistUsers.responseText);
+        
+                    for(let i = 0; i < listUsers.length; i++)
+                    {
+                        let div = document.createElement('div');
+                        div.id = "user";
+                        div.className = "user";
+                        let div_image = document.createElement('div');
+                        div_image.className = "user-image";
+                        let a_image = document.createElement('a');
+                        a_image.id = "profile-user";
+                        let img_user = document.createElement('img');
+                        img_user.id = "img_user";
+                        a_image.appendChild(img_user);
+                        div_image.appendChild(a_image);
+                        div.appendChild(div_image);
+                        a_image.dataset.id = listUsers[i].id;
+                        a_image.href = "../Profile/" + a_image.dataset.id;
+        
+                        
+                        let div_userinfo = document.createElement('div');
+                        div_userinfo.className = "user-info";
+                        let a_userinfo = document.createElement('a');
+                        let h3_userinfo = document.createElement('h3');
+                        h3_userinfo.innerHTML = listUsers[i].nome;
+                        let h6_userinfo = document.createElement('h6');
+                        div_userinfo.appendChild(a_userinfo);
+                        a_userinfo.appendChild(h3_userinfo);
+                        div_userinfo.appendChild(h6_userinfo);
+                        div.appendChild(div_userinfo);
+                        a_userinfo.dataset.id = listUsers[i].id;
+                        a_userinfo.href = "../Profile/" + a_userinfo.dataset.id;
+        
+                        let div_buttons = document.createElement('div');
+                        div_buttons.className = "add-buttons";
+                        let button1 = document.createElement('button');
+                        button1.className = "add-icon";
+                        let button2 = document.createElement('button');
+                        button2.className = "add-button-hover";
+                        let img_btn1 = document.createElement('img');
+                        button1.appendChild(img_btn1);
+                        let img_btn2 = document.createElement('img');
+                        button2.appendChild(img_btn2);
+                        div_buttons.appendChild(button1);
+                        div_buttons.appendChild(button2);
+                        div.appendChild(div_buttons);
+                        img_btn1.src = "../images/user-add.png";
+                        img_btn2.src = "../images/user-add-hover.png";
+                        divFriends.appendChild(div);
+        
+        
+                        //-------------------------------
+
+                        if(listUsers[i].email == userInfo[i].email)
+                        {
+                            if(userInfo[i].genero == 'Feminino')
+                            {
+                                img_user.src = "../images/profile-female.png";
+                            }
+                            if(userInfo[i].genero == 'Masculino')
+                            {
+                                img_user.src = "../images/profile-male.png";
+                            }
+                            if(userInfo[i].genero == 'other')
+                            {
+                                img_user.src = "../images/profile-other.png";
+                            }
+                            
+                            h6_userinfo.innerHTML = userInfo[i].headline;
+                        }
+                    }
+                }
+            }
+            xhrlistUsers.send();
+        }
+
+        
+    }
+    xhrUserInfo.send();
+
+}
+
+
 
 var init = function () {
     getLoggedUserData();
+    createshowUsers();
 };
 
 window.onload = init;

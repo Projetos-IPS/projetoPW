@@ -53,6 +53,24 @@ router.get('/getloggedinUserID', function(req, res)
 });
 
 
+router.get('/getUsersProfissionais', function(req,res)
+{
+    User.getIdbyEmail(req.session.name).then(function(result2)
+    {
+        User.getProfissionalUsersList(result2[0].id).then(function(result)
+        {
+            res.json(result);
+        });
+    });
+   
+})
 
+router.get('/getUsersProfissionaisInformation', function(req, res)
+{
+    User.getProfissionalUsersInformation(req.session.name).then(function(result)
+    {
+        res.json(result);
+    })
+})
 
 module.exports = router;

@@ -196,7 +196,7 @@ var User = {
   {
     return new Promise(function(resolve, reject)
     {
-      let query = `SELECT id from utilizador WHERE approved = 1 AND tipo_utilizador != 'Admin'`;
+      let query = `SELECT * from utilizador WHERE approved = 1 AND tipo_utilizador != 'Admin'`;
       let connection = mysql.createConnection(options.mysql);
       connection.query(query, function(error, result)
       {
@@ -211,6 +211,45 @@ var User = {
     })
   
     },
+
+    getProfissionalUsersList: function(id)
+    {
+      return new Promise(function(resolve, reject)
+      {
+        let query = `SELECT * from utilizador WHERE approved = 1 AND tipo_utilizador != 'Admin' AND  tipo_utilizador != 'Empresa' AND id != ? ORDER BY email ASC`;
+        let connection = mysql.createConnection(options.mysql);
+        connection.query(query, id, function(error, result)
+        {
+          if(error) {reject(error);}
+          else
+          {
+            resolve(result);
+          }
+          connection.end();
+        })
+        
+      })
+    
+      },
+    getProfissionalUsersInformation: function(email)
+    {
+      return new Promise(function(resolve, reject)
+      {
+        let query = `SELECT * from profissional WHERE email != ? ORDER BY email ASC;`;
+        let connection = mysql.createConnection(options.mysql);
+        connection.query(query, email, function(error, result)
+        {
+          if(error) {reject(error);}
+          else
+          {
+            resolve(result);
+          }
+          connection.end();
+        })
+        
+      })
+    
+      },
 
     getEmailById: function(id)
     {
