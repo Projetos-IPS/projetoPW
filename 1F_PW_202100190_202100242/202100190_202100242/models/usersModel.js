@@ -391,7 +391,7 @@ var User = {
       
         },
 
-      editdescription: function(data1, email)
+    editdescription: function(data1, email)
         {
           return new Promise(function(resolve, reject)
           {
@@ -412,13 +412,90 @@ var User = {
         
           },
 //---------------------------------
+//Pedidos de amizade---------------------
+    sendFriendRequest: function(id_destino, data)
+  {
+  return new Promise(function(resolve, reject)
+  {
+    let query = `INSERT INTO pedido_amizade(id_origem, id_destino, aprovado) VALUES (?, ?, 0)`;
+    let connection = mysql.createConnection(options.mysql);
+    let values = [id_destino, data.userid];
+    connection.query(query, values, function(error, result)
+    {
+      if(error) {reject(error);}
+      else
+      {
+        resolve(0);
+      }
+    connection.end();
+    });
+  
+  });
 
+  },
 
+  getSentFriendsRequests : function(id)
+  {
+    return new Promise(function(resolve, reject)
+  {
+    let query = `SELECT * FROM pedido_amizade WHERE id_origem = ?`;
+    let connection = mysql.createConnection(options.mysql);
+    connection.query(query, id, function(error, result)
+    {
+      if(error) {reject(error);}
+      else
+      {
+        resolve(result);
+      }
+    connection.end();
+    });
+  
+  });
+  },
+
+  DeleteFriendsRequests : function(id_origem, data)
+  {
+    return new Promise(function(resolve, reject)
+  {
+    let query = `Delete FROM pedido_amizade WHERE id_origem = ? AND id_destino = ?`;
+    let connection = mysql.createConnection(options.mysql);
+    let values = [id_origem, data.userid];
+    connection.query(query, values, function(error, result)
+    {
+      if(error) {reject(error);}
+      else
+      {
+        resolve(0);
+      }
+    connection.end();
+    });
+  
+  });
+  },
+
+  getReceivedFriendsRequests : function(id)
+  {
+    return new Promise(function(resolve, reject)
+  {
+    let query = `SELECT * FROM pedido_amizade WHERE id_destino = ?`;
+    let connection = mysql.createConnection(options.mysql);
+    connection.query(query, id, function(error, result)
+    {
+      if(error) {reject(error);}
+      else
+      {
+        resolve(result);
+      }
+    connection.end();
+    });
+  
+  });
+  },
  
 
 }
 
-
+//Pedidos de amizade---------------------
 
 
 module.exports = User;

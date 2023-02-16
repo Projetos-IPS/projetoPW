@@ -83,6 +83,10 @@ function getLoggedUserData() {
 }
 
 function createshowUsers(){
+    let divFriends = document.getElementById('main-side');
+    let h2 = document.createElement('h2');
+    h2.innerHTML = 'Add friends';
+    divFriends.appendChild(h2);
     const xhrUserInfo = new XMLHttpRequest();
     xhrUserInfo.open('GET', 'Home/getUsersProfissionaisInformation', true);
     xhrUserInfo.setRequestHeader('Content-Type', 'application/json');
@@ -93,11 +97,10 @@ function createshowUsers(){
             const xhrlistUsers = new XMLHttpRequest();
             xhrlistUsers.open('GET', 'Home/getUsersProfissionais', true);
             xhrlistUsers.setRequestHeader('Content-Type', 'application/json');
-            let divFriends = document.getElementById('main-side');
             xhrlistUsers.onload = function () {
                 if (xhrlistUsers.status === 200) {
                     let listUsers = JSON.parse(xhrlistUsers.responseText);
-        
+                    
                     for(let i = 0; i < listUsers.length; i++)
                     {
                         let div = document.createElement('div');
@@ -115,7 +118,6 @@ function createshowUsers(){
                         a_image.dataset.id = listUsers[i].id;
                         a_image.href = "../Profile/" + a_image.dataset.id;
         
-                        
                         let div_userinfo = document.createElement('div');
                         div_userinfo.className = "user-info";
                         let a_userinfo = document.createElement('a');
@@ -135,17 +137,47 @@ function createshowUsers(){
                         button1.className = "add-icon";
                         let button2 = document.createElement('button');
                         button2.className = "add-button-hover";
+                        button2.id = "btn2";
                         let img_btn1 = document.createElement('img');
+                       // button1.dataset.id = listUsers[i].id;
+                       // button1.onclick = sendFriendRequest;
                         button1.appendChild(img_btn1);
                         let img_btn2 = document.createElement('img');
                         button2.appendChild(img_btn2);
+                        
+                        button2.dataset.id = listUsers[i].id;
+                        
+                        button2.addEventListener("click", function(event){
+                            event.preventDefault();
+                          //  const clickedbtn = event.target;
+                             const data = {
+                              userid : button2.dataset.id
+                             }
+                             
+                            const xhrUpdate = new XMLHttpRequest();
+                            xhrUpdate.open('POST', '/Home/sendFriendRequest', true);
+                            xhrUpdate.setRequestHeader('Content-Type', 'application/json');
+                            xhrUpdate.send(JSON.stringify(data));
+
+                            xhrUpdate.onload = function() {
+                            if (xhrUpdate.status === 200) {
+                                let requeststatus = JSON.parse(xhrUpdate.responseText);
+                                if(requeststatus == 0)
+                                {
+                                 divFriends.innerHTML = "";
+                                 createshowUsers();
+                                }
+                              
+                             }
+                           }
+                        });
+
                         div_buttons.appendChild(button1);
                         div_buttons.appendChild(button2);
                         div.appendChild(div_buttons);
                         img_btn1.src = "../images/user-add.png";
                         img_btn2.src = "../images/user-add-hover.png";
                         divFriends.appendChild(div);
-        
         
                         //-------------------------------
 
@@ -166,23 +198,168 @@ function createshowUsers(){
                             
                             h6_userinfo.innerHTML = userInfo[i].headline;
                         }
+
+                        //----------------------------------------
+                        const xhrlistSentRequests = new XMLHttpRequest();
+                        xhrlistSentRequests.open('GET', 'Home/getSentFriendRequests', true);
+                        xhrlistSentRequests.setRequestHeader('Content-Type', 'application/json');
+                        xhrlistSentRequests.onload = function () {
+                        
+                            if (xhrlistSentRequests.status === 200) {
+                    
+                            let sentRequests = JSON.parse(xhrlistSentRequests.responseText);
+                                for(let j = 0; j < sentRequests.length; j++)
+                                {
+                                    if(sentRequests[j].aprovado == '0')
+                                    {
+                                    if(button2.dataset.id == sentRequests[j].id_destino)
+                                    {
+                                        let p = document.createElement('a');
+                                        p.className = "request-status";
+                                        p.style.display = "none";
+                                        div_buttons.style.display = "none";
+                                        p.style.display = "inline";
+                                        p.innerHTML = "Sent";
+                                        div.appendChild(p);
+                                    }       
+                                    }
+                                }
+                          }
+                        }
+                        xhrlistSentRequests.send();
+
+                        //---------------------------------------------------------------
+                        const xhrlistReceivedRequests = new XMLHttpRequest();
+                        xhrlistReceivedRequests.open('GET', 'Home/getReceivedFriendRequests', true);
+                        xhrlistReceivedRequests.setRequestHeader('Content-Type', 'application/json');
+                        xhrlistReceivedRequests.onload = function () {
+                        
+                            if (xhrlistReceivedRequests.status === 200) {
+                    
+                            let receivedRequests = JSON.parse(xhrlistReceivedRequests.responseText);
+                                for(let j = 0; j < receivedRequests.length; j++)
+                                {
+                                    if(receivedRequests[j].aprovado == '0')
+                                    {
+                                    if(button2.dataset.id == receivedRequests[j].id_origem)
+                                    {
+                                        let p = document.createElement('p');
+                                        p.className = "request-status";
+                                        p.style.display = "none";
+                                        div_buttons.style.display = "none";
+                                        p.style.display = "inline";
+                                        p.innerHTML = "Received";
+                                        div.appendChild(p);
+                                    }
+                                    
+                                    }
+                                }
+                    
+                          }
+                        }
+                        xhrlistReceivedRequests.send();
+                    
                     }
                 }
             }
             xhrlistUsers.send();
+            
         }
 
-        
+     /*   updateSentList();
+        updateReceivedList();*/
     }
+    
     xhrUserInfo.send();
 
 }
 
 
 
+function updateSentList(){
+    const elements1 = document.getElementsByClassName('add-buttons');
+    const elements2 = document.getElementsByClassName('add-button-hover');
+    const elements3 = document.getElementsByClassName('user');
+    let divFriends = document.getElementById('main-side');
+    const xhrlistSentRequests = new XMLHttpRequest();
+    xhrlistSentRequests.open('GET', 'Home/getSentFriendRequests', true);
+    xhrlistSentRequests.setRequestHeader('Content-Type', 'application/json');
+    xhrlistSentRequests.onload = function () {
+    
+        if (xhrlistSentRequests.status === 200) {
+
+        let sentRequests = JSON.parse(xhrlistSentRequests.responseText);
+        for (let i = 0; i < elements1.length; i++)
+        {
+            for(let j = 0; j < sentRequests.length; j++)
+            {
+                if(sentRequests[j].aprovado == '0')
+                {
+                if(elements2[i].dataset.id == sentRequests[j].id_destino)
+                {
+                    let p = document.createElement('a');
+                    p.className = "request-status";
+                    p.style.display = "none";
+                    elements1[i].style.display = "none";
+                    p.style.display = "inline";
+                    p.innerHTML = "Sent";
+                    elements3[i].appendChild(p);
+
+                   
+                }       
+                }
+            }
+        }
+      }
+    }
+    xhrlistSentRequests.send();
+}
+
+function updateReceivedList(){
+    const elements1 = document.getElementsByClassName('add-buttons');
+    const elements2 = document.getElementsByClassName('add-button-hover');
+    const elements3 = document.getElementsByClassName('user');
+    const xhrlistReceivedRequests = new XMLHttpRequest();
+    xhrlistReceivedRequests.open('GET', 'Home/getReceivedFriendRequests', true);
+    xhrlistReceivedRequests.setRequestHeader('Content-Type', 'application/json');
+    xhrlistReceivedRequests.onload = function () {
+    
+        if (xhrlistReceivedRequests.status === 200) {
+
+        let receivedRequests = JSON.parse(xhrlistReceivedRequests.responseText);
+        for (let i = 0; i < elements1.length; i++)
+        {
+            for(let j = 0; j < receivedRequests.length; j++)
+            {
+                if(receivedRequests[j].aprovado == '0')
+                {
+                if(elements2[i].dataset.id == receivedRequests[j].id_origem)
+                {
+                    let p = document.createElement('p');
+                    p.className = "request-status";
+                    p.style.display = "none";
+                    elements1[i].style.display = "none";
+                    p.style.display = "inline";
+                    p.innerHTML = "Received";
+                    elements3[i].appendChild(p);
+                }
+                
+                }
+            }
+        }
+
+      }
+    }
+    xhrlistReceivedRequests.send();
+}
+
+
+
+
 var init = function () {
     getLoggedUserData();
     createshowUsers();
+    
 };
 
 window.onload = init;
