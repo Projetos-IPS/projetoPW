@@ -232,7 +232,7 @@ function createshowUsers(){
                                                 });
                                                 div.appendChild(p);
                                             }
-                                            
+                                            else
                                             if (requests[i].id_destino == id_origem && requests[i].id_origem == button2.dataset.id && requests[i].aprovado == 0)
                                             {
                                                 div_buttons.style.display = "none";
@@ -240,6 +240,11 @@ function createshowUsers(){
                                                 p.className = "request-status";
                                                 p.innerHTML = "Received";
                                                 div.appendChild(p);
+                                            }
+                                            else
+                                            if ((requests[i].id_destino == id_origem && requests[i].id_origem == button2.dataset.id && requests[i].aprovado == 1) || (requests[i].id_origem == id_origem && requests[i].id_destino == button2.dataset.id && requests[i].aprovado == 1))
+                                            {
+                                                div.style.display = "none";
                                             }
                                     }
                                 }
