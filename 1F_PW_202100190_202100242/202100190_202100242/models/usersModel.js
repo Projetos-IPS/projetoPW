@@ -425,7 +425,7 @@ var User = {
       if(error) {reject(error);}
       else
       {
-        resolve(0);
+        resolve(result.insertId);
         connection.end();
       }
   
@@ -480,7 +480,7 @@ var User = {
 
 }
 
-//Pedidos de amizade---------------------
+//---------------------
 
 
 module.exports = User;

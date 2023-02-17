@@ -1,5 +1,3 @@
-
-
 function getLoggedUserData() {
     const xhrloggedUserType = new XMLHttpRequest();
     xhrloggedUserType.open('GET', '/Home/getloggedinUserType', true);
@@ -90,7 +88,7 @@ function getLoggedUserData() {
  * When a user clicks the button to send a friend request, the function creates an XMLHttpRequest to send a POST request to the server to add a new friend request. When the POST request is successful, the function calls the update function to update the button's status.
  * When a user clicks the button to cancel a friend request, the function creates an XMLHttpRequest to send a POST request to the server to cancel the friend request. When the POST request is successful, the function updates the button's status by displaying the button and hiding the "Sent" status.
  */
-function createshowUsers(){
+function showUsers(){
     let divFriends = document.getElementById('main-side');
     let h2 = document.createElement('h2');
     h2.innerHTML = 'Add friends';
@@ -175,12 +173,11 @@ function createshowUsers(){
                                };
                         });
                         div_buttons.appendChild(button2);
-
                         div.appendChild(div_buttons);
                         img_btn1.src = "../images/user-add.png";
                         img_btn2.src = "../images/user-add-hover.png";
                         divFriends.appendChild(div);
-                        //-------------------------------
+                    //----------------------------------------
 
                         if(listUsers[i].email == userInfo[i].email)
                         {
@@ -258,7 +255,6 @@ function createshowUsers(){
                             }
                             xhrgetRequests.send();
                         }
-
                     //----------------------------------------//
                         update();
                     }
@@ -314,7 +310,7 @@ function showfriendrequests(){
 
 var init = function () {
     getLoggedUserData();
-    createshowUsers();
+    showUsers();
 
 };
 
