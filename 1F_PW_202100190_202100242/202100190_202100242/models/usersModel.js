@@ -435,7 +435,7 @@ var User = {
 
   },
 
-  getFriendsRequests : function()
+    getFriendsRequests : function()
   {
     return new Promise(function(resolve, reject)
   {
@@ -455,7 +455,7 @@ var User = {
   });
   },
 
-  DeleteSentFriendsRequests : function(id_origem, data)
+    DeleteSentFriendsRequests : function(id_origem, data)
   {
     return new Promise(function(resolve, reject)
   {
@@ -476,7 +476,53 @@ var User = {
   });
   },
 
- 
+  acceptFriendRequest : function(data)
+  {
+    return new Promise(function(resolve, reject)
+  {
+    let values1 = [data.origem, data.destino];
+    let values2 = [data.destinoemail, data.useremail];
+
+    let query1 = `UPDATE pedido_amizade SET aprovado = 1 WHERE id_origem = ? AND id_destino = ?`;
+    let query2 = `INSERT INTO amigo(email_utilizador, email_amigo) VALUES (?, ?)`;
+    let connection = mysql.createConnection(options.mysql);
+    connection.query(query1, values1, function(error)
+    {
+      if(error) {reject(error);}
+      else
+      {
+        connection.query(query2, values2, function(error, result)
+        {
+            resolve(0);
+        });
+      }
+   
+    });
+  
+  });
+  },
+
+  rejectFriendRequest : function(data)
+  {
+    return new Promise(function(resolve, reject)
+  {
+    let values1 = [data.origem, data.destino];
+
+    let query1 = `DELETE from pedido_amizade WHERE id_origem = ? and id_destino = ?`;
+    let connection = mysql.createConnection(options.mysql);
+    connection.query(query1, values1, function(error,result)
+    {
+      if(error) {reject(error);}
+      else
+      {
+        resolve(0);
+        connection.end();
+      }
+   
+    });
+  
+  });
+  },
 
 }
 

@@ -97,18 +97,34 @@ router.get('/getFriendRequests', function(req, res)
     
 });
 
-
-
-router.post('/cancelFriendRequest', function(req, res)
+router.get('/getUsers', function(req, res)
 {
-    const dataCFQ = req.body;
-    User.getIdbyEmail(req.session.name).then(function(result2){
-        User.DeleteSentFriendsRequests(result2[0].id, dataCFQ).then(function(result)
+       User.getUserIDs().then(function(result)
         {
             res.json(result);
         })
+   
+    
+});
+
+router.post('/acceptFriend', function(req, res)
+{
+    const dataAdd = req.body;
+
+    User.acceptFriendRequest(dataAdd).then(function(result) {
+        res.json(result);
+    })
+});
+
+router.post('/deleteFriendRequest', function(req, res)
+{
+    const dataRemove = req.body;
+    User.rejectFriendRequest(dataRemove).then(function(result)
+    {
+        res.json(result);
     })
     
 });
+
 
 module.exports = router;

@@ -88,7 +88,7 @@ function getLoggedUserData() {
  * When a user clicks the button to send a friend request, the function creates an XMLHttpRequest to send a POST request to the server to add a new friend request. When the POST request is successful, the function calls the update function to update the button's status.
  * When a user clicks the button to cancel a friend request, the function creates an XMLHttpRequest to send a POST request to the server to cancel the friend request. When the POST request is successful, the function updates the button's status by displaying the button and hiding the "Sent" status.
  */
-function showUsers(){
+function showAddUsers(){
     let divFriends = document.getElementById('main-side');
     let h2 = document.createElement('h2');
     h2.innerHTML = 'Add friends';
@@ -213,6 +213,7 @@ function showUsers(){
                                             {
                                                 div_buttons.style.display = "none";
                                                 let p = document.createElement('a');
+                                                p.style.cursor = 'pointer';
                                                 p.className = "request-status";
                                                 p.innerHTML = "Sent";
                                                 p.addEventListener('click', function(event) {
@@ -271,47 +272,193 @@ function showUsers(){
     
 }
 
-function showfriendrequests(){
+function showFriendRequests(){
     let divFriends = document.getElementById('friend-requests');
     let h2 = document.createElement('h2');
-
     h2.innerHTML = 'Friend requests';
     divFriends.appendChild(h2);
-    const xhrUserInfor = new XMLHttpRequest();
-    xhrUserInfor.open('GET', 'Home/getUsersProfissionaisInformation', true);
-    xhrUserInfor.setRequestHeader('Content-Type', 'application/json');
-    xhrUserInfor.onload = function () {
-        if (xhrUserInfor.status === 200) {
-            let userInfo = JSON.parse(xhrUserInfor.responseText);
+    const xhrUserInfo2 = new XMLHttpRequest(); //1
+    xhrUserInfo2.open('GET', 'Home/getUsersProfissionaisInformation', true);
+    xhrUserInfo2.setRequestHeader('Content-Type', 'application/json');
+    xhrUserInfo2.onload = function () {
+        if (xhrUserInfo2.status === 200) {
+            let userInfo2 = JSON.parse(xhrUserInfo2.responseText);
 
-            const xhrlistUsersRequests = new XMLHttpRequest();
-            xhrlistUsersRequests.open('GET', 'Home/getReceivedFriendRequests2', true);
-            xhrlistUsersRequests.setRequestHeader('Content-Type', 'application/json');
-            xhrlistUsersRequests.onload = function () {
-                if (xhrlistUsersRequests.status === 200) {
-                    let listUsers = JSON.parse(xhrlistUsersRequests.responseText);
-                    console.log(listUsers);
-                    console.log(userInfo);
+            const xhrlistUsers2 = new XMLHttpRequest(); //2
+            xhrlistUsers2.open('GET', 'Home/getFriendRequests', true);
+            xhrlistUsers2.setRequestHeader('Content-Type', 'application/json');
+            xhrlistUsers2.onload = function () {
+                if (xhrlistUsers2.status === 200) {
+                    let id_destino = document.getElementById('profile-hyperlink').getAttribute('data-userid');
+                    let listUsers = JSON.parse(xhrlistUsers2.responseText);
+                    console.log(listUsers); // imprime o id_origem e destino do pedido
+                    if(listUsers.length>0){
+                    for(let i = 0; i < listUsers.length; i++)
+                    {
+                        if(listUsers[i].id_destino == id_destino && listUsers[i].aprovado == 0){
+                            const xhrlistUsers3 = new XMLHttpRequest(); //3
+                            xhrlistUsers3.open('GET', 'Home/getUsers', true);
+                            xhrlistUsers3.setRequestHeader('Content-Type', 'application/json');
+                            xhrlistUsers3.onload = function () {
+                                if (xhrlistUsers3.status === 200) {
+                                    let listUsers2 = JSON.parse(xhrlistUsers3.responseText);
+                                    console.log(listUsers2); //imprime os friend requests
+                                    var foundItem = listUsers2.find(item => item.id == listUsers[i].id_origem);
+                                    console.log(foundItem.email); // imprime os dados do email encontrado
+                                    var foundItem2 = listUsers2.find(item => item.id == listUsers[i].id_destino);
+                                    console.log(foundItem2.email);
+                                    //------------------
+                                    let div = document.createElement('div');
+                                    div.id = "user";
+                                    div.className = "user";
+                                    let div_image = document.createElement('div');
+                                    div_image.className = "user-image";
+                                    let a_image = document.createElement('a');
+                                    a_image.id = "profile-user";
+                                    let img_user = document.createElement('img');
+                                    img_user.id = "img_user";
+                                    a_image.appendChild(img_user);
+                                    div_image.appendChild(a_image);
+                                    div.appendChild(div_image);
+                                    a_image.dataset.id = listUsers[i].id_origem;
+                                    a_image.href = "../Profile/" + a_image.dataset.id;
+                    
+                                    let div_userinfo = document.createElement('div');
+                                    div_userinfo.className = "user-info";
+                                    let a_userinfo = document.createElement('a');
+                                    let h3_userinfo = document.createElement('h3');
+                                    h3_userinfo.innerHTML = foundItem.nome;
+                                    let h6_userinfo = document.createElement('h6');
+                                    div_userinfo.appendChild(a_userinfo);
+                                    a_userinfo.appendChild(h3_userinfo);
+                                    div_userinfo.appendChild(h6_userinfo);
+                                    div.appendChild(div_userinfo);
+                                    a_userinfo.dataset.id = listUsers[i].id_origem;
+                                    a_userinfo.href = "../Profile/" + a_userinfo.dataset.id;
+                    
+                                    let div_buttons = document.createElement('div');
+                                    div_buttons.className = "add-buttons2";
+                                    div_buttons.id = "add-buttons2";
 
-                        let emails = listUsers.find(obj => obj.id_origem === userInfo.id);
-                        console.log(emails);
+                                    let buttonAdd = document.createElement('a');
+                                    let i1 = document.createElement('i');
+                                    i1.style.margin = '15px';
+                                    i1.className = 'fas fa-check';
+                                    buttonAdd.appendChild(i1);
+                                    buttonAdd.style.cursor = 'pointer';
+                                    buttonAdd.className = "accept-icon";
+                                    buttonAdd.dataset.id = listUsers[i].id_origem;
 
+                                    buttonAdd.addEventListener('click', function(event) {
+                                        const dataAdd = {
+                                            destino : id_destino,
+                                            origem : listUsers[i].id_origem,
+                                            useremail : foundItem.email,
+                                            destinoemail : foundItem2.email
+                                           };
+                                    
+                                           const xhrAcceptRequest = new XMLHttpRequest();
+                                           xhrAcceptRequest.open('POST', '/Home/acceptFriend', true);
+                                           xhrAcceptRequest.setRequestHeader('Content-Type', 'application/json');
+                                           xhrAcceptRequest.send(JSON.stringify(dataAdd));
+                                           
+                                           xhrAcceptRequest.onload = function(){
+                                            if(xhrAcceptRequest.status === 200)
+                                            {
+                                                document.getElementById('main-side').innerHTML = "";
+                                                showAddUsers();
+                                                divFriends.innerHTML = "";
+                                                showFriendRequests();
+                                            }
+                                         
+                                           };
+                                    });
+                                    div_buttons.appendChild(buttonAdd);
+
+                                    let buttonReject = document.createElement('a');
+                                    let i2 = document.createElement('i');
+                                    i2.className = 'fas fa-trash-alt';
+                                    buttonReject.appendChild(i2);
+                                    buttonReject.style.cursor = 'pointer';
+                                    buttonReject.className = "reject-icon";
+                                    buttonReject.dataset.id = listUsers[i].id_origem;
+                                    buttonReject.addEventListener('click', function(event) {
+                                        const dataRemove = {
+                                            destino : id_destino,
+                                            origem : listUsers[i].id_origem,
+                                           };
+                                    
+                                           const xhrRejectRequest = new XMLHttpRequest();
+                                           xhrRejectRequest.open('POST', '/Home/deleteFriendRequest', true);
+                                           xhrRejectRequest.setRequestHeader('Content-Type', 'application/json');
+                                           xhrRejectRequest.send(JSON.stringify(dataRemove));
+                                           
+                                           xhrRejectRequest.onload = function(){
+                                            if(xhrRejectRequest.status === 200)
+                                            {
+                                                document.getElementById('main-side').innerHTML = "";
+                                                showAddUsers();
+                                                divFriends.innerHTML = "";
+                                                showFriendRequests();
+                                            }
+                                         
+                                           };
+                                    });
+                                    div_buttons.appendChild(buttonReject);
+                                    
+                                   
+
+                                    div.appendChild(div_buttons);
+                                    divFriends.appendChild(div);
+
+                                    for(let x = 0; x < userInfo2.length; x++){
+                                        if(userInfo2[x].email == foundItem.email){
+                                            if(userInfo2[x].genero == 'Feminino')
+                                            {
+                                                img_user.src = "../images/profile-female.png";
+                                            }
+                                            if(userInfo2[x].genero == 'Masculino')
+                                            {
+                                                img_user.src = "../images/profile-male.png";
+                                            }
+                                            if(userInfo2[x].genero == 'other')
+                                            {
+                                                img_user.src = "../images/profile-other.png";
+                                            }
+                                      
+                                            h6_userinfo.innerHTML = userInfo2[x].headline;
+                                        }
+                                    }
+                                    
+
+                                //-------------------------------
+                                }
+                            }
+                            xhrlistUsers3.send();
+
+
+
+
+                    }
+                  }
+                }
+
+                
+                }
             }
-            }
-            xhrlistUsersRequests.send();
-            
+            xhrlistUsers2.send();
         }
     }
     
-    xhrUserInfor.send();
-
+    xhrUserInfo2.send();
+    
 }
 
 
 var init = function () {
     getLoggedUserData();
-    showUsers();
-
+    showAddUsers();
+    showFriendRequests();
 };
 
 window.onload = init;
