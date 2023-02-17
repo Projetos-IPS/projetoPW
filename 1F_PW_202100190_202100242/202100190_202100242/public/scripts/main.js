@@ -83,6 +83,13 @@ function getLoggedUserData() {
     xhrloggedUserType.send();
 }
  
+/**
+ * 
+ * This is a function that adds user information and buttons to the HTML document. The function sends a GET request to the server to retrieve a list of user information and another GET request to retrieve a list of users. It then loops through the user list and creates a div element for each user, adds user information to the div element, and adds two buttons to send a friend request and cancel a friend request. 
+ * The function also defines an update function to update the button's status when a friend request is sent or canceled.
+ * When a user clicks the button to send a friend request, the function creates an XMLHttpRequest to send a POST request to the server to add a new friend request. When the POST request is successful, the function calls the update function to update the button's status.
+ * When a user clicks the button to cancel a friend request, the function creates an XMLHttpRequest to send a POST request to the server to cancel the friend request. When the POST request is successful, the function updates the button's status by displaying the button and hiding the "Sent" status.
+ */
 function createshowUsers(){
     let divFriends = document.getElementById('main-side');
     let h2 = document.createElement('h2');
