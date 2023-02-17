@@ -70,6 +70,7 @@ function getLoggedUserData() {
                 if (xhrloggedUserID.status === 200) {
                     let idUser = JSON.parse(xhrloggedUserID.responseText);
                     profile_hyperlink.href = "Profile/" + idUser[0].id;
+                    profile_hyperlink.dataset.userid = idUser[0].id;
                     profile_hyperlink_menu.href = "Profile/" + idUser[0].id;
                     username_show.href = "Profile/" + idUser[0].id;
                 }
@@ -81,7 +82,7 @@ function getLoggedUserData() {
     }
     xhrloggedUserType.send();
 }
-
+ 
 function createshowUsers(){
     let divFriends = document.getElementById('main-side');
     let h2 = document.createElement('h2');
@@ -101,6 +102,7 @@ function createshowUsers(){
                 if (xhrlistUsers.status === 200) {
                     let listUsers = JSON.parse(xhrlistUsers.responseText);
                     
+                    if(listUsers.length>0){
                     for(let i = 0; i < listUsers.length; i++)
                     {
                         let div = document.createElement('div');
@@ -133,8 +135,10 @@ function createshowUsers(){
         
                         let div_buttons = document.createElement('div');
                         div_buttons.className = "add-buttons";
+                        div_buttons.id = "add-buttons";
                         let button1 = document.createElement('button');
                         button1.className = "add-icon";
+                        button1.dataset.id = listUsers[i].id;
                         let button2 = document.createElement('button');
                         button2.className = "add-button-hover";
                         button2.id = "btn2";
@@ -142,41 +146,33 @@ function createshowUsers(){
                         button1.appendChild(img_btn1);
                         let img_btn2 = document.createElement('img');
                         button2.appendChild(img_btn2);
-                        
                         button2.dataset.id = listUsers[i].id;
-                        
-                        button2.addEventListener("click", function(event){
-                            event.preventDefault();
-                          //  const clickedbtn = event.target;
-                             const data = {
-                              userid : button2.dataset.id
-                             }
-                             
-                            const xhrUpdate = new XMLHttpRequest();
-                            xhrUpdate.open('POST', '/Home/sendFriendRequest', true);
-                            xhrUpdate.setRequestHeader('Content-Type', 'application/json');
-                            xhrUpdate.send(JSON.stringify(data));
-
-                            xhrUpdate.onload = function() {
-                            if (xhrUpdate.status === 200) {
-                                let requeststatus = JSON.parse(xhrUpdate.responseText);
-                                if(requeststatus == 0)
-                                {
-                                 divFriends.innerHTML = "";
-                                 createshowUsers();
-                                }
-                              
-                             }
-                           }
-                        });
-
                         div_buttons.appendChild(button1);
+                        
+                        button2.addEventListener('click', function(event) {
+                            const dataRQ = {
+                                userid : listUsers[i].id
+                               };
+                        
+                               const xhrSendRequest = new XMLHttpRequest();
+                               xhrSendRequest.open('POST', '/Home/sendFriendRequest', true);
+                               xhrSendRequest.setRequestHeader('Content-Type', 'application/json');
+                               xhrSendRequest.send(JSON.stringify(dataRQ));
+                               
+                               xhrSendRequest.onload = function(){
+                                if(xhrSendRequest.status === 200)
+                                {
+                                 update();
+                                }
+                             
+                               };
+                        });
                         div_buttons.appendChild(button2);
+
                         div.appendChild(div_buttons);
                         img_btn1.src = "../images/user-add.png";
                         img_btn2.src = "../images/user-add-hover.png";
                         divFriends.appendChild(div);
-        
                         //-------------------------------
 
                         if(listUsers[i].email == userInfo[i].email)
@@ -197,75 +193,109 @@ function createshowUsers(){
                             h6_userinfo.innerHTML = userInfo[i].headline;
                         }
 
-                        //----------------------------------------
-                        const xhrlistSentRequests = new XMLHttpRequest();
-                        xhrlistSentRequests.open('GET', 'Home/getSentFriendRequests', true);
-                        xhrlistSentRequests.setRequestHeader('Content-Type', 'application/json');
-                        xhrlistSentRequests.onload = function () {
-                        
-                            if (xhrlistSentRequests.status === 200) {
-                    
-                            let sentRequests = JSON.parse(xhrlistSentRequests.responseText);
-                                for(let j = 0; j < sentRequests.length; j++)
-                                {
-                                    if(sentRequests[j].aprovado == '0')
-                                    {
-                                    if(button2.dataset.id == sentRequests[j].id_destino)
-                                    {
-                                        let p = document.createElement('a');
-                                        p.className = "request-status";
-                                        p.style.display = "none";
-                                        div_buttons.style.display = "none";
-                                        p.style.display = "inline";
-                                        p.innerHTML = "Sent";
-                                        div.appendChild(p);
-                                    }       
-                                    }
-                                }
-                          }
-                        }
-                        xhrlistSentRequests.send();
+                    //----------------------------------------
 
-                        //---------------------------------------------------------------
-                        const xhrlistReceivedRequests = new XMLHttpRequest();
-                        xhrlistReceivedRequests.open('GET', 'Home/getReceivedFriendRequests', true);
-                        xhrlistReceivedRequests.setRequestHeader('Content-Type', 'application/json');
-                        xhrlistReceivedRequests.onload = function () {
-                        
-                            if (xhrlistReceivedRequests.status === 200) {
-                    
-                            let receivedRequests = JSON.parse(xhrlistReceivedRequests.responseText);
-                                for(let j = 0; j < receivedRequests.length; j++)
-                                {
-                                    if(receivedRequests[j].aprovado == '0')
-                                    {
-                                    if(button2.dataset.id == receivedRequests[j].id_origem)
-                                    {
-                                        let p = document.createElement('p');
-                                        p.className = "request-status";
-                                        p.style.display = "none";
-                                        div_buttons.style.display = "none";
-                                        p.style.display = "inline";
-                                        p.innerHTML = "Received";
-                                        div.appendChild(p);
-                                    }
-                                    
+                        function update(){
+                            const xhrgetRequests = new XMLHttpRequest();
+                            xhrgetRequests.open('GET', 'Home/getFriendRequests', true);
+                            xhrgetRequests.setRequestHeader('Content-Type', 'application/json');
+                            xhrgetRequests.onload = function () {
+                                if (xhrgetRequests.status === 200) {
+                                    let id_origem = document.getElementById('profile-hyperlink').getAttribute('data-userid');
+                                    let requests = JSON.parse(xhrgetRequests.responseText);
+                                        for(let i = 0; i < requests.length; i++)
+                                        {
+                                            if(requests[i].id_origem == id_origem && requests[i].id_destino == button2.dataset.id && requests[i].aprovado == 0)
+                                            {
+                                                div_buttons.style.display = "none";
+                                                let p = document.createElement('a');
+                                                p.className = "request-status";
+                                                p.innerHTML = "Sent";
+                                                p.addEventListener('click', function(event) {
+                                                    const dataCFQ = {
+                                                        userid : button2.dataset.id
+                                                       };
+                                                
+                                                       const xhrSendRequest = new XMLHttpRequest();
+                                                       xhrSendRequest.open('POST', '/Home/cancelFriendRequest', true);
+                                                       xhrSendRequest.setRequestHeader('Content-Type', 'application/json');
+                                                       xhrSendRequest.send(JSON.stringify(dataCFQ));
+                                                       
+                                                       xhrSendRequest.onload = function(){
+                                                        if(xhrSendRequest.status === 200)
+                                                        {
+                                                            div_buttons.style.display = "block";
+                                                            p.style.display = "none";
+                                                        }
+                                                     
+                                                       };
+                                                });
+                                                div.appendChild(p);
+                                            }
+                                            
+                                            if (requests[i].id_destino == id_origem && requests[i].id_origem == button2.dataset.id && requests[i].aprovado == 0)
+                                            {
+                                                div_buttons.style.display = "none";
+                                                let p = document.createElement('p');
+                                                p.className = "request-status";
+                                                p.innerHTML = "Received";
+                                                div.appendChild(p);
+                                            }
                                     }
                                 }
-                    
-                          }
+                            }
+                            xhrgetRequests.send();
                         }
-                        xhrlistReceivedRequests.send();
-                    
+
+                    //----------------------------------------//
+                        update();
                     }
+                }
+
+                
                 }
             }
             xhrlistUsers.send();
-            
         }
     }
     
     xhrUserInfo.send();
+    
+}
+
+function showfriendrequests(){
+    let divFriends = document.getElementById('friend-requests');
+    let h2 = document.createElement('h2');
+
+    h2.innerHTML = 'Friend requests';
+    divFriends.appendChild(h2);
+    const xhrUserInfor = new XMLHttpRequest();
+    xhrUserInfor.open('GET', 'Home/getUsersProfissionaisInformation', true);
+    xhrUserInfor.setRequestHeader('Content-Type', 'application/json');
+    xhrUserInfor.onload = function () {
+        if (xhrUserInfor.status === 200) {
+            let userInfo = JSON.parse(xhrUserInfor.responseText);
+
+            const xhrlistUsersRequests = new XMLHttpRequest();
+            xhrlistUsersRequests.open('GET', 'Home/getReceivedFriendRequests2', true);
+            xhrlistUsersRequests.setRequestHeader('Content-Type', 'application/json');
+            xhrlistUsersRequests.onload = function () {
+                if (xhrlistUsersRequests.status === 200) {
+                    let listUsers = JSON.parse(xhrlistUsersRequests.responseText);
+                    console.log(listUsers);
+                    console.log(userInfo);
+
+                        let emails = listUsers.find(obj => obj.id_origem === userInfo.id);
+                        console.log(emails);
+
+            }
+            }
+            xhrlistUsersRequests.send();
+            
+        }
+    }
+    
+    xhrUserInfor.send();
 
 }
 
@@ -273,7 +303,7 @@ function createshowUsers(){
 var init = function () {
     getLoggedUserData();
     createshowUsers();
-    
+
 };
 
 window.onload = init;

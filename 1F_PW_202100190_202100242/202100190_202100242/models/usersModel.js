@@ -426,34 +426,36 @@ var User = {
       else
       {
         resolve(0);
+        connection.end();
       }
-    connection.end();
+  
     });
   
   });
 
   },
 
-  getSentFriendsRequests : function(id)
+  getFriendsRequests : function()
   {
     return new Promise(function(resolve, reject)
   {
-    let query = `SELECT * FROM pedido_amizade WHERE id_origem = ?`;
+    let query = `SELECT * FROM pedido_amizade`;
     let connection = mysql.createConnection(options.mysql);
-    connection.query(query, id, function(error, result)
+    connection.query(query, function(error, result)
     {
       if(error) {reject(error);}
       else
       {
         resolve(result);
+        connection.end();
       }
-    connection.end();
+   
     });
   
   });
   },
 
-  DeleteFriendsRequests : function(id_origem, data)
+  DeleteSentFriendsRequests : function(id_origem, data)
   {
     return new Promise(function(resolve, reject)
   {
@@ -466,31 +468,14 @@ var User = {
       else
       {
         resolve(0);
+        connection.end();
       }
-    connection.end();
+ 
     });
   
   });
   },
 
-  getReceivedFriendsRequests : function(id)
-  {
-    return new Promise(function(resolve, reject)
-  {
-    let query = `SELECT * FROM pedido_amizade WHERE id_destino = ?`;
-    let connection = mysql.createConnection(options.mysql);
-    connection.query(query, id, function(error, result)
-    {
-      if(error) {reject(error);}
-      else
-      {
-        resolve(result);
-      }
-    connection.end();
-    });
-  
-  });
-  },
  
 
 }

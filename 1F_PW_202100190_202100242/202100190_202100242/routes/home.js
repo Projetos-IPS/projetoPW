@@ -75,11 +75,11 @@ router.get('/getUsersProfissionaisInformation', function(req, res)
 
 router.post('/sendFriendRequest', function(req, res)
 {
-    const data = req.body;
+    const dataRQ = req.body;
 
     User.getIdbyEmail(req.session.name).then(function(result2)
     {
-        User.sendFriendRequest(result2[0].id, data).then(function(result)
+        User.sendFriendRequest(result2[0].id, dataRQ).then(function(result)
         {
             res.json(result);
         });
@@ -87,33 +87,23 @@ router.post('/sendFriendRequest', function(req, res)
 
 });
 
-router.get('/getSentFriendRequests', function(req, res)
+router.get('/getFriendRequests', function(req, res)
 {
-    User.getIdbyEmail(req.session.name).then(function(result2){
-        User.getSentFriendsRequests(result2[0].id).then(function(result)
+       User.getFriendsRequests().then(function(result)
         {
             res.json(result);
         })
-    })
+   
     
 });
 
-router.get('/getReceivedFriendRequests', function(req, res)
-{
-    User.getIdbyEmail(req.session.name).then(function(result2){
-        User.getReceivedFriendsRequests(result2[0].id).then(function(result)
-        {
-            res.json(result);
-        })
-    })
-    
-});
+
 
 router.post('/cancelFriendRequest', function(req, res)
 {
-    const data2 = req.body;
+    const dataCFQ = req.body;
     User.getIdbyEmail(req.session.name).then(function(result2){
-        User.DeleteFriendsRequests(result2[0].id, data2).then(function(result)
+        User.DeleteSentFriendsRequests(result2[0].id, dataCFQ).then(function(result)
         {
             res.json(result);
         })
