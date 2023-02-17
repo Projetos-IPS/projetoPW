@@ -69,6 +69,7 @@ function getLoggedUserData() {
                     let idUser = JSON.parse(xhrloggedUserID.responseText);
                     profile_hyperlink.href = "Profile/" + idUser[0].id;
                     profile_hyperlink.dataset.userid = idUser[0].id;
+                    profile_hyperlink.dataset.email
                     profile_hyperlink_menu.href = "Profile/" + idUser[0].id;
                     username_show.href = "Profile/" + idUser[0].id;
                 }
@@ -291,7 +292,7 @@ function showFriendRequests(){
                 if (xhrlistUsers2.status === 200) {
                     let id_destino = document.getElementById('profile-hyperlink').getAttribute('data-userid');
                     let listUsers = JSON.parse(xhrlistUsers2.responseText);
-                    console.log(listUsers); // imprime o id_origem e destino do pedido
+                 //   console.log(listUsers); // imprime o id_origem e destino do pedido
                     if(listUsers.length>0){
                     for(let i = 0; i < listUsers.length; i++)
                     {
@@ -302,11 +303,11 @@ function showFriendRequests(){
                             xhrlistUsers3.onload = function () {
                                 if (xhrlistUsers3.status === 200) {
                                     let listUsers2 = JSON.parse(xhrlistUsers3.responseText);
-                                    console.log(listUsers2); //imprime os friend requests
+                                 //   console.log(listUsers2); //imprime os friend requests
                                     var foundItem = listUsers2.find(item => item.id == listUsers[i].id_origem);
-                                    console.log(foundItem.email); // imprime os dados do email encontrado
+                                 //   console.log(foundItem.email); // imprime os dados do email encontrado
                                     var foundItem2 = listUsers2.find(item => item.id == listUsers[i].id_destino);
-                                    console.log(foundItem2.email);
+                                 //   console.log(foundItem2.email);
                                     //------------------
                                     let div = document.createElement('div');
                                     div.id = "user";
@@ -454,11 +455,41 @@ function showFriendRequests(){
     
 }
 
+function showFriends(){
+    let divFriends = document.getElementById('friends');
+    let h2 = document.createElement('h2');
+    h2.innerHTML = 'Friends List';
+    divFriends.appendChild(h2);
+    const xhrUserInfor = new XMLHttpRequest();
+    xhrUserInfor.open('GET', 'Home/getUsersProfissionaisInformation', true);
+    xhrUserInfor.setRequestHeader('Content-Type', 'application/json');
+    xhrUserInfor.onload = function () {
+        if (xhrUserInfor.status === 200) {
+            let userInfo = JSON.parse(xhrUserInfor.responseText);
+
+            const xhrFriends = new XMLHttpRequest();
+            xhrFriends.open('GET', 'Home/getFriends', true);
+            xhrFriends.setRequestHeader('Content-Type', 'application/json');
+            xhrFriends.onload = function () {
+                if (xhrFriends.status === 200) {
+                    let friends = JSON.parse(xhrFriends.responseText);
+                    console.log(friends);
+                    
+                }
+            }
+            xhrFriends.send();
+        }
+    }
+    xhrUserInfor.send();
+
+}
+
 
 var init = function () {
     getLoggedUserData();
     showAddUsers();
     showFriendRequests();
+    showFriends();
 };
 
 window.onload = init;

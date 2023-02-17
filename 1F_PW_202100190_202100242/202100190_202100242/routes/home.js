@@ -116,6 +116,18 @@ router.post('/acceptFriend', function(req, res)
     })
 });
 
+router.post('/cancelFriendRequest', function(req, res)
+{
+    const dataCFQ = req.body;
+    User.getIdbyEmail(req.session.name).then(function(result2){
+        User.DeleteSentFriendsRequests(result2[0].id, dataCFQ).then(function(result)
+        {
+            res.json(result);
+        })
+    })
+    
+});
+
 router.post('/deleteFriendRequest', function(req, res)
 {
     const dataRemove = req.body;
@@ -124,6 +136,15 @@ router.post('/deleteFriendRequest', function(req, res)
         res.json(result);
     })
     
+});
+
+router.get('/getFriends', function(req, res)
+{
+    User.getFriends().then(function(result)
+    {
+        res.json(result);
+    })
+
 });
 
 

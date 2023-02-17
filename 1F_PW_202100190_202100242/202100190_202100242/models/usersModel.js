@@ -524,6 +524,26 @@ var User = {
   });
   },
 
+  getFriends : function()
+  {
+    return new Promise(function(resolve, reject)
+  {
+    let query = `SELECT * FROM amigo`;
+    let connection = mysql.createConnection(options.mysql);
+    connection.query(query, function(error, result)
+    {
+      if(error) {reject(error);}
+      else
+      {
+        resolve(result);
+        connection.end();
+      }
+   
+    });
+  
+  });
+  },
+
 }
 
 //---------------------
