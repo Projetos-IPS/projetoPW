@@ -465,14 +465,14 @@ function showFriends(){
     h2.innerHTML = 'Friends List';
     divFriends.appendChild(h2);
     const xhrUserInfor = new XMLHttpRequest();
-    xhrUserInfor.open('GET', 'Home/getUsersProfissionaisInformation', true);
+    xhrUserInfor.open('GET', '../Home/getUsersProfissionaisInformation', true);
     xhrUserInfor.setRequestHeader('Content-Type', 'application/json');
     xhrUserInfor.onload = function () {
         if (xhrUserInfor.status === 200) {
             let userInfo = JSON.parse(xhrUserInfor.responseText);
-
+  
             const xhrFriends = new XMLHttpRequest();
-            xhrFriends.open('GET', 'Home/getFriends', true);
+            xhrFriends.open('GET', '../Home/getFriends', true);
             xhrFriends.setRequestHeader('Content-Type', 'application/json');
             xhrFriends.onload = function () {
                 if (xhrFriends.status === 200) {
@@ -482,7 +482,7 @@ function showFriends(){
                         for(let i = 0; i < friends.length; i++)
                         {
                             const xhrlistUsers1 = new XMLHttpRequest();
-                            xhrlistUsers1.open('GET', 'Home/getUsersProfissionais', true);
+                            xhrlistUsers1.open('GET', '../Home/getUsersProfissionais', true);
                             xhrlistUsers1.setRequestHeader('Content-Type', 'application/json');
                             xhrlistUsers1.onload = function () {
                                 if (xhrlistUsers1.status === 200) {
@@ -490,7 +490,7 @@ function showFriends(){
                                     let listUsers = JSON.parse(xhrlistUsers1.responseText);
                                     var friend_info = listUsers.find(item => item.email == friends[i].email_amigo);
                                     var friend_info2 = userInfo.find(item => item.email == friends[i].email_amigo);
-                                    console.log(id_destino);
+                                //   console.log(id_destino);
                                 //------------------
                                 let div = document.createElement('div');
                                 div.id = "user";
@@ -506,7 +506,7 @@ function showFriends(){
                                 div.appendChild(div_image);
                                 a_image.dataset.id = friend_info.id;
                                 a_image.href = "../Profile/" + a_image.dataset.id;
-
+  
                                 let div_userinfo = document.createElement('div');
                                 div_userinfo.className = "user-info";
                                 let a_userinfo = document.createElement('a');
@@ -519,11 +519,11 @@ function showFriends(){
                                 div.appendChild(div_userinfo);
                                 a_userinfo.dataset.id = friend_info.id;
                                 a_userinfo.href = "../Profile/" + a_userinfo.dataset.id;
-
+  
                                 let div_buttons = document.createElement('div');
                                 div_buttons.className = "add-buttons";
                                 div_buttons.id = "add-buttons3";
-
+  
                                 let buttonReject = document.createElement('a');
                                 let i2 = document.createElement('i');
                                 i2.className = 'fas fa-trash-alt';
@@ -539,7 +539,7 @@ function showFriends(){
                                        };
                                 
                                        const xhrRejectRequest = new XMLHttpRequest();
-                                       xhrRejectRequest.open('POST', '/Home/deleteFriend', true);
+                                       xhrRejectRequest.open('POST', '../Home/deleteFriend', true);
                                        xhrRejectRequest.setRequestHeader('Content-Type', 'application/json');
                                        xhrRejectRequest.send(JSON.stringify(dataR));
                                        
@@ -552,17 +552,18 @@ function showFriends(){
                                             showFriendRequests();
                                             divFriends.innerHTML = "";
                                             showFriends();
+                                            updateList();
                                         }
                                      
                                        };
                                 });
                                 div_buttons.appendChild(buttonReject);
-
-
-
+  
+  
+  
                                 div.appendChild(div_buttons);
                                 divFriends.appendChild(div);
-
+  
                                         if(friend_info2.genero == 'Feminino')
                                         {
                                             img_user.src = "../images/profile-female.png";
@@ -578,8 +579,8 @@ function showFriends(){
                                 
                                         h6_userinfo.innerHTML = friend_info2.headline;
             
-
-
+  
+  
                                 //-------------------------------
                                 }
                             }
@@ -588,14 +589,48 @@ function showFriends(){
                                 
                         }
                     }
-
+  
                 }
             }
             xhrFriends.send();
         }
     }
     xhrUserInfor.send();
+  
+}
 
+function updateList(){
+    const xhrVerifyLoggedUserType = new XMLHttpRequest();
+    xhrVerifyLoggedUserType.open('GET', '../Home/getloggedinUserType', true);
+    xhrVerifyLoggedUserType.onload = function(){
+      if(xhrVerifyLoggedUserType.status === 200){
+        let userTypeConfirm = JSON.parse(xhrVerifyLoggedUserType.responseText);
+        if(userTypeConfirm[0].tipo_utilizador == 'Profissional')
+        {
+          const xhrVerifyFriends = new XMLHttpRequest();
+          xhrVerifyFriends.open('GET', '../Home/getFriends', true);
+          xhrVerifyFriends.onload = function(){
+          if(xhrVerifyFriends.status === 200){
+          let friendsverify = JSON.parse(xhrVerifyFriends.responseText);
+          
+          if(friendsverify.length <= 0)
+          {
+            document.getElementById('main-side').style.display = "block";
+            document.getElementById('friends').style.display = "none";
+          }
+          if(friendsverify.length > 0)
+          {
+            document.getElementById('friends').style.display = "block";
+            document.getElementById('main-side').style.display = "none";
+          }
+        }
+  
+    }
+    xhrVerifyFriends.send();
+        }
+      }
+    }
+    xhrVerifyLoggedUserType.send();
 }
 
 
@@ -604,6 +639,7 @@ var init = function () {
     showAddUsers();
     showFriendRequests();
     showFriends();
+    updateList();
 };
 
 window.onload = init;
