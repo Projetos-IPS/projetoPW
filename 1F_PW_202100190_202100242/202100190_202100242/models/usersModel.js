@@ -481,10 +481,10 @@ var User = {
     return new Promise(function(resolve, reject)
   {
     let values1 = [data.origem, data.destino];
-    let values2 = [data.destinoemail, data.useremail];
-
+    let values2 = [data.useremail, data.destinoemail];
     let query1 = `UPDATE pedido_amizade SET aprovado = 1 WHERE id_origem = ? AND id_destino = ?`;
     let query2 = `INSERT INTO amigo(email_utilizador, email_amigo) VALUES (?, ?)`;
+    let query3 = `INSERT INTO amigo(email_amigo, email_utilizador) VALUES (?, ?)`;
     let connection = mysql.createConnection(options.mysql);
     connection.query(query1, values1, function(error)
     {
@@ -493,7 +493,10 @@ var User = {
       {
         connection.query(query2, values2, function(error, result)
         {
-            resolve(0);
+          connection.query(query3, values2, function(error, result)
+          {
+              resolve(0);
+          });
         });
       }
    
