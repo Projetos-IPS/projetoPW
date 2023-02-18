@@ -189,7 +189,7 @@ function showAddUsers(){
                                 document.getElementById('friend-requests').style.display = "none";
                                 document.getElementById('friends').style.display = "none";
                                 document.getElementById('h2-home').innerHTML = "Users list";
-                                document.getElementById('main-side').style.display = "block";
+                                document.getElementById('main-side').style.removeProperty('display');;
                                 div_buttons.style.display = "none";
                             }
                         }
@@ -636,12 +636,12 @@ function updateList(){
           
           if(friendsverify.length <= 0)
           {
-            document.getElementById('main-side').style.display = "block";
+            document.getElementById('main-side').style.removeProperty('display');;
             document.getElementById('friends').style.display = "none";
           }
           if(friendsverify.length > 0)
           {
-            document.getElementById('friends').style.display = "block";
+            document.getElementById('friends').style.removeProperty('display');;
             document.getElementById('main-side').style.display = "none";
           }
         }

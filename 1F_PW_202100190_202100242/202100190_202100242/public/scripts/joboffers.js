@@ -749,12 +749,12 @@ function updateList(){
         
         if(friendsverify.length <= 0)
         {
-          document.getElementById('main-side').style.display = "block";
+          document.getElementById('main-side').style.removeProperty('display');
           document.getElementById('friends').style.display = "none";
         }
         if(friendsverify.length > 0)
         {
-          document.getElementById('friends').style.display = "block";
+          document.getElementById('friends').style.removeProperty('display');
           document.getElementById('main-side').style.display = "none";
         }
       }
