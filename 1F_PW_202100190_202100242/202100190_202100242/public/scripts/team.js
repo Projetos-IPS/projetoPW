@@ -634,13 +634,13 @@ function updateList(){
           
           if(friendsverify.length <= 0)
           {
-            let main_side = document.getElementById('main-side').style.display = "block";
-            let friends = document.getElementById('friends').style.display = "none";
+            document.getElementById('main-side').style.display = "block";
+            document.getElementById('friends').style.display = "none";
           }
           if(friendsverify.length > 0)
           {
-            let friends = document.getElementById('friends').style.display = "block";
-            let main_side = document.getElementById('main-side').style.display = "none";
+            document.getElementById('friends').style.display = "block";
+            document.getElementById('main-side').style.display = "none";
           }
         }
   
