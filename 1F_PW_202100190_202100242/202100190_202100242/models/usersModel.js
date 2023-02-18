@@ -552,6 +552,7 @@ var User = {
     return new Promise(function(resolve, reject)
   {
     let query = `DELETE FROM amigo WHERE email_utilizador = ? AND email_amigo = ?`;
+    let query3 = `DELETE FROM amigo WHERE email_amigo = ? AND email_utilizador = ?`;
     let query2 = `DELETE FROM pedido_amizade WHERE id_origem = ? AND id_destino = ?`;
     let values = [email, data.emailUser];
     let values2 = [data.origem, data.destino]
@@ -562,8 +563,10 @@ var User = {
       else
       {
         connection.query(query2, values2, function(error, result){
-          resolve(0);
-          connection.end();
+          connection.query(query3, values, function(error, result){
+            resolve(0);
+            connection.end();
+          })
         })
       }
    
