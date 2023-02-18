@@ -552,7 +552,7 @@ function showFriends(){
                                             showFriendRequests();
                                             divFriends.innerHTML = "";
                                             showFriends();
-                                            updateList();
+                                            // updateList();
                                         }
                                      
                                        };
