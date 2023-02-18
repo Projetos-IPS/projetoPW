@@ -36,7 +36,7 @@
     width: 130px;
     height: 130px;
     margin-top: -93px;
-    margin-left: 9.3%;
+    margin-left: 11.5%;
     border-radius: 50%;
     position: relative;
     top: 40px;
@@ -179,11 +179,6 @@
     scrollbar-width: none;
 }
 
-.pop-up-form p {
-    margin: 0;
-    color: red;
-}
-
 .pop-up-form h3 {
     font-family: 'Unbounded', cursive;
 }
@@ -195,7 +190,7 @@
     height: 80%;
     position: absolute;
     z-index: 2;
-    margin: 5% 15%;
+    margin: 0% 15%;
     border-radius: 12px;
     display: none;
 }
@@ -239,7 +234,7 @@ textarea {
 }
 
 /** BUTTON **/
-.pop-up-edit .save {
+.save {
     width: 300px;
     height: 40px;
     border-radius: 20px;
@@ -253,13 +248,36 @@ textarea {
     margin: 20px 0px 0px 0px;
 }
 
-.pop-up-edit .save:hover {
+.save:hover {
     background-position: right center;
     cursor: pointer;
 }
 
 .button-save {
     text-align: center;
+}
+
+.pop-up-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.pop-up-form textarea {
+    width: 70%;
+}
+
+.pop-up-edit-description {
+    padding: 0px 30px 30px 30px;
+}
+
+.profile-name {
+    height: 20px;
+}
+
+#profile-headline {
+    height: 7px;
 }
 
 
