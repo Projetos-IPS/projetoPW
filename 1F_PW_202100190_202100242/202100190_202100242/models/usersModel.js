@@ -524,19 +524,44 @@ var User = {
   });
   },
 
-  getFriends : function()
+  getFriends : function(email)
   {
     return new Promise(function(resolve, reject)
   {
-    let query = `SELECT * FROM amigo`;
+    let query = `SELECT * FROM amigo WHERE email_utilizador = ?`;
     let connection = mysql.createConnection(options.mysql);
-    connection.query(query, function(error, result)
+    connection.query(query, email, function(error, result)
     {
       if(error) {reject(error);}
       else
       {
         resolve(result);
         connection.end();
+      }
+   
+    });
+  
+  });
+  },
+
+  deleteFriend : function(email, data)
+  {
+    return new Promise(function(resolve, reject)
+  {
+    let query = `DELETE FROM amigo WHERE email_utilizador = ? AND email_amigo = ?`;
+    let query2 = `DELETE FROM pedido_amizade WHERE id_origem = ? AND id_destino = ?`;
+    let values = [email, data.emailUser];
+    let values2 = [data.origem, data.destino]
+    let connection = mysql.createConnection(options.mysql);
+    connection.query(query, values, function(error, result)
+    {
+      if(error) {reject(error);}
+      else
+      {
+        connection.query(query2, values2, function(error, result){
+          resolve(0);
+          connection.end();
+        })
       }
    
     });

@@ -107,6 +107,15 @@ router.get('/getUsers', function(req, res)
     
 });
 
+router.get('/getFriends', function(req, res)
+{
+    User.getFriends(req.session.name).then(function(result)
+    {
+        res.json(result);
+    })
+
+});
+
 router.post('/acceptFriend', function(req, res)
 {
     const dataAdd = req.body;
@@ -138,14 +147,17 @@ router.post('/deleteFriendRequest', function(req, res)
     
 });
 
-router.get('/getFriends', function(req, res)
+router.post('/deleteFriend', function(req, res)
 {
-    User.getFriends().then(function(result)
+    const dataR = req.body;
+    User.deleteFriend(req.session.name, dataR).then(function(result)
     {
         res.json(result);
     })
-
+    
 });
+
+
 
 
 module.exports = router;

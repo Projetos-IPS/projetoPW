@@ -28,7 +28,7 @@ function getLoggedUserData() {
                         else if (profissionalInfo[0].genero == 'other') {
                             profile_pic_show.src = '../images/profile-other.png';
                         }
-
+                    //  profile_hyperlink.dataset.email = profissionalInfo[0].email;
                     }
                 }
                 xhrloggedUserinformationProfissional.send();
@@ -69,7 +69,7 @@ function getLoggedUserData() {
                     let idUser = JSON.parse(xhrloggedUserID.responseText);
                     profile_hyperlink.href = "Profile/" + idUser[0].id;
                     profile_hyperlink.dataset.userid = idUser[0].id;
-                    profile_hyperlink.dataset.email
+                    
                     profile_hyperlink_menu.href = "Profile/" + idUser[0].id;
                     username_show.href = "Profile/" + idUser[0].id;
                 }
@@ -338,7 +338,7 @@ function showFriendRequests(){
                                     a_userinfo.href = "../Profile/" + a_userinfo.dataset.id;
                     
                                     let div_buttons = document.createElement('div');
-                                    div_buttons.className = "add-buttons2";
+                                    div_buttons.className = "add-buttons";
                                     div_buttons.id = "add-buttons2";
 
                                     let buttonAdd = document.createElement('a');
@@ -370,6 +370,8 @@ function showFriendRequests(){
                                                 showAddUsers();
                                                 divFriends.innerHTML = "";
                                                 showFriendRequests();
+                                                document.getElementById('friends').innerHTML = "";
+                                                showFriends();
                                             }
                                          
                                            };
@@ -401,6 +403,8 @@ function showFriendRequests(){
                                                 showAddUsers();
                                                 divFriends.innerHTML = "";
                                                 showFriendRequests();
+                                                document.getElementById('friends').innerHTML = "";
+                                                showFriends();
                                             }
                                          
                                            };
@@ -472,9 +476,119 @@ function showFriends(){
             xhrFriends.setRequestHeader('Content-Type', 'application/json');
             xhrFriends.onload = function () {
                 if (xhrFriends.status === 200) {
+                   // let email_loggeduser = document.getElementById('profile-hyperlink').getAttribute('data-email');
                     let friends = JSON.parse(xhrFriends.responseText);
-                    console.log(friends);
+                    if(friends.length>0){
+                        for(let i = 0; i < friends.length; i++)
+                        {
+                            const xhrlistUsers1 = new XMLHttpRequest();
+                            xhrlistUsers1.open('GET', 'Home/getUsersProfissionais', true);
+                            xhrlistUsers1.setRequestHeader('Content-Type', 'application/json');
+                            xhrlistUsers1.onload = function () {
+                                if (xhrlistUsers1.status === 200) {
+                                    let id_destino = document.getElementById('profile-hyperlink').getAttribute('data-userid');
+                                    let listUsers = JSON.parse(xhrlistUsers1.responseText);
+                                    var friend_info = listUsers.find(item => item.email == friends[i].email_amigo);
+                                    var friend_info2 = userInfo.find(item => item.email == friends[i].email_amigo);
+                                    console.log(id_destino);
+                                //------------------
+                                let div = document.createElement('div');
+                                div.id = "user";
+                                div.className = "user";
+                                let div_image = document.createElement('div');
+                                div_image.className = "user-image";
+                                let a_image = document.createElement('a');
+                                a_image.id = "profile-user";
+                                let img_user = document.createElement('img');
+                                img_user.id = "img_user";
+                                a_image.appendChild(img_user);
+                                div_image.appendChild(a_image);
+                                div.appendChild(div_image);
+                                a_image.dataset.id = friend_info.id;
+                                a_image.href = "../Profile/" + a_image.dataset.id;
+
+                                let div_userinfo = document.createElement('div');
+                                div_userinfo.className = "user-info";
+                                let a_userinfo = document.createElement('a');
+                                let h3_userinfo = document.createElement('h3');
+                                h3_userinfo.innerHTML = friend_info.nome;
+                                let h6_userinfo = document.createElement('h6');
+                                div_userinfo.appendChild(a_userinfo);
+                                a_userinfo.appendChild(h3_userinfo);
+                                div_userinfo.appendChild(h6_userinfo);
+                                div.appendChild(div_userinfo);
+                                a_userinfo.dataset.id = friend_info.id;
+                                a_userinfo.href = "../Profile/" + a_userinfo.dataset.id;
+
+                                let div_buttons = document.createElement('div');
+                                div_buttons.className = "add-buttons";
+                                div_buttons.id = "add-buttons3";
+
+                                let buttonReject = document.createElement('a');
+                                let i2 = document.createElement('i');
+                                i2.className = 'fas fa-trash-alt';
+                                buttonReject.appendChild(i2);
+                                buttonReject.style.cursor = 'pointer';
+                                buttonReject.className = "reject-icon";
+                                buttonReject.dataset.id = friend_info.id;
+                                buttonReject.addEventListener('click', function(event) {
+                                    const dataR = {
+                                        destino : id_destino,
+                                        origem : friend_info.id,
+                                        emailUser : friend_info.email
+                                       };
+                                
+                                       const xhrRejectRequest = new XMLHttpRequest();
+                                       xhrRejectRequest.open('POST', '/Home/deleteFriend', true);
+                                       xhrRejectRequest.setRequestHeader('Content-Type', 'application/json');
+                                       xhrRejectRequest.send(JSON.stringify(dataR));
+                                       
+                                       xhrRejectRequest.onload = function(){
+                                        if(xhrRejectRequest.status === 200)
+                                        {
+                                            document.getElementById('main-side').innerHTML = "";
+                                            showAddUsers();
+                                            document.getElementById('friend-requests').innerHTML = "";
+                                            showFriendRequests();
+                                            divFriends.innerHTML = "";
+                                            showFriends();
+                                        }
+                                     
+                                       };
+                                });
+                                div_buttons.appendChild(buttonReject);
+
+
+
+                                div.appendChild(div_buttons);
+                                divFriends.appendChild(div);
+
+                                        if(friend_info2.genero == 'Feminino')
+                                        {
+                                            img_user.src = "../images/profile-female.png";
+                                        }
+                                        if(friend_info2.genero == 'Masculino')
+                                        {
+                                            img_user.src = "../images/profile-male.png";
+                                        }
+                                        if(friend_info2.genero == 'other')
+                                        {
+                                            img_user.src = "../images/profile-other.png";
+                                        }
+                                
+                                        h6_userinfo.innerHTML = friend_info2.headline;
+            
+
+
+                                //-------------------------------
+                                }
+                            }
+                            xhrlistUsers1.send();
                     
+                                
+                        }
+                    }
+
                 }
             }
             xhrFriends.send();
