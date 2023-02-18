@@ -553,7 +553,9 @@ var User = {
   {
     let query = `DELETE FROM amigo WHERE email_utilizador = ? AND email_amigo = ?`;
     let query3 = `DELETE FROM amigo WHERE email_amigo = ? AND email_utilizador = ?`;
-    let query2 = `DELETE FROM pedido_amizade WHERE id_destino = ? AND id_origem = ?`;
+    let query2 = `DELETE FROM pedido_amizade WHERE id_origem = ? AND id_destino = ?`;
+    let query4 = `DELETE FROM pedido_amizade WHERE id_destino = ? AND id_origem = ?`;
+  
     let values = [email, data.emailUser];
     let values2 = [data.origem, data.destino]
     let connection = mysql.createConnection(options.mysql);
@@ -564,8 +566,10 @@ var User = {
       {
         connection.query(query2, values2, function(error, result){
           connection.query(query3, values, function(error, result){
-            resolve(0);
-            connection.end();
+            connection.query(query4, values2, function(error, result){
+              resolve(0);
+              connection.end();
+            })
           })
         })
       }
