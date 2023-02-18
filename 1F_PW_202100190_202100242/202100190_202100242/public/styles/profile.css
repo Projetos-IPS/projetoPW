@@ -11,7 +11,6 @@
     width: 240px;
     margin: 2% 1.5%;
     z-index: 1;
-    line-height: 10px;
     text-transform: capitalize;
     border-radius: 12px;
     text-align: center;
@@ -41,7 +40,7 @@
     border-radius: 50%;
     position: relative;
     top: 40px;
-    right: 5px;
+    right: 10px;
 }
 
 .profile-gray-area {
