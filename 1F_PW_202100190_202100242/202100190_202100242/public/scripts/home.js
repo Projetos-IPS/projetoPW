@@ -176,6 +176,23 @@ function showAddUsers(){
                         });
                         div_buttons.appendChild(button2);
                         div.appendChild(div_buttons);
+                        
+                        const xhrVerifyLoggedUserType = new XMLHttpRequest();
+                        xhrVerifyLoggedUserType.open('GET', '/Home/getloggedinUserType', true);
+                        xhrVerifyLoggedUserType.onload = function(){
+                        if(xhrVerifyLoggedUserType.status === 200){
+                            let userTypeConfirm = JSON.parse(xhrVerifyLoggedUserType.responseText);
+                            if(userTypeConfirm[0].tipo_utilizador == 'Empresa')
+                            {
+                                document.getElementById('friend-requests').style.display = "none";
+                                document.getElementById('friends').style.display = "none";
+                                document.getElementById('h2-home').innerHTML = "Users list";
+                                div_buttons.style.display = "none";
+                            }
+                        }
+                        }
+
+                        xhrVerifyLoggedUserType.send();
                         img_btn1.src = "../images/user-add.png";
                         img_btn2.src = "../images/user-add-hover.png";
                         divFriends.appendChild(div);
@@ -260,7 +277,7 @@ function showAddUsers(){
                         }
                     //----------------------------------------//
                         update();
-                        updateList();
+                       // updateList();
                     }
                 }
 

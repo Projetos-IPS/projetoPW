@@ -94,6 +94,7 @@ function getLoggedUserData() {
 function showAddUsers(){
     let divFriends = document.getElementById('main-side');
     let h2 = document.createElement('h2');
+    h2.id = "h2-home";
     h2.innerHTML = 'Add friends';
     divFriends.appendChild(h2);
     const xhrUserInfo = new XMLHttpRequest();
@@ -177,6 +178,24 @@ function showAddUsers(){
                         });
                         div_buttons.appendChild(button2);
                         div.appendChild(div_buttons);
+
+                        const xhrVerifyLoggedUserType1 = new XMLHttpRequest();
+                        xhrVerifyLoggedUserType1.open('GET', '../Home/getloggedinUserType', true);
+                        xhrVerifyLoggedUserType1.onload = function(){
+                        if(xhrVerifyLoggedUserType1.status === 200){
+                            let userTypeConfirm = JSON.parse(xhrVerifyLoggedUserType1.responseText);
+                            if(userTypeConfirm[0].tipo_utilizador == 'Empresa')
+                            {
+                                document.getElementById('friend-requests').style.display = "none";
+                                document.getElementById('friends').style.display = "none";
+                                document.getElementById('h2-home').innerHTML = "Users list";
+                                document.getElementById('main-side').style.display = "block";
+                                div_buttons.style.display = "none";
+                            }
+                        }
+                        }
+                        xhrVerifyLoggedUserType1.send();
+
                         img_btn1.src = "../images/user-add.png";
                         img_btn2.src = "../images/user-add-hover.png";
                         divFriends.appendChild(div);
