@@ -164,7 +164,7 @@ function showAddUsers(){
                                };
                         
                                const xhrSendRequest = new XMLHttpRequest();
-                               xhrSendRequest.open('POST', '..//Home/sendFriendRequest', true);
+                               xhrSendRequest.open('POST', '../Home/sendFriendRequest', true);
                                xhrSendRequest.setRequestHeader('Content-Type', 'application/json');
                                xhrSendRequest.send(JSON.stringify(dataRQ));
                                
