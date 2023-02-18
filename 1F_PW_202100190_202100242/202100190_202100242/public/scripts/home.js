@@ -93,6 +93,7 @@ function showAddUsers(){
     let divFriends = document.getElementById('main-side');
     let h2 = document.createElement('h2');
     h2.innerHTML = 'Add friends';
+    h2.id = "h2-home";
     divFriends.appendChild(h2);
     const xhrUserInfo = new XMLHttpRequest();
     xhrUserInfo.open('GET', 'Home/getUsersProfissionaisInformation', true);
@@ -259,6 +260,7 @@ function showAddUsers(){
                         }
                     //----------------------------------------//
                         update();
+                        updateList();
                     }
                 }
 
@@ -552,7 +554,7 @@ function showFriends(){
                                             showFriendRequests();
                                             divFriends.innerHTML = "";
                                             showFriends();
-                                            // updateList();
+                                        //    updateList();
                                         }
                                      
                                        };
@@ -599,30 +601,23 @@ function showFriends(){
   
 }
 
-/*function updateList(){
+function updateList(){
     const xhrVerifyLoggedUserType = new XMLHttpRequest();
-    xhrVerifyLoggedUserType.open('GET', '../Home/getloggedinUserType', true);
+    xhrVerifyLoggedUserType.open('GET', '/Home/getloggedinUserType', true);
     xhrVerifyLoggedUserType.onload = function(){
       if(xhrVerifyLoggedUserType.status === 200){
         let userTypeConfirm = JSON.parse(xhrVerifyLoggedUserType.responseText);
-        if(userTypeConfirm[0].tipo_utilizador == 'Profissional')
-        {
-          const xhrVerifyFriends = new XMLHttpRequest();
-          xhrVerifyFriends.open('GET', '../Home/getFriends', true);
-          xhrVerifyFriends.onload = function(){
-          if(xhrVerifyFriends.status === 200){
-          let friendsverify = JSON.parse(xhrVerifyFriends.responseText);
-          
-
-        }
-  
-    }
-    xhrVerifyFriends.send();
-        }
+        if(userTypeConfirm[0].tipo_utilizador == 'Empresa')
+          {
+              document.getElementById('friend-requests').style.display = "none";
+              document.getElementById('friends').style.display = "none";
+              document.getElementById('h2-home').innerHTML = "Users list";
+              document.getElementById('add-buttons').style.display = "none";
+          }
       }
     }
     xhrVerifyLoggedUserType.send();
-}*/
+}
 
 
 var init = function () {
@@ -630,7 +625,6 @@ var init = function () {
     showAddUsers();
     showFriendRequests();
     showFriends();
-   // updateList();
 };
 
 window.onload = init;
