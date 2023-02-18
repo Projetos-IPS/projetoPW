@@ -854,6 +854,7 @@ function submitFormDataP(){
       if(xhrsubmitEditDescription.status === 200)
       {
         closeEditDescription();
+        console.log(data1.description);
       }
    
      };

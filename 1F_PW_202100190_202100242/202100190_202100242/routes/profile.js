@@ -103,7 +103,7 @@ router.post('/editDescription/:userid/', function(req, res)
    const data1 = req.body;
    User.getEmailById(id).then(function(result)
    {
-      User.editdescription(data1, result[0].id).then(function(result2)
+      User.editdescription(data1, result[0].email).then(function(result2)
       {
          res.json(result2);
       })
