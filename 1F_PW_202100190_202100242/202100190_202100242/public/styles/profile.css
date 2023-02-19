@@ -314,6 +314,14 @@ textarea {
 .profile-content{
     margin-top: 3%;
     display: flex;
+    width: 100%;
+}
+
+.content-part{
+    display: flex;
+    width: 210px;
+    justify-content: space-between;
+
 }
 
 
