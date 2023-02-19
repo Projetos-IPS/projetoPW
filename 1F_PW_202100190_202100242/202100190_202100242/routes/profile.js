@@ -107,6 +107,20 @@ router.get('/getExperienceDates/:userid/', function(req, res){
    })
 });
 
+router.post('/deleteExperience/:userid/', function(req, res)
+{
+   let id = req.params.userid;
+   const data = req.body;
+   User.getEmailById(id).then(function(result)
+   {
+      User.deleteExperience(data, result[0].email).then(function(result2)
+      {
+         res.json(result2);
+      })
+   })
+});
+
+
 router.post('/editIntro/:userid/', function(req, res)
 {
    let id = req.params.userid;

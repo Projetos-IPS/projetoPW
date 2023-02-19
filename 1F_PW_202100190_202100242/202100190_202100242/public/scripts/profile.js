@@ -702,6 +702,7 @@ function getProfileInformation() {
                         document.getElementById('add-button-experience').style.display = "none";
                         document.getElementById('add-button-education').style.display = "none";
                         document.getElementById('profile-menu').className = "link";
+
                     }
                 }
             }
@@ -1023,6 +1024,7 @@ function showExperiences(){
                 let div_content_part_icons = document.createElement('div');
                 div_content_part_icons.className = 'content-part-icon';
                 let a1 = document.createElement('a');
+                a1.id = 'exp-icon1';
                 //a1.dataset.experienceid = experiencesProfile[i].id;
                 let li1 = document.createElement('li');
                 li1.className = 'fas fa-edit';
@@ -1032,17 +1034,53 @@ function showExperiences(){
                 div_content_part_icons.appendChild(a1);
 
                 let a2 = document.createElement('a');
+                a2.id = 'exp-icon2';
                 //a2.dataset.experienceid = experiencesProfile[i].id;
                 let li2 = document.createElement('li');
                 li2.className = 'fas fa-trash-alt';
                 li2.className += ' icon2';
                 li2.style.color = 'black';
                 a2.appendChild(li2);
-                div_content_part_icons.appendChild(a2);
+                a2.addEventListener("click", function() {
+                    const data = {
+                        id : experiencesProfile[i].id
+                       };
+            
+                       const xhrDeleteExp = new XMLHttpRequest();
+                       xhrDeleteExp.open('POST', '/Profile/deleteExperience/' + userID, true);
+                       xhrDeleteExp.setRequestHeader('Content-Type', 'application/json');
+                       xhrDeleteExp.send(JSON.stringify(data));
+                       
+                       xhrDeleteExp.onload = function(){
+                        if(xhrDeleteExp.status === 200)
+                        {
+                            div_profile_content.innerHTML = "";
+                            showExperiences();
+                        }
+                    }
+                  });
 
+                div_content_part_icons.appendChild(a2);
                 div_content_part.appendChild(div_content_part_icons);
                 div_profile_content.appendChild(div_content_part);
                 experience_div.appendChild(div_profile_content);
+
+
+                //visibilidade dos icons 
+                const xhrloggedUserInfo1 = new XMLHttpRequest();
+                xhrloggedUserInfo1.open('GET', '/Home/getloggedinUserType', true);
+                xhrloggedUserInfo1.setRequestHeader('Content-Type', 'application/json');
+                xhrloggedUserInfo1.onload = function () {
+                    if (xhrloggedUserInfo1.status === 200) {
+                        let loggedUserInfo1 = JSON.parse(xhrloggedUserInfo1.responseText);
+                        if (loggedUserInfo1[0].id != userID) {
+                           a1.style.display = "none";
+                           a2.style.display = "none";
+                        }
+                    }
+                }
+                xhrloggedUserInfo1.send();
+                //--------------------------------
             }
         }
 

@@ -513,6 +513,27 @@ var User = {
                       });
                     
                       },
+
+    deleteExperience: function(data, email){
+                 return new Promise(function(resolve, reject)
+                     {
+                    let query = `DELETE FROM experiencia_trabalho WHERE id = ? and email_profissional = ?`;
+                    let connection = mysql.createConnection(options.mysql);
+                    let values = [data.id, email];
+                     connection.query(query, values, function(error, result)
+                     {
+                       if(error) {reject(error);}
+                       else
+                       {
+                       resolve(0);
+                       connection.end();
+                        }
+                          
+                      });
+                            
+                     });
+                          
+                   },
 //---------------------------------
 //Pedidos de amizade---------------------
     sendFriendRequest: function(id_destino, data)
