@@ -1086,6 +1086,11 @@ function showExperiences(){
                 //--------------------------------
             }
         }
+        else{
+            let p = document.createElement('p');
+            p.innerHTML = 'No experiences added';
+            experience_div.appendChild(p);
+        }
 
 
         }
