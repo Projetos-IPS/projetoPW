@@ -1077,7 +1077,7 @@ function showExperiences(){
                     if (xhrloggedUserInfo1.status === 200) {
                         let loggedUserInfo1 = JSON.parse(xhrloggedUserInfo1.responseText);
                         if (loggedUserInfo1[0].id != userID) {
-                           a1.style.display = "none";
+                           //a1.style.display = "none";
                            a2.style.display = "none";
                         }
                     }
