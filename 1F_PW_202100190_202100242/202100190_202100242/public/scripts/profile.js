@@ -668,10 +668,14 @@ function getProfileInformation() {
                         }
                         profileHeadline.innerHTML = informationProfile[0].headline;
                         profileAddress.innerHTML = informationProfile[0].localidade;
-                    }
+
+                        showExperiences();
+                 }
                 }
                 xhrprofileprofissional.send();
             }
+
+
             else if (profileType[0].tipo_utilizador == 'Empresa') {
                 const xhrprofileempresa = new XMLHttpRequest();
                 xhrprofileempresa.open('GET', '/Profile/getProfileInformationEmpresa/' + userID, true);
@@ -698,7 +702,6 @@ function getProfileInformation() {
                         document.getElementById('add-button-experience').style.display = "none";
                         document.getElementById('add-button-education').style.display = "none";
                         document.getElementById('profile-menu').className = "link";
-
                     }
                 }
             }
@@ -837,7 +840,6 @@ function submitFormDataP() {
           }
 
         let bd_date_start = formAddExperience.experiencestartdate.value + '-01';
-        let bd_date_end = formAddExperience.experienceEndDate.value + '-01';
 
         const data2 = {
             cargo: formAddExperience.titleUser.value,
@@ -847,7 +849,7 @@ function submitFormDataP() {
             tipo_localizacao: formAddExperience.locationtype.value,
             trabalho_atual: currentlyworkingValue,
             data_inicio: bd_date_start,
-            data_fim: bd_date_end,
+            data_fim: formAddExperience.experienceEndDate.value,
             descricao: formAddExperience.experienceDescription.value
         };
         const xhrsubmitAddExperience = new XMLHttpRequest();
@@ -858,6 +860,7 @@ function submitFormDataP() {
         xhrsubmitAddExperience.onload = function () {
             if (xhrsubmitAddExperience.status === 200) {
                 closeAddExperience();
+                showExperiences();
             }
 
         };
@@ -875,7 +878,6 @@ function submitFormDataP() {
           }
 
         let bd_date_start = formAddEducation.startDateEducation.value + '-01';
-        let bd_date_end = formAddEducation.startDateEducation.value + '-01';
 
         const data3 = {
             name_school: formAddEducation.educationSchool.value,
@@ -951,6 +953,103 @@ function openAddExperience() {
 function closeAddExperience() {
     document.getElementById('pop-up-add-experience').style.display = "none";
     document.getElementById('page-mask').style.display = "none";
+    document.getElementById('addExperienceForm').reset();
+}
+
+function showExperiences(){
+    const xhrEmpregos = new XMLHttpRequest();
+    xhrEmpregos.open('GET', '/Profile/getProfileExperiences/' + userID, true);
+    xhrEmpregos.setRequestHeader('Content-Type', 'application/json');
+    xhrEmpregos.onload = function () {
+        let experience_div = document.getElementById('experiences');
+        if (xhrEmpregos.status === 200) {
+            let experiencesProfile = JSON.parse(xhrEmpregos.responseText);
+        
+        if(experiencesProfile.length > 0){
+            for(let i = 0; i < experiencesProfile.length; i++){
+                let div_profile_content = document.createElement('div');
+                div_profile_content.className = 'profile-content';
+                let div_img_part = document.createElement('div');
+                div_img_part.className = 'img-part';
+                let img_div = document.createElement('img');
+                img_div.src = '../images/experience.jpg';
+                img_div.className = 'img-experience';
+                div_img_part.appendChild(img_div);
+                div_profile_content.appendChild(div_img_part);
+
+                let div_content_part = document.createElement('div');
+                div_content_part.className = 'content-part';
+
+                let div_content_part_text = document.createElement('div');
+                div_content_part_text.className = 'content-part-text';
+                
+                let div_experience_title = document.createElement('div');
+                div_experience_title.className = 'experience-title';
+                div_experience_title.innerHTML = experiencesProfile[i].cargo;
+                div_content_part_text.appendChild(div_experience_title);
+                let div_experience_company_employment = document.createElement('div');
+                div_experience_company_employment.className = 'experience-Company-Employment';
+                div_experience_company_employment.innerHTML = experiencesProfile[i].nome_empresa + " - " + experiencesProfile[i].regime;
+                div_content_part_text.appendChild(div_experience_company_employment);
+                let div_experience_date = document.createElement('div');
+                div_experience_date.className = 'experience-date';
+             
+                //DATAS
+                const xhrDatasExperiences = new XMLHttpRequest();
+                xhrDatasExperiences.open('GET', '/Profile/getExperienceDates/' + userID, true);
+                xhrDatasExperiences.setRequestHeader('Content-Type', 'application/json');
+                xhrDatasExperiences.onload = function () {
+                    if (xhrDatasExperiences.status === 200) {
+                        let experiencesDates = JSON.parse(xhrDatasExperiences.responseText);
+                        div_experience_date.innerHTML = experiencesDates[i].datainicio;
+                        if(experiencesProfile[i].data_fim != null){
+                            div_experience_date.innerHTML += ' - ' + experiencesDates[i].datafim;
+                        }
+                    }
+                }
+                xhrDatasExperiences.send();
+                //--------------
+                div_content_part_text.appendChild(div_experience_date);
+                let div_experience_location_type = document.createElement('div');
+                div_experience_location_type.className = 'experience-localidade-tipo';
+                div_experience_location_type.innerHTML = experiencesProfile[i].localizacao + " - " + experiencesProfile[i].tipo_localizacao;
+                div_content_part_text.appendChild(div_experience_location_type);
+                let p_description = document.createElement('p');
+                p_description.className = 'experience-description';
+                p_description.innerHTML = experiencesProfile[i].descricao;
+                div_content_part_text.appendChild(p_description);
+                div_content_part.appendChild(div_content_part_text);
+
+                let div_content_part_icons = document.createElement('div');
+                div_content_part_icons.className = 'content-part-icon';
+                let a1 = document.createElement('a');
+                //a1.dataset.experienceid = experiencesProfile[i].id;
+                let li1 = document.createElement('li');
+                li1.className = 'fas fa-edit';
+                li1.className += ' icon1';
+                li1.style.color = 'black';
+                a1.appendChild(li1);
+                div_content_part_icons.appendChild(a1);
+
+                let a2 = document.createElement('a');
+                //a2.dataset.experienceid = experiencesProfile[i].id;
+                let li2 = document.createElement('li');
+                li2.className = 'fas fa-trash-alt';
+                li2.className += ' icon2';
+                li2.style.color = 'black';
+                a2.appendChild(li2);
+                div_content_part_icons.appendChild(a2);
+
+                div_content_part.appendChild(div_content_part_icons);
+                div_profile_content.appendChild(div_content_part);
+                experience_div.appendChild(div_profile_content);
+            }
+        }
+
+
+        }
+    }
+    xhrEmpregos.send();
 }
 
 function openAddEducation() {
@@ -971,18 +1070,27 @@ var init = function () {
     showFriendRequests();
     showFriends();
     updateList();
+    changeviewExperience();
 };
 
 function changeviewExperience(){
     let currentlyworking = document.getElementById('currentlyworking');
-    if(currentlyworking.checked == true){
+
+    currentlyworking.addEventListener("change", function() {
+        // Call your function here
+        change(currentlyworking);
+      });
+
+    function change(check){
+    if(check.checked == true){
         document.getElementById('experienceEndDate').style.display = "none";
         document.getElementById('enddate-label').style.display = "none";
       }
-      else if(currentlyworking.checked == false){
+      else if(check.checked == false){
         document.getElementById('experienceEndDate').style.removeProperty('display');
         document.getElementById('enddate-label').style.removeProperty('display');
       }
+    }
 }
 
 function changeviewEducation(){

@@ -312,16 +312,34 @@ textarea {
 
 
 .profile-content{
-    margin-top: 3%;
+    margin-top: 1%;
     display: flex;
     width: 100%;
 }
 
 .content-part{
     display: flex;
-    width: 210px;
+    width: 260px;
     justify-content: space-between;
 
+}
+
+.content-part-icon .icon1{
+    margin: 10px;
+    cursor: pointer;
+}
+
+.content-part-icon .icon2{
+    cursor: pointer;
+}
+
+.experience-date, .experience-localidade-tipo{
+    font-size: small;
+    color: gray;
+}
+
+.experience-title{
+    font-weight: 600;
 }
 
 

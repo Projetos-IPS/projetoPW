@@ -84,6 +84,29 @@ router.get('/getProfileBirthdate/:userid/', function(req, res)
    })
 });
 
+router.get('/getProfileExperiences/:userid/', function(req, res)
+{
+   let id = req.params.userid;
+   User.getEmailById(id).then(function(result)
+   {
+      User.getExperiences(result[0].email).then(function(result2)
+      {
+            res.json(result2);
+      })
+   })
+});
+
+router.get('/getExperienceDates/:userid/', function(req, res){
+   let id = req.params.userid;
+   User.getEmailById(id).then(function(result)
+   {
+      User.getExperiencesDate(result[0].email).then(function(result2)
+      {
+            res.json(result2);
+      })
+   })
+});
+
 router.post('/editIntro/:userid/', function(req, res)
 {
    let id = req.params.userid;
