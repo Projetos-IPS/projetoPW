@@ -110,6 +110,32 @@ router.post('/editDescription/:userid/', function(req, res)
    })
 });
 
+router.post('/addExperience/:userid/', function(req, res)
+{
+   let id = req.params.userid;
+   const data2 = req.body;
+   User.getEmailById(id).then(function(result)
+   {
+      User.addExperience(data2, result[0].email).then(function(result2)
+      {
+         res.json(result2);
+      })
+   })
+});
+
+router.post('/addEducation/:userid/', function(req, res)
+{
+   let id = req.params.userid;
+   const data3 = req.body;
+   User.getEmailById(id).then(function(result)
+   {
+      User.addEducation(data3, result[0].email).then(function(result2)
+      {
+         res.json(result2);
+      })
+   })
+});
+
 
   
  module.exports = router;

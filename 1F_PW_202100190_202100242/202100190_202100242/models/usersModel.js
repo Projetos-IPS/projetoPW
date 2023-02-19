@@ -411,6 +411,46 @@ var User = {
           });
         
           },
+
+    addExperience: function(data, email){
+      return new Promise(function(resolve, reject)
+          {
+            let query = `INSERT INTO experiencia_trabalho(email_profissional, cargo, regime, nome_empresa, localizacao, tipo_localizacao, trabalho_atual, data_inicio, data_fim, descricao) values (?,?,?,?,?,?,?,?,?,?)`;
+            let connection = mysql.createConnection(options.mysql);
+            let values = [email, data.cargo, data.regime, data.nome_empresa, data.localizacao, data.tipo_localizacao, data.trabalho_atual, data.data_inicio, data.data_fim, data.descricao];
+            connection.query(query, values, function(error, result)
+            {
+              if(error) {reject(error);}
+              else
+              {
+                resolve(result.insertId);
+              }
+            connection.end();
+            });
+          
+          });
+        
+          },
+
+      addEducation: function(data, email){
+      return new Promise(function(resolve, reject)
+          {
+            let query = `INSERT INTO educacao(email_profissional, estabelecimento_ensino, tipo_curso, nome_curso, atual, data_inicio, data_fim, media, atividades, descricao) values (?,?,?,?,?,?,?,?,?,?)`;
+            let connection = mysql.createConnection(options.mysql);
+            let values = [email, data.name_school, data.name_degree, data.name_field, data.currently_studying, data.date_start, data.date_end, data.grade, data.activities, data.description];
+            connection.query(query, values, function(error, result)
+            {
+              if(error) {reject(error);}
+              else
+              {
+                resolve(result.insertId);
+              }
+            connection.end();
+            });
+          
+          });
+        
+          },
 //---------------------------------
 //Pedidos de amizade---------------------
     sendFriendRequest: function(id_destino, data)

@@ -8,7 +8,7 @@
 
 .main-profile-stuff {
     padding-top: 2%;
-    width: 240px;
+    width: 275px;
     margin: 2% 1.5%;
     z-index: 1;
     text-transform: capitalize;
@@ -132,6 +132,7 @@
 .profile-name {
     font-family: 'Unbounded', cursive;
     text-align: center;
+    margin: 1%;
 }
 
 .profile-headline {
@@ -260,12 +261,11 @@ textarea {
 .pop-up-form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     text-align: center;
 }
 
 .pop-up-form textarea {
-    width: 70%;
+    margin: 10px;
 }
 
 .pop-up-edit-description {
@@ -280,6 +280,29 @@ textarea {
     height: 7px;
 }
 
+.pop-up-add-experience{
+ 
+    background-color: white;
+    width: 50%;
+    position: absolute;
+    z-index: 2;
+    margin: 0% 15%;
+    border-radius: 12px;
+    display: none;
+    height: 80%;
+
+}
+
+.pop-up-add-education{
+    background-color: white;
+    width: 50%;
+    position: absolute;
+    z-index: 2;
+    margin: 0% 15%;
+    border-radius: 12px;
+    display: none;
+    height: 80%;
+}
 
 
 

@@ -691,7 +691,8 @@ function getProfileInformation() {
                     if (loggedUserInfo[0].id != userID) {
                         document.getElementById('edit-button').style.display = "none";
                         document.getElementById('edit-button-description').style.display = "none";
-                        document.getElementById('edit-button-experience').style.display = "none";
+                        document.getElementById('add-button-experience').style.display = "none";
+                        document.getElementById('add-button-education').style.display = "none";
                         document.getElementById('profile-menu').className = "link";
 
                     }
@@ -815,11 +816,85 @@ function submitFormDataP() {
         xhrsubmitEditDescription.onload = function () {
             if (xhrsubmitEditDescription.status === 200) {
                 closeEditDescription();
-                console.log(data1.description);
             }
 
         };
+    });
 
+    let formAddExperience = document.getElementById('addExperienceForm');
+    formAddExperience.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        if(formAddExperience.currentlyworking.checked == true){
+            currentlyworkingValue = 1;
+          }
+          else if(formAddExperience.currentlyworking.checked == false){
+            currentlyworkingValue = 0;
+          }
+
+        let bd_date_start = formAddExperience.experiencestartdate.value + '-01';
+        let bd_date_end = formAddExperience.experienceEndDate.value + '-01';
+
+        const data2 = {
+            cargo: formAddExperience.titleUser.value,
+            regime: formAddExperience.employmentType.value,
+            nome_empresa: formAddExperience.companyExperience.value,
+            localizacao: formAddExperience.locationExperience.value,
+            tipo_localizacao: formAddExperience.locationtype.value,
+            trabalho_atual: currentlyworkingValue,
+            data_inicio: bd_date_start,
+            data_fim: bd_date_end,
+            descricao: formAddExperience.experienceDescription.value
+        };
+        const xhrsubmitAddExperience = new XMLHttpRequest();
+        xhrsubmitAddExperience.open('post', '/Profile/addExperience/' + userID, true);
+        xhrsubmitAddExperience.setRequestHeader('Content-Type', 'application/json');
+        xhrsubmitAddExperience.send(JSON.stringify(data2));
+
+        xhrsubmitAddExperience.onload = function () {
+            if (xhrsubmitAddExperience.status === 200) {
+                closeAddExperience();
+            }
+
+        };
+    });
+
+    let formAddEducation = document.getElementById('addEducationForm');
+    formAddEducation.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        if(formAddEducation.currentlystudying.checked == true){
+            currentlystudying = 1;
+          }
+          else if(formAddEducation.currentlystudying.checked == false){
+            currentlystudying = 0;
+          }
+
+        let bd_date_start = formAddEducation.startDateEducation.value + '-01';
+        let bd_date_end = formAddEducation.startDateEducation.value + '-01';
+
+        const data3 = {
+            name_school: formAddEducation.educationSchool.value,
+            name_degree: formAddEducation.educationDegree.value,
+            name_field: formAddEducation.educationField.value,
+            currently_studying: currentlystudying,
+            date_start: bd_date_start,
+            date_end: bd_date_end,
+            grade: formAddEducation.gradeEducation.value,
+            activities: formAddEducation.activitiesEducation.value,
+            description: formAddEducation.descriptionEducation.value
+        };
+        const xhrsubmitAddEducation = new XMLHttpRequest();
+        xhrsubmitAddEducation.open('post', '/Profile/addEducation/' + userID, true);
+        xhrsubmitAddEducation.setRequestHeader('Content-Type', 'application/json');
+        xhrsubmitAddEducation.send(JSON.stringify(data3));
+
+        xhrsubmitAddEducation.onload = function () {
+            if (xhrsubmitAddEducation.status === 200) {
+                closeAddEducation();
+            }
+
+        };
     });
 }
 
@@ -874,6 +949,16 @@ function closeAddExperience() {
     document.getElementById('page-mask').style.display = "none";
 }
 
+function openAddEducation() {
+    document.getElementById('pop-up-add-education').style.display = "block";
+    document.getElementById('page-mask').style.display = "block";
+}
+
+function closeAddEducation() {
+    document.getElementById('pop-up-add-education').style.display = "none";
+    document.getElementById('page-mask').style.display = "none";
+}
+
 var init = function () {
     getLoggedUserData();
     getProfileInformation();
@@ -882,7 +967,30 @@ var init = function () {
     showFriendRequests();
     showFriends();
     updateList();
-
 };
+
+function changeviewExperience(){
+    let currentlyworking = document.getElementById('currentlyworking');
+    if(currentlyworking.checked == true){
+        document.getElementById('experienceEndDate').style.display = "none";
+        document.getElementById('enddate-label').style.display = "none";
+      }
+      else if(currentlyworking.checked == false){
+        document.getElementById('experienceEndDate').style.removeProperty('display');
+        document.getElementById('enddate-label').style.removeProperty('display');
+      }
+}
+
+function changeviewEducation(){
+    let currentlystudying = document.getElementById('currentlystudying');
+    if(currentlystudying.checked == true){
+        document.getElementById('endDateEducation').style.display = "none";
+        document.getElementById('endDateEducation-label').style.display = "none";
+      }
+      else if(currentlystudying.checked == false){
+        document.getElementById('endDateEducation').style.removeProperty('display');
+        document.getElementById('endDateEducation-label').style.removeProperty('display');
+      }
+}
 
 window.onload = init;

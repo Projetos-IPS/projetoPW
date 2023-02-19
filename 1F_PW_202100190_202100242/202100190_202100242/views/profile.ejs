@@ -139,7 +139,7 @@
           <form class="editDescriptionProfileP" method="post"  id="editDescriptionProfileP">
             <p>You can write about your years of experience, industry, or skills. People also talk about their achievements or previous job experiences.</p>
             <br>
-            <textarea wrap="hard" id="descriptionUser" name="descriptionUser"></textarea><br>
+            <textarea wrap="hard" id="descriptionUser" name="descriptionUser" cols="30" rows="10"></textarea><br>
         </div>
         <div class="button-save">
           <button class="save" type="submit">Save</button>
@@ -149,26 +149,89 @@
   </div>
 
   <!------INICIO POP-UP de adicionar experiência profissional-->
-  <div id="pop-up-add-experience" class="pop-up-edit-description">
+  <div id="pop-up-add-experience" class="pop-up-add-experience">
     <div class="pop-up-header">
     <h3>Add experience</h3>
     <button class="close-btn" onclick="closeAddExperience()"><i class="fa-solid fa-x" style="font-size: 20px; color: #7088B0;"></i></button>
     </div>
 
     <div class="pop-up-form">
-    <form class="editDescriptionProfileP" method="post" id="editDescriptionProfileP">
-     
+    <form class="addExperienceForm" method="post" id="addExperienceForm">
+      <label for="titleUser">Title*</label><br>
+      <input id="titleUser" type="text" name="titleUser" required><br>
+      <br>
+      <label for="EmploymentType">Employment type*</label><br>
+      <select id="regime" name="employmentType">
+        <option value="Full-time">Full-team</option>
+        <option value="Part-ime">Part-team</option>
+        <option value="Self-employed">Self-employed</option>
+        <option value="Freelance">Freelance</option>
+        <option value="Contract">Contract</option>
+        <option value="Internship">Internship</option>
+        <option value="Apprenticeship">Apprenticeship</option>
+        <option value="Seasonal">Seasonal</option>
+      </select>
+      <br><br>
+      <label for="companyExperience">Company name*</label><br>
+      <input id="companyExperience" type="text" name="companyExperience" required><br><br>
+      <label for="locationExperience">Location*</label><br>
+      <input id="locationExperience" type="text" name="locationExperience" required><br><br>
+      <label for="locationtype">Location type*</label><br>
+      <select id="locationtype" name="locationtype" required>
+        <option value="On-site">On-site</option>
+        <option value="Hybrid">Hybrid</option>
+        <option value="Remote">Remote</option>
+      </select><br><br>
+    <input type="checkbox" id="currentlyworking" name="currentlyworking" onclick="changeviewExperience()"> I am currently working in this role
+    <br><br>
+    <label for="startdate">Start date*</label><br>
+    <input type="month" id="experiencestartdate" name="experiencestartdate" required><br>
+    <label for="enddate" id="enddate-label">End date</label><br>
+    <input type="month" id="experienceEndDate" name="experienceEndDate"><br><br>
+    <label for="experienceDescription" class="experienceDescription">Description</label><br>
+    <textarea id="experienceDescription" class="experienceDescription" cols="30" rows="10"></textarea>
     </div>
     <div class="button-save">
       <button class="save" type="submit">Save</button>
     </div>
 </form>
-
 </div>
 <!------FIM POP-UP de adicionar experiência profissional-->
   <!--------------------------------------------------------------->
+  <div id="pop-up-add-education" class="pop-up-add-education">
+    <div class="pop-up-header">
+    <h3>Add education</h3>
+    <button class="close-btn" onclick="closeAddEducation()"><i class="fa-solid fa-x" style="font-size: 20px; color: #7088B0;"></i></button>
+    </div>
 
+    <div class="pop-up-form">
+    <form class="addEducationForm" method="post"  id="addEducationForm">
+      <label for="educationSchool">School*</label><br>
+      <input type="text" name="educationSchool" id="educationSchool" required><br><br>
+      <label for="educationDegree">Degree*</label><br>
+      <input type="text" name="educationDegree" id="educationDegree" required><br><br>
+      <label for="educationField">Field of study*</label><br>
+      <input type="text" name="educationField" id="field" required><br><br>
+      <input type="checkbox" name="currentlystudying" id="currentlystudying" onclick="changeviewEducation()">
+      I am currently studying <br><br>
+      <label for="startDateEducation">Start date*</label><br>
+      <input type="month" name="startDateEducation" id="startDateEducation" required><br>
+      <label for="endDateEducation" id="endDateEducation-label">End date</label><br>
+      <input type="month" name="endDateEducation" id="endDateEducation"><br><br>
+      <label for="gradeEducation">Grade</label><br>
+      <input type="text" name="gradeEducation" id="gradeEducation"><br><br>
+      <label for="activitiesEducation">Activities and societies</label><br>
+      <textarea name="activitiesEducation" id="activitiesEducation" cols="30" rows="10"></textarea><br>
+      <label for="descriptionEducation">Description</label><br>
+      <textarea name="descriptionEducation" id="descriptionEducation" cols="30" rows="10"></textarea>
+   </div>
+  <div class="button-save">
+    <button class="save" type="submit">Save</button>
+  </div>
+</form>
+</div>
 
+  <!--------------------------------------------------------------->
   <section class="main-general">     
     <section class="profile-gray-area">
       <div class="profile-main">
@@ -183,7 +246,7 @@
             <button class="edit-button" onclick="openEditIntro()"><i class='far fa-edit' style='font-size:24px'></i></button>
            </div>
         </div>
-
+       
       </div>
       <div class="profile-description-area">
         <div class="profile-description-header">
@@ -196,7 +259,15 @@
       <div class="profile-description-area">
         <div class="profile-description-header">
           <h3>Experience</h3>
-          <button id="edit-button-experience" class="edit-button" onclick="openAddExperience()"><i class='fas fa-plus' style='font-size:24px'></i></button>
+          <button id="add-button-experience" class="edit-button" onclick="openAddExperience()"><i class='fas fa-plus' style='font-size:24px'></i></button>
+        </div>
+        <p id="profile-description"> </p>
+      </div>
+
+      <div class="profile-description-area">
+        <div class="profile-description-header">
+          <h3>Education</h3>
+          <button id="add-button-education" class="edit-button" onclick="openAddEducation()"><i class='fas fa-plus' style='font-size:24px'></i></button>
         </div>
         <p id="profile-description"> </p>
       </div>
