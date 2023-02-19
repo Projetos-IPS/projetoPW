@@ -858,8 +858,10 @@ function submitFormDataP() {
 
         xhrsubmitAddExperience.onload = function () {
             if (xhrsubmitAddExperience.status === 200) {
-                closeAddExperience();
+
+                document.getElementById('experiences').innerHTML = "";
                 showExperiences();
+                closeAddExperience();
             }
 
         };
@@ -884,7 +886,7 @@ function submitFormDataP() {
             name_field: formAddEducation.educationField.value,
             currently_studying: currentlystudying,
             date_start: bd_date_start,
-            date_end: bd_date_end,
+            date_end: formAddEducation.endDateEducation.value,
             grade: formAddEducation.gradeEducation.value,
             activities: formAddEducation.activitiesEducation.value,
             description: formAddEducation.descriptionEducation.value
@@ -896,6 +898,8 @@ function submitFormDataP() {
 
         xhrsubmitAddEducation.onload = function () {
             if (xhrsubmitAddEducation.status === 200) {
+                document.getElementById('education').innerHTML = "";
+                showEducations();
                 closeAddEducation();
             }
 
@@ -1006,6 +1010,9 @@ function showExperiences(){
                         if(experiencesProfile[i].data_fim != null){
                             div_experience_date.innerHTML += ' - ' + experiencesDates[i].datafim;
                         }
+                        if(experiencesProfile[i].trabalho_atual == 1){
+                            div_experience_date.innerHTML += ' - Present'
+                        }
                     }
                 }
                 xhrDatasExperiences.send();
@@ -1023,7 +1030,7 @@ function showExperiences(){
 
                 let div_content_part_icons = document.createElement('div');
                 div_content_part_icons.className = 'content-part-icon';
-                //editar icon nao é obrigatorio
+                //editar nao é obrigatorio
                 /*let a1 = document.createElement('a');
                 a1.id = 'exp-icon1';
                 //a1.dataset.experienceid = experiencesProfile[i].id;
@@ -1055,7 +1062,7 @@ function showExperiences(){
                        xhrDeleteExp.onload = function(){
                         if(xhrDeleteExp.status === 200)
                         {
-                            div_profile_content.innerHTML = "";
+                            experience_div.innerHTML = "";
                             showExperiences();
                         }
                     }
@@ -1096,9 +1103,145 @@ function showExperiences(){
     xhrEmpregos.send();
 }
 
+function showEducations(){
+    const xhrEducations = new XMLHttpRequest();
+    xhrEducations.open('GET', '/Profile/getProfileEducations/' + userID, true);
+    xhrEducations.setRequestHeader('Content-Type', 'application/json');
+    xhrEducations.onload = function () {
+        let education_div = document.getElementById('education');
+        if (xhrEducations.status === 200) {
+            let educations_profile = JSON.parse(xhrEducations.responseText);
+
+            if(educations_profile.length > 0){
+                for(let i = 0; i < educations_profile.length; i++){
+                    let div_profile_content = document.createElement('div');
+                    div_profile_content.className = 'profile-content';
+                    let div_img_part = document.createElement('div');
+                    div_img_part.className = 'img-part';
+                    let img = document.createElement('img');
+                    img.src = '../images/education.jpg';
+                    img.className = 'img-experience';
+                    div_img_part.appendChild(img);
+                    div_profile_content.appendChild(div_img_part);
+
+                    let div_content_part = document.createElement('div');
+                    div_content_part.className = 'content-part';
+                    let div_content_part_text = document.createElement('div');
+                    div_content_part_text.className = 'content-part-text';
+                    let div_education_title = document.createElement('div');
+                    div_education_title.className = 'experience-title';
+                    div_education_title.innerHTML = educations_profile[i].estabelecimento_ensino;
+                    div_content_part_text.appendChild(div_education_title);
+                    let div_education_type_curso = document.createElement('div');
+                    div_education_type_curso.className = 'experience-Company-Employment';
+                    div_education_type_curso.innerHTML = educations_profile[i].tipo_curso + ' - ' + educations_profile[i].nome_curso;
+                    div_content_part_text.appendChild(div_education_type_curso);
+
+                    let div_education_date = document.createElement('div');
+                    div_education_date.className = 'experience-date';
+                    div_content_part_text.appendChild(div_education_date);
+                //DATAS
+                    const xhrDatasEducation = new XMLHttpRequest();
+                    xhrDatasEducation.open('GET', '/Profile/getEducationDates/' + userID, true);
+                    xhrDatasEducation.setRequestHeader('Content-Type', 'application/json');
+                    xhrDatasEducation.onload = function () {
+                        if (xhrDatasEducation.status === 200) {
+                            let educationDates = JSON.parse(xhrDatasEducation.responseText);
+                            div_education_date.innerHTML = educationDates[i].datainicio;
+                            if(educations_profile[i].data_fim != null){
+                                div_education_date.innerHTML += ' - ' + educationDates[i].datafim;
+                            }
+                            if(educations_profile[i].atual == 1){
+                                div_education_date.innerHTML += ' - Present'
+                            }
+                        }
+                    }
+                    xhrDatasEducation.send();
+                //--------------
+
+                    let div_education_grade = document.createElement('div');
+                    div_education_grade.className = 'education-grade';
+                    if(educations_profile[i].media != null){
+                        div_education_grade.innerHTML = 'Grade: ' + educations_profile[i].media;
+                    }
+                    div_content_part_text.appendChild(div_education_grade);
+
+                    let education_activities = document.createElement('p');
+                    education_activities.className = 'education-activities';
+                    if(educations_profile[i].atividades != ''){
+                        education_activities.innerHTML = 'Activities and societies: ' + educations_profile[i].atividades;
+                    }
+                    div_content_part_text.appendChild(education_activities);
+
+                    let education_description = document.createElement('p');
+                    education_description.className = 'education-description';
+                    education_description.innerHTML = educations_profile[i].descricao;
+                    div_content_part_text.appendChild(education_description);
+
+
+                    div_content_part.appendChild(div_content_part_text);
+
+                    let div_content_part_icons = document.createElement('div');
+                    div_content_part_icons.className = 'content-part-icon';
+                    
+                    /*let a1 = document.createElement('a');
+                    a1.id = 'exp-icon1';
+                    //a1.dataset.experienceid = experiencesProfile[i].id;
+                    let li1 = document.createElement('li');
+                    li1.className = 'fas fa-edit';
+                    li1.className += ' icon1';
+                    li1.style.color = 'black';
+                    a1.appendChild(li1);
+                    div_content_part_icons.appendChild(a1);*/
+
+                    let a2 = document.createElement('a');
+                    a2.id = 'exp-icon2';
+                    //a2.dataset.experienceid = experiencesProfile[i].id;
+                    let li2 = document.createElement('li');
+                    li2.className = 'fas fa-trash-alt';
+                    li2.className += ' icon2';
+                    li2.style.color = 'black';
+                    a2.appendChild(li2);
+                    a2.addEventListener("click", function() {
+                        const data = {
+                            id : educations_profile[i].id
+                        };
+                
+                        const xhrDeleteEd = new XMLHttpRequest();
+                        xhrDeleteEd.open('POST', '/Profile/deleteEducation/' + userID, true);
+                        xhrDeleteEd.setRequestHeader('Content-Type', 'application/json');
+                        xhrDeleteEd.send(JSON.stringify(data));
+                        
+                        xhrDeleteEd.onload = function(){
+                            if(xhrDeleteEd.status === 200)
+                            {
+                                education_div.innerHTML = "";
+                                showEducations();
+                            }
+                        }
+                    });
+
+                    div_content_part_icons.appendChild(a2);
+                    div_content_part.appendChild(div_content_part_icons);
+                    div_profile_content.appendChild(div_content_part);
+                    education_div.appendChild(div_profile_content);
+                }
+            }
+            else{
+                let p = document.createElement('p');
+                p.innerHTML = 'No educations added';
+                education_div.appendChild(p);
+            }
+        }
+   
+    }
+    xhrEducations.send();
+}
+
 function openAddEducation() {
     document.getElementById('pop-up-add-education').style.display = "block";
     document.getElementById('page-mask').style.display = "block";
+
 }
 
 function closeAddEducation() {
@@ -1107,6 +1250,8 @@ function closeAddEducation() {
     document.getElementById('addEducationForm').reset();
     document.getElementById('endDateEducation').style.removeProperty('display');
     document.getElementById('endDateEducation-label').style.removeProperty('display');
+    document.getElementById('gradeEducation').style.removeProperty('display');
+    document.getElementById('grade-label').style.removeProperty('display');
 }
 
 var init = function () {
@@ -1117,9 +1262,10 @@ var init = function () {
     showFriendRequests();
     showFriends();
     updateList();
-    showExperiences();
     changeviewExperience();
     changeviewEducation();
+    showExperiences();
+    showEducations();
 };
 
 function changeviewExperience(){
@@ -1150,10 +1296,15 @@ function changeviewEducation(){
         if(check.checked == true){
             document.getElementById('endDateEducation').style.display = "none";
             document.getElementById('endDateEducation-label').style.display = "none";
+            document.getElementById('gradeEducation').style.display = "none";
+            document.getElementById('grade-label').style.display = "none";
           }
           else if(check.checked == false){
             document.getElementById('endDateEducation').style.removeProperty('display');
             document.getElementById('endDateEducation-label').style.removeProperty('display');
+            document.getElementById('gradeEducation').style.removeProperty('display');
+            document.getElementById('grade-label').style.removeProperty('display');
+
           }
         }
 }

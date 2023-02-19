@@ -456,6 +456,17 @@ var User = {
     addEducation: function(data, email){
       return new Promise(function(resolve, reject)
           {
+            if(data.date_end == ''){
+              data.date_end = null;
+            }
+            else{
+                data.date_end += '-01';
+            }
+
+            if(data.grade == ''){
+              data.grade = null;
+            }
+            
             let query = `INSERT INTO educacao(email_profissional, estabelecimento_ensino, tipo_curso, nome_curso, atual, data_inicio, data_fim, media, atividades, descricao) values (?,?,?,?,?,?,?,?,?,?)`;
             let connection = mysql.createConnection(options.mysql);
             let values = [email, data.name_school, data.name_degree, data.name_field, data.currently_studying, data.date_start, data.date_end, data.grade, data.activities, data.description];
@@ -518,6 +529,68 @@ var User = {
                  return new Promise(function(resolve, reject)
                      {
                     let query = `DELETE FROM experiencia_trabalho WHERE id = ? and email_profissional = ?`;
+                    let connection = mysql.createConnection(options.mysql);
+                    let values = [data.id, email];
+                     connection.query(query, values, function(error, result)
+                     {
+                       if(error) {reject(error);}
+                       else
+                       {
+                       resolve(0);
+                       connection.end();
+                        }
+                          
+                      });
+                            
+                     });
+                          
+                   },
+
+    getEducations: function(email){
+            return new Promise(function(resolve, reject)
+                {
+                  let query = `SELECT * FROM educacao WHERE email_profissional = ?`;
+                  let connection = mysql.createConnection(options.mysql);
+                  connection.query(query, email, function(error, result)
+                  {
+                    if(error) {reject(error);}
+                    else
+                    {
+                      resolve(result);
+                      connection.end();
+                    }
+              
+                  });
+                
+                });
+              
+                },
+
+    geteducationDates: function(email){
+                  return new Promise(function(resolve, reject)
+                      {
+                        let query = `SELECT id, DATE_FORMAT(data_inicio, '%M %Y') AS datainicio, DATE_FORMAT(data_fim, '%M %Y') AS datafim FROM educacao WHERE email_profissional = ?`;
+                        let connection = mysql.createConnection(options.mysql);
+                        connection.query(query, email, function(error, result)
+                        {
+                          if(error) {reject(error);}
+                          else
+                          {
+                            resolve(result);
+                            connection.end();
+                          }
+                    
+                        });
+                      
+                      });
+                    
+                      },
+
+
+    deleteEducation: function(data, email){
+                 return new Promise(function(resolve, reject)
+                     {
+                    let query = `DELETE FROM educacao WHERE id = ? and email_profissional = ?`;
                     let connection = mysql.createConnection(options.mysql);
                     let values = [data.id, email];
                      connection.query(query, values, function(error, result)

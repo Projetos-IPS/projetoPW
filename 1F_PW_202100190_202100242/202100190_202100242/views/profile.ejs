@@ -158,7 +158,7 @@
     <div class="pop-up-form">
     <form class="addExperienceForm" method="post" id="addExperienceForm">
       <label for="titleUser">Title*</label><br>
-      <input id="titleUser" type="text" name="titleUser" required><br>
+      <input id="titleUser" type="text" placeholder="Ex. Data Analyst" name="titleUser" required><br>
       <br>
       <label for="EmploymentType">Employment type*</label><br>
       <select id="regime" name="employmentType">
@@ -173,9 +173,9 @@
       </select>
       <br><br>
       <label for="companyExperience">Company name*</label><br>
-      <input id="companyExperience" type="text" name="companyExperience" required><br><br>
+      <input id="companyExperience" placeholder="Ex. Microsoft" type="text" name="companyExperience" required><br><br>
       <label for="locationExperience">Location*</label><br>
-      <input id="locationExperience" type="text" name="locationExperience" required><br><br>
+      <input id="locationExperience" placeholder="Ex. Lisbon, Portugal" type="text" name="locationExperience" required><br><br>
       <label for="locationtype">Location type*</label><br>
       <select id="locationtype" name="locationtype" required>
         <option value="On-site">On-site</option>
@@ -209,19 +209,19 @@
       <label for="educationSchool">School*</label><br>
       <input type="text" name="educationSchool" id="educationSchool" required><br><br>
       <label for="educationDegree">Degree*</label><br>
-      <input type="text" name="educationDegree" id="educationDegree" required><br><br>
+      <input type="text" name="educationDegree" placeholder="Ex. Bachelor's" id="educationDegree" required><br><br>
       <label for="educationField">Field of study*</label><br>
-      <input type="text" name="educationField" id="field" required><br><br>
+      <input type="text" name="educationField" placeholder="Ex. Business" id="field" required><br><br>
       <input type="checkbox" name="currentlystudying" id="currentlystudying">
       I am currently studying <br><br>
       <label for="startDateEducation">Start date*</label><br>
       <input type="month" name="startDateEducation" id="startDateEducation" required><br>
       <label for="endDateEducation" id="endDateEducation-label">End date</label><br>
       <input type="month" name="endDateEducation" id="endDateEducation"><br><br>
-      <label for="gradeEducation">Grade</label><br>
+      <label for="gradeEducation" id="grade-label">Grade</label><br>
       <input type="text" name="gradeEducation" id="gradeEducation"><br><br>
       <label for="activitiesEducation">Activities and societies</label><br>
-      <textarea name="activitiesEducation" id="activitiesEducation" cols="30" rows="10"></textarea><br>
+      <textarea name="activitiesEducation" id="activitiesEducation" placeholder="Ex. Volleyball, Marching band" cols="30" rows="10"></textarea><br>
       <label for="descriptionEducation">Description</label><br>
       <textarea name="descriptionEducation" id="descriptionEducation" cols="30" rows="10"></textarea>
    </div>
@@ -256,26 +256,29 @@
         <p id="profile-description"> </p>
       </div>
 
-      <div class="profile-description-area" id="experiences">
+      <div class="profile-description-area" >
         <div class="profile-description-header">
           <h3>Experience</h3>
           <button id="add-button-experience" class="edit-button" onclick="openAddExperience()"><i class='fas fa-plus' style='font-size:24px'></i></button>
         </div>
+      <div class="profile-main-content" id="experiences">
 
-        <div class="profile-content">
-
+      </div>
         </div>
 
 
       </div>
-
-      <div class="profile-description-area">
+      <div class="profile-description-area" >
         <div class="profile-description-header">
           <h3>Education</h3>
           <button id="add-button-education" class="edit-button" onclick="openAddEducation()"><i class='fas fa-plus' style='font-size:24px'></i></button>
         </div>
-        <p id="profile-description"> </p>
+      <div class="profile-main-content" id="education">
+        
       </div>
+      </div>
+
+
 
     </section>
       <!-------------------------------------------------------------------->
