@@ -949,6 +949,8 @@ function openEditExperience() {
 function openAddExperience() {
     document.getElementById('pop-up-add-experience').style.display = "block";
     document.getElementById('page-mask').style.display = "block";
+    document.getElementById('experienceEndDate').style.removeProperty('display');
+    document.getElementById('enddate-label').style.removeProperty('display');
 }
 
 function closeAddExperience() {
@@ -1098,6 +1100,9 @@ function openAddEducation() {
 function closeAddEducation() {
     document.getElementById('pop-up-add-education').style.display = "none";
     document.getElementById('page-mask').style.display = "none";
+    document.getElementById('addEducationForm').reset();
+    document.getElementById('endDateEducation').style.removeProperty('display');
+    document.getElementById('endDateEducation-label').style.removeProperty('display');
 }
 
 var init = function () {
@@ -1109,13 +1114,13 @@ var init = function () {
     showFriends();
     updateList();
     changeviewExperience();
+    changeviewEducation();
 };
 
 function changeviewExperience(){
     let currentlyworking = document.getElementById('currentlyworking');
 
     currentlyworking.addEventListener("change", function() {
-        // Call your function here
         change(currentlyworking);
       });
 
@@ -1133,14 +1138,19 @@ function changeviewExperience(){
 
 function changeviewEducation(){
     let currentlystudying = document.getElementById('currentlystudying');
-    if(currentlystudying.checked == true){
-        document.getElementById('endDateEducation').style.display = "none";
-        document.getElementById('endDateEducation-label').style.display = "none";
-      }
-      else if(currentlystudying.checked == false){
-        document.getElementById('endDateEducation').style.removeProperty('display');
-        document.getElementById('endDateEducation-label').style.removeProperty('display');
-      }
+    currentlystudying.addEventListener("change", function() {
+        change(currentlystudying);
+      });
+    function change(check){
+        if(check.checked == true){
+            document.getElementById('endDateEducation').style.display = "none";
+            document.getElementById('endDateEducation-label').style.display = "none";
+          }
+          else if(check.checked == false){
+            document.getElementById('endDateEducation').style.removeProperty('display');
+            document.getElementById('endDateEducation-label').style.removeProperty('display');
+          }
+        }
 }
 
 window.onload = init;
