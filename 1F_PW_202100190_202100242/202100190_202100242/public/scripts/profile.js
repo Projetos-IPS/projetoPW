@@ -1025,7 +1025,8 @@ function showExperiences(){
 
                 let div_content_part_icons = document.createElement('div');
                 div_content_part_icons.className = 'content-part-icon';
-                let a1 = document.createElement('a');
+                //editar icon nao é obrigatorio
+                /*let a1 = document.createElement('a');
                 a1.id = 'exp-icon1';
                 //a1.dataset.experienceid = experiencesProfile[i].id;
                 let li1 = document.createElement('li');
@@ -1033,7 +1034,7 @@ function showExperiences(){
                 li1.className += ' icon1';
                 li1.style.color = 'black';
                 a1.appendChild(li1);
-                div_content_part_icons.appendChild(a1);
+                div_content_part_icons.appendChild(a1);*/
 
                 let a2 = document.createElement('a');
                 a2.id = 'exp-icon2';
