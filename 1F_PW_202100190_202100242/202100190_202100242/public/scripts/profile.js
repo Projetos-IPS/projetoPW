@@ -662,6 +662,10 @@ function getProfileInformation() {
 
 
                         profileDescription.innerHTML = informationProfile[0].descricao;
+                        if(profileDescription.innerHTML == "")
+                        {
+                            profileDescription.innerHTML = "No description"
+                        }
                         profileHeadline.innerHTML = informationProfile[0].headline;
                         profileAddress.innerHTML = informationProfile[0].localidade;
                     }
