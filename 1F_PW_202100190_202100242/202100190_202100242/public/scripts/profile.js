@@ -668,8 +668,6 @@ function getProfileInformation() {
                         }
                         profileHeadline.innerHTML = informationProfile[0].headline;
                         profileAddress.innerHTML = informationProfile[0].localidade;
-
-                        showExperiences();
                  }
                 }
                 xhrprofileprofissional.send();
@@ -1119,6 +1117,7 @@ var init = function () {
     showFriendRequests();
     showFriends();
     updateList();
+    showExperiences();
     changeviewExperience();
     changeviewEducation();
 };
