@@ -20,11 +20,12 @@
 .profile-description-area {
     background-color: #f2f2f8;
     border-radius: 12px;
-    height: 170px;
     margin: 1.5%;
     padding: 0% 2%;
     overflow: hidden;
 }
+
+
 
 .profile-description-area h3 {
     font-size: 22px;
@@ -303,6 +304,19 @@ textarea {
     display: none;
     height: 80%;
 }
+
+.img-experience{
+    width: 50px;
+    margin-right: 10px;
+}
+
+
+.profile-content{
+    margin-top: 3%;
+    display: flex;
+}
+
+
 
 
 
