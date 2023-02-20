@@ -79,7 +79,6 @@ function getLoggedUserData() {
                             document.getElementById('add-button-experience').style.display = "none";
                             document.getElementById('add-button-education').style.display = "none";
                             document.getElementById('profile-menu').className = "link";
-                            document.getElementById('exp-icon3').style.display = "none";
                         }
                 }
                 
@@ -524,7 +523,7 @@ function showPortfolios(){
                                                    };
                                             
                                                    const xhrSendRequest = new XMLHttpRequest();
-                                                   xhrSendRequest.open('POST', '..//Home/cancelFriendRequest', true);
+                                                   xhrSendRequest.open('POST', '../Home/cancelFriendRequest', true);
                                                    xhrSendRequest.setRequestHeader('Content-Type', 'application/json');
                                                    xhrSendRequest.send(JSON.stringify(dataCFQ));
                                                    
@@ -724,7 +723,7 @@ function showFriendRequests() {
                                             };
 
                                             const xhrRejectRequest = new XMLHttpRequest();
-                                            xhrRejectRequest.open('POST', '..//Home/deleteFriendRequest', true);
+                                            xhrRejectRequest.open('POST', '../Home/deleteFriendRequest', true);
                                             xhrRejectRequest.setRequestHeader('Content-Type', 'application/json');
                                             xhrRejectRequest.send(JSON.stringify(dataRemove));
 
@@ -1567,6 +1566,7 @@ function showExperiences(){
                         }
                     }
                   });
+                  
 
                 div_content_part_icons.appendChild(a2);
                 div_content_part.appendChild(div_content_part_icons);
@@ -1576,7 +1576,7 @@ function showExperiences(){
 
                 //visibilidade dos icons 
                 const xhrloggedUserInfo1 = new XMLHttpRequest();
-                xhrloggedUserInfo1.open('GET', '/Home/getloggedinUserType', true);
+                xhrloggedUserInfo1.open('GET', '../Home/getloggedinUserType', true);
                 xhrloggedUserInfo1.setRequestHeader('Content-Type', 'application/json');
                 xhrloggedUserInfo1.onload = function () {
                     if (xhrloggedUserInfo1.status === 200) {
@@ -1720,6 +1720,22 @@ function showEducations(){
                             }
                         }
                     });
+
+                    //visibilidade dos icons 
+                    const xhrloggedUserInfo5 = new XMLHttpRequest();
+                    xhrloggedUserInfo5.open('GET', '../Home/getloggedinUserType', true);
+                    xhrloggedUserInfo5.setRequestHeader('Content-Type', 'application/json');
+                    xhrloggedUserInfo5.onload = function () {
+                    if (xhrloggedUserInfo5.status === 200) {
+                        let loggedUserInfo1 = JSON.parse(xhrloggedUserInfo5.responseText);
+                        if (loggedUserInfo1[0].id != userID) {
+                           //a1.style.display = "none";
+                           a2.style.display = "none";
+                        }
+                    }
+                }
+                xhrloggedUserInfo5.send();
+                //--------------------------------
 
                     div_content_part_icons.appendChild(a2);
                     div_content_part.appendChild(div_content_part_icons);
