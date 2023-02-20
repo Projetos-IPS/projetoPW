@@ -17,7 +17,7 @@
     width: 100%;
     height: 70%;
     overflow: auto;
-    max-height: 470px;
+    max-height: 65vh;
 }
 
 .jobs-side::-webkit-scrollbar {
