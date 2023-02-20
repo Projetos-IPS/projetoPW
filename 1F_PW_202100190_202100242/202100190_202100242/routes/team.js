@@ -12,7 +12,7 @@ function renderPage(req, res, next) {
       req.session.name === 2 ||
       req.session.name === 3
     ) {
-      throw new Error('Invalid session name');
+      res.redirect('/Homepage');
     }
     res.render('team');
   } catch (err) {
