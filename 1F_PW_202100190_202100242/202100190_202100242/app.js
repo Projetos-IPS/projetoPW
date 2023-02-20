@@ -14,6 +14,7 @@ var teamRouter = require('./routes/team');
 var profileRouter = require('./routes/profile');
 var homeRouter = require('./routes/home');
 var approveRouter = require('./routes/approveUsers')
+var portfoliosRouter = require('./routes/portfolios');
 
 const oneDay = 1000 * 60 * 60 * 24;
 // view engine setup
@@ -48,6 +49,7 @@ app.use('/Team', teamRouter);
 app.use('/Profile', profileRouter);
 app.use('/Home', homeRouter);
 app.use('/Approve', approveRouter);
+app.use('/Portfolios', portfoliosRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

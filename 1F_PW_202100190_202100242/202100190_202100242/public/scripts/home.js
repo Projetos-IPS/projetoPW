@@ -193,6 +193,7 @@ function showAddUsers(){
                                 document.getElementById('friend-requests').style.display = "none";
                                 document.getElementById('friends').style.display = "none";
                                 document.getElementById('h2-home').innerHTML = "Users list";
+                                document.getElementById('main-side').style.display = "none";
                                 div_buttons.style.display = "none";
                             }
                         }
