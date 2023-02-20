@@ -202,6 +202,7 @@ function getLoggedUserData() {
                         }
                         document.getElementById('aprovar-utilizadores').style.display = "none";
                         document.getElementById('portfolios-menu').style.display = "none";
+                        document.getElementById('home-menu').style.display = "none";
                         }
                         //  profile_hyperlink.dataset.email = profissionalInfo[0].email;
 

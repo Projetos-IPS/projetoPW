@@ -53,6 +53,8 @@ function getLoggedUserData() {
                             xhrloggedUserinformationEmpresa.send();
                             document.getElementById('aprovar-utilizadores').style.display = "none";
                             document.getElementById('joboffers-menu').style.display = "none";
+                            document.getElementById('home-menu').style.display = "none";
+
                         }
 
                         if (loggedUserType[0].tipo_utilizador == 'Admin') {
@@ -98,11 +100,240 @@ function getLoggedUserData() {
  * When a user clicks the button to send a friend request, the function creates an XMLHttpRequest to send a POST request to the server to add a new friend request. When the POST request is successful, the function calls the update function to update the button's status.
  * When a user clicks the button to cancel a friend request, the function creates an XMLHttpRequest to send a POST request to the server to cancel the friend request. When the POST request is successful, the function updates the button's status by displaying the button and hiding the "Sent" status.
  */
-function showAddUsers() {
+function showAddUsers(){
+
+    const xhrloggedUserType3 = new XMLHttpRequest();
+    xhrloggedUserType3.open('GET', '../Home/getloggedinUserType', true);
+    xhrloggedUserType3.setRequestHeader('Content-Type', 'application/json');
+    xhrloggedUserType3.onload = function () {
+        if (xhrloggedUserType3.status === 200) {
+            let loggedUserType = JSON.parse(xhrloggedUserType3.responseText);
+
+            if(loggedUserType[0].tipo_utilizador == 'Profissional'){
+            let divFriends = document.getElementById('main-side');
+                let h2 = document.createElement('h2');
+                h2.innerHTML = 'Add friends';
+                h2.id = 'h2-home';
+                divFriends.appendChild(h2);
+                const xhrUserInfo = new XMLHttpRequest();
+                xhrUserInfo.open('GET', '../Home/getUsersProfissionaisInformation', true);
+                xhrUserInfo.setRequestHeader('Content-Type', 'application/json');
+                xhrUserInfo.onload = function () {
+                    if (xhrUserInfo.status === 200) {
+                        let userInfo = JSON.parse(xhrUserInfo.responseText);
+
+                        const xhrlistUsers = new XMLHttpRequest();
+                        xhrlistUsers.open('GET', '../Home/getUsersProfissionais', true);
+                        xhrlistUsers.setRequestHeader('Content-Type', 'application/json');
+                        xhrlistUsers.onload = function () {
+                            if (xhrlistUsers.status === 200) {
+                                let listUsers = JSON.parse(xhrlistUsers.responseText);
+                                
+                                if(listUsers.length>0){
+                                for(let i = 0; i < listUsers.length; i++)
+                                {
+                                    let div = document.createElement('div');
+                                    div.id = "user";
+                                    div.className = "user";
+                                    let div_image = document.createElement('div');
+                                    div_image.className = "user-image";
+                                    let a_image = document.createElement('a');
+                                    a_image.id = "profile-user";
+                                    let img_user = document.createElement('img');
+                                    img_user.id = "img_user";
+                                    a_image.appendChild(img_user);
+                                    div_image.appendChild(a_image);
+                                    div.appendChild(div_image);
+                                    a_image.dataset.id = listUsers[i].id;
+                                    a_image.href = "../Profile/" + a_image.dataset.id;
+                    
+                                    let div_userinfo = document.createElement('div');
+                                    div_userinfo.className = "user-info";
+                                    let a_userinfo = document.createElement('a');
+                                    let h3_userinfo = document.createElement('h3');
+                                    h3_userinfo.innerHTML = listUsers[i].nome;
+                                    let h6_userinfo = document.createElement('h6');
+                                    div_userinfo.appendChild(a_userinfo);
+                                    a_userinfo.appendChild(h3_userinfo);
+                                    div_userinfo.appendChild(h6_userinfo);
+                                    div.appendChild(div_userinfo);
+                                    a_userinfo.dataset.id = listUsers[i].id;
+                                    a_userinfo.href = "../Profile/" + a_userinfo.dataset.id;
+                    
+                                    let div_buttons = document.createElement('div');
+                                    div_buttons.className = "add-buttons";
+                                    div_buttons.id = "add-buttons";
+                                    let button1 = document.createElement('button');
+                                    button1.className = "add-icon";
+                                    button1.dataset.id = listUsers[i].id;
+                                    let button2 = document.createElement('button');
+                                    button2.className = "add-button-hover";
+                                    button2.id = "btn2";
+                                    let img_btn1 = document.createElement('img');
+                                    button1.appendChild(img_btn1);
+                                    let img_btn2 = document.createElement('img');
+                                    button2.appendChild(img_btn2);
+                                    button2.dataset.id = listUsers[i].id;
+                                    div_buttons.appendChild(button1);
+                                    
+                                    button2.addEventListener('click', function(event) {
+                                        const dataRQ = {
+                                            userid : listUsers[i].id
+                                        };
+                                    
+                                        const xhrSendRequest = new XMLHttpRequest();
+                                        xhrSendRequest.open('POST', '../Home/sendFriendRequest', true);
+                                        xhrSendRequest.setRequestHeader('Content-Type', 'application/json');
+                                        xhrSendRequest.send(JSON.stringify(dataRQ));
+                                        
+                                        xhrSendRequest.onload = function(){
+                                            if(xhrSendRequest.status === 200)
+                                            {
+                                            update();
+                                            }
+                                        
+                                        };
+                                    });
+                                    div_buttons.appendChild(button2);
+                                    div.appendChild(div_buttons);
+
+                                    const xhrVerifyLoggedUserType1 = new XMLHttpRequest();
+                                    xhrVerifyLoggedUserType1.open('GET', '../Home/getloggedinUserType', true);
+                                    xhrVerifyLoggedUserType1.onload = function(){
+                                    if(xhrVerifyLoggedUserType1.status === 200){
+                                        let userTypeConfirm = JSON.parse(xhrVerifyLoggedUserType1.responseText);
+                                        if(userTypeConfirm[0].tipo_utilizador == 'Empresa')
+                                        {
+                                            document.getElementById('friend-requests').style.display = "none";
+                                            document.getElementById('friends').style.display = "none";
+                                            document.getElementById('h2-home').innerHTML = "Users list";
+                                            document.getElementById('main-side').style.removeProperty('display');
+                                            div_buttons.style.display = "none";
+                                        }
+                                    }
+                                    }
+                                    xhrVerifyLoggedUserType1.send();
+
+                                    img_btn1.src = "../images/user-add.png";
+                                    img_btn2.src = "../images/user-add-hover.png";
+                                    divFriends.appendChild(div);
+                                //----------------------------------------
+
+                                    if(listUsers[i].email == userInfo[i].email)
+                                    {
+                                        if(userInfo[i].genero == 'Feminino')
+                                        {
+                                            img_user.src = "../images/profile-female.png";
+                                        }
+                                        if(userInfo[i].genero == 'Masculino')
+                                        {
+                                            img_user.src = "../images/profile-male.png";
+                                        }
+                                        if(userInfo[i].genero == 'other')
+                                        {
+                                            img_user.src = "../images/profile-other.png";
+                                        }
+                                        
+                                        h6_userinfo.innerHTML = userInfo[i].headline;
+                                    }
+
+                                //----------------------------------------
+
+                                    function update(){
+                                        const xhrgetRequests = new XMLHttpRequest();
+                                        xhrgetRequests.open('GET', '../Home/getFriendRequests', true);
+                                        xhrgetRequests.setRequestHeader('Content-Type', 'application/json');
+                                        xhrgetRequests.onload = function () {
+                                            if (xhrgetRequests.status === 200) {
+                                                let id_origem = document.getElementById('profile-hyperlink').getAttribute('data-userid');
+                                                let requests = JSON.parse(xhrgetRequests.responseText);
+                                                    for(let i = 0; i < requests.length; i++)
+                                                    {
+                                                        if(requests[i].id_origem == id_origem && requests[i].id_destino == button2.dataset.id && requests[i].aprovado == 0)
+                                                        {
+                                                            div_buttons.style.display = "none";
+                                                            let p = document.createElement('a');
+                                                            p.style.cursor = 'pointer';
+                                                            p.className = "request-status";
+                                                            p.innerHTML = "Sent";
+                                                            p.addEventListener('click', function(event) {
+                                                                const dataCFQ = {
+                                                                    userid : button2.dataset.id
+                                                                };
+                                                            
+                                                                const xhrSendRequest = new XMLHttpRequest();
+                                                                xhrSendRequest.open('POST', '../Home/cancelFriendRequest', true);
+                                                                xhrSendRequest.setRequestHeader('Content-Type', 'application/json');
+                                                                xhrSendRequest.send(JSON.stringify(dataCFQ));
+                                                                
+                                                                xhrSendRequest.onload = function(){
+                                                                    if(xhrSendRequest.status === 200)
+                                                                    {
+                                                                        div_buttons.style.display = "block";
+                                                                        p.style.display = "none";
+                                                                    }
+                                                                
+                                                                };
+                                                            });
+                                                            div.appendChild(p);
+                                                        }
+                                                        else
+                                                        if (requests[i].id_destino == id_origem && requests[i].id_origem == button2.dataset.id && requests[i].aprovado == 0)
+                                                        {
+                                                            div_buttons.style.display = "none";
+                                                            let p = document.createElement('p');
+                                                            p.className = "request-status";
+                                                            p.innerHTML = "Received";
+                                                            div.appendChild(p);
+                                                        }
+                                                        else
+                                                        if ((requests[i].id_destino == id_origem && requests[i].id_origem == button2.dataset.id && requests[i].aprovado == 1) || (requests[i].id_origem == id_origem && requests[i].id_destino == button2.dataset.id && requests[i].aprovado == 1))
+                                                        {
+                                                            div.style.display = "none";
+                                                        }
+                                                }
+                                            }
+                                        }
+                                        xhrgetRequests.send();
+                                    }
+                                //----------------------------------------//
+                                    update();
+                                }
+                            }
+
+                            
+                            }
+                        }
+                        xhrlistUsers.send();
+                    }
+                }
+                
+                xhrUserInfo.send();
+
+
+
+        }
+            if(loggedUserType[0].tipo_utilizador == 'Empresa' || loggedUserType[0].tipo_utilizador == 'Admin'){
+                showPortfolios();
+            }
+        }
+    }
+    xhrloggedUserType3.send();
+
+}
+
+function showPortfolios(){
+    const xhrloggedUserType2 = new XMLHttpRequest();
+    xhrloggedUserType2.open('GET', '../Home/getloggedinUserType', true);
+    xhrloggedUserType2.setRequestHeader('Content-Type', 'application/json');
+    xhrloggedUserType2.onload = function () {
+    if (xhrloggedUserType2.status === 200) {
+        let loggedUserType = JSON.parse(xhrloggedUserType2.responseText);
+
     let divFriends = document.getElementById('main-side');
     let h2 = document.createElement('h2');
-    h2.id = "h2-home";
-    h2.innerHTML = 'Add friends';
+    h2.innerHTML = 'Portfolios ';
+    h2.id = 'h2-home';
     divFriends.appendChild(h2);
     const xhrUserInfo = new XMLHttpRequest();
     xhrUserInfo.open('GET', '../Home/getUsersProfissionaisInformation', true);
@@ -117,177 +348,264 @@ function showAddUsers() {
             xhrlistUsers.onload = function () {
                 if (xhrlistUsers.status === 200) {
                     let listUsers = JSON.parse(xhrlistUsers.responseText);
+                    
+                    if(listUsers.length>0){
+                    for(let i = 0; i < listUsers.length; i++)
+                    {
+                        if(userInfo[i].visualizacao_empresas == 1 && loggedUserType[0].tipo_utilizador == 'Empresa'){
+                        let div = document.createElement('div');
+                        div.id = "user";
+                        div.className = "user";
+                        let div_image = document.createElement('div');
+                        div_image.className = "user-image";
+                        let a_image = document.createElement('a');
+                        a_image.id = "profile-user";
+                        let img_user = document.createElement('img');
+                        img_user.id = "img_user";
+                        a_image.appendChild(img_user);
+                        div_image.appendChild(a_image);
+                        div.appendChild(div_image);
+                        a_image.dataset.id = listUsers[i].id;
+                        a_image.href = "../Profile/" + a_image.dataset.id;
+        
+                        let div_userinfo = document.createElement('div');
+                        div_userinfo.className = "user-info";
+                        let a_userinfo = document.createElement('a');
+                        let h3_userinfo = document.createElement('h3');
+                        h3_userinfo.innerHTML = listUsers[i].nome;
+                        let h6_userinfo = document.createElement('h6');
+                        div_userinfo.appendChild(a_userinfo);
+                        a_userinfo.appendChild(h3_userinfo);
+                        div_userinfo.appendChild(h6_userinfo);
+                        div.appendChild(div_userinfo);
+                        let h6_userlocation = document.createElement('h6');
+                        h6_userlocation.innerHTML = userInfo[i].localidade; 
+                        div_userinfo.appendChild(h6_userlocation);
+                        let h6_userage = document.createElement('h6');
 
-                    if (listUsers.length > 0) {
-                        for (let i = 0; i < listUsers.length; i++) {
-                            let div = document.createElement('div');
-                            div.id = "user";
-                            div.className = "user";
-                            let div_image = document.createElement('div');
-                            div_image.className = "user-image";
-                            let a_image = document.createElement('a');
-                            a_image.id = "profile-user";
-                            let img_user = document.createElement('img');
-                            img_user.id = "img_user";
-                            a_image.appendChild(img_user);
-                            div_image.appendChild(a_image);
-                            div.appendChild(div_image);
-                            a_image.dataset.id = listUsers[i].id;
-                            a_image.href = "../Profile/" + a_image.dataset.id;
-
-                            let div_userinfo = document.createElement('div');
-                            div_userinfo.className = "user-info";
-                            let a_userinfo = document.createElement('a');
-                            let h3_userinfo = document.createElement('h3');
-                            h3_userinfo.innerHTML = listUsers[i].nome;
-                            let h6_userinfo = document.createElement('h6');
-                            div_userinfo.appendChild(a_userinfo);
-                            a_userinfo.appendChild(h3_userinfo);
-                            div_userinfo.appendChild(h6_userinfo);
-                            div.appendChild(div_userinfo);
-                            a_userinfo.dataset.id = listUsers[i].id;
-                            a_userinfo.href = "../Profile/" + a_userinfo.dataset.id;
-
-                            let div_buttons = document.createElement('div');
-                            div_buttons.className = "add-buttons";
-                            div_buttons.id = "add-buttons";
-                            let button1 = document.createElement('button');
-                            button1.className = "add-icon";
-                            button1.dataset.id = listUsers[i].id;
-                            let button2 = document.createElement('button');
-                            button2.className = "add-button-hover";
-                            button2.id = "btn2";
-                            let img_btn1 = document.createElement('img');
-                            button1.appendChild(img_btn1);
-                            let img_btn2 = document.createElement('img');
-                            button2.appendChild(img_btn2);
-                            button2.dataset.id = listUsers[i].id;
-                            div_buttons.appendChild(button1);
-
-                            button2.addEventListener('click', function (event) {
-                                const dataRQ = {
-                                    userid: listUsers[i].id
-                                };
-
-                                const xhrSendRequest = new XMLHttpRequest();
-                                xhrSendRequest.open('POST', '../Home/sendFriendRequest', true);
-                                xhrSendRequest.setRequestHeader('Content-Type', 'application/json');
-                                xhrSendRequest.send(JSON.stringify(dataRQ));
-
-                                xhrSendRequest.onload = function () {
-                                    if (xhrSendRequest.status === 200) {
-                                        update();
-                                    }
-
-                                };
-                            });
-                            div_buttons.appendChild(button2);
-                            div.appendChild(div_buttons);
-
-                            const xhrVerifyLoggedUserType1 = new XMLHttpRequest();
-                            xhrVerifyLoggedUserType1.open('GET', '../Home/getloggedinUserType', true);
-                            xhrVerifyLoggedUserType1.onload = function () {
-                                if (xhrVerifyLoggedUserType1.status === 200) {
-                                    let userTypeConfirm = JSON.parse(xhrVerifyLoggedUserType1.responseText);
-                                    if (userTypeConfirm[0].tipo_utilizador == 'Empresa') {
-                                        document.getElementById('friend-requests').style.display = "none";
-                                        document.getElementById('friends').style.display = "none";
-                                        document.getElementById('h2-home').innerHTML = "Users list";
-                                        document.getElementById('main-side').style.removeProperty('display');
-                                        div_buttons.style.display = "none";
-                                    }
-                                }
+                        //------------------idade
+                        const xhrUserAge = new XMLHttpRequest();
+                        xhrUserAge.open('GET', '../Home/getUsersProfissionaisAge', true);
+                        xhrUserAge.setRequestHeader('Content-Type', 'application/json');
+                        xhrUserAge.onload = function () {
+                            if (xhrUserAge.status === 200) {
+                                let ages = JSON.parse(xhrUserAge.responseText);
+                                h6_userage.innerHTML = 'Age: ' + ages[i].age;
                             }
-                            xhrVerifyLoggedUserType1.send();
-
-                            img_btn1.src = "../images/user-add.png";
-                            img_btn2.src = "../images/user-add-hover.png";
-                            divFriends.appendChild(div);
-                            //----------------------------------------
-
-                            if (listUsers[i].email == userInfo[i].email) {
-                                if (userInfo[i].genero == 'Feminino') {
-                                    img_user.src = "../images/profile-female.png";
-                                }
-                                if (userInfo[i].genero == 'Masculino') {
-                                    img_user.src = "../images/profile-male.png";
-                                }
-                                if (userInfo[i].genero == 'other') {
-                                    img_user.src = "../images/profile-other.png";
-                                }
-
-                                h6_userinfo.innerHTML = userInfo[i].headline;
-                            }
-
-                            //----------------------------------------
-
-                            function update() {
-                                const xhrgetRequests = new XMLHttpRequest();
-                                xhrgetRequests.open('GET', '../Home/getFriendRequests', true);
-                                xhrgetRequests.setRequestHeader('Content-Type', 'application/json');
-                                xhrgetRequests.onload = function () {
-                                    if (xhrgetRequests.status === 200) {
-                                        let id_origem = document.getElementById('profile-hyperlink').getAttribute('data-userid');
-                                        let requests = JSON.parse(xhrgetRequests.responseText);
-                                        for (let i = 0; i < requests.length; i++) {
-                                            if (requests[i].id_origem == id_origem && requests[i].id_destino == button2.dataset.id && requests[i].aprovado == 0) {
-                                                div_buttons.style.display = "none";
-                                                let p = document.createElement('a');
-                                                p.style.cursor = 'pointer';
-                                                p.className = "request-status";
-                                                p.innerHTML = "Sent";
-                                                p.addEventListener('click', function (event) {
-                                                    const dataCFQ = {
-                                                        userid: button2.dataset.id
-                                                    };
-
-                                                    const xhrSendRequest = new XMLHttpRequest();
-                                                    xhrSendRequest.open('POST', '/Home/cancelFriendRequest', true);
-                                                    xhrSendRequest.setRequestHeader('Content-Type', 'application/json');
-                                                    xhrSendRequest.send(JSON.stringify(dataCFQ));
-
-                                                    xhrSendRequest.onload = function () {
-                                                        if (xhrSendRequest.status === 200) {
-                                                            div_buttons.style.display = "block";
-                                                            p.style.display = "none";
-                                                        }
-
-                                                    };
-                                                });
-                                                div.appendChild(p);
-                                            }
-                                            else
-                                                if (requests[i].id_destino == id_origem && requests[i].id_origem == button2.dataset.id && requests[i].aprovado == 0) {
-                                                    div_buttons.style.display = "none";
-                                                    let p = document.createElement('p');
-                                                    p.className = "request-status";
-                                                    p.innerHTML = "Received";
-                                                    div.appendChild(p);
-                                                }
-                                                else
-                                                    if ((requests[i].id_destino == id_origem && requests[i].id_origem == button2.dataset.id && requests[i].aprovado == 1) || (requests[i].id_origem == id_origem && requests[i].id_destino == button2.dataset.id && requests[i].aprovado == 1)) {
-                                                        div.style.display = "none";
-                                                    }
-                                        }
-                                    }
-                                }
-                                xhrgetRequests.send();
-                            }
-                            //----------------------------------------//
-                            update();
                         }
+                        xhrUserAge.send();
+                        //--------------------------- 
+                        div.appendChild(h6_userage);
+                        a_userinfo.dataset.id = listUsers[i].id;
+                        a_userinfo.href = "../Profile/" + a_userinfo.dataset.id;
+                       
+                        divFriends.appendChild(div);
+                    //----------------------------------------
+
+                        if(listUsers[i].email == userInfo[i].email)
+                        {
+                            if(userInfo[i].genero == 'Feminino')
+                            {
+                                img_user.src = "../images/profile-female.png";
+                            }
+                            if(userInfo[i].genero == 'Masculino')
+                            {
+                                img_user.src = "../images/profile-male.png";
+                            }
+                            if(userInfo[i].genero == 'other')
+                            {
+                                img_user.src = "../images/profile-other.png";
+                            }
+                            
+                            h6_userinfo.innerHTML = userInfo[i].headline;
+                        }
+
+                    
+                        update();
+                    }
+                    
+                    if(loggedUserType[0].tipo_utilizador == 'Admin'){
+
+
+                        let div = document.createElement('div');
+                        div.id = "user";
+                        div.className = "user";
+                        let div_image = document.createElement('div');
+                        div_image.className = "user-image";
+                        let a_image = document.createElement('a');
+                        a_image.id = "profile-user";
+                        let img_user = document.createElement('img');
+                        img_user.id = "img_user";
+                        a_image.appendChild(img_user);
+                        div_image.appendChild(a_image);
+                        div.appendChild(div_image);
+                        a_image.dataset.id = listUsers[i].id;
+                        a_image.href = "../Profile/" + a_image.dataset.id;
+        
+                        let div_userinfo = document.createElement('div');
+                        div_userinfo.className = "user-info";
+                        let a_userinfo = document.createElement('a');
+                        let h3_userinfo = document.createElement('h3');
+                        h3_userinfo.innerHTML = listUsers[i].nome;
+                        let h6_userinfo = document.createElement('h6');
+                        div_userinfo.appendChild(a_userinfo);
+                        a_userinfo.appendChild(h3_userinfo);
+                        div_userinfo.appendChild(h6_userinfo);
+                        div.appendChild(div_userinfo);
+                        let h6_userlocation = document.createElement('h6');
+                        h6_userlocation.innerHTML = userInfo[i].localidade; 
+                        div_userinfo.appendChild(h6_userlocation);
+                        let h6_userage = document.createElement('h6');
+
+                        //------------------idade
+                        const xhrUserAge = new XMLHttpRequest();
+                        xhrUserAge.open('GET', '../Home/getUsersProfissionaisAge', true);
+                        xhrUserAge.setRequestHeader('Content-Type', 'application/json');
+                        xhrUserAge.onload = function () {
+                            if (xhrUserAge.status === 200) {
+                                let ages = JSON.parse(xhrUserAge.responseText);
+                                h6_userage.innerHTML = 'Age: ' + ages[i].age;
+                            }
+                        }
+                        xhrUserAge.send();
+                        //--------------------------- 
+                        div.appendChild(h6_userage);
+                        a_userinfo.dataset.id = listUsers[i].id;
+                        a_userinfo.href = "../Profile/" + a_userinfo.dataset.id;
+                       
+                        divFriends.appendChild(div);
+                    //----------------------------------------
+
+                        if(listUsers[i].email == userInfo[i].email)
+                        {
+                            if(userInfo[i].genero == 'Feminino')
+                            {
+                                img_user.src = "../images/profile-female.png";
+                            }
+                            if(userInfo[i].genero == 'Masculino')
+                            {
+                                img_user.src = "../images/profile-male.png";
+                            }
+                            if(userInfo[i].genero == 'other')
+                            {
+                                img_user.src = "../images/profile-other.png";
+                            }
+                            
+                            h6_userinfo.innerHTML = userInfo[i].headline;
+                        }
+
+                    
+                        update();
+
                     }
 
+                    //----------------------------------------
 
+                    function update(){
+                        const xhrgetRequests = new XMLHttpRequest();
+                        xhrgetRequests.open('GET', '../Home/getFriendRequests', true);
+                        xhrgetRequests.setRequestHeader('Content-Type', 'application/json');
+                        xhrgetRequests.onload = function () {
+                            if (xhrgetRequests.status === 200) {
+                                let id_origem = document.getElementById('profile-hyperlink').getAttribute('data-userid');
+                                let requests = JSON.parse(xhrgetRequests.responseText);
+                                    for(let i = 0; i < requests.length; i++)
+                                    {
+                                        if(requests[i].id_origem == id_origem && requests[i].id_destino == button2.dataset.id && requests[i].aprovado == 0)
+                                        {
+                                            div_buttons.style.display = "none";
+                                            let p = document.createElement('a');
+                                            p.style.cursor = 'pointer';
+                                            p.className = "request-status";
+                                            p.innerHTML = "Sent";
+                                            p.addEventListener('click', function(event) {
+                                                const dataCFQ = {
+                                                    userid : button2.dataset.id
+                                                   };
+                                            
+                                                   const xhrSendRequest = new XMLHttpRequest();
+                                                   xhrSendRequest.open('POST', '..//Home/cancelFriendRequest', true);
+                                                   xhrSendRequest.setRequestHeader('Content-Type', 'application/json');
+                                                   xhrSendRequest.send(JSON.stringify(dataCFQ));
+                                                   
+                                                   xhrSendRequest.onload = function(){
+                                                    if(xhrSendRequest.status === 200)
+                                                    {
+                                                        div_buttons.style.display = "block";
+                                                        p.style.display = "none";
+                                                    }
+                                                 
+                                                   };
+                                            });
+                                            div.appendChild(p);
+                                        }
+                                        else
+                                        if (requests[i].id_destino == id_origem && requests[i].id_origem == button2.dataset.id && requests[i].aprovado == 0)
+                                        {
+                                            div_buttons.style.display = "none";
+                                            let p = document.createElement('p');
+                                            p.className = "request-status";
+                                            p.innerHTML = "Received";
+                                            div.appendChild(p);
+                                        }
+                                        else
+                                        if ((requests[i].id_destino == id_origem && requests[i].id_origem == button2.dataset.id && requests[i].aprovado == 1) || (requests[i].id_origem == id_origem && requests[i].id_destino == button2.dataset.id && requests[i].aprovado == 1))
+                                        {
+                                            div.style.display = "none";
+                                        }
+                                }
+                            }
+                        }
+                        xhrgetRequests.send();
+                    }
+                //----------------------------------------//
+                } //fim do for
+
+                }
+
+                let input = document.createElement('input');
+                input.type = 'text';
+                input.id = 'myInput';
+                input.onkeyup = search;
+                input.className = 'input-text';
+                input.placeholder = 'search';
+                divFriends.appendChild(input);
+                divFriends.style.removeProperty('display');
                 }
             }
             xhrlistUsers.send();
         }
     }
-
+    
     xhrUserInfo.send();
 
+    }
+    }
+    xhrloggedUserType2.send();
+ 
 }
+
+function search() {
+    let input, filter, ul, li, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    li = document.getElementsByClassName("user");
+  
+    for (i = 0; i < li.length; i++) {
+      txtValue = li[i].textContent || li[i].innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+  }
+
+var init = function () {
+    getLoggedUserData();
+    showPortfolios();
+
+};
 
 function showFriendRequests() {
     let divFriends = document.getElementById('friend-requests');
@@ -746,7 +1064,8 @@ function getProfileInformation() {
                              
                             }
                             xhrprofileempresa.send();
-                            
+                            let title = document.getElementById('page-header');
+                            title.innerHTML = 'Profile';
                         }
                     }
                     

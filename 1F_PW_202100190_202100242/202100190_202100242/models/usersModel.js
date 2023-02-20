@@ -257,6 +257,27 @@ var User = {
     
       },
 
+  getProfissionalUsersAge: function(email)
+  {
+    return new Promise(function(resolve, reject)
+    {
+      let query = `SELECT FLOOR(DATEDIFF(CURDATE(), data_nascimento) / 365.25) AS age FROM profissional ORDER BY email ASC;`;
+      let connection = mysql.createConnection(options.mysql);
+      connection.query(query, email, function(error, result)
+      {
+        if(error) {reject(error);}
+        else
+        {
+          resolve(result);
+          connection.end();
+        }
+       
+      })
+      
+    })
+  
+    },
+
   getEmailById: function(id)
     {
       return new Promise(function(resolve, reject)

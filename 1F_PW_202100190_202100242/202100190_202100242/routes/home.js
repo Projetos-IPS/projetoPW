@@ -73,6 +73,14 @@ router.get('/getUsersProfissionaisInformation', function(req, res)
     })
 })
 
+router.get('/getUsersProfissionaisAge', function(req,res)
+{
+    User.getProfissionalUsersAge().then(function(result){
+        res.json(result);
+    })
+   
+})
+
 router.post('/sendFriendRequest', function(req, res)
 {
     const dataRQ = req.body;

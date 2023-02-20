@@ -59,6 +59,7 @@ function getLoggedUserData() {
                             xhrloggedUserinformationEmpresa.send();
                             document.getElementById('aprovar-utilizadores').style.display = "none";
                             document.getElementById('joboffers-menu').style.display = "none";
+                            document.getElementById('home-menu').style.display = "none";
                         }
 
                         if (loggedUserType[0].tipo_utilizador == 'Admin') {
@@ -642,7 +643,6 @@ function updateList(){
     }
     xhrVerifyLoggedUserType.send();
 }
-
 
 var init = function () {
     getLoggedUserData();
