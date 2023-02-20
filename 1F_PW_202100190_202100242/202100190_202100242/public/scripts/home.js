@@ -191,8 +191,8 @@ function showAddUsers(){
                             }
                         }
                         }
-
                         xhrVerifyLoggedUserType.send();
+                        
                         img_btn1.src = "../images/user-add.png";
                         img_btn2.src = "../images/user-add-hover.png";
                         divFriends.appendChild(div);
