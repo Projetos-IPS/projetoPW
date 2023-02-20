@@ -1362,23 +1362,6 @@ function showEducations(){
     xhrEducations.send();
 }
 
-/*function showPortfolio(){
-    const xhrPortfolios = new XMLHttpRequest();
-    xhrPortfolios.open('GET', '/Profile/getPortfolio/' + userID, true);
-    xhrPortfolios.setRequestHeader('Content-Type', 'application/json');
-   // let portfolio_div = document.getElementById('portfolio');
-    xhrPortfolios.onload = function () {
-        if (this.status === 200) {
-          let portfolio_info = JSON.parse(this.responseText);
-          console.log(portfolio_info);
-            
-            
-        }
-    }
-    xhrPortfolios.send();
-
-}*/
-
 function openAddEducation() {
     document.getElementById('pop-up-add-education').style.display = "block";
     document.getElementById('page-mask').style.display = "block";
@@ -1395,10 +1378,6 @@ function closeAddEducation() {
     document.getElementById('grade-label').style.removeProperty('display');
 
 }
-
-
-
-
 
 var init = function () {
     getLoggedUserData();
