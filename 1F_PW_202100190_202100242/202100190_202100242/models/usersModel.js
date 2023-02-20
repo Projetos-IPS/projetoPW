@@ -180,6 +180,22 @@ getUserIDs: function() {
   })
 },
 
+getUsers: function() {
+  return new Promise(function(resolve, reject) {
+    let query = `SELECT * from utilizador`;
+    let connection = mysql.createConnection(options.mysql);
+    connection.query(query, function(error, result) {
+      if (error) {
+        reject(error);
+        connection.end();
+      } else {
+        resolve(result);
+        connection.end();
+      }
+    })
+  })
+},
+
 getProfissionalUsersList: function(id) {
   return new Promise(function(resolve, reject) {
     let query = `SELECT * from utilizador WHERE approved = 1 AND tipo_utilizador != 'Admin' AND  tipo_utilizador != 'Empresa' AND id != ? ORDER BY email ASC`;

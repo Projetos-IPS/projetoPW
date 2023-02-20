@@ -24,6 +24,15 @@ router.get('/', function(req, res, next) {
   
 });
 
+router.get('/getUsers', function(req, res){
+  User.getUsers().then(function(result){
+    res.status(200).json(result);
+  }).catch(function(error){
+    console.log(error);
+    res.status(500).send("Internal Server Error");
+  })
+})
+
 router.post('/registoP', function(req, res)
 {
   const data = req.body;

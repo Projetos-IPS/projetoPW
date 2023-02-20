@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/index.css" />
     <script src="../scripts/index.js"> </script>
+    <script src="../scripts/formValidations.js"> </script>
     <link rel="icon" href="images/ff-logo.png" />
     <title>FOLIO&FLEX</title>
   </head>
@@ -150,7 +151,7 @@
 
           <div class="form-left">
             <label for="birthday">Birth Date</label><br>
-            <input type="date" class="birthday" id="birthday" name="birthdayP" required><br><br>
+            <input type="date" class="birthday" id="birthday" min='1908-01-01' name="birthdayP"><br><br>
 
             <label for="gender">Select Gender</label><br><br>
 
@@ -182,17 +183,43 @@
             let formProfissional = document.getElementById('profissional');
             formProfissional.addEventListener('submit', function(event){
              event.preventDefault();
-            // const data = new FormData(form);
-             const dataP = {
+
+             const xhrUsers = new XMLHttpRequest();
+             xhrUsers.open('GET', '/getUsers', true);
+             xhrUsers.setRequestHeader('Content-Type', 'application/json');
+             xhrUsers.onload = function(){
+                  if(this.status === 200)
+                  {
+                    let users = JSON.parse(xhrUsers.responseText);
+                 
+                    function emailNotExists(email){
+                        if(users.find(item => item.email === email) == undefined){
+                        return true;
+                      }
+                      else{
+                          return false;
+                      }
+                    }
+
+            const isNameValid = validateNameLength(formProfissional.nameP.value);
+            const uniqueEmail = emailNotExists(formProfissional.emailP.value);
+            const isValidEmail = validateEmail(formProfissional.emailP.value);
+            const isValidPassword = validatePasswords(formProfissional.passwordP.value, formProfissional.passwordRepeatP.value);
+            const isValidLengthPass = validatePasswordLength(formProfissional.passwordP.value);
+            const isValidDate = validateDate(formProfissional.birthdayP.value);
+
+            if (isValidEmail && isValidPassword && isValidLengthPass && isValidDate && uniqueEmail && isNameValid) {
+            const xhrRprofissional = new XMLHttpRequest();
+            
+            const dataP = {
               nomeP: formProfissional.nameP.value,
               emailP: formProfissional.emailP.value,
               passP: formProfissional.passwordP.value,
               birthdayP: formProfissional.birthdayP.value,
               genderP: formProfissional.genderP.value
-             };
-
-             const xhrRprofissional = new XMLHttpRequest();
-             xhrRprofissional.open('POST', '/registoP', true);
+             }; 
+            
+            xhrRprofissional.open('POST', '/registoP', true);
              xhrRprofissional.setRequestHeader('Content-Type', 'application/json');
              xhrRprofissional.send(JSON.stringify(dataP));
              
@@ -202,11 +229,27 @@
                 let response = JSON.parse(xhrRprofissional.responseText);
                 formProfissional.reset();
                 alert('Account created. You can now log-in.');
-             //   console.log(response.id);
               }
            
              };
-           
+
+              } if(isValidEmail == false) {
+                alert('Invalid email');
+              } if(isValidPassword == false){
+                alert('Password and repeat password are not equal');
+              } if(isValidLengthPass == false){
+                alert('Passwords must have a minimum of 8 characters');
+              } if(isValidDate == false){
+                alert('You chose a future date');
+              } if(uniqueEmail == false){
+                alert('Email already exists');
+              } if(isNameValid == false){
+                alert('Name too big');
+              }
+
+                  }
+              }
+              xhrUsers.send();
             });
           
           </script> 
@@ -248,28 +291,66 @@
             let formEmpresa = document.getElementById('company');
             formEmpresa.addEventListener('submit', function(event){
              event.preventDefault();
-            // const data = new FormData(form);
-             const dataE = {
-              nomeE: formEmpresa.nameE.value,
-              emailE: formEmpresa.emailE.value,
-              passE: formEmpresa.passwordE.value
-             };
+
+            const xhrUsersE = new XMLHttpRequest();
+            xhrUsersE.open('GET', '/getUsers', true);
+            xhrUsersE.setRequestHeader('Content-Type', 'application/json');
+            xhrUsersE.onload = function(){
+                  if(this.status === 200)
+                  {
+                    let users = JSON.parse(xhrUsersE.responseText);
+
+                    const dataE = {
+                    nomeE: formEmpresa.nameE.value,
+                    emailE: formEmpresa.emailE.value,
+                    passE: formEmpresa.passwordE.value
+                    };
     
-             const xhrRempresa = new XMLHttpRequest();
-             xhrRempresa.open('POST', '/registoE', true);
-             xhrRempresa.setRequestHeader('Content-Type', 'application/json');
-             xhrRempresa.send(JSON.stringify(dataE));
+                    function emailNotExists(email){
+                        if(users.find(item => item.email === email) == undefined){
+                        return true;
+                      }
+                      else{
+                          return false;
+                      }
+                    }
+
+                    const isValidEmail = validateEmail(formEmpresa.emailE.value);
+                    const uniqueEmail = emailNotExists(formEmpresa.emailE.value);
+                    const isValidPassword = validatePasswords(formEmpresa.passwordE.value, formEmpresa.passwordRepeatE.value);
+                    const isValidLengthPass = validatePasswordLength(formEmpresa.passwordE.value);
+                
+                    if(uniqueEmail && isValidPassword && isValidLengthPass && isValidEmail){
+                      const xhrRempresa = new XMLHttpRequest();
+                      xhrRempresa.open('POST', '/registoE', true);
+                      xhrRempresa.setRequestHeader('Content-Type', 'application/json');
+                      xhrRempresa.send(JSON.stringify(dataE));
              
-             xhrRempresa.onload = function(){
-              if(xhrRempresa.status === 201)
-              {
-                let response = JSON.parse(xhrRempresa.responseText);
-                formEmpresa.reset();
-                alert('Account created. You must wait for an administrator to activate your account.');
-             //   console.log(response.id);
-              }
-            
-             }
+                      xhrRempresa.onload = function(){
+                      if(xhrRempresa.status === 201)
+                      {
+                        let response = JSON.parse(xhrRempresa.responseText);
+                        formEmpresa.reset();
+                        alert('Account created. You must wait for an administrator to activate your account.');
+                      }
+                    
+                      }
+                     }
+                     if(uniqueEmail == false){
+                      alert('Email already exists');
+                     } if(isValidPassword == false){
+                      alert('Password and repeat password are not equal');
+                     } if(isValidLengthPass == false){
+                      alert('Passwords must have a minimum of 8 characters');
+                     } if(isValidEmail == false){
+                      alert('Invalid email');
+                     }
+                  }
+                }
+                xhrUsersE.send();
+
+             
+
            
             });
      
