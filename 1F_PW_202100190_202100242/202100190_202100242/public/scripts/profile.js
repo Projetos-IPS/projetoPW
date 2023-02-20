@@ -79,6 +79,7 @@ function getLoggedUserData() {
                             document.getElementById('add-button-experience').style.display = "none";
                             document.getElementById('add-button-education').style.display = "none";
                             document.getElementById('profile-menu').className = "link";
+                            document.getElementById('exp-icon3').style.display = "none";
                         }
                 }
                 

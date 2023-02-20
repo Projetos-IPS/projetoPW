@@ -290,3 +290,34 @@ body {
 #myBtn:hover {
     background-color: rgba(0, 74, 173, 0.5); /* Add a dark-grey background on hover */
 }
+
+/** MEDIA QUERIES **/
+@media only screen and (max-width: 480px) {
+    body {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .side, .side-under, .side-menu, .side-footer {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .main {
+        width: 95%;
+        height: 100%;
+    }
+
+    .main-general {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+    
+    .main-side {
+        width: 90%;
+    }
+}

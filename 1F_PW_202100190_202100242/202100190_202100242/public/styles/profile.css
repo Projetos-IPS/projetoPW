@@ -166,7 +166,6 @@
 }
 
 .pop-up-form {
-
     overflow: auto;
     width: 100%;
     height: 72%;
@@ -198,12 +197,9 @@
 }
 
 .pop-up-edit .name-occupation {
+    width: 70%;
     display: flex;
-    justify-content: center;
-}
-
-.pop-up-edit .name-occupation .second {
-    margin-left: 100px;
+    justify-content: space-between;
 }
 
 .pop-up-form input[type=text] {
@@ -257,6 +253,12 @@ textarea {
 
 .button-save {
     text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .pop-up-form {
@@ -346,8 +348,28 @@ textarea {
     font-size: small;
 }
 
+/** MEDIA QUERIES **/
+@media only screen and (max-width: 480px) {
+    .profile-gray-area {
+        width: 95%;
+        height: 100%;
+    }
 
+    .main-side {
+        margin: 10px 0px 20px 0px;
+        margin-bottom: 20px;
+    }
 
+    .pop-up-edit, .pop-up-edit-description, .pop-up-add-experience, .pop-up-add-education {
+        width: 90%;
+        margin: 0;
+    }
 
+    .name-occupation {
+        flex-direction: column;
+    }
 
-
+    .name-occupation .second {
+        margin-top: 15px;
+    }
+}

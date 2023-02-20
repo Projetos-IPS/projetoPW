@@ -1,8 +1,5 @@
-/*-------------------------------------
-                 TEAM
---------------------------------------*/
 .team {
-    overflow:auto;
+    overflow: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -82,4 +79,17 @@
 .member:hover .details {
     opacity : 1;
     transform: translateY(-10px);
+}
+
+/** MEDIA QUERIES **/
+@media only screen and (max-width: 480px) {
+    .team {
+        width: 90%;
+        flex-direction: column;
+    }
+
+    .team .member {
+        width: 85%;
+        margin: 20px 0px;
+    }
 }
