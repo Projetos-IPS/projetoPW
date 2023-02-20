@@ -545,7 +545,7 @@ editDescriptionEmpresa: function(data, email) {
 
 //---------------------------------
 //Pedidos de amizade---------------------
-  sendFriendRequest: function(id_destino, data)
+sendFriendRequest: function(id_destino, data)
   {
   return new Promise(function(resolve, reject)
   {
@@ -565,9 +565,9 @@ editDescriptionEmpresa: function(data, email) {
   
   });
 
-  },
+},
 
-  getFriendsRequests : function()
+getFriendsRequests : function()
   {
     return new Promise(function(resolve, reject)
   {
@@ -585,9 +585,9 @@ editDescriptionEmpresa: function(data, email) {
     });
   
   });
-  },
+},
 
-  DeleteSentFriendsRequests : function(id_origem, data)
+DeleteSentFriendsRequests : function(id_origem, data)
   {
     return new Promise(function(resolve, reject)
   {
@@ -606,9 +606,9 @@ editDescriptionEmpresa: function(data, email) {
     });
   
   });
-  },
+},
 
-  acceptFriendRequest : function(data)
+acceptFriendRequest : function(data)
   {
     return new Promise(function(resolve, reject)
   {
@@ -636,9 +636,9 @@ editDescriptionEmpresa: function(data, email) {
     });
   
   });
-  },
+},
 
-  rejectFriendRequest : function(data)
+rejectFriendRequest : function(data)
   {
     return new Promise(function(resolve, reject)
   {
@@ -658,9 +658,9 @@ editDescriptionEmpresa: function(data, email) {
     });
   
   });
-  },
+},
 
-  getFriends : function(email)
+getFriends : function(email)
   {
     return new Promise(function(resolve, reject)
   {
@@ -678,9 +678,9 @@ editDescriptionEmpresa: function(data, email) {
     });
   
   });
-  },
+},
 
-  deleteFriend : function(email, data)
+deleteFriend : function(email, data)
   {
     return new Promise(function(resolve, reject)
   {
@@ -710,7 +710,7 @@ editDescriptionEmpresa: function(data, email) {
     });
   
   });
-  },
+},
 
 }
 //---------------------
