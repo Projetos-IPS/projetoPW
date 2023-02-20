@@ -204,7 +204,7 @@ function getLoggedUserData() {
                             document.getElementById('profile-menu').style.display = "none";
                             document.getElementById('team-page').style.display = "none";
                             profile_pic_show.style.display = "none";
-                            document.getElementById('admin-name-show').style.display = 'inline';
+                            document.getElementById('admin-name-show').style.removeProperty('display');
                         }
 
                         profile_hyperlink.href = "../Profile/" + loggedUserType[0].id;
