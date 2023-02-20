@@ -664,7 +664,7 @@ getFriends : function(email)
   {
     return new Promise(function(resolve, reject)
   {
-    let query = `SELECT * FROM amigo WHERE email_utilizador = ?`;
+    let query = `SELECT * FROM amigo WHERE email_utilizador = ? ORDER BY email_amigo ASC`;
     let connection = mysql.createConnection(options.mysql);
     connection.query(query, email, function(error, result)
     {

@@ -79,7 +79,6 @@ function getLoggedUserData() {
                             document.getElementById('add-button-experience').style.display = "none";
                             document.getElementById('add-button-education').style.display = "none";
                             document.getElementById('profile-menu').className = "link";
-                            document.getElementById('exp-icon3').style.display = "none";
                         }
                 }
                 
@@ -1015,21 +1014,22 @@ function getProfileInformation() {
                            xhrFriends1.onload = function () {
                            if (xhrFriends1.status === 200) {
                             let friendslist = JSON.parse(xhrFriends1.responseText);
+
                             if(friendslist.length > 0){
-                            for(let i = 0; i < friendslist.length; i++){
-                                if(loggedUserinfo[0].email != informationProfile[0].email && informationProfile[0].email != friendslist[i].email_amigo){
-                                    window.location.href = '../Home';
-                                //    alert('Only friends can see each others portfolios');
+                                if(loggedUserinfo[0].email != informationProfile[0].email){
+    
+                                    if(friendslist.find(item => item.email_amigo === informationProfile[0].email) == undefined){
+                                        window.location.href = '../home';
+                                    } 
                                 }
                             }
-                           }
-                           if(friendslist == 0){
+                            if(friendslist.length == 0){
                             if(loggedUserinfo[0].email != informationProfile[0].email){
                                 window.location.href = '../Home';
                             }
                            }
                         }
-                    }
+                         }
                         xhrFriends1.send();
                         }
 
@@ -1499,20 +1499,8 @@ function showExperiences(){
 
                 let div_content_part_icons = document.createElement('div');
                 div_content_part_icons.className = 'content-part-icon';
-                //editar nao é obrigatorio
-                /*let a1 = document.createElement('a');
-                a1.id = 'exp-icon1';
-                //a1.dataset.experienceid = experiencesProfile[i].id;
-                let li1 = document.createElement('li');
-                li1.className = 'fas fa-edit';
-                li1.className += ' icon1';
-                li1.style.color = 'black';
-                a1.appendChild(li1);
-                div_content_part_icons.appendChild(a1);*/
-
                 let a2 = document.createElement('a');
                 a2.id = 'exp-icon2';
-                //a2.dataset.experienceid = experiencesProfile[i].id;
                 let li2 = document.createElement('li');
                 li2.className = 'fas fa-trash-alt';
                 li2.className += ' icon2';
@@ -1552,7 +1540,6 @@ function showExperiences(){
                     if (xhrloggedUserInfo1.status === 200) {
                         let loggedUserInfo1 = JSON.parse(xhrloggedUserInfo1.responseText);
                         if (loggedUserInfo1[0].id != userID) {
-                           //a1.style.display = "none";
                            a2.style.display = "none";
                         }
                     }
@@ -1653,20 +1640,8 @@ function showEducations(){
 
                     let div_content_part_icons = document.createElement('div');
                     div_content_part_icons.className = 'content-part-icon';
-                    
-                    /*let a1 = document.createElement('a');
-                    a1.id = 'exp-icon1';
-                    //a1.dataset.experienceid = experiencesProfile[i].id;
-                    let li1 = document.createElement('li');
-                    li1.className = 'fas fa-edit';
-                    li1.className += ' icon1';
-                    li1.style.color = 'black';
-                    a1.appendChild(li1);
-                    div_content_part_icons.appendChild(a1);*/
-
                     let a2 = document.createElement('a');
                     a2.id = 'exp-icon3';
-                    //a2.dataset.experienceid = experiencesProfile[i].id;
                     let li2 = document.createElement('li');
                     li2.className = 'fas fa-trash-alt';
                     li2.className += ' icon2';
@@ -1699,7 +1674,6 @@ function showEducations(){
                     if (xhrloggedUserInfo5.status === 200) {
                         let loggedUserInfo1 = JSON.parse(xhrloggedUserInfo5.responseText);
                         if (loggedUserInfo1[0].id != userID) {
-                           //a1.style.display = "none";
                            a2.style.display = "none";
                         }
                     }
@@ -1753,7 +1727,6 @@ var init = function () {
     changeviewEducation();
     showExperiences();
     showEducations();
-   // showPortfolio();
 };
 
 function changeviewExperience(){
