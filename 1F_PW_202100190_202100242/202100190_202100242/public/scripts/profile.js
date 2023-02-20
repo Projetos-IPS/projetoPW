@@ -690,6 +690,7 @@ function getProfileInformation() {
                             //    alert('This user doesnt allow companies to see his portfolio');
                             }
 
+                        if(loggedUserinfo[0].tipo_utilizador == 'Profissional'){
                            const xhrFriends1 = new XMLHttpRequest();
                            xhrFriends1.open('GET', '../Home/getFriends', true);
                            xhrFriends1.setRequestHeader('Content-Type', 'application/json');
@@ -710,9 +711,10 @@ function getProfileInformation() {
                             window.location.href = '../Home';
                            // alert('Only friends can see each others portfolios');
                            }
-                           }
                         }
+                    }
                         xhrFriends1.send();
+                        }
 
 
                         }
