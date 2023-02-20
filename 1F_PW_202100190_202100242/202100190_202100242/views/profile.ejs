@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="../styles/profile.css" />
   <script src="../scripts/profile.js"></script>
   <script src="https://kit.fontawesome.com/93b3c59277.js" crossorigin="anonymous"></script>
+  <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
   <link rel="icon" href="../images/ff-logo.png" />
   <title>FOLIO&FLEX</title>
 </head>
@@ -100,14 +101,14 @@
             </div>
             <div class="second">
               <label for="email">Occupation*</label><br>
-              <input id="headlineUser" type="text" name="headline" required><br>
+              <input id="headlineUser" placeholder="Ex. Software Engineer" type="text" name="headline" required><br>
             </div>
           </div>
 
           <div class="field">
             <h3>Location</h3>
             <label for="locationUser">Country/Region*</label><br />
-            <input id="locationUser" type="text" name="locationUser">
+            <input id="locationUser" placeholder="Ex. Lisbon, Portugal" type="text" name="locationUser">
           </div>
 
           <div class="field">
@@ -127,6 +128,47 @@
   </form>
 </div>
 
+<!------------------------------------------------------------------------>
+
+<div id="pop-up-editEmpresa" class="pop-up-edit-description">
+   
+  <div class="pop-up-header">
+  <h3>Edit Intro</h3>
+  <button class="close-btn" onclick="closeEditIntroEmpresa()"><i class="fa-solid fa-x" style="font-size: 20px; color: #7088B0;"></i></button>
+  </div>
+
+  <div class="pop-up-form">
+  <form class="editProfileEmpresa" method="post"  id="editProfileEmpresa">
+    <label for="urlEmpresa">Website</label><br>
+    <input type="url" name="urlEmpresa" id="urlEmpresa"><br><br>
+  </div>
+<div class="button-save">
+  <button class="save" type="submit">Save</button>
+</div>
+</form>
+
+</div>
+
+<!------------------------------------------------------------------->
+<div id="pop-up-edit-description-empresa" class="pop-up-edit-description">
+   
+  <div class="pop-up-header">
+  <h3>Edit about</h3>
+  <button class="close-btn" onclick="closeEditDescriptionE()"><i class="fa-solid fa-x" style="font-size: 20px; color: #7088B0;"></i></button>
+  </div>
+
+  <div class="pop-up-form">
+  <form class="editDescriptionProfileE" method="post"  id="editDescriptionProfileE">
+    <br>
+    <p>Describe your company</p>
+    <textarea wrap="hard" id="descriptionE" name="descriptionUser" cols="30" rows="10"></textarea><br>
+</div>
+<div class="button-save">
+  <button class="save" type="submit">Save</button>
+</div>
+</form>
+
+</div>
   <!--------------------------------------------------------------->
   <div id="pop-up-edit-description" class="pop-up-edit-description">
    
@@ -147,6 +189,30 @@
       </form>
       
   </div>
+
+
+    <!--------------------------------------------------------------->
+    <div id="pop-up-add-portfolio" class="pop-up-edit-description">
+   
+      <div class="pop-up-header">
+      <h3>Add portfolio</h3>
+      <button class="close-btn" onclick="closeAddPortfolio()"><i class="fa-solid fa-x" style="font-size: 20px; color: #7088B0;"></i></button>
+      </div>
+
+      <div class="pop-up-form">
+      <form class="addPortfolioForm" method="post"  id="addPortfolioForm">
+      <label for="portfolioUser">Submit portfolio</label><br>
+        <input type="file" name="portfolioUser" id="portfolioUser"> <br><br>
+        <input type="checkbox" name="visibilityPortfolio" id="visibilityPortfolio">
+        I allow others to see my portfolio 
+      </div>
+    <div class="button-save">
+      <button class="save" type="submit">Save</button>
+    </div>
+  </form>
+  
+</div>
+
 
   <!------INICIO POP-UP de adicionar experiência profissional-->
   <div id="pop-up-add-experience" class="pop-up-add-experience">
@@ -197,7 +263,7 @@
 </form>
 </div>
 <!------FIM POP-UP de adicionar experiência profissional-->
-  <!--------------------------------------------------------------->
+  <!-----INICIO POP-UP de adicionar educação------------->
   <div id="pop-up-add-education" class="pop-up-add-education">
     <div class="pop-up-header">
     <h3>Add education</h3>
@@ -244,7 +310,7 @@
           </div>
           <div class="editIntro-button" id="edit-button">
             <button class="edit-button" onclick="openEditIntro()"><i class='far fa-edit' style='font-size:24px'></i></button>
-           </div>
+          </div>
         </div>
        
       </div>
@@ -257,37 +323,34 @@
         <p id="profile-description"> </p>
       </div>
 
-      <div class="profile-description-area" >
-        <div class="profile-description-header">
-          <h3>Portfolio</h3>
-          <button id="add-button-education" class="edit-button" onclick="openAddEducation()"><i class='fas fa-plus' style='font-size:24px'></i></button>
-        </div>
-      <div class="profile-main-content" id="portfolio">
-        
-      </div>
-      </div>
-
-      <div class="profile-description-area" >
+      <div class="profile-description-area" id="experience-area" >
         <div class="profile-description-header">
           <h3>Experience</h3>
-          <button id="add-button-experience" class="edit-button" onclick="openAddExperience()"><i class='fas fa-plus' style='font-size:24px'></i></button>
+          <button id="add-button-experience" class="edit-button" onclick="openAddExperience()">
+            <i class='fas fa-plus' style='font-size:24px'></i></button>
         </div>
       <div class="profile-main-content" id="experiences">
 
       </div>
         </div>
 
-
-      </div>
-      <div class="profile-description-area" >
-        <div class="profile-description-header">
-          <h3>Education</h3>
-          <button id="add-button-education" class="edit-button" onclick="openAddEducation()"><i class='fas fa-plus' style='font-size:24px'></i></button>
+      
+        <div class="profile-description-area" id="education-area">
+          <div class="profile-description-header">
+            <h3>Education</h3>
+            <button  id="add-button-education" class="edit-button" onclick="openAddEducation()">
+              <i class='fas fa-plus' style='font-size:24px'></i>
+            </button>
+          </div>
+        <div class="profile-main-content" id="education">
+          
         </div>
-      <div class="profile-main-content" id="education">
+        </div>
+
+
         
       </div>
-      </div>
+
 
       
 

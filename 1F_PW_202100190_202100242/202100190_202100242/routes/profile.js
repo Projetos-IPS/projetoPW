@@ -170,6 +170,19 @@ router.post('/editIntro/:userid/', function(req, res)
    })
 });
 
+router.post('/editIntroEmpresa/:userid/', function(req, res)
+{
+   let id = req.params.userid;
+   const data5 = req.body;
+   User.getEmailById(id).then(function(result)
+   {
+      User.editintroEmpresa(data5, result[0].email).then(function(result2)
+      {
+         res.json(result2);
+      })
+   })
+});
+
 router.post('/editDescription/:userid/', function(req, res)
 {
    let id = req.params.userid;
@@ -177,6 +190,19 @@ router.post('/editDescription/:userid/', function(req, res)
    User.getEmailById(id).then(function(result)
    {
       User.editdescription(data1, result[0].email).then(function(result2)
+      {
+         res.json(result2);
+      })
+   })
+});
+
+router.post('/editDescriptionEmpresa/:userid/', function(req, res)
+{
+   let id = req.params.userid;
+   const data6 = req.body;
+   User.getEmailById(id).then(function(result)
+   {
+      User.editDescriptionEmpresa(data6, result[0].email).then(function(result2)
       {
          res.json(result2);
       })
@@ -208,6 +234,7 @@ router.post('/addEducation/:userid/', function(req, res)
       })
    })
 });
+
 
 
   

@@ -668,7 +668,7 @@ function getProfileInformation() {
                         }
                         profileHeadline.innerHTML = informationProfile[0].headline;
                         profileAddress.innerHTML = informationProfile[0].localidade;
-                 }
+                    }
                 }
                 xhrprofileprofissional.send();
             }
@@ -683,7 +683,18 @@ function getProfileInformation() {
                         let informationProfile = JSON.parse(xhrprofileempresa.responseText);
                         profileName.innerHTML = informationProfile[0].nome;
                         profileImg.src = '../images/profile_company.png';
+                        document.getElementById('experience-area').style.display = "none";
+                        document.getElementById('education-area').style.display = "none";
+                        profileHeadline.innerHTML = informationProfile[0].site;    
+                        profileDescription.innerHTML = informationProfile[0].descricao;
+                        if(profileDescription.innerHTML == "")
+                        {
+                            profileDescription.innerHTML = "No description"
+                        }
+                    
                     }
+
+
                 }
                 xhrprofileempresa.send();
             }
@@ -700,8 +711,9 @@ function getProfileInformation() {
                         document.getElementById('add-button-experience').style.display = "none";
                         document.getElementById('add-button-education').style.display = "none";
                         document.getElementById('profile-menu').className = "link";
-
+                        document.getElementById('exp-icon3').style.display = "none";
                     }
+
                 }
             }
             xhrloggedUserInfo.send();
@@ -721,9 +733,15 @@ function closeEditIntro() {
     getProfileInformation();
 }
 
+function closeEditIntroEmpresa() {
+    document.getElementById('pop-up-editEmpresa').style.display = "none";
+    document.getElementById('page-mask').style.display = "none";
+    document.getElementById('editProfileEmpresa').reset();
+    getLoggedUserData();
+    getProfileInformation();
+}
+
 function openEditIntro() {
-    document.getElementById('pop-up-edit').style.display = "block";
-    document.getElementById('page-mask').style.display = "block";
     let headline_input = document.getElementById('headlineUser');
     let username_input = document.getElementById('nameUser');
     let location_input = document.getElementById('locationUser');
@@ -770,10 +788,26 @@ function openEditIntro() {
                     }
                 }
                 xhrforminformationProfissional.send();
-
+                document.getElementById('pop-up-edit').style.display = "block";
+                document.getElementById('page-mask').style.display = "block";
             }
             if (userprofileType[0].tipo_utilizador == 'Empresa') {
-                //faltam cenas
+                document.getElementById('pop-up-editEmpresa').style.display = "block";
+                document.getElementById('page-mask').style.display = "block";
+                url_input = document.getElementById('urlEmpresa');
+
+                const xhrforminformationEmpresa = new XMLHttpRequest();
+                xhrforminformationEmpresa.open('GET', '/Profile/getProfileInformationEmpresa/' + userID, true);
+                xhrforminformationEmpresa.setRequestHeader('Content-Type', 'application/json');
+                xhrforminformationEmpresa.onload = function () {
+                            if (xhrforminformationEmpresa.status === 200) {
+                                let infoEmpresa = JSON.parse(xhrforminformationEmpresa.responseText);
+                                document.getElementById('urlEmpresa').value = infoEmpresa[0].site;
+                                
+                            }
+                        }
+                        xhrforminformationEmpresa.send();
+
             }
         }
 
@@ -782,7 +816,7 @@ function openEditIntro() {
     xhruserprofileType.send();
 }
 
-function submitFormDataP() {
+function submitFormData() {
 
     let formEdit = document.getElementById('editProfile');
     formEdit.addEventListener('submit', function (event) {
@@ -905,6 +939,73 @@ function submitFormDataP() {
 
         };
     });
+
+    let formAddPortfolio = document.getElementById('addPortfolioForm');
+    formAddPortfolio.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        if(formAddPortfolio.visibilityPortfolio.checked == true){
+            visibilityPortfolio = 'Public';
+          }
+          else if(formAddPortfolio.visibilityPortfolio.checked == false){
+            visibilityPortfolio = 'Private';
+          }
+
+        const data4 = {
+            file : formAddPortfolio.portfolioUser.value,
+            visibility : visibilityPortfolio
+        };
+        const xhrsubmitAddPortfolio = new XMLHttpRequest();
+        xhrsubmitAddPortfolio.open('post', '/Profile/addPortfolio/' + userID, true);
+        xhrsubmitAddPortfolio.setRequestHeader('Content-Type', 'application/json');
+        xhrsubmitAddPortfolio.send(JSON.stringify(data4));
+
+        xhrsubmitAddPortfolio.onload = function () {
+            if (xhrsubmitAddPortfolio.status === 200) {
+               closeAddPortfolio();
+            }
+
+        };
+    });
+
+    let formEditEmpresa = document.getElementById('editProfileEmpresa');
+    formEditEmpresa.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const data5 = {
+            url : urlEmpresa.value
+        };
+        const xhrsubmitEditEmpresa = new XMLHttpRequest();
+        xhrsubmitEditEmpresa.open('post', '/Profile/editIntroEmpresa/' + userID, true);
+        xhrsubmitEditEmpresa.setRequestHeader('Content-Type', 'application/json');
+        xhrsubmitEditEmpresa.send(JSON.stringify(data5));
+
+        xhrsubmitEditEmpresa.onload = function () {
+            if (xhrsubmitEditEmpresa.status === 200) {
+                closeEditIntroEmpresa();
+            }
+
+        };
+
+    });
+
+    let formEditDescriptionEmpresa = document.getElementById('editDescriptionProfileE');
+    formEditDescriptionEmpresa.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const data6 = {
+            description: formEditDescriptionEmpresa.descriptionUser.value
+        };
+        const xhrsubmitEditDescription = new XMLHttpRequest();
+        xhrsubmitEditDescription.open('post', '/Profile/editDescriptionEmpresa/' + userID, true);
+        xhrsubmitEditDescription.setRequestHeader('Content-Type', 'application/json');
+        xhrsubmitEditDescription.send(JSON.stringify(data6));
+
+        xhrsubmitEditDescription.onload = function () {
+            if (xhrsubmitEditDescription.status === 200) {
+                closeEditDescriptionE();
+            }
+
+        };
+    });
 }
 
 function closeEditDescription() {
@@ -915,9 +1016,17 @@ function closeEditDescription() {
     getProfileInformation();
 }
 
+function closeEditDescriptionE() {
+    document.getElementById('pop-up-edit-description-empresa').style.display = "none";
+    document.getElementById('page-mask').style.display = "none";
+    document.getElementById('editDescriptionProfileE').reset();
+    getLoggedUserData();
+    getProfileInformation();
+
+}
+
 function openEditDescription() {
-    document.getElementById('pop-up-edit-description').style.display = "block";
-    document.getElementById('page-mask').style.display = "block";
+ 
     let description_input = document.getElementById('descriptionUser');
 
     const xhruserprofileType = new XMLHttpRequest();
@@ -938,14 +1047,29 @@ function openEditDescription() {
                     }
                 }
                 xhrforminformationProfissional.send();
+                document.getElementById('pop-up-edit-description').style.display = "block";
+                document.getElementById('page-mask').style.display = "block";
+            }
+            else if(userprofileType[0].tipo_utilizador == 'Empresa'){
+                document.getElementById('pop-up-edit-description-empresa').style.display = "block";
+                document.getElementById('page-mask').style.display = "block";
+                const xhrforminformationEmpresa = new XMLHttpRequest();
+                xhrforminformationEmpresa.open('GET', '/Profile/getProfileInformationEmpresa/' + userID, true);
+                xhrforminformationEmpresa.setRequestHeader('Content-Type', 'application/json');
+                xhrforminformationEmpresa.onload = function () {
+                            if (xhrforminformationEmpresa.status === 200) {
+                                let infoEmpresa = JSON.parse(xhrforminformationEmpresa.responseText);
+                                document.getElementById('descriptionE').value = infoEmpresa[0].descricao;
+                                
+                            }
+                        }
+                        xhrforminformationEmpresa.send();
+                
             }
         }
     }
     xhruserprofileType.send();
 
-}
-
-function openEditExperience() {
 }
 
 function openAddExperience() {
@@ -1195,7 +1319,7 @@ function showEducations(){
                     div_content_part_icons.appendChild(a1);*/
 
                     let a2 = document.createElement('a');
-                    a2.id = 'exp-icon2';
+                    a2.id = 'exp-icon3';
                     //a2.dataset.experienceid = experiencesProfile[i].id;
                     let li2 = document.createElement('li');
                     li2.className = 'fas fa-trash-alt';
@@ -1238,6 +1362,23 @@ function showEducations(){
     xhrEducations.send();
 }
 
+/*function showPortfolio(){
+    const xhrPortfolios = new XMLHttpRequest();
+    xhrPortfolios.open('GET', '/Profile/getPortfolio/' + userID, true);
+    xhrPortfolios.setRequestHeader('Content-Type', 'application/json');
+   // let portfolio_div = document.getElementById('portfolio');
+    xhrPortfolios.onload = function () {
+        if (this.status === 200) {
+          let portfolio_info = JSON.parse(this.responseText);
+          console.log(portfolio_info);
+            
+            
+        }
+    }
+    xhrPortfolios.send();
+
+}*/
+
 function openAddEducation() {
     document.getElementById('pop-up-add-education').style.display = "block";
     document.getElementById('page-mask').style.display = "block";
@@ -1252,12 +1393,17 @@ function closeAddEducation() {
     document.getElementById('endDateEducation-label').style.removeProperty('display');
     document.getElementById('gradeEducation').style.removeProperty('display');
     document.getElementById('grade-label').style.removeProperty('display');
+
 }
+
+
+
+
 
 var init = function () {
     getLoggedUserData();
     getProfileInformation();
-    submitFormDataP();
+    submitFormData();
     showAddUsers();
     showFriendRequests();
     showFriends();
@@ -1266,6 +1412,7 @@ var init = function () {
     changeviewEducation();
     showExperiences();
     showEducations();
+   // showPortfolio();
 };
 
 function changeviewExperience(){
@@ -1308,5 +1455,6 @@ function changeviewEducation(){
           }
         }
 }
+
 
 window.onload = init;

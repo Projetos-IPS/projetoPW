@@ -7,7 +7,7 @@ const { Session } = require("express-session");
 var User = {
 
   //Registo e login---------------
-    createP: function(data)
+  createP: function(data)
     {
         return new Promise(function(resolve, reject)
         {
@@ -27,7 +27,7 @@ var User = {
         
     },
 
-    createE: function(data)
+  createE: function(data)
     {
         return new Promise(function(resolve, reject)
         {
@@ -44,7 +44,7 @@ var User = {
         });
     },
 
-    login: function(data)
+  login: function(data)
 {
     return new Promise(function(resolve, reject)
   {
@@ -94,7 +94,7 @@ var User = {
     },
  //------------------------------- 
  //Aprovar empresas---------------
-    getCompanyUsers: function()
+  getCompanyUsers: function()
     {
       return new Promise(function(resolve, reject)
       {
@@ -115,7 +115,7 @@ var User = {
       });
     },
 
-    approveCompany: function(data)
+  approveCompany: function(data)
     {
       return new Promise(function(resolve, reject)
       {
@@ -146,7 +146,7 @@ var User = {
     });
     },
 
-    rejectCompany: function(data)
+  rejectCompany: function(data)
   {
     return new Promise(function(resolve, reject){
       let query = `DELETE FROM utilizador WHERE email = ?`;
@@ -166,7 +166,7 @@ var User = {
     })
     },
 
-    deactivateCompany: function(data)
+  deactivateCompany: function(data)
   {
     return new Promise(function(resolve, reject){
       let query2 = `DELETE FROM empresa WHERE email = ?`;
@@ -194,7 +194,7 @@ var User = {
     },
 //--------------------------------
 //userdata - perfil e sessão logada
-    getUserIDs: function()
+  getUserIDs: function()
   {
     return new Promise(function(resolve, reject)
     {
@@ -215,7 +215,7 @@ var User = {
   
     },
 
-    getProfissionalUsersList: function(id)
+  getProfissionalUsersList: function(id)
     {
       return new Promise(function(resolve, reject)
       {
@@ -235,7 +235,8 @@ var User = {
       })
     
       },
-    getProfissionalUsersInformation: function(email)
+
+  getProfissionalUsersInformation: function(email)
     {
       return new Promise(function(resolve, reject)
       {
@@ -256,7 +257,7 @@ var User = {
     
       },
 
-    getEmailById: function(id)
+  getEmailById: function(id)
     {
       return new Promise(function(resolve, reject)
       {
@@ -278,7 +279,7 @@ var User = {
    
     },
 
-    getIdbyEmail: function(email)
+  getIdbyEmail: function(email)
     {
       return new Promise(function(resolve, reject)
       {
@@ -298,7 +299,7 @@ var User = {
       })
     },
 
-    getUserType: function(email)
+  getUserType: function(email)
     {
       return new Promise(function(resolve, reject)
       {
@@ -319,7 +320,7 @@ var User = {
    
     },
 
-    getUserDataProfissional: function(email)
+  getUserDataProfissional: function(email)
     {
       return new Promise(function(resolve, reject)
       {
@@ -339,7 +340,7 @@ var User = {
       })
     },
 
-    getUserDataEmpresa: function(email)
+  getUserDataEmpresa: function(email)
     {
       return new Promise(function(resolve, reject)
       {
@@ -359,7 +360,7 @@ var User = {
       })
     },
 
-    getuserBirthDate: function(email)
+  getuserBirthDate: function(email)
     {
       return new Promise(function(resolve, reject)
       {
@@ -381,7 +382,7 @@ var User = {
     
       },
 
-    editintro: function(data, email)
+  editintro: function(data, email)
       {
         return new Promise(function(resolve, reject)
         {
@@ -403,7 +404,7 @@ var User = {
       
         },
 
-    editdescription: function(data1, email)
+  editdescription: function(data1, email)
         {
           return new Promise(function(resolve, reject)
           {
@@ -425,7 +426,7 @@ var User = {
         
           },
 
-    addExperience: function(data, email){
+  addExperience: function(data, email){
       return new Promise(function(resolve, reject)
           {
             if(data.data_fim == ''){
@@ -453,7 +454,7 @@ var User = {
         
           },
 
-    addEducation: function(data, email){
+  addEducation: function(data, email){
       return new Promise(function(resolve, reject)
           {
             if(data.date_end == ''){
@@ -485,7 +486,7 @@ var User = {
         
           },
 
-    getExperiences: function(email){
+  getExperiences: function(email){
             return new Promise(function(resolve, reject)
                 {
                   let query = `SELECT * FROM experiencia_trabalho WHERE email_profissional = ?`;
@@ -505,7 +506,7 @@ var User = {
               
                 },
 
-    getExperiencesDate: function(email){
+  getExperiencesDate: function(email){
                   return new Promise(function(resolve, reject)
                       {
                         let query = `SELECT id, DATE_FORMAT(data_inicio, '%M %Y') AS datainicio, DATE_FORMAT(data_fim, '%M %Y') AS datafim FROM experiencia_trabalho WHERE email_profissional = ?`;
@@ -525,7 +526,7 @@ var User = {
                     
                       },
 
-    deleteExperience: function(data, email){
+  deleteExperience: function(data, email){
                  return new Promise(function(resolve, reject)
                      {
                     let query = `DELETE FROM experiencia_trabalho WHERE id = ? and email_profissional = ?`;
@@ -546,7 +547,7 @@ var User = {
                           
                    },
 
-    getEducations: function(email){
+  getEducations: function(email){
             return new Promise(function(resolve, reject)
                 {
                   let query = `SELECT * FROM educacao WHERE email_profissional = ?`;
@@ -566,7 +567,7 @@ var User = {
               
                 },
 
-    geteducationDates: function(email){
+  geteducationDates: function(email){
                   return new Promise(function(resolve, reject)
                       {
                         let query = `SELECT id, DATE_FORMAT(data_inicio, '%M %Y') AS datainicio, DATE_FORMAT(data_fim, '%M %Y') AS datafim FROM educacao WHERE email_profissional = ?`;
@@ -586,8 +587,7 @@ var User = {
                     
                       },
 
-
-    deleteEducation: function(data, email){
+  deleteEducation: function(data, email){
                  return new Promise(function(resolve, reject)
                      {
                     let query = `DELETE FROM educacao WHERE id = ? and email_profissional = ?`;
@@ -607,9 +607,53 @@ var User = {
                      });
                           
                    },
+
+  editintroEmpresa: function(data, email)
+      {
+        return new Promise(function(resolve, reject)
+        {
+          let query = `UPDATE empresa SET site = ? WHERE email = ?`;
+          let connection = mysql.createConnection(options.mysql);
+          let values = [data.url, email];
+          connection.query(query, values, function(error, result)
+          {
+            if(error) {reject(error);}
+            else
+            {
+              resolve(result.insertId);
+              connection.end();
+            }
+        
+          });
+        
+        });
+      
+        },
+
+  editDescriptionEmpresa: function(data, email)
+      {
+        return new Promise(function(resolve, reject)
+        {
+          let query = `UPDATE empresa SET descricao = ? WHERE email = ?`;
+          let connection = mysql.createConnection(options.mysql);
+          let values = [data.description, email];
+          connection.query(query, values, function(error, result)
+          {
+            if(error) {reject(error);}
+            else
+            {
+              resolve(result.insertId);
+              connection.end();
+            }
+        
+          });
+        
+        });
+      
+        },
 //---------------------------------
 //Pedidos de amizade---------------------
-    sendFriendRequest: function(id_destino, data)
+  sendFriendRequest: function(id_destino, data)
   {
   return new Promise(function(resolve, reject)
   {
@@ -631,7 +675,7 @@ var User = {
 
   },
 
-    getFriendsRequests : function()
+  getFriendsRequests : function()
   {
     return new Promise(function(resolve, reject)
   {
@@ -651,7 +695,7 @@ var User = {
   });
   },
 
-    DeleteSentFriendsRequests : function(id_origem, data)
+  DeleteSentFriendsRequests : function(id_origem, data)
   {
     return new Promise(function(resolve, reject)
   {
