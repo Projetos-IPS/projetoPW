@@ -53,8 +53,7 @@ function imprimirArrayValorDesc() {
   list = "";
 
   for (let job of data) {
-    list += "<li class='listajobs'>" + job.companyName + " Looking for " + job.description + "<br>" + "<b> Position: </b>" + job.position + "<br>" + "<b> Duration: </b>" + job.duration + "<br>" + "<b>Location: </b>" + job.location + "<br>" + "<b>Yearly salary: </b>" + job.salary + "€" + "<br>" + "<img alt='arrowRedirect' src='images/arrow.png' class='arrow'> ";
-    list += "<hr class='hr-jobs'>";
+    list += "<li class='listajobs'>" + job.companyName + " Looking for " + job.description + "<br>" + "<b> Position: </b>" + job.position + "<br>" + "<b> Duration: </b>" + job.duration + "<br>" + "<b>Location: </b>" + job.location + "<br>" + "<b>Yearly salary: </b>" + job.salary + "€" + "<br>" + "<b> Offer expiring in: " + job.expire + "</b><img alt='arrowRedirect' src='images/arrow.png' class='arrow'> ";    list += "<hr class='hr-jobs'>";
   }
 
   ulListaValor.innerHTML = list;
@@ -74,8 +73,7 @@ function imprimirArrayValorAsc() {
   list = "";
 
   for (let job of data) {
-    list += "<li class='listajobs'>" + job.companyName + " Looking for " + job.description + "<br>" + "<b> Position: </b>" + job.position + "<br>" + "<b> Duration: </b>" + job.duration + "<br>" + "<b>Location: </b>" + job.location + "<br>" + "<b>Yearly salary: </b>" + job.salary + "€" + "<br>" + "<img alt='arrowRedirect' src='images/arrow.png' class='arrow'> ";
-    list += "<hr class='hr-jobs'>";
+    list += "<li class='listajobs'>" + job.companyName + " Looking for " + job.description + "<br>" + "<b> Position: </b>" + job.position + "<br>" + "<b> Duration: </b>" + job.duration + "<br>" + "<b>Location: </b>" + job.location + "<br>" + "<b>Yearly salary: </b>" + job.salary + "€" + "<br>" + "<b> Offer expiring in: " + job.expire + "</b><img alt='arrowRedirect' src='images/arrow.png' class='arrow'> ";    list += "<hr class='hr-jobs'>";
   }
 
   ulListaValor.innerHTML = list;
