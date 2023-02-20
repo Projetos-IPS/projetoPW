@@ -632,6 +632,7 @@ function getProfileInformation() {
     let profileImg = document.getElementById('profile-img');
     let profileName = document.getElementById('profile-name');
     let profileHeadline = document.getElementById('profile-headline');
+    let profileUrl = document.getElementById('profile-url');
     let profileAddress = document.getElementById('profile-address');
     let profileDescription = document.getElementById('profile-description');
 
@@ -685,7 +686,9 @@ function getProfileInformation() {
                         profileImg.src = '../images/profile_company.png';
                         document.getElementById('experience-area').style.display = "none";
                         document.getElementById('education-area').style.display = "none";
-                        profileHeadline.innerHTML = informationProfile[0].site;    
+                        profileUrl.style.removeProperty('Display');
+                        profileUrl.href = informationProfile[0].site;
+                        profileUrl.innerHTML = informationProfile[0].site;    
                         profileDescription.innerHTML = informationProfile[0].descricao;
                         if(profileDescription.innerHTML == "")
                         {
