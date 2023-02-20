@@ -386,9 +386,9 @@ var User = {
       {
         return new Promise(function(resolve, reject)
         {
-          let query = `UPDATE profissional SET nome = ?, data_nascimento = ?, genero = ?, headline = ?, localidade = ? WHERE email = ?`;
+          let query = `UPDATE profissional SET nome = ?, data_nascimento = ?, genero = ?, headline = ?, localidade = ?, visualizacao_empresas = ? WHERE email = ?`;
           let connection = mysql.createConnection(options.mysql);
-          let values = [data.nome, data.birth, data.genero, data.headline, data.localidade, email];
+          let values = [data.nome, data.birth, data.genero, data.headline, data.localidade, data.visualizacao, email ];
           connection.query(query, values, function(error, result)
           {
             if(error) {reject(error);}

@@ -669,6 +669,7 @@ function getProfileInformation() {
                         }
                         profileHeadline.innerHTML = informationProfile[0].headline;
                         profileAddress.innerHTML = informationProfile[0].localidade;
+                       
                     }
                 }
                 xhrprofileprofissional.send();
@@ -690,6 +691,7 @@ function getProfileInformation() {
                         profileUrl.href = informationProfile[0].site;
                         profileUrl.innerHTML = informationProfile[0].site;    
                         profileDescription.innerHTML = informationProfile[0].descricao;
+                    
                         if(profileDescription.innerHTML == "")
                         {
                             profileDescription.innerHTML = "No description"
@@ -777,7 +779,7 @@ function openEditIntro() {
                         else if (forminformationProfissional[0].genero == 'other') {
                             document.getElementById('other').checked = true;
                         }
-
+                        
                         const xhrformInformationBirthdate = new XMLHttpRequest();
                         xhrformInformationBirthdate.open('GET', '/Profile/getProfileBirthdate/' + userID, true);
                         xhrformInformationBirthdate.setRequestHeader('Content-Type', 'application/json');
@@ -788,6 +790,14 @@ function openEditIntro() {
                             }
                         }
                         xhrformInformationBirthdate.send();
+                        if(forminformationProfissional[0].visualizacao_empresas == 1){
+
+                            document.getElementById('visualizacaoUser').checked = true;
+                        }
+                        else
+                        {
+                            document.getElementById('visualizacaoUser').checked = false;
+                        }
                     }
                 }
                 xhrforminformationProfissional.send();
@@ -824,12 +834,23 @@ function submitFormData() {
     let formEdit = document.getElementById('editProfile');
     formEdit.addEventListener('submit', function (event) {
         event.preventDefault();
+        
+       
+        if(document.getElementById('visualizacaoUser').checked == true)
+        {
+            visibility = 1;
+        }
+        else if(document.getElementById('visualizacaoUser').checked == false){
+            visibility = 0;
+        }
+        
         const data = {
             nome: formEdit.nameUser.value,
             birth: formEdit.birthUser.value,
             genero: formEdit.generoUser.value,
             headline: formEdit.headline.value,
-            localidade: formEdit.locationUser.value
+            localidade: formEdit.locationUser.value,
+            visualizacao: visibility
         };
         const xhrsubmitEdit = new XMLHttpRequest();
         xhrsubmitEdit.open('post', '/Profile/editIntro/' + userID, true);
