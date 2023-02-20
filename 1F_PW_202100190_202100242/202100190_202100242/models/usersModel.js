@@ -75,7 +75,7 @@ login: function(data) {
     });
   },
 
-  //------------------------------- 
+//------------------------------- 
 //Aprovar empresas---------------
  getCompanyUsers: function() {
   return new Promise(function(resolve, reject) {
@@ -161,6 +161,7 @@ deactivateCompany: function(data) {
     });
   });
 },
+
 //--------------------------------
 //userdata - perfil e sessão logada
 getUserIDs: function() {
@@ -541,6 +542,7 @@ editDescriptionEmpresa: function(data, email) {
         });
     });
 },
+
 //---------------------------------
 //Pedidos de amizade---------------------
   sendFriendRequest: function(id_destino, data)
