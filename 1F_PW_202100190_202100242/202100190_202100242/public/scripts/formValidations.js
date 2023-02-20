@@ -32,11 +32,12 @@ function validateEmail(email) {
   }
 
   function validateNameLength(name){
-    if(name.length > 0 && name.length < 255)
+    if(name.length < 255)
     return true;
     else
     return false;
   }
+
 
 
   

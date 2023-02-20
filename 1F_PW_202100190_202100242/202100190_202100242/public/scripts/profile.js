@@ -1221,17 +1221,26 @@ function submitFormData() {
         const data1 = {
             description: formEditDescription.descriptionUser.value
         };
-        const xhrsubmitEditDescription = new XMLHttpRequest();
-        xhrsubmitEditDescription.open('post', '/Profile/editDescription/' + userID, true);
-        xhrsubmitEditDescription.setRequestHeader('Content-Type', 'application/json');
-        xhrsubmitEditDescription.send(JSON.stringify(data1));
 
-        xhrsubmitEditDescription.onload = function () {
-            if (xhrsubmitEditDescription.status === 200) {
-                closeEditDescription();
-            }
+        const maxText = validateNameLength(formEditDescription.descriptionUser.value);
+        if(maxText){
+            const xhrsubmitEditDescription = new XMLHttpRequest();
+            xhrsubmitEditDescription.open('post', '/Profile/editDescription/' + userID, true);
+            xhrsubmitEditDescription.setRequestHeader('Content-Type', 'application/json');
+            xhrsubmitEditDescription.send(JSON.stringify(data1));
+    
+            xhrsubmitEditDescription.onload = function () {
+                if (xhrsubmitEditDescription.status === 200) {
+                    closeEditDescription();
+                }
+    
+            };
+        }
+        if(maxText == false){
+            alert('Text too long: there is a maximum of 255 characters');
+        }
 
-        };
+
     });
 
     let formAddExperience = document.getElementById('addExperienceForm');
@@ -1258,6 +1267,9 @@ function submitFormData() {
             data_fim: formAddExperience.experienceEndDate.value,
             descricao: formAddExperience.experienceDescription.value
         };
+
+        const maxText = validateNameLength(formAddExperience.experienceDescription.value);
+        if(maxText){
         const xhrsubmitAddExperience = new XMLHttpRequest();
         xhrsubmitAddExperience.open('post', '/Profile/addExperience/' + userID, true);
         xhrsubmitAddExperience.setRequestHeader('Content-Type', 'application/json');
@@ -1272,6 +1284,10 @@ function submitFormData() {
             }
 
         };
+        }
+        if(maxText == false){
+            alert('Text too long: there is a maximum of 255 characters');
+        }
     });
 
     let formAddEducation = document.getElementById('addEducationForm');
@@ -1298,6 +1314,11 @@ function submitFormData() {
             activities: formAddEducation.activitiesEducation.value,
             description: formAddEducation.descriptionEducation.value
         };
+
+        const maxTextDescription = validateNameLength(formAddEducation.descriptionEducation.value);
+        const maxTextActivities = validateNameLength(formAddEducation.activitiesEducation.value);
+    
+        if(maxTextDescription && maxTextActivities){
         const xhrsubmitAddEducation = new XMLHttpRequest();
         xhrsubmitAddEducation.open('post', '/Profile/addEducation/' + userID, true);
         xhrsubmitAddEducation.setRequestHeader('Content-Type', 'application/json');
@@ -1311,6 +1332,10 @@ function submitFormData() {
             }
 
         };
+        }
+        if(maxTextActivities == false || maxTextDescription == false){
+            alert('Text too long: there is a maximum of 255 characters')
+        }
     });
 
     let formEditEmpresa = document.getElementById('editProfileEmpresa');
