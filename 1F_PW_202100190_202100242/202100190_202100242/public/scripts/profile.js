@@ -701,15 +701,16 @@ function getProfileInformation() {
                             console.log(friendslist[0]);
                             if(friendslist.length > 0){
                             for(let i = 0; i < friendslist.length; i++){
-                                if(informationProfile[0].email != friendslist[i].email_amigo){
+                                if(loggedUserinfo[0].email != informationProfile[0].email && informationProfile[0].email != friendslist[i].email_amigo){
                                     window.location.href = '../Home';
                                 //    alert('Only friends can see each others portfolios');
                                 }
                             }
                            }
-                           else{
-                            window.location.href = '../Home';
-                           // alert('Only friends can see each others portfolios');
+                           if(friendslist == 0){
+                            if(loggedUserinfo[0].email != informationProfile[0].email){
+                                window.location.href = '../Home';
+                            }
                            }
                         }
                     }
