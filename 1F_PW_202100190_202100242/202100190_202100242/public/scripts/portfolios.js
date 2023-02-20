@@ -21,19 +21,7 @@ function getLoggedUserData() {
                         let profissionalInfo = JSON.parse(xhrloggedUserinformationProfissional.responseText);
 
                         if (loggedUserType[0].tipo_utilizador == 'Profissional') {
-
-                        username_show.innerHTML = profissionalInfo[0].nome;
-                        if (profissionalInfo[0].genero == 'Feminino') {
-                            profile_pic_show.src = '../images/profile-female.png';
-                        }
-                        else if (profissionalInfo[0].genero == 'Masculino') {
-                            profile_pic_show.src = '../images/profile-male.png';
-                        }
-                        else if (profissionalInfo[0].genero == 'other') {
-                            profile_pic_show.src = '../images/profile-other.png';
-                        }
-                        document.getElementById('aprovar-utilizadores').style.display = "none";
-                        document.getElementById('portfolios-menu').style.display = "none";
+                          window.location.href = '/Home';
                         }
                         //  profile_hyperlink.dataset.email = profissionalInfo[0].email;
 

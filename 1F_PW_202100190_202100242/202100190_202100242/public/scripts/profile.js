@@ -1005,7 +1005,7 @@ function getProfileInformation() {
                             profileAddress.innerHTML = informationProfile[0].localidade;
 
                             if(loggedUserinfo[0].tipo_utilizador == 'Empresa' && informationProfile[0].visualizacao_empresas == 0){
-                                window.location.href = '../Home';
+                                window.location.href = '../Portfolios';
                             //    alert('This user doesnt allow companies to see his portfolio');
                             }
 
