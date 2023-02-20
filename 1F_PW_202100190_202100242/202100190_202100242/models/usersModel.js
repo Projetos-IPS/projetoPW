@@ -234,7 +234,7 @@ var User = {
         
       })
     
-      },
+    },
 
   getProfissionalUsersInformation: function(email)
     {
@@ -255,7 +255,7 @@ var User = {
         
       })
     
-      },
+    },
 
   getProfissionalUsersAge: function(email)
   {
@@ -401,7 +401,7 @@ var User = {
         
       })
     
-      },
+    },
 
   editintro: function(data, email)
       {
@@ -423,7 +423,7 @@ var User = {
         
         });
       
-        },
+    },
 
   editdescription: function(data1, email)
         {
@@ -445,7 +445,7 @@ var User = {
           
           });
         
-          },
+    },
 
   addExperience: function(data, email){
       return new Promise(function(resolve, reject)
@@ -473,7 +473,7 @@ var User = {
           
           });
         
-          },
+    },
 
   addEducation: function(data, email){
       return new Promise(function(resolve, reject)
@@ -505,7 +505,7 @@ var User = {
           
           });
         
-          },
+    },
 
   getExperiences: function(email){
             return new Promise(function(resolve, reject)
@@ -525,7 +525,7 @@ var User = {
                 
                 });
               
-                },
+    },
 
   getExperiencesDate: function(email){
                   return new Promise(function(resolve, reject)
@@ -545,7 +545,7 @@ var User = {
                       
                       });
                     
-                      },
+    },
 
   deleteExperience: function(data, email){
                  return new Promise(function(resolve, reject)
@@ -566,7 +566,7 @@ var User = {
                             
                      });
                           
-                   },
+    },
 
   getEducations: function(email){
             return new Promise(function(resolve, reject)
@@ -586,7 +586,7 @@ var User = {
                 
                 });
               
-                },
+    },
 
   geteducationDates: function(email){
                   return new Promise(function(resolve, reject)
@@ -606,7 +606,7 @@ var User = {
                       
                       });
                     
-                      },
+    },
 
   deleteEducation: function(data, email){
                  return new Promise(function(resolve, reject)
@@ -627,7 +627,7 @@ var User = {
                             
                      });
                           
-                   },
+    },
 
   editintroEmpresa: function(data, email)
       {
@@ -649,7 +649,7 @@ var User = {
         
         });
       
-        },
+    },
 
   editDescriptionEmpresa: function(data, email)
       {
@@ -671,7 +671,7 @@ var User = {
         
         });
       
-        },
+    },
 //---------------------------------
 //Pedidos de amizade---------------------
   sendFriendRequest: function(id_destino, data)
@@ -842,7 +842,6 @@ var User = {
   },
 
 }
-
 //---------------------
 
 
