@@ -9,12 +9,17 @@ router.get('/', function(req, res, next) {
   if(req.session.name !== undefined && req.session.name !== 0 && req.session.name !== 2 && req.session.name !== 3)
   {
     req.session.destroy((err) => {
-      res.render('index');
+      if (err) {
+        console.log(err);
+        res.status(500).send("Internal Server Error");
+      } else {
+        res.render('index');
+      }
     })
   }
   else
   {
-  res.render('index');
+    res.render('index');
   }
   
 });
@@ -23,7 +28,10 @@ router.post('/registoP', function(req, res)
 {
   const data = req.body;
   User.createP(data).then(function(id){
-    res.json({id : id});
+    res.status(201).json({id : id});
+  }).catch(function(error){
+    console.log(error);
+    res.status(500).send("Internal Server Error");
   });
 });
 
@@ -31,7 +39,10 @@ router.post('/registoE', function(req, res)
 {
   const data = req.body;
   User.createE(data).then(function(id){
-    res.json({id : id});
+    res.status(201).json({id : id});
+  }).catch(function(error){
+    console.log(error);
+    res.status(500).send("Internal Server Error");
   });
 });
 
@@ -41,17 +52,22 @@ router.post('/login', function(req, res)
   User.login(data).then(function(id){
     req.session.name = id;
     res.json({result : id});  
+  }).catch(function(error){
+    console.log(error);
+    res.status(500).send("Internal Server Error");
   });
-  
 });
 
 router.get('/out', function(req,res){
   req.session.destroy((err) => {
-    res.redirect('/'); 
-    res.end();
+    if (err) {
+      console.log(err);
+      res.status(500).send("Internal Server Error");
+    } else {
+      res.redirect('/'); 
+      res.end();
+    }
   })
 });
-
-
 
 module.exports = router;

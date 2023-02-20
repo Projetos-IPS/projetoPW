@@ -604,7 +604,7 @@ var init = function () {
     getLoggedUserData();
     showPortfolios();
 
-};
+}
 
 function showFriendRequests() {
     let divFriends = document.getElementById('friend-requests');
@@ -966,7 +966,6 @@ function getProfileInformation() {
     xhrloggedUserInfo.onload = function () {
         if (xhrloggedUserInfo.status === 200) {
             let loggedUserinfo = JSON.parse(xhrloggedUserInfo.responseText);
-            console.log(loggedUserinfo);
 
             const xhrprofiletype = new XMLHttpRequest();
             xhrprofiletype.open('GET', '/Profile/getProfileType/' + userID, true);
@@ -1015,8 +1014,6 @@ function getProfileInformation() {
                            xhrFriends1.onload = function () {
                            if (xhrFriends1.status === 200) {
                             let friendslist = JSON.parse(xhrFriends1.responseText);
-                            console.log(informationProfile[0]);
-                            console.log(friendslist[0]);
                             if(friendslist.length > 0){
                             for(let i = 0; i < friendslist.length; i++){
                                 if(loggedUserinfo[0].email != informationProfile[0].email && informationProfile[0].email != friendslist[i].email_amigo){
@@ -1266,7 +1263,7 @@ function submitFormData() {
         xhrsubmitAddExperience.send(JSON.stringify(data2));
 
         xhrsubmitAddExperience.onload = function () {
-            if (xhrsubmitAddExperience.status === 200) {
+            if (xhrsubmitAddExperience.status === 201) {
 
                 document.getElementById('experiences').innerHTML = "";
                 showExperiences();
@@ -1306,38 +1303,10 @@ function submitFormData() {
         xhrsubmitAddEducation.send(JSON.stringify(data3));
 
         xhrsubmitAddEducation.onload = function () {
-            if (xhrsubmitAddEducation.status === 200) {
+            if (xhrsubmitAddEducation.status === 201) {
                 document.getElementById('education').innerHTML = "";
                 showEducations();
                 closeAddEducation();
-            }
-
-        };
-    });
-
-    let formAddPortfolio = document.getElementById('addPortfolioForm');
-    formAddPortfolio.addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        if(formAddPortfolio.visibilityPortfolio.checked == true){
-            visibilityPortfolio = 'Public';
-          }
-          else if(formAddPortfolio.visibilityPortfolio.checked == false){
-            visibilityPortfolio = 'Private';
-          }
-
-        const data4 = {
-            file : formAddPortfolio.portfolioUser.value,
-            visibility : visibilityPortfolio
-        };
-        const xhrsubmitAddPortfolio = new XMLHttpRequest();
-        xhrsubmitAddPortfolio.open('post', '/Profile/addPortfolio/' + userID, true);
-        xhrsubmitAddPortfolio.setRequestHeader('Content-Type', 'application/json');
-        xhrsubmitAddPortfolio.send(JSON.stringify(data4));
-
-        xhrsubmitAddPortfolio.onload = function () {
-            if (xhrsubmitAddPortfolio.status === 200) {
-               closeAddPortfolio();
             }
 
         };

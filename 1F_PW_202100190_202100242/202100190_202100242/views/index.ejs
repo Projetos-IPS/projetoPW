@@ -197,7 +197,7 @@
              xhrRprofissional.send(JSON.stringify(dataP));
              
              xhrRprofissional.onload = function(){
-              if(xhrRprofissional.status === 200)
+              if(xhrRprofissional.status === 201)
               {
                 let response = JSON.parse(xhrRprofissional.responseText);
                 formProfissional.reset();
@@ -261,7 +261,7 @@
              xhrRempresa.send(JSON.stringify(dataE));
              
              xhrRempresa.onload = function(){
-              if(xhrRempresa.status === 200)
+              if(xhrRempresa.status === 201)
               {
                 let response = JSON.parse(xhrRempresa.responseText);
                 formEmpresa.reset();

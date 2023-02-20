@@ -4,17 +4,16 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', renderPage);
 
- function renderPage(req, res)
- {
- 
-  if(req.session.name == undefined || req.session.name == 0 || req.session.name == 2 || req.session.name == 3)
-   {
+ function renderPage(req, res, next) {
+   try {
+    if(req.session.name == undefined || req.session.name == 0 || req.session.name == 2 || req.session.name == 3) {
       res.redirect('/Homepage');
-   
-   }
-   else
-   {
+    }
+    else {
       res.render('joboffers');
+    }
+   } catch (error) {
+     next(error);
    }
  }
 
