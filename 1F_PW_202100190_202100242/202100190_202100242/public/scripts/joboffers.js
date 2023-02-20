@@ -1,17 +1,17 @@
 const jobOfferPosition = {
   SUPPORTSPECIALIST: "Support specialist",
   WEBDEVELOPER: "Web developer",
-  COMPUTERPROGRAMMER: "Computer programmer",
+  COMPUTERPROGRAMMER: "Software developer",
   SYSTEMSANALYST: "Systems analyst",
   SOFTWAREENGINEER: "Software engineer",
   DATABASEADMINISTRATOR: "Database administrator",
-  DATASCIENTIST: "Data scientist",
+  DATASCIENTIST: "Data analyst",
   ITDIRECTOR: "IT director"
 }
 
 var data = [
-  { companyName: 'Kwalee', description: 'Senior Software Engineer - Frontend', position: jobOfferPosition.SOFTWAREENGINEER, duration: 'Part-time', location: 'Lisbon/Portugal', salary: '39.532', expire: '5 days' },
-  { companyName: 'Reaktor', description: 'Senior Frontend Engineer', position: jobOfferPosition.SOFTWAREENGINEER, duration: 'Internship - 6 months', location: 'Lisbon/Portugal', salary: '42.000', expire: '5 days' },
+  { companyName: 'Kwalee', description: 'Senior Software Engineer', position: jobOfferPosition.SOFTWAREENGINEER, duration: 'Part-time', location: 'Lisbon/Portugal', salary: '39.532', expire: '5 days' },
+  { companyName: 'Reaktor', description: 'Front-end web developer', position: jobOfferPosition.WEBDEVELOPER, duration: 'Internship - 6 months', location: 'Lisbon/Portugal', salary: '42.000', expire: '5 days' },
   { companyName: 'Smart Consulting', description: 'Java developer Junior', position: jobOfferPosition.COMPUTERPROGRAMMER, duration: 'Full-time', location: 'Lisbon/Portugal', salary: '42.000', expire: '7 days' },
   { companyName: 'DevoTeam', description: 'Data Analyst', position: jobOfferPosition.DATASCIENTIST, duration: 'Fulltime/Remote', location: 'Lisbon/Portugal', salary: '52.000', expire: '10 days' },
   { companyName: 'ADENTIS Portugal', description: 'SQL developer', position: jobOfferPosition.DATABASEADMINISTRATOR, duration: 'Full-time/Remote', location: 'Lisbon/Portugal', salary: '47.000', expire: '7 days' },
