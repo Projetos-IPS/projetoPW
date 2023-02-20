@@ -107,3 +107,28 @@
 .filter p {
     text-align: center;
 }
+
+/** MEDIA QUERIES **/
+@media only screen and (max-width: 480px) {
+    .jobs {
+        width: 90%;
+        height: 100%;
+    }
+
+    .filter-buttons {
+        flex-direction: column;
+    }
+
+    .hr-jobs2 {
+        width: 85%;
+    }
+
+    .info {
+        height: 100%;
+    }
+
+    .jobs-side {
+        overflow: none;
+        max-height: fit-content;
+    }
+}

@@ -377,3 +377,72 @@ input[type=password] {
     font-size: 13px;
     height: 20px;
 }
+
+/** MEDIA QUERIES **/
+@media only screen and (max-width: 480px) {
+    body {
+        height: 100%;
+        background-image: url(../images/secundary-bg-image.jpg);
+        background-repeat: repeat;
+    }
+
+    .side-to-side {
+        background-image: none;
+        width: 90%;
+        height: 100%;
+        flex-direction: column;
+        margin: 0;
+        box-shadow: none;
+        align-self: center;
+    }
+
+    .left {
+        align-self: center;
+        align-items: center;
+        width: 90%;
+        margin: 0;
+        text-align: -webkit-center;
+    }
+
+    .left img {
+        width: 50%;
+        align-self: center;
+    }
+
+    .left hr {
+        width: 100%;
+    }
+
+    .right {
+        align-self: center;
+        align-items: center;
+        width: 90%;
+        margin: 0;
+    }
+
+    .right .profissional {
+       margin: 0;
+    }
+
+    .profissional .form {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .profissional .form .second {
+        margin: 10px 0px;
+    }
+
+    .right .company {
+        margin: 0;
+     }
+ 
+     .company .form {
+         flex-direction: column;
+         width: 90%;
+     }
+ 
+     .company .form .second {
+         margin: 10px 0px;
+     }
+}

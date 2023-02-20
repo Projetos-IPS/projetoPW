@@ -62,3 +62,10 @@
     background-color: rgb(152, 2, 2);
     color: white;
 }
+
+/** MEDIA QUERIES **/
+@media only screen and (max-width: 480px) {
+    .side {
+        width: 100%;
+    }
+}
