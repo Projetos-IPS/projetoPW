@@ -13,13 +13,16 @@ function getLoggedUserData() {
         if (xhrloggedUserType.status === 200) {
             let loggedUserType = JSON.parse(xhrloggedUserType.responseText);
 
-            if (loggedUserType[0].tipo_utilizador == 'Profissional') {
                 const xhrloggedUserinformationProfissional = new XMLHttpRequest();
                 xhrloggedUserinformationProfissional.open('GET', '../Home/getloggedinUserInformationProfissional', true);
                 xhrloggedUserinformationProfissional.setRequestHeader('Content-Type', 'application/json');
                 xhrloggedUserinformationProfissional.onload = function () {
+
+                    
                     if (xhrloggedUserinformationProfissional.status === 200) {
                         let profissionalInfo = JSON.parse(xhrloggedUserinformationProfissional.responseText);
+                        if (loggedUserType[0].tipo_utilizador == 'Profissional') {
+
                         username_show.innerHTML = profissionalInfo[0].nome;
                         if (profissionalInfo[0].genero == 'Feminino') {
                             profile_pic_show.src = '../images/profile-female.png';
@@ -30,56 +33,59 @@ function getLoggedUserData() {
                         else if (profissionalInfo[0].genero == 'other') {
                             profile_pic_show.src = '../images/profile-other.png';
                         }
+                        document.getElementById('aprovar-utilizadores').style.display = "none";
+                        document.getElementById('portfolios-menu').style.display = "none";
+                        }
                         //  profile_hyperlink.dataset.email = profissionalInfo[0].email;
-                    }
+
+
+                        if (loggedUserType[0].tipo_utilizador == 'Empresa') {
+                            const xhrloggedUserinformationEmpresa = new XMLHttpRequest();
+                            xhrloggedUserinformationEmpresa.open('GET', '../Home/getloggedinUserInformationEmpresa', true);
+                            xhrloggedUserinformationEmpresa.setRequestHeader('Content-Type', 'application/json');
+                            xhrloggedUserinformationEmpresa.onload = function () {
+                                if (xhrloggedUserinformationEmpresa.status === 200) {
+                                    let empresaInfo = JSON.parse(xhrloggedUserinformationEmpresa.responseText);
+                                    username_show.innerHTML = empresaInfo[0].nome;
+                                    profile_pic_show.src = '../images/profile_company.png';
+                                }
+                            }
+                            xhrloggedUserinformationEmpresa.send();
+                            document.getElementById('aprovar-utilizadores').style.display = "none";
+                            document.getElementById('joboffers-menu').style.display = "none";
+                        }
+
+                        if (loggedUserType[0].tipo_utilizador == 'Admin') {
+                            document.getElementById('home-menu').style.display = "none";
+                            document.getElementById('joboffers-menu').style.display = "none";
+                            document.getElementById('profile-menu').style.display = "none";
+                            document.getElementById('team-page').style.display = "none";
+                            profile_pic_show.style.display = "none";
+                            document.getElementById('admin-name-show').style.display = 'inline';
+                            
+                        }
+
+                        profile_hyperlink.href = "../Profile/" + loggedUserType[0].id;
+                        profile_hyperlink.dataset.userid = loggedUserType[0].id;
+            
+                        profile_hyperlink_menu.href = "../Profile/" + loggedUserType[0].id;
+                        username_show.href = "../Profile/" + loggedUserType[0].id;
+
+                        if (loggedUserType[0].id != userID) {
+                            document.getElementById('edit-button').style.display = "none";
+                            document.getElementById('edit-button-description').style.display = "none";
+                            document.getElementById('add-button-experience').style.display = "none";
+                            document.getElementById('add-button-education').style.display = "none";
+                            document.getElementById('profile-menu').className = "link";
+                        }
                 }
-                xhrloggedUserinformationProfissional.send();
-                document.getElementById('aprovar-utilizadores').style.display = "none";
-                document.getElementById('portfolios-menu').style.display = "none";
+                
 
             }
-            if (loggedUserType[0].tipo_utilizador == 'Empresa') {
-                const xhrloggedUserinformationEmpresa = new XMLHttpRequest();
-                xhrloggedUserinformationEmpresa.open('GET', '../Home/getloggedinUserInformationEmpresa', true);
-                xhrloggedUserinformationEmpresa.setRequestHeader('Content-Type', 'application/json');
-                xhrloggedUserinformationEmpresa.onload = function () {
-                    if (xhrloggedUserinformationEmpresa.status === 200) {
-                        let empresaInfo = JSON.parse(xhrloggedUserinformationEmpresa.responseText);
-                        username_show.innerHTML = empresaInfo[0].nome;
-                        profile_pic_show.src = '../images/profile_company.png';
-                    }
-                }
-                xhrloggedUserinformationEmpresa.send();
-                document.getElementById('aprovar-utilizadores').style.display = "none";
-                document.getElementById('joboffers-menu').style.display = "none";
-            }
-
-            if (loggedUserType[0].tipo_utilizador == 'Admin') {
-                document.getElementById('home-menu').style.display = "none";
-                document.getElementById('joboffers-menu').style.display = "none";
-                document.getElementById('profile-menu').style.display = "none";
-                document.getElementById('team-page').style.display = "none";
-                profile_pic_show.style.display = "none";
-                document.getElementById('admin-name-show').style.display = 'inline';
-            }
-
-            const xhrloggedUserID = new XMLHttpRequest();
-            xhrloggedUserID.open('GET', '../Home/getloggedinUserID', true);
-            xhrloggedUserID.setRequestHeader('Content-Type', 'application/json');
-            xhrloggedUserID.onload = function () {
-                if (xhrloggedUserID.status === 200) {
-                    let idUser = JSON.parse(xhrloggedUserID.responseText);
-                    profile_hyperlink.href = "../Profile/" + idUser[0].id;
-                    profile_hyperlink.dataset.userid = idUser[0].id;
-
-                    profile_hyperlink_menu.href = "../Profile/" + idUser[0].id;
-                    username_show.href = "../Profile/" + idUser[0].id;
-                }
-            }
-            xhrloggedUserID.send();
-
+            xhrloggedUserinformationProfissional.send();
 
         }
+
     }
     xhrloggedUserType.send();
 }
@@ -636,98 +642,121 @@ function getProfileInformation() {
     let profileAddress = document.getElementById('profile-address');
     let profileDescription = document.getElementById('profile-description');
 
-    const xhrprofiletype = new XMLHttpRequest();
-    xhrprofiletype.open('GET', '/Profile/getProfileType/' + userID, true);
-    xhrprofiletype.setRequestHeader('Content-Type', 'application/json');
-    xhrprofiletype.onload = function () {
-        if (xhrprofiletype.status === 200) {
-            profileType = JSON.parse(xhrprofiletype.responseText);
-            if (profileType[0].tipo_utilizador == 'Profissional') {
-                const xhrprofileprofissional = new XMLHttpRequest();
-                xhrprofileprofissional.open('GET', '/Profile/getProfileInformationProfissional/' + userID, true);
-                xhrprofileprofissional.setRequestHeader('Content-Type', 'application/json');
-                xhrprofileprofissional.onload = function () {
+    const xhrloggedUserInfo = new XMLHttpRequest();
+    xhrloggedUserInfo.open('GET', '../Home/getloggedinUserType', true);
+    xhrloggedUserInfo.setRequestHeader('Content-Type', 'application/json');
+    xhrloggedUserInfo.onload = function () {
+        if (xhrloggedUserInfo.status === 200) {
+            let loggedUserinfo = JSON.parse(xhrloggedUserInfo.responseText);
+            console.log(loggedUserinfo);
+
+            const xhrprofiletype = new XMLHttpRequest();
+            xhrprofiletype.open('GET', '/Profile/getProfileType/' + userID, true);
+            xhrprofiletype.setRequestHeader('Content-Type', 'application/json');
+            xhrprofiletype.onload = function () {
+                if (xhrprofiletype.status === 200) {
+                    profileType = JSON.parse(xhrprofiletype.responseText);
+
+                    const xhrprofileprofissional = new XMLHttpRequest();
+                    xhrprofileprofissional.open('GET', '/Profile/getProfileInformationProfissional/' + userID, true);
+                    xhrprofileprofissional.setRequestHeader('Content-Type', 'application/json');
+                    xhrprofileprofissional.onload = function () {
                     if (xhrprofileprofissional.status === 200) {
                         let informationProfile = JSON.parse(xhrprofileprofissional.responseText);
 
-                        if (informationProfile[0].genero == 'Feminino') {
-                            profileImg.src = '../images/profile-female.png';
+                        if (profileType[0].tipo_utilizador == 'Profissional') {
+                            if (informationProfile[0].genero == 'Feminino') {
+                                profileImg.src = '../images/profile-female.png';
+                            }
+                            else if (informationProfile[0].genero == 'Masculino') {
+                                profileImg.src = '../images/profile-male.png';
+                            }
+                            else if (informationProfile[0].genero == 'other') {
+                                profileImg.src = '../images/profile-other.png';
+                            }
+                            profileName.innerHTML = informationProfile[0].nome;
+    
+    
+                            profileDescription.innerHTML = informationProfile[0].descricao;
+                            if(profileDescription.innerHTML == "")
+                            {
+                                profileDescription.innerHTML = "No description"
+                            }
+                            profileHeadline.innerHTML = informationProfile[0].headline;
+                            profileAddress.innerHTML = informationProfile[0].localidade;
+
+                            if(loggedUserinfo[0].tipo_utilizador == 'Empresa' && informationProfile[0].visualizacao_empresas == 0){
+                                window.location.href = '../Home';
+                            //    alert('This user doesnt allow companies to see his portfolio');
+                            }
+
+                           const xhrFriends1 = new XMLHttpRequest();
+                           xhrFriends1.open('GET', '../Home/getFriends', true);
+                           xhrFriends1.setRequestHeader('Content-Type', 'application/json');
+                           xhrFriends1.onload = function () {
+                           if (xhrFriends1.status === 200) {
+                            let friendslist = JSON.parse(xhrFriends1.responseText);
+                            console.log(informationProfile[0]);
+                            console.log(friendslist[0]);
+                            if(friendslist.length > 0){
+                            for(let i = 0; i < friendslist.length; i++){
+                                if(informationProfile[0].email != friendslist[i].email_amigo){
+                                    window.location.href = '../Home';
+                                //    alert('Only friends can see each others portfolios');
+                                }
+                            }
+                           }
+                           else{
+                            window.location.href = '../Home';
+                           // alert('Only friends can see each others portfolios');
+                           }
+                           }
                         }
-                        else if (informationProfile[0].genero == 'Masculino') {
-                            profileImg.src = '../images/profile-male.png';
-                        }
-                        else if (informationProfile[0].genero == 'other') {
-                            profileImg.src = '../images/profile-other.png';
-                        }
-                        profileName.innerHTML = informationProfile[0].nome;
+                        xhrFriends1.send();
 
 
-                        profileDescription.innerHTML = informationProfile[0].descricao;
-                        if(profileDescription.innerHTML == "")
-                        {
-                            profileDescription.innerHTML = "No description"
                         }
-                        profileHeadline.innerHTML = informationProfile[0].headline;
-                        profileAddress.innerHTML = informationProfile[0].localidade;
-                       
+                        else if (profileType[0].tipo_utilizador == 'Empresa') {
+
+                            const xhrprofileempresa = new XMLHttpRequest();
+                            xhrprofileempresa.open('GET', '/Profile/getProfileInformationEmpresa/' + userID, true);
+                            xhrprofileempresa.setRequestHeader('Content-Type', 'application/json');
+                            xhrprofileempresa.onload = function () {
+                                if (xhrprofileempresa.status === 200) {
+                                    let informationProfile = JSON.parse(xhrprofileempresa.responseText);
+                                    profileName.innerHTML = informationProfile[0].nome;
+                                    profileImg.src = '../images/profile_company.png';
+                                    document.getElementById('experience-area').style.display = "none";
+                                    document.getElementById('education-area').style.display = "none";
+                                    profileUrl.style.removeProperty('Display');
+                                    profileUrl.href = informationProfile[0].site;
+                                    profileUrl.innerHTML = informationProfile[0].site;    
+                                    profileDescription.innerHTML = informationProfile[0].descricao;
+                                
+                                    if(profileDescription.innerHTML == "")
+                                    {
+                                        profileDescription.innerHTML = "No description"
+                                    }
+                                }
+            
+                             
+                            }
+                            xhrprofileempresa.send();
+                            
+                        }
                     }
+                    
                 }
                 xhrprofileprofissional.send();
-            }
-
-
-            else if (profileType[0].tipo_utilizador == 'Empresa') {
-                const xhrprofileempresa = new XMLHttpRequest();
-                xhrprofileempresa.open('GET', '/Profile/getProfileInformationEmpresa/' + userID, true);
-                xhrprofileempresa.setRequestHeader('Content-Type', 'application/json');
-                xhrprofileempresa.onload = function () {
-                    if (xhrprofileempresa.status === 200) {
-                        let informationProfile = JSON.parse(xhrprofileempresa.responseText);
-                        profileName.innerHTML = informationProfile[0].nome;
-                        profileImg.src = '../images/profile_company.png';
-                        document.getElementById('experience-area').style.display = "none";
-                        document.getElementById('education-area').style.display = "none";
-                        profileUrl.style.removeProperty('Display');
-                        profileUrl.href = informationProfile[0].site;
-                        profileUrl.innerHTML = informationProfile[0].site;    
-                        profileDescription.innerHTML = informationProfile[0].descricao;
-                    
-                        if(profileDescription.innerHTML == "")
-                        {
-                            profileDescription.innerHTML = "No description"
-                        }
-                    
-                    }
-
-
                 }
-                xhrprofileempresa.send();
+        
             }
-
-            const xhrloggedUserInfo = new XMLHttpRequest();
-            xhrloggedUserInfo.open('GET', '/Home/getloggedinUserType', true);
-            xhrloggedUserInfo.setRequestHeader('Content-Type', 'application/json');
-            xhrloggedUserInfo.onload = function () {
-                if (xhrloggedUserInfo.status === 200) {
-                    let loggedUserInfo = JSON.parse(xhrloggedUserInfo.responseText);
-                    if (loggedUserInfo[0].id != userID) {
-                        document.getElementById('edit-button').style.display = "none";
-                        document.getElementById('edit-button-description').style.display = "none";
-                        document.getElementById('add-button-experience').style.display = "none";
-                        document.getElementById('add-button-education').style.display = "none";
-                        document.getElementById('profile-menu').className = "link";
-                        document.getElementById('exp-icon3').style.display = "none";
-                    }
-
-                }
-            }
-            xhrloggedUserInfo.send();
+            xhrprofiletype.send();
 
 
         }
-
     }
-    xhrprofiletype.send();
+    xhrloggedUserInfo.send();
 }
 
 function closeEditIntro() {
