@@ -81,7 +81,7 @@ function showPortfolios(){
 
     let divFriends = document.getElementById('main-side');
     let h2 = document.createElement('h2');
-    h2.innerHTML = 'Portfolios ';
+    h2.innerHTML = 'Portfolios available';
     h2.id = 'h2-home';
     divFriends.appendChild(h2);
     const xhrUserInfo = new XMLHttpRequest();

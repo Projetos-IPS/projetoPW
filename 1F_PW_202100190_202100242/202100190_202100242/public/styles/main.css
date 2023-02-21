@@ -157,6 +157,7 @@ body {
 .main-side h2 {
     font-family: 'Unbounded', cursive;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .main-side .user {
