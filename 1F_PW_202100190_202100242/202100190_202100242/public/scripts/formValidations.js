@@ -18,16 +18,14 @@ function validateEmail(email) {
   }
 
   function validateDate(date1){
-    function isDateInFuture(dateString) {
-        const selectedDate = new Date(dateString);
-        const currentDate = new Date();
-      
-        return selectedDate > currentDate;
-      }
-      if (isDateInFuture(date1)) {
-        return false;
-      } else {
+ 
+      const currentDate = new Date();
+      const selectedDate = new Date(date1);
+
+      if(Number(currentDate.getFullYear() - selectedDate.getFullYear()) >= 18){
         return true;
+      }else{
+        return false;
       }
   }
 
