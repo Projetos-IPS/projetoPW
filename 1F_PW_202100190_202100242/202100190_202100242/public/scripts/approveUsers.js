@@ -1,6 +1,6 @@
 /**
  * Retrieves information about the company users and creates the table with their data if there are any users available.
- * @function getUser
+ * @function getUsers
  * @returns {void}
 */
 function getUsers() {
@@ -172,7 +172,7 @@ var init = function() {
 /**
  * Retrieves information about the currently logged-in user and updates the page accordingly.
  * This page is only for admin users so any other user is redirected to their home pages.
- * @function
+ * @function getLoggedUserData
  * @returns {void}
  */
 function getLoggedUserData() {

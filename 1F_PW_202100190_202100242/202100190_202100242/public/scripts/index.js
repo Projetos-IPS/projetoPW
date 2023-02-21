@@ -1,6 +1,8 @@
 /**
  * Displays the sign up form for regular users.
  * Hides the login and company sign up forms if displayed.
+ * @function showSignUp
+ * @returns {void}
 */
 function showSignUp() {
   document.getElementById('login').style.display = "none";
@@ -11,6 +13,8 @@ function showSignUp() {
 /**
  * Displays the sign up form for companies.
  * Hides the login and regular user sign up forms if displayed.
+ * @function signUpCompany
+ * @returns {void}
 */
 function signUpCompany() {
   document.getElementById('login').style.display = "none";
@@ -20,6 +24,8 @@ function signUpCompany() {
 
 /**
  * Hides all sign up forms and displays the login form.
+ * @function hideSignUp
+ * @returns {void}
 */
 function hideSignUp() {
   document.getElementById('login').style.display = "block";
@@ -29,6 +35,8 @@ function hideSignUp() {
 
 /**
  * Highlights the "female" gender choice.
+ * @function getChoiceFemale
+ * @returns {void}
 */
 function getChoiceFemale() {
   document.getElementById('female').style.color = "white";
@@ -38,6 +46,8 @@ function getChoiceFemale() {
 
 /**
  * Highlights the "male" gender choice.
+ * @function getChoiceMale
+ * @returns {void}
 */
 function getChoiceMale() {
   document.getElementById('male').style.color = "white";
@@ -47,6 +57,8 @@ function getChoiceMale() {
 
 /**
  * Highlights the "other" gender choice.
+ * @function getChoiceOther
+ * @returns {void}
 */
 function getChoiceOther() {
   document.getElementById('other').style.color = "white";

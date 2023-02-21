@@ -1,7 +1,7 @@
 /**
- * Retrieves information about the currently logged-in user and updates the page accordingly.
  * @function getLoggedUserData
  * @returns {void}
+ * Retrieves information about the currently logged-in user and updates the page accordingly.
  */
 function getLoggedUserData() {
     const xhrloggedUserType = new XMLHttpRequest();
@@ -74,9 +74,9 @@ function getLoggedUserData() {
 }
 
 /**
- * Displays the available portfolios.
  * @function showPortfolios
  * @returns {void}
+ * Displays the available portfolios.
  */
 function showPortfolios(){
 
@@ -351,9 +351,9 @@ function showPortfolios(){
 }
 
 /**
- * Search function to filter a list of users by name.
  * @function search
  * @returns {void}
+ * Search function to filter a list of users by name.
 */
 function search() {
     let input, filter, ul, li, i, txtValue;
@@ -372,9 +372,9 @@ function search() {
 }
 
 /**
- * Calls the necessary functions to initialize the page
  * @function
  * @returns {void}
+ * Calls the necessary functions to initialize the page
 */
 var init = function () {
     getLoggedUserData();
