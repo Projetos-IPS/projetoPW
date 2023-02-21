@@ -400,6 +400,11 @@ function showAddUsers(){
                       update();
                   }
               }
+              else{
+                let p = document.createElement('p');
+                p.innerHTML = 'No users found';
+                divFriends.appendChild(p);
+            }
 
               
               }

@@ -288,6 +288,11 @@ function showAddUsers(){
                        // updateList();
                     }
                 }
+                else{
+                    let p = document.createElement('p');
+                    p.innerHTML = 'No users found';
+                    divFriends.appendChild(p);
+                }
 
                 
                 }
@@ -474,6 +479,11 @@ function showFriendRequests(){
                     }
                   }
                 }
+                else{
+                    let p = document.createElement('p');
+                    p.innerHTML = 'No users found';
+                    divFriends.appendChild(p);
+                }
 
                 
                 }
@@ -615,6 +625,11 @@ function showFriends(){
                     
                                 
                         }
+                    }
+                    else{
+                        let p = document.createElement('p');
+                        p.innerHTML = 'No users found';
+                        divFriends.appendChild(p);
                     }
   
                 }

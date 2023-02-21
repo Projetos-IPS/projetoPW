@@ -311,6 +311,11 @@ function showPortfolios(){
                 } //fim do for
 
                 }
+                else{
+                    let p = document.createElement('p');
+                    p.innerHTML = 'No users found';
+                    divFriends.appendChild(p);
+                }
 
                 let input = document.createElement('input');
                 input.type = 'text';
