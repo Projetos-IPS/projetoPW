@@ -514,7 +514,7 @@ geteducationDates: function(email){
 deleteEducation: function(data, email) {
     return new Promise(function(resolve, reject) {
         let query = `DELETE FROM educacao WHERE id = ? and email_profissional = ?`;
-        let editDescriptionEmpresaconnection = mysql.createConnection(options.mysql);
+        let connection = mysql.createConnection(options.mysql);
         let values = [data.id, email];
         connection.query(query, values, function(error, result) {
             if (error) {
