@@ -6,6 +6,12 @@
     border-color: #adb1ba;
     border-radius: 20px;
     width: 200px;
-    height: 15px;
-    margin-top: 53px;
+    height: 30px;
+    margin: 20px 0px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .input-text {
+        height: 15px;
+    }
 }

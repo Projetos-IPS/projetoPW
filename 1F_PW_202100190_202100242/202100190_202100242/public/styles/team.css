@@ -16,7 +16,7 @@
 }
 
 .team .member {
-    width: 39%;
+    width: 36%;
     height: 89%;
     margin: 0px 20px 20px 20px;
     padding: 30px;
@@ -82,14 +82,14 @@
 }
 
 /** MEDIA QUERIES **/
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 1024px) {
     .team {
-        width: 90%;
+        width: 95%;
         flex-direction: column;
     }
 
     .team .member {
-        width: 85%;
+        width: 90%;
         margin: 20px 0px;
     }
 }
