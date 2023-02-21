@@ -1,3 +1,8 @@
+/**
+ * Retrieves information about the currently logged-in user and updates the page accordingly.
+ * @function getLoggedUserData
+ * @returns {void}
+ */
 function getLoggedUserData() {
     const xhrloggedUserType = new XMLHttpRequest();
     xhrloggedUserType.open('GET', '../Home/getloggedinUserType', true);
@@ -23,8 +28,6 @@ function getLoggedUserData() {
                         if (loggedUserType[0].tipo_utilizador == 'Profissional') {
                           window.location.href = '/Home';
                         }
-                        //  profile_hyperlink.dataset.email = profissionalInfo[0].email;
-
 
                         if (loggedUserType[0].tipo_utilizador == 'Empresa') {
                             const xhrloggedUserinformationEmpresa = new XMLHttpRequest();
@@ -70,6 +73,11 @@ function getLoggedUserData() {
     xhrloggedUserType.send();
 }
 
+/**
+ * Displays the available portfolios.
+ * @function showPortfolios
+ * @returns {void}
+ */
 function showPortfolios(){
 
     const xhrloggedUserType2 = new XMLHttpRequest();
@@ -342,6 +350,11 @@ function showPortfolios(){
     
 }
 
+/**
+ * Search function to filter a list of users by name.
+ * @function search
+ * @returns {void}
+*/
 function search() {
     let input, filter, ul, li, i, txtValue;
     input = document.getElementById("myInput");
@@ -356,8 +369,13 @@ function search() {
         li[i].style.display = "none";
       }
     }
-  }
+}
 
+/**
+ * Calls the necessary functions to initialize the page
+ * @function
+ * @returns {void}
+*/
 var init = function () {
     getLoggedUserData();
     showPortfolios();

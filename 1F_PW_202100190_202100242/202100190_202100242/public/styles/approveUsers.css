@@ -69,3 +69,8 @@
         width: 100%;
     }
 }
+
+#admin-name-show {
+    margin-right: 100px;
+    display: inline;
+}

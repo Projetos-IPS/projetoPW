@@ -114,7 +114,7 @@
           <div class="field">
             <h3>User information</h3>
             <label for="birthUser">Birthdate</label><br />
-            <input type="date" id="birthUser" name="birthUser"><br><br>
+            <input type="date" id="birthUser" min='1908-01-01' name="birthUser"><br><br>
 
             <b><label for="generoUser">Gender:</label></b>
             <input type="radio" id="female" name="generoUser" value="Feminino"> Female <!-- 1 TRUE-->
@@ -229,9 +229,9 @@
     <input type="checkbox" id="currentlyworking" name="currentlyworking"> I am currently working in this role
     <br><br>
     <label for="startdate">Start date*</label><br>
-    <input type="month" id="experiencestartdate" name="experiencestartdate" required><br>
+    <input type="month" min='1950-01' id="experiencestartdate" name="experiencestartdate" required><br>
     <label for="enddate" id="enddate-label">End date</label><br>
-    <input type="month" id="experienceEndDate" name="experienceEndDate"><br><br>
+    <input type="month" min='1950-01' id="experienceEndDate" name="experienceEndDate"><br><br>
     <label for="experienceDescription" class="experienceDescription">Description</label><br>
     <textarea id="experienceDescription" class="experienceDescription" cols="30" rows="10"></textarea>
     </div>
@@ -259,9 +259,9 @@
       <input type="checkbox" name="currentlystudying" id="currentlystudying">
       I am currently studying this degree<br><br>
       <label for="startDateEducation">Start date*</label><br>
-      <input type="month" name="startDateEducation" id="startDateEducation" required><br>
+      <input type="month" min='1950-01' name="startDateEducation" id="startDateEducation" required><br>
       <label for="endDateEducation" id="endDateEducation-label">End date</label><br>
-      <input type="month" name="endDateEducation" id="endDateEducation"><br><br>
+      <input type="month" min='1950-01' name="endDateEducation" id="endDateEducation"><br><br>
       <label for="gradeEducation" id="grade-label">Grade</label><br>
       <input type="text" name="gradeEducation" id="gradeEducation"><br><br>
       <label for="activitiesEducation">Activities and societies</label><br>

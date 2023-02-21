@@ -1,3 +1,8 @@
+/**
+ * Retrieves information about the currently logged-in user and updates the page accordingly.
+ * @function getLoggedUserData
+ * @returns {void}
+ */
 function getLoggedUserData() {
     const xhrloggedUserType = new XMLHttpRequest();
     xhrloggedUserType.open('GET', '../Home/getloggedinUserType', true);
@@ -10,18 +15,15 @@ function getLoggedUserData() {
     xhrloggedUserType.onload = function () {
         if (xhrloggedUserType.status === 200) {
             let loggedUserType = JSON.parse(xhrloggedUserType.responseText);
-
                 const xhrloggedUserinformationProfissional = new XMLHttpRequest();
                 xhrloggedUserinformationProfissional.open('GET', '../Home/getloggedinUserInformationProfissional', true);
                 xhrloggedUserinformationProfissional.setRequestHeader('Content-Type', 'application/json');
                 xhrloggedUserinformationProfissional.onload = function () {
 
-                    
                     if (xhrloggedUserinformationProfissional.status === 200) {
                         let profissionalInfo = JSON.parse(xhrloggedUserinformationProfissional.responseText);
 
                         if (loggedUserType[0].tipo_utilizador == 'Profissional') {
-
                         username_show.innerHTML = profissionalInfo[0].nome;
                         if (profissionalInfo[0].genero == 'Feminino') {
                             profile_pic_show.src = '../images/profile-female.png';
@@ -35,51 +37,20 @@ function getLoggedUserData() {
                         document.getElementById('aprovar-utilizadores').style.display = "none";
                         document.getElementById('portfolios-menu').style.display = "none";
                         }
-                        //  profile_hyperlink.dataset.email = profissionalInfo[0].email;
-
 
                         if (loggedUserType[0].tipo_utilizador == 'Empresa') {
-                            const xhrloggedUserinformationEmpresa = new XMLHttpRequest();
-                            xhrloggedUserinformationEmpresa.open('GET', '../Home/getloggedinUserInformationEmpresa', true);
-                            xhrloggedUserinformationEmpresa.setRequestHeader('Content-Type', 'application/json');
-                            xhrloggedUserinformationEmpresa.onload = function () {
-                                if (xhrloggedUserinformationEmpresa.status === 200) {
-                                    let empresaInfo = JSON.parse(xhrloggedUserinformationEmpresa.responseText);
-                                    username_show.innerHTML = empresaInfo[0].nome;
-                                    profile_pic_show.src = '../images/profile_company.png';
-            
-                                    if(profissionalInfo[0].visualizacao == 0){
-                                        alert('This user doesnt allow companies to see his portfolio');
-                                        window.location.href('../Home');
-                                    }
-                                  
-                                    
-                                }
-                            }
-                            xhrloggedUserinformationEmpresa.send();
-                            document.getElementById('aprovar-utilizadores').style.display = "none";
-                            document.getElementById('joboffers-menu').style.display = "none";
-                            document.getElementById('home-menu').style.display = "none";
+                            window.location.href = '/Portfolios';
                         }
 
                         if (loggedUserType[0].tipo_utilizador == 'Admin') {
-                            document.getElementById('home-menu').style.display = "none";
-                            document.getElementById('joboffers-menu').style.display = "none";
-                            document.getElementById('profile-menu').style.display = "none";
-                            document.getElementById('team-page').style.display = "none";
-                            profile_pic_show.style.display = "none";
-                            document.getElementById('admin-name-show').style.removeProperty('display');
-                            
+                           window.location.href = '/Approve';
                         }
-
                         profile_hyperlink.href = "../Profile/" + loggedUserType[0].id;
                         profile_hyperlink.dataset.userid = loggedUserType[0].id;
             
                         profile_hyperlink_menu.href = "../Profile/" + loggedUserType[0].id;
                         username_show.href = "../Profile/" + loggedUserType[0].id;
                 }
-                
-
             }
             xhrloggedUserinformationProfissional.send();
 
@@ -88,14 +59,13 @@ function getLoggedUserData() {
     }
     xhrloggedUserType.send();
 }
- 
+
 /**
- * 
- * This is a function that adds user information and buttons to the HTML document. The function sends a GET request to the server to retrieve a list of user information and another GET request to retrieve a list of users. It then loops through the user list and creates a div element for each user, adds user information to the div element, and adds two buttons to send a friend request and cancel a friend request. 
- * The function also defines an update function to update the button's status when a friend request is sent or canceled.
- * When a user clicks the button to send a friend request, the function creates an XMLHttpRequest to send a POST request to the server to add a new friend request. When the POST request is successful, the function calls the update function to update the button's status.
- * When a user clicks the button to cancel a friend request, the function creates an XMLHttpRequest to send a POST request to the server to cancel the friend request. When the POST request is successful, the function updates the button's status by displaying the button and hiding the "Sent" status.
- */
+ * Displays a list of users and allows the current user to add them as friends.
+ * Retrieves users information and list of users from the server and creates elements in the DOM to display them.
+ * @function showAddUsers
+ * @returns {void}
+*/
 function showAddUsers(){
     let divFriends = document.getElementById('main-side');
     let h2 = document.createElement('h2');
@@ -283,15 +253,10 @@ function showAddUsers(){
                             }
                             xhrgetRequests.send();
                         }
-                    //----------------------------------------//
+
                         update();
-                       // updateList();
+
                     }
-                }
-                else{
-                    let p = document.createElement('p');
-                    p.innerHTML = 'No users found';
-                    divFriends.appendChild(p);
                 }
 
                 
@@ -305,6 +270,11 @@ function showAddUsers(){
     
 }
 
+/**
+ * Shows the friend requests of a user.
+ * @function showFriendRequests
+ * @returns {void}
+*/
 function showFriendRequests(){
     let divFriends = document.getElementById('friend-requests');
     let h2 = document.createElement('h2');
@@ -324,7 +294,6 @@ function showFriendRequests(){
                 if (xhrlistUsers2.status === 200) {
                     let id_destino = document.getElementById('profile-hyperlink').getAttribute('data-userid');
                     let listUsers = JSON.parse(xhrlistUsers2.responseText);
-                 //   console.log(listUsers); // imprime o id_origem e destino do pedido
                     if(listUsers.length>0){
                     for(let i = 0; i < listUsers.length; i++)
                     {
@@ -335,11 +304,8 @@ function showFriendRequests(){
                             xhrlistUsers3.onload = function () {
                                 if (xhrlistUsers3.status === 200) {
                                     let listUsers2 = JSON.parse(xhrlistUsers3.responseText);
-                                 //   console.log(listUsers2); //imprime os friend requests
                                     var foundItem = listUsers2.find(item => item.id == listUsers[i].id_origem);
-                                 //   console.log(foundItem.email); // imprime os dados do email encontrado
                                     var foundItem2 = listUsers2.find(item => item.id == listUsers[i].id_destino);
-                                 //   console.log(foundItem2.email);
                                     //------------------
                                     let div = document.createElement('div');
                                     div.id = "user";
@@ -479,11 +445,7 @@ function showFriendRequests(){
                     }
                   }
                 }
-                else{
-                    let p = document.createElement('p');
-                    p.innerHTML = 'No users found';
-                    divFriends.appendChild(p);
-                }
+
 
                 
                 }
@@ -496,6 +458,11 @@ function showFriendRequests(){
     
 }
 
+/**
+ * Shows the friends of a user.
+ * @function showFriends
+ * @returns {void}
+*/
 function showFriends(){
     let divFriends = document.getElementById('friends');
     let h2 = document.createElement('h2');
@@ -513,7 +480,6 @@ function showFriends(){
             xhrFriends.setRequestHeader('Content-Type', 'application/json');
             xhrFriends.onload = function () {
                 if (xhrFriends.status === 200) {
-                   // let email_loggeduser = document.getElementById('profile-hyperlink').getAttribute('data-email');
                     let friends = JSON.parse(xhrFriends.responseText);
                     if(friends.length>0){
                         for(let i = 0; i < friends.length; i++)
@@ -527,8 +493,7 @@ function showFriends(){
                                     let listUsers = JSON.parse(xhrlistUsers1.responseText);
                                     var friend_info = listUsers.find(item => item.email == friends[i].email_amigo);
                                     var friend_info2 = userInfo.find(item => item.email == friends[i].email_amigo);
-                                //   console.log(id_destino);
-                                //------------------
+
                                 let div = document.createElement('div');
                                 div.id = "user";
                                 div.className = "user";
@@ -616,20 +581,12 @@ function showFriends(){
                                 
                                         h6_userinfo.innerHTML = friend_info2.headline;
             
-  
-  
-                                //-------------------------------
                                 }
                             }
                             xhrlistUsers1.send();
                     
                                 
                         }
-                    }
-                    else{
-                        let p = document.createElement('p');
-                        p.innerHTML = 'No users found';
-                        divFriends.appendChild(p);
                     }
   
                 }
@@ -641,6 +598,12 @@ function showFriends(){
   
 }
 
+/**
+ * Updates the user interface based on the type of the logged-in user.
+ * If the user is an "Empresa" (company), the friend requests, friends, and add buttons sections are hidden, and the "h2-home" element's text is set to "Users list".
+ * @function updateList
+ * @returns {void}
+*/
 function updateList(){
     const xhrVerifyLoggedUserType = new XMLHttpRequest();
     xhrVerifyLoggedUserType.open('GET', '/Home/getloggedinUserType', true);
@@ -659,6 +622,11 @@ function updateList(){
     xhrVerifyLoggedUserType.send();
 }
 
+/**
+ * Calls the necessary functions to initialize the page
+ * @function
+ * @returns {void}
+*/
 var init = function () {
     getLoggedUserData();
     showAddUsers();
@@ -667,7 +635,3 @@ var init = function () {
 };
 
 window.onload = init;
-
-function addFriend() {
-    alert("ADD");
-}

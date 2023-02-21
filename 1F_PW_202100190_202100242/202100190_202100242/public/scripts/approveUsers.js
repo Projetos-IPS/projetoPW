@@ -1,3 +1,8 @@
+/**
+ * Retrieves information about the company users and creates the table with their data if there are any users available.
+ * @function getUser
+ * @returns {void}
+*/
 function getUsers() {
     const xhrUsers = new XMLHttpRequest();
     xhrUsers.open('GET', '/Approve/getUsers', true);
@@ -7,7 +12,6 @@ function getUsers() {
     xhrUsers.onload = function() {
         if(xhrUsers.status === 200) {
             let dataUser = JSON.parse(xhrUsers.responseText);
-
             if(dataUser.length > 0) {
                 for(let count = 0; count < dataUser.length; count++) {
                     let btnEdit = document.createElement('button');
@@ -70,7 +74,6 @@ function getUsers() {
                         btnDeactivate.dataset.userid = dataUser[count].email;
                     }
             
-                    //----------------------------------------------------------
                     btnEdit.addEventListener("click", function(event) {
                         const clickedButton = event.target;
                         let data = {
@@ -93,9 +96,7 @@ function getUsers() {
                             }
                         }
                     })
-                    //----------------------------------------------------------
 
-                    //----------------------------------------------------------
                     btnDelete.addEventListener("click", function(event) {
                         const clickedButton = event.target;
                         let data = {
@@ -118,9 +119,7 @@ function getUsers() {
                             }
                         }
                     })
-                    //----------------------------------------------------------
 
-                    //----------------------------------------------------------
                     btnDeactivate.addEventListener("click", function(event) {
                         const clickedButton = event.target;
                         let data = {
@@ -143,7 +142,6 @@ function getUsers() {
                             }
                         }
                     })
-                    //----------------------------------------------------------
 
                     c = document.createElement("td");   
                     c.appendChild(btnEdit);
@@ -161,38 +159,33 @@ function getUsers() {
     xhrUsers.send();
 };
 
+/**
+ * Calls the necessary functions to initialize the page
+ * @function
+ * @returns {void}
+*/
 var init = function() {
     getUsers();
     getLoggedUserData();
 };
 
+/**
+ * Retrieves information about the currently logged-in user and updates the page accordingly.
+ * This page is only for admin users so any other user is redirected to their home pages.
+ * @function
+ * @returns {void}
+ */
 function getLoggedUserData() {
     const xhrloggedUserType = new XMLHttpRequest();
     xhrloggedUserType.open('GET', '../Home/getloggedinUserType', true);
     xhrloggedUserType.setRequestHeader('Content-Type', 'application/json');
-    let username_show = document.getElementById('user-name-show');
     let profile_pic_show = document.getElementById('profile');
-    let profile_hyperlink = document.getElementById('profile-hyperlink');
-    let profile_hyperlink_menu = document.getElementById('profile-menu');
-
     xhrloggedUserType.onload = function () {
         if (xhrloggedUserType.status === 200) {
             let loggedUserType = JSON.parse(xhrloggedUserType.responseText);
-
-                const xhrloggedUserinformationProfissional = new XMLHttpRequest();
-                xhrloggedUserinformationProfissional.open('GET', '../Home/getloggedinUserInformationProfissional', true);
-                xhrloggedUserinformationProfissional.setRequestHeader('Content-Type', 'application/json');
-                xhrloggedUserinformationProfissional.onload = function () {
-
-                    
-                    if (xhrloggedUserinformationProfissional.status === 200) {
-                        let profissionalInfo = JSON.parse(xhrloggedUserinformationProfissional.responseText);
-
                         if (loggedUserType[0].tipo_utilizador == 'Profissional') {
                             window.location.href = '/Home';
                         }
-                        //  profile_hyperlink.dataset.email = profissionalInfo[0].email;
-
 
                         if (loggedUserType[0].tipo_utilizador == 'Empresa') {
                             window.location.href = '/Portfolios';
@@ -206,20 +199,7 @@ function getLoggedUserData() {
                             profile_pic_show.style.display = "none";
                             document.getElementById('admin-name-show').style.removeProperty('display');
                         }
-
-                        profile_hyperlink.href = "../Profile/" + loggedUserType[0].id;
-                        profile_hyperlink.dataset.userid = loggedUserType[0].id;
-            
-                        profile_hyperlink_menu.href = "../Profile/" + loggedUserType[0].id;
-                        username_show.href = "../Profile/" + loggedUserType[0].id;
-                }
-                
-
-            }
-            xhrloggedUserinformationProfissional.send();
-
         }
-
     }
     xhrloggedUserType.send();
 }

@@ -1,5 +1,10 @@
 var userID = window.location.href.split('/').pop();
 
+/**
+ * Retrieves information about the currently logged-in user and updates the page accordingly.
+ * @function getLoggedUserData
+ * @returns {void}
+ */
 function getLoggedUserData() {
     const xhrloggedUserType = new XMLHttpRequest();
     xhrloggedUserType.open('GET', '../Home/getloggedinUserType', true);
@@ -36,8 +41,6 @@ function getLoggedUserData() {
                         document.getElementById('aprovar-utilizadores').style.display = "none";
                         document.getElementById('portfolios-menu').style.display = "none";
                         }
-                        //  profile_hyperlink.dataset.email = profissionalInfo[0].email;
-
 
                         if (loggedUserType[0].tipo_utilizador == 'Empresa') {
                             const xhrloggedUserinformationEmpresa = new XMLHttpRequest();
@@ -93,11 +96,11 @@ function getLoggedUserData() {
 }
 
 /**
- * 
- * This is a function that adds user information and buttons to the HTML document. The function sends a GET request to the server to retrieve a list of user information and another GET request to retrieve a list of users. It then loops through the user list and creates a div element for each user, adds user information to the div element, and adds two buttons to send a friend request and cancel a friend request. 
- * The function also defines an update function to update the button's status when a friend request is sent or canceled.
- * When a user clicks the button to send a friend request, the function creates an XMLHttpRequest to send a POST request to the server to add a new friend request. When the POST request is successful, the function calls the update function to update the button's status.
- * When a user clicks the button to cancel a friend request, the function creates an XMLHttpRequest to send a POST request to the server to cancel the friend request. When the POST request is successful, the function updates the button's status by displaying the button and hiding the "Sent" status.
+ * Displays a list of users and allows the current user to add them as friends.
+ * Retrieves users information and list of users from the server and creates elements in the DOM to display them.
+ * @function showAddUsers
+ * @name showAddUsers
+ * @returns {void}
  */
 function showAddUsers(){
 
@@ -326,6 +329,11 @@ function showAddUsers(){
 
 }
 
+/**
+ * Displays the available portfolios.
+ * @function showPortfolios
+ * @returns {void}
+ */
 function showPortfolios(){
     const xhrloggedUserType2 = new XMLHttpRequest();
     xhrloggedUserType2.open('GET', '../Home/getloggedinUserType', true);
@@ -589,6 +597,11 @@ function showPortfolios(){
  
 }
 
+/**
+ * Search function to filter a list of users by name.
+ * @function search
+ * @returns {void}
+ */
 function search() {
     let input, filter, ul, li, i, txtValue;
     input = document.getElementById("myInput");
@@ -605,12 +618,22 @@ function search() {
     }
   }
 
+  /**
+ * Calls the necessary functions to initialize the page
+ * @function
+ * @returns {void}
+ */
 var init = function () {
     getLoggedUserData();
     showPortfolios();
 
 }
 
+/**
+ * Shows the friend requests of a user.
+ * @function showFriendRequests
+ * @returns {void}
+ */
 function showFriendRequests() {
     let divFriends = document.getElementById('friend-requests');
     let h2 = document.createElement('h2');
@@ -791,6 +814,11 @@ function showFriendRequests() {
 
 }
 
+/**
+ * Shows the friends of a user.
+ * @function showFriends
+ * @returns {void}
+ */
 function showFriends() {
     let divFriends = document.getElementById('friends');
     let h2 = document.createElement('h2');
@@ -926,6 +954,12 @@ function showFriends() {
 
 }
 
+/**
+ * Updates the user interface based on the type of the logged-in user.
+ * If the user is an "Empresa" (company), the friend requests, friends, and add buttons sections are hidden, and the "h2-home" element's text is set to "Users list".
+ * @function updateList
+ * @returns {void}
+ */
 function updateList() {
     const xhrVerifyLoggedUserType = new XMLHttpRequest();
     xhrVerifyLoggedUserType.open('GET', '../Home/getloggedinUserType', true);
@@ -957,6 +991,11 @@ function updateList() {
     xhrVerifyLoggedUserType.send();
 }
 
+/**
+ * Retrieves the profile information of a logged in user and populates the relevant HTML elements
+ * @function getProfileInformation
+ * @returns {void}
+ */
 function getProfileInformation() {
     let profileImg = document.getElementById('profile-img');
     let profileName = document.getElementById('profile-name');
@@ -1084,6 +1123,12 @@ function getProfileInformation() {
     xhrloggedUserInfo.send();
 }
 
+/**
+ * Closes the edit profile popup and clears the form
+ * Calls getLoggedUserData() and getProfileInformation() to update the profile information on the page
+ * @function closeEditIntro
+ * @returns {void}
+ */
 function closeEditIntro() {
     document.getElementById('pop-up-edit').style.display = "none";
     document.getElementById('page-mask').style.display = "none";
@@ -1092,6 +1137,12 @@ function closeEditIntro() {
     getProfileInformation();
 }
 
+/**
+ * Close the pop-up for editing the profile information of an Empresa and reset the form fields.
+ * Update the logged user data and the profile information after closing the pop-up.
+ * @function closeEditIntroEmpresa
+ * @returns {void}
+*/
 function closeEditIntroEmpresa() {
     document.getElementById('pop-up-editEmpresa').style.display = "none";
     document.getElementById('page-mask').style.display = "none";
@@ -1100,6 +1151,11 @@ function closeEditIntroEmpresa() {
     getProfileInformation();
 }
 
+/**
+ * Shows the edit popup for the user's profile information.
+ * @function openEditIntro
+ * @returns {void}
+ */
 function openEditIntro() {
     let headline_input = document.getElementById('headlineUser');
     let username_input = document.getElementById('nameUser');
@@ -1183,6 +1239,11 @@ function openEditIntro() {
     xhruserprofileType.send();
 }
 
+/**
+ * Handles forms' data
+ * @function submitFormData
+ * @returns {void}
+ */
 function submitFormData() {
 
     let formEdit = document.getElementById('editProfile');
@@ -1198,6 +1259,7 @@ function submitFormData() {
             visibility = 0;
         }
         
+        const isDateValid = validateDate(formEdit.birthUser.value);
         const data = {
             nome: formEdit.nameUser.value,
             birth: formEdit.birthUser.value,
@@ -1206,6 +1268,8 @@ function submitFormData() {
             localidade: formEdit.locationUser.value,
             visualizacao: visibility
         };
+
+        if(isDateValid){
         const xhrsubmitEdit = new XMLHttpRequest();
         xhrsubmitEdit.open('post', '/Profile/editIntro/' + userID, true);
         xhrsubmitEdit.setRequestHeader('Content-Type', 'application/json');
@@ -1217,6 +1281,10 @@ function submitFormData() {
             }
 
         };
+    }
+    if(isDateValid == false){
+        alert('Failed to save: too young');
+    }
 
     });
 
@@ -1383,6 +1451,12 @@ function submitFormData() {
     });
 }
 
+/** 
+* Closes the edit description popup from the user profile and clears the form
+* Calls getLoggedUserData() and getProfileInformation() to update the profile information on the page
+* @function closeEditDescription
+* @returns {void}
+*/
 function closeEditDescription() {
     document.getElementById('pop-up-edit-description').style.display = "none";
     document.getElementById('page-mask').style.display = "none";
@@ -1391,15 +1465,25 @@ function closeEditDescription() {
     getProfileInformation();
 }
 
+/** 
+* Closes the edit description popup from the company profile and clears the form
+* Calls getLoggedUserData() and getProfileInformation() to update the profile information on the page
+* @function closeEditDescriptionE
+* @returns {void}
+*/
 function closeEditDescriptionE() {
     document.getElementById('pop-up-edit-description-empresa').style.display = "none";
     document.getElementById('page-mask').style.display = "none";
     document.getElementById('editDescriptionProfileE').reset();
     getLoggedUserData();
     getProfileInformation();
-
 }
 
+/**
+ * Shows the edit description popup
+ * @function openEditDescription
+ * @returns {void}
+ */
 function openEditDescription() {
  
     let description_input = document.getElementById('descriptionUser');
@@ -1447,6 +1531,11 @@ function openEditDescription() {
 
 }
 
+/**
+ * Shows the add experience popup
+ * @function openAddExperience
+ * @returns {void}
+ */
 function openAddExperience() {
     document.getElementById('pop-up-add-experience').style.display = "block";
     document.getElementById('page-mask').style.display = "block";
@@ -1454,12 +1543,23 @@ function openAddExperience() {
     document.getElementById('enddate-label').style.removeProperty('display');
 }
 
+/**
+ * Closes the add experience popup
+ * Clears the add experience form
+ * @function closeAddExperience
+ * @returns {void}
+ */
 function closeAddExperience() {
     document.getElementById('pop-up-add-experience').style.display = "none";
     document.getElementById('page-mask').style.display = "none";
     document.getElementById('addExperienceForm').reset();
 }
 
+/**
+ * Shows the user's experiences
+ * @function showExperiences
+ * @returns {void}
+ */
 function showExperiences(){
     const xhrEmpregos = new XMLHttpRequest();
     xhrEmpregos.open('GET', '/Profile/getProfileExperiences/' + userID, true);
@@ -1590,6 +1690,11 @@ function showExperiences(){
     xhrEmpregos.send();
 }
 
+/**
+ * Shows the user's educations
+ * @function showExperiences
+ * @returns {void}
+ */
 function showEducations(){
     const xhrEducations = new XMLHttpRequest();
     xhrEducations.open('GET', '/Profile/getProfileEducations/' + userID, true);
@@ -1728,12 +1833,22 @@ function showEducations(){
     xhrEducations.send();
 }
 
+/**
+ * Shows the add education popup
+ * @function openAddExperience
+ * @returns {void}
+ */
 function openAddEducation() {
     document.getElementById('pop-up-add-education').style.display = "block";
     document.getElementById('page-mask').style.display = "block";
 
 }
 
+/**
+ * Closes the add education popup
+ * @function closeAddEducation
+ * @returns {void}
+ */
 function closeAddEducation() {
     document.getElementById('pop-up-add-education').style.display = "none";
     document.getElementById('page-mask').style.display = "none";
@@ -1745,6 +1860,11 @@ function closeAddEducation() {
 
 }
 
+/**
+ * Calls the necessary functions to initialize the page
+ * @function
+ * @returns {void}
+*/
 var init = function () {
     getLoggedUserData();
     getProfileInformation();
@@ -1759,6 +1879,11 @@ var init = function () {
     showEducations();
 };
 
+/**
+ * Checks whether or not currently studying is checked and displays end date depending on its state
+ * @function
+ * @returns {void}
+ */
 function changeviewExperience(){
     let currentlyworking = document.getElementById('currentlyworking');
 
@@ -1779,6 +1904,11 @@ function changeviewExperience(){
     }
 }
 
+/**
+ * Checks whether or not currently working is checked and displays end date depending on its state
+ * @function
+ * @returns {void}
+ */
 function changeviewEducation(){
     let currentlystudying = document.getElementById('currentlystudying');
     currentlystudying.addEventListener("change", function() {

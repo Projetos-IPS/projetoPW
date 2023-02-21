@@ -1,3 +1,8 @@
+/**
+ * Retrieves information about the currently logged-in user and updates the page accordingly.
+ * @function getLoggedUserData
+ * @returns {void}
+ */
 function getLoggedUserData() {
     const xhrloggedUserType = new XMLHttpRequest();
     xhrloggedUserType.open('GET', '../Home/getloggedinUserType', true);
@@ -11,63 +16,49 @@ function getLoggedUserData() {
         if (xhrloggedUserType.status === 200) {
             let loggedUserType = JSON.parse(xhrloggedUserType.responseText);
 
-                const xhrloggedUserinformationProfissional = new XMLHttpRequest();
-                xhrloggedUserinformationProfissional.open('GET', '../Home/getloggedinUserInformationProfissional', true);
-                xhrloggedUserinformationProfissional.setRequestHeader('Content-Type', 'application/json');
-                xhrloggedUserinformationProfissional.onload = function () {
+            const xhrloggedUserinformationProfissional = new XMLHttpRequest();
+            xhrloggedUserinformationProfissional.open('GET', '../Home/getloggedinUserInformationProfissional', true);
+            xhrloggedUserinformationProfissional.setRequestHeader('Content-Type', 'application/json');
+            xhrloggedUserinformationProfissional.onload = function () {
+                if (xhrloggedUserinformationProfissional.status === 200) {
+                    let profissionalInfo = JSON.parse(xhrloggedUserinformationProfissional.responseText);
 
-                    
-                    if (xhrloggedUserinformationProfissional.status === 200) {
-                        let profissionalInfo = JSON.parse(xhrloggedUserinformationProfissional.responseText);
-
-                        if (loggedUserType[0].tipo_utilizador == 'Profissional') {
-
+                    if (loggedUserType[0].tipo_utilizador == 'Profissional') {
                         username_show.innerHTML = profissionalInfo[0].nome;
                         if (profissionalInfo[0].genero == 'Feminino') {
                             profile_pic_show.src = '../images/profile-female.png';
-                        }
-                        else if (profissionalInfo[0].genero == 'Masculino') {
+                        } else if (profissionalInfo[0].genero == 'Masculino') {
                             profile_pic_show.src = '../images/profile-male.png';
-                        }
-                        else if (profissionalInfo[0].genero == 'other') {
+                        } else if (profissionalInfo[0].genero == 'other') {
                             profile_pic_show.src = '../images/profile-other.png';
                         }
                         document.getElementById('aprovar-utilizadores').style.display = "none";
                         document.getElementById('portfolios-menu').style.display = "none";
-                        }
-                        //  profile_hyperlink.dataset.email = profissionalInfo[0].email;
+                    }
 
-
-                        if (loggedUserType[0].tipo_utilizador == 'Empresa') {
-                            const xhrloggedUserinformationEmpresa = new XMLHttpRequest();
-                            xhrloggedUserinformationEmpresa.open('GET', '../Home/getloggedinUserInformationEmpresa', true);
-                            xhrloggedUserinformationEmpresa.setRequestHeader('Content-Type', 'application/json');
-                            xhrloggedUserinformationEmpresa.onload = function () {
-                                if (xhrloggedUserinformationEmpresa.status === 200) {
-                                    let empresaInfo = JSON.parse(xhrloggedUserinformationEmpresa.responseText);
-                                    username_show.innerHTML = empresaInfo[0].nome;
-                                    profile_pic_show.src = '../images/profile_company.png';                        
-                                }
+                    if (loggedUserType[0].tipo_utilizador == 'Empresa') {
+                        const xhrloggedUserinformationEmpresa = new XMLHttpRequest();
+                        xhrloggedUserinformationEmpresa.open('GET', '../Home/getloggedinUserInformationEmpresa', true);
+                        xhrloggedUserinformationEmpresa.setRequestHeader('Content-Type', 'application/json');
+                        xhrloggedUserinformationEmpresa.onload = function () {
+                            if (xhrloggedUserinformationEmpresa.status === 200) {
+                                let empresaInfo = JSON.parse(xhrloggedUserinformationEmpresa.responseText);
+                                username_show.innerHTML = empresaInfo[0].nome;
+                                profile_pic_show.src = '../images/profile_company.png';
                             }
-                            xhrloggedUserinformationEmpresa.send();
-                            document.getElementById('aprovar-utilizadores').style.display = "none";
-                            document.getElementById('joboffers-menu').style.display = "none";
-                            document.getElementById('home-menu').style.display = "none";
-                        }
+                        };
+                        xhrloggedUserinformationEmpresa.send();
+                        document.getElementById('aprovar-utilizadores').style.display = "none";
+                        document.getElementById('joboffers-menu').style.display = "none";
+                        document.getElementById('home-menu').style.display = "none";
+                    }
 
                         if (loggedUserType[0].tipo_utilizador == 'Admin') {
-                            document.getElementById('home-menu').style.display = "none";
-                            document.getElementById('joboffers-menu').style.display = "none";
-                            document.getElementById('profile-menu').style.display = "none";
-                            document.getElementById('team-page').style.display = "none";
-                            profile_pic_show.style.display = "none";
-                            document.getElementById('admin-name-show').style.removeProperty('display');
-                            
+                            window.location.href = '/Approve';                       
                         }
 
                         profile_hyperlink.href = "../Profile/" + loggedUserType[0].id;
                         profile_hyperlink.dataset.userid = loggedUserType[0].id;
-            
                         profile_hyperlink_menu.href = "../Profile/" + loggedUserType[0].id;
                         username_show.href = "../Profile/" + loggedUserType[0].id;
                 }
@@ -81,14 +72,13 @@ function getLoggedUserData() {
     }
     xhrloggedUserType.send();
 }
- 
+
 /**
- * 
- * This is a function that adds user information and buttons to the HTML document. The function sends a GET request to the server to retrieve a list of user information and another GET request to retrieve a list of users. It then loops through the user list and creates a div element for each user, adds user information to the div element, and adds two buttons to send a friend request and cancel a friend request. 
- * The function also defines an update function to update the button's status when a friend request is sent or canceled.
- * When a user clicks the button to send a friend request, the function creates an XMLHttpRequest to send a POST request to the server to add a new friend request. When the POST request is successful, the function calls the update function to update the button's status.
- * When a user clicks the button to cancel a friend request, the function creates an XMLHttpRequest to send a POST request to the server to cancel the friend request. When the POST request is successful, the function updates the button's status by displaying the button and hiding the "Sent" status.
- */
+ * Displays a list of users and allows the current user to add them as friends.
+ * Retrieves users information and list of users from the server and creates elements in the DOM to display them.
+ * @function showAddUsers
+ * @returns {void}
+*/
 function showAddUsers(){
 
     const xhrloggedUserType3 = new XMLHttpRequest();
@@ -316,6 +306,11 @@ function showAddUsers(){
 
 }
 
+/**
+ * Displays the available portfolios.
+ * @function showPortfolios
+ * @returns {void}
+ */
 function showPortfolios(){
     const xhrloggedUserType2 = new XMLHttpRequest();
     xhrloggedUserType2.open('GET', '../Home/getloggedinUserType', true);
@@ -579,6 +574,11 @@ function showPortfolios(){
  
 }
 
+/**
+ * Search function to filter a list of users by name.
+ * @function search
+ * @returns {void}
+*/
 function search() {
     let input, filter, ul, li, i, txtValue;
     input = document.getElementById("myInput");
@@ -601,6 +601,11 @@ var init = function () {
 
 };
 
+/**
+ * Shows the friend requests of a user.
+ * @function showFriendRequests
+ * @returns {void}
+*/
 function showFriendRequests(){
     let divFriends = document.getElementById('friend-requests');
     let h2 = document.createElement('h2');
@@ -787,6 +792,11 @@ function showFriendRequests(){
     
 }
 
+/**
+ * Shows the friends of a user.
+ * @function showFriends
+ * @returns {void}
+*/
 function showFriends(){
     let divFriends = document.getElementById('friends');
     let h2 = document.createElement('h2');
@@ -927,6 +937,12 @@ function showFriends(){
   
 }
 
+/**
+ * Updates the user interface based on the type of the logged-in user.
+ * If the user is an "Empresa" (company), the friend requests, friends, and add buttons sections are hidden, and the "h2-home" element's text is set to "Users list".
+ * @function updateList
+ * @returns {void}
+*/
 function updateList(){
     const xhrVerifyLoggedUserType = new XMLHttpRequest();
     xhrVerifyLoggedUserType.open('GET', '../Home/getloggedinUserType', true);
@@ -961,7 +977,11 @@ function updateList(){
     xhrVerifyLoggedUserType.send();
 }
 
-
+/**
+ * Calls the necessary functions to initialize the page
+ * @function
+ * @returns {void}
+*/
 var init = function () {
     getLoggedUserData();
     showAddUsers();
