@@ -1765,6 +1765,7 @@ function changeviewExperience(){
     if(check.checked == true){
         document.getElementById('experienceEndDate').style.display = "none";
         document.getElementById('enddate-label').style.display = "none";
+        document.getElementById('experienceEndDate').value = '';
       }
       else if(check.checked == false){
         document.getElementById('experienceEndDate').style.removeProperty('display');
@@ -1784,6 +1785,7 @@ function changeviewEducation(){
             document.getElementById('endDateEducation-label').style.display = "none";
             document.getElementById('gradeEducation').style.display = "none";
             document.getElementById('grade-label').style.display = "none";
+            document.getElementById('endDateEducation').value = '';
           }
           else if(check.checked == false){
             document.getElementById('endDateEducation').style.removeProperty('display');
