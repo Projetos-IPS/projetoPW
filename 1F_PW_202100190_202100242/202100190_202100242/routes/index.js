@@ -29,7 +29,7 @@ router.get('/getUsers', function(req, res){
     res.status(200).json(result);
   }).catch(function(error){
     console.log(error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: err.message });
   })
 })
 
@@ -40,7 +40,7 @@ router.post('/registoP', function(req, res)
     res.status(201).json({id : id});
   }).catch(function(error){
     console.log(error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: err.message });
   });
 });
 
@@ -51,7 +51,7 @@ router.post('/registoE', function(req, res)
     res.status(201).json({id : id});
   }).catch(function(error){
     console.log(error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: err.message });
   });
 });
 
@@ -63,7 +63,7 @@ router.post('/login', function(req, res)
     res.json({result : id});  
   }).catch(function(error){
     console.log(error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: err.message });
   });
 });
 
